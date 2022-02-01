@@ -1,6 +1,7 @@
 import React from 'react';
-import {HomeScreen} from '@screens';
+import 'react-native-gesture-handler';
+import {AppNavigator} from '@navigation/AppNavigator';
 
 export const App: React.FC = () => {
-  return <HomeScreen />;
+  return <AppNavigator />;
 };

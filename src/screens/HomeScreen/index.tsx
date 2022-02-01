@@ -2,7 +2,8 @@ import React, {useRef, useState} from 'react';
 import {Card} from '@components';
 import {Screen} from '@ui';
 import {styles} from './styles';
-import {Animated, PanResponder} from 'react-native';
+import {Animated, PanResponder, View} from 'react-native';
+import {H1} from '@Typography';
 
 export const HomeScreen: React.FC = () => {
   const [index, setIndex] = useState(0);
@@ -10,12 +11,10 @@ export const HomeScreen: React.FC = () => {
   const pan = useRef(new Animated.ValueXY()).current;
   const scale = useRef(new Animated.Value(0.9)).current;
   const translateY = useRef(new Animated.Value(44)).current;
-  const opacity = useRef(new Animated.Value(0)).current;
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
     onPanResponderGrant: () => {
-      Animated.timing(opacity, {toValue: 0.5, useNativeDriver: false}).start();
       Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
       Animated.spring(translateY, {toValue: 0, useNativeDriver: false}).start();
     },
@@ -32,8 +31,6 @@ export const HomeScreen: React.FC = () => {
     onPanResponderRelease: () => {
       //@ts-ignore
       const positionY = pan.y.__getValue();
-
-      Animated.timing(opacity, {toValue: 0, useNativeDriver: false}).start();
 
       if (Math.abs(positionY) > 150) {
         Animated.timing(pan, {
@@ -69,7 +66,10 @@ export const HomeScreen: React.FC = () => {
 
   return (
     <Screen style={styles.container}>
-      <Animated.View style={[styles.mask, {opacity}]} />
+      <H1 fontWeight="600" style={styles.title}>
+        Choose situation puzzle
+      </H1>
+
       <Animated.View
         style={[styles.secondCard, {transform: [{scale}, {translateY}]}]}>
         <Card />
@@ -79,7 +79,7 @@ export const HomeScreen: React.FC = () => {
           transform: [{translateX: pan.x}, {translateY: pan.y}],
         }}
         {...panResponder.panHandlers}>
-        <Card />
+        <Card canOpen={true} />
       </Animated.View>
     </Screen>
   );
