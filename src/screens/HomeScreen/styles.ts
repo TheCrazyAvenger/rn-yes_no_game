@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
   },
   title: {
     position: 'absolute',
-    left: 30,
+    left: 35,
     width: 300,
-    top: 10,
+    top: 20,
   },
   secondCard: {
     position: 'absolute',

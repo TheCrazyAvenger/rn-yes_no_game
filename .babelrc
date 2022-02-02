@@ -25,7 +25,7 @@
           "@ui": "./src/ui/index.ts",
           "@constants": "./src/constants/index.ts",
           "@forms": ".src/forms/index.ts",
-          "@hooks": "./src/hooks/hooks.ts",
+          "@hooks": "./src/hooks/index.ts",
           "@screens": "./src/screens/index.ts",
           "@utilities": "./src/utilities/index.ts",
           "@store": "./src/store",

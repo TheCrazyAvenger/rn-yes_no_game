@@ -16,9 +16,6 @@ export const styles = StyleSheet.create({
 
     elevation: 4,
   },
-  header: {
-    height: '50%',
-  },
   image: {
     width: '100%',
     height: '100%',
@@ -26,11 +23,44 @@ export const styles = StyleSheet.create({
   },
   headerTitle: {
     color: colors.white,
+    width: '90%',
     paddingBottom: 20,
     paddingLeft: 20,
   },
+  title: {
+    color: colors.blue,
+    textTransform: 'uppercase',
+    marginBottom: 20,
+    marginRight: 10,
+  },
+  story: {
+    paddingBottom: 20,
+  },
   text: {
     padding: 20,
+  },
+  answerContainer: {
+    flexDirection: 'row',
+  },
+  answer: {
+    backgroundColor: colors.darkGray,
+    borderRadius: 14,
+    marginBottom: 100,
+  },
+  answerText: {
+    fontSize: 18.72,
+    fontFamily: 'OpenSans-SemiBold',
+    padding: 20,
+    color: colors.white,
+  },
+  answerIcon: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   closeButton: {
     width: 32,
@@ -50,5 +80,36 @@ export const styles = StyleSheet.create({
     shadowRadius: 8.3,
 
     elevation: 13,
+  },
+  button: {
+    backgroundColor: colors.blue,
+    marginBottom: 20,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.3,
+
+    elevation: 13,
+  },
+  buttonText: {
+    color: colors.white,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+  },
+  openButton: {
+    position: 'absolute',
+    bottom: -20,
+    right: 0,
+    left: 0,
+    height: 60,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
   },
 });
