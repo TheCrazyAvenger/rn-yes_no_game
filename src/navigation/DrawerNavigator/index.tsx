@@ -1,7 +1,7 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {HomeScreen} from '@screens';
-import {Screens} from '@constants';
+import {Screens, yesno} from '@constants';
 
 const Drawer = createDrawerNavigator();
 
@@ -11,7 +11,7 @@ export const DrawerNavigator: React.FC = () => {
       <Drawer.Screen
         name={Screens.homeScreen}
         options={{
-          title: 'Home',
+          title: `In catalog ${yesno.length} stories`,
         }}
         component={HomeScreen}
       />
