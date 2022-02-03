@@ -1,11 +1,11 @@
-import React, {useRef, useState} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import {Card} from '@components';
 import {Screen} from '@ui';
 import {styles} from './styles';
 import {Animated, PanResponder} from 'react-native';
 import {H3} from '@Typography';
 import {yesno} from '@constants';
-import {getNextIndex} from '@utilities';
+import {getNextIndex, shuffle} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {toggleYesNo} from '@store/slices/actionsSlice';
 
@@ -14,6 +14,8 @@ export const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const [index, setIndex] = useState(0);
+
+  const yesnoArray = useMemo(() => shuffle(yesno), [yesno]);
 
   const pan = useRef(new Animated.ValueXY()).current;
   const scale = useRef(new Animated.Value(0.9)).current;
@@ -103,7 +105,7 @@ export const HomeScreen: React.FC = () => {
 
       <Animated.View
         style={[styles.secondCard, {transform: [{scale}, {translateY}]}]}>
-        <Card data={yesno[getNextIndex(index)]} />
+        <Card data={yesnoArray[getNextIndex(index)]} />
       </Animated.View>
       <Animated.View
         style={{
@@ -119,7 +121,7 @@ export const HomeScreen: React.FC = () => {
           ],
         }}
         {...panResponder.panHandlers}>
-        <Card canOpen={true} data={yesno[index]} />
+        <Card canOpen={true} data={yesnoArray[index]} />
       </Animated.View>
     </Screen>
   );

@@ -24,13 +24,12 @@ export const styles = StyleSheet.create({
   headerTitle: {
     color: colors.white,
     width: '90%',
-    paddingBottom: 20,
-    paddingLeft: 20,
+    padding: 20,
   },
   title: {
     color: colors.blue,
     textTransform: 'uppercase',
-    marginBottom: 20,
+    marginBottom: 5,
     marginRight: 10,
   },
   story: {
@@ -41,6 +40,8 @@ export const styles = StyleSheet.create({
   },
   answerContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
   },
   answer: {
     backgroundColor: colors.darkGray,
@@ -62,47 +63,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  closeButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 22,
-    backgroundColor: colors.white,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    right: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.3,
-
-    elevation: 13,
-  },
-  button: {
-    backgroundColor: colors.blue,
-    marginBottom: 20,
-    padding: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.3,
-
-    elevation: 13,
-  },
-  buttonText: {
-    color: colors.white,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-  },
+  button: {paddingHorizontal: 10, paddingVertical: 8, marginBottom: 0},
   openButton: {
     position: 'absolute',
     bottom: -20,

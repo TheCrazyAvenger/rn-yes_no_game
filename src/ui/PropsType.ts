@@ -11,3 +11,17 @@ export type TextProps = {
   numberOfLines?: number;
   onPress?: (...args: any) => void;
 };
+
+export type ButtonProps = {
+  title: string;
+  disabled?: boolean;
+  onPress: (...args: any) => void;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
+};
+
+export type CloseButtonProps = {
+  disabled?: boolean;
+  onPress: (...args: any) => void;
+  style?: any;
+};
