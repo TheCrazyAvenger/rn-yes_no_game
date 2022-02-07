@@ -26,8 +26,8 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
   const dispatch = useAppDispatch();
 
-  const width = useRef(new Animated.Value(cardWidth - 70)).current;
-  const height = useRef(new Animated.Value(cardHeight / 1.5)).current;
+  const width = useRef(new Animated.Value(cardWidth - 60)).current;
+  const height = useRef(new Animated.Value(cardHeight / 1.3)).current;
   const closeButtomTop = useRef(new Animated.Value(-100)).current;
   const opacity = useRef(new Animated.Value(0)).current;
   const imageHeight = useRef(new Animated.Value(250)).current;
@@ -78,11 +78,11 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
       useNativeDriver: false,
     }).start();
     Animated.spring(width, {
-      toValue: cardWidth - 70,
+      toValue: cardWidth - 60,
       useNativeDriver: false,
     }).start();
     Animated.spring(height, {
-      toValue: cardHeight / 1.5,
+      toValue: cardHeight / 1.3,
       useNativeDriver: false,
     }).start();
     Animated.spring(closeButtomTop, {

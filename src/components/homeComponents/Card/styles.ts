@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
     color: colors.white,
     width: '90%',
     padding: 20,
+    paddingTop: 30,
   },
   title: {
     color: colors.blue,
