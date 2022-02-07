@@ -21,6 +21,8 @@ export const HomeScreen: React.FC = () => {
   const scale = useRef(new Animated.Value(0.9)).current;
   const translateY = useRef(new Animated.Value(44)).current;
   const rotate = useRef(new Animated.Value(0)).current;
+  const thirdScale = useRef(new Animated.Value(0.8)).current;
+  const thirdTranslateY = useRef(new Animated.Value(50)).current;
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (_, gestureState) => {
@@ -37,6 +39,15 @@ export const HomeScreen: React.FC = () => {
     onPanResponderGrant: () => {
       Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
       Animated.spring(translateY, {toValue: 0, useNativeDriver: false}).start();
+
+      Animated.spring(thirdScale, {
+        toValue: 0.9,
+        useNativeDriver: false,
+      }).start();
+      Animated.spring(thirdTranslateY, {
+        toValue: 44,
+        useNativeDriver: false,
+      }).start();
     },
     onPanResponderMove: Animated.event(
       [
@@ -69,14 +80,10 @@ export const HomeScreen: React.FC = () => {
           useNativeDriver: false,
         }).start(() => {
           dispatch(toggleYesNo(false));
-          Animated.spring(translateY, {
-            toValue: 44,
-            useNativeDriver: false,
-          }).start();
-          Animated.spring(scale, {
-            toValue: 0.9,
-            useNativeDriver: false,
-          }).start();
+          scale.setValue(0.9);
+          translateY.setValue(44);
+          thirdTranslateY.setValue(-50);
+          thirdScale.setValue(0.8);
           setIndex(prev => getNextIndex(prev));
           pan.setValue({x: 0, y: 0});
         });
@@ -93,15 +100,27 @@ export const HomeScreen: React.FC = () => {
           toValue: 44,
           useNativeDriver: false,
         }).start();
+        Animated.spring(thirdScale, {
+          toValue: 0.8,
+          useNativeDriver: false,
+        }).start();
+        Animated.spring(thirdTranslateY, {
+          toValue: -50,
+          useNativeDriver: false,
+        }).start();
       }
     },
   });
 
   return (
     <Screen style={styles.container}>
-      {/* <H3 fontWeight="600" style={styles.title}>
-        In catalog {yesno.length} stories
-      </H3> */}
+      <Animated.View
+        style={[
+          styles.secondCard,
+          {transform: [{scale: thirdScale}, {translateY: thirdTranslateY}]},
+        ]}>
+        <Card data={yesnoArray[getNextIndex(index + 1)]} />
+      </Animated.View>
 
       <Animated.View
         style={[styles.secondCard, {transform: [{scale}, {translateY}]}]}>
