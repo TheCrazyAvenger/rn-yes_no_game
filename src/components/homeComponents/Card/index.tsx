@@ -1,7 +1,7 @@
 import {CardProps} from '@components';
 import {colors} from '@constants';
 import {H1, H2, H3} from '@Typography';
-import React, {useRef, useState} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {
   ImageBackground,
@@ -20,23 +20,34 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
   const [showAnswer, setShowAnswer] = useState(false);
 
   const {title, story, answer, image, rating, difficulty, time} = data;
-
   const {width: cardWidth, height: cardHeight} = useWindowDimensions();
 
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
   const dispatch = useAppDispatch();
+
+  const Content = useMemo(
+    () => (actionYesNo ? ScrollView : View),
+    [actionYesNo],
+  );
 
   const width = useRef(new Animated.Value(cardWidth - 60)).current;
   const height = useRef(new Animated.Value(cardHeight / 1.3)).current;
   const closeButtomTop = useRef(new Animated.Value(-100)).current;
   const opacity = useRef(new Animated.Value(0)).current;
   const imageHeight = useRef(new Animated.Value(250)).current;
+  const reviewHeight = useRef(new Animated.Value(0)).current;
 
   const showHideAnswer = () => {
     setShowAnswer(prev => !prev);
+
     Animated.timing(opacity, {
       toValue: showAnswer ? 0 : 1,
       duration: 400,
+      useNativeDriver: false,
+    }).start();
+
+    Animated.spring(reviewHeight, {
+      toValue: 40,
       useNativeDriver: false,
     }).start();
   };
@@ -45,7 +56,7 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
     if (canOpen) {
       dispatch(toggleYesNo(true));
       Animated.spring(imageHeight, {
-        toValue: 125,
+        toValue: 120,
         useNativeDriver: false,
       }).start();
       Animated.spring(width, {
@@ -63,7 +74,7 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
         useNativeDriver: false,
       }).start(() => setShowAnswer(false));
       Animated.spring(closeButtomTop, {
-        toValue: 67,
+        toValue: 63,
         useNativeDriver: false,
       }).start();
     }
@@ -72,6 +83,7 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
   const closeCard = () => {
     dispatch(toggleYesNo(false));
     setShowAnswer(false);
+    reviewHeight.setValue(0);
 
     Animated.spring(imageHeight, {
       toValue: 250,
@@ -106,7 +118,7 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
             </View>
           </ImageBackground>
         </Animated.View>
-        <ScrollView
+        <Content
           showsVerticalScrollIndicator={false}
           style={[styles.text, {height: actionYesNo ? 'auto' : 160}]}>
           <StoryInfo time={time} rating={rating} difficulty={difficulty} />
@@ -116,6 +128,18 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
 
           <H3 style={styles.story}>{story}</H3>
 
+          <Animated.View
+            style={[styles.reviewContainer, {height: reviewHeight}]}>
+            <H2 fontWeight="600" style={styles.title}>
+              Enjoy the story?
+            </H2>
+
+            <Button
+              title="Review"
+              onPress={() => {}}
+              style={styles.reviewButton}
+            />
+          </Animated.View>
           {actionYesNo && (
             <>
               <View style={styles.answerContainer}>
@@ -150,7 +174,7 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
               </View>
             </>
           )}
-        </ScrollView>
+        </Content>
         <CloseButton style={{top: closeButtomTop}} onPress={closeCard} />
       </Animated.View>
       <Button

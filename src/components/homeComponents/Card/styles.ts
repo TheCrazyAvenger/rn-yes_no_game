@@ -39,6 +39,16 @@ export const styles = StyleSheet.create({
   text: {
     padding: 20,
   },
+  reviewContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 20,
+  },
+  reviewButton: {
+    width: 100,
+    height: '100%',
+    paddingVertical: 0,
+  },
   answerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -66,8 +76,7 @@ export const styles = StyleSheet.create({
   },
   button: {
     width: 150,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
+    paddingVertical: 10,
     marginBottom: 0,
   },
   openButton: {

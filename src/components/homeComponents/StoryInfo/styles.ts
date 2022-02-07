@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
   },
   line: {
-    backgroundColor: colors.darkBlue,
+    backgroundColor: colors.blue,
     height: 1,
     marginVertical: 10,
   },

@@ -3,7 +3,6 @@ import {Card} from '@components';
 import {Loading, Screen} from '@ui';
 import {styles} from './styles';
 import {Animated, PanResponder} from 'react-native';
-import {yesno} from '@constants';
 import {getNextIndex, shuffle} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {toggleYesNo} from '@store/slices/actionsSlice';
@@ -11,18 +10,13 @@ import {useGetStoriesQuery} from '@api';
 
 export const HomeScreen: React.FC = () => {
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
-  const yesnoArray = useMemo(() => shuffle(yesno), [yesno]);
   const dispatch = useAppDispatch();
-
   const {data, error, isLoading} = useGetStoriesQuery({});
-
-  console.log(data, isLoading);
 
   const [index, setIndex] = useState(0);
   const pan = useRef(new Animated.ValueXY()).current;
   const scale = useRef(new Animated.Value(0.9)).current;
   const translateY = useRef(new Animated.Value(44)).current;
-  const rotate = useRef(new Animated.Value(0)).current;
   const thirdScale = useRef(new Animated.Value(0.8)).current;
   const thirdTranslateY = useRef(new Animated.Value(50)).current;
 
@@ -55,30 +49,20 @@ export const HomeScreen: React.FC = () => {
       [
         null,
         {
-          dx: pan.x,
+          dy: pan.y,
         },
       ],
       {
         useNativeDriver: false,
-        listener: (event: any) =>
-          Animated.spring(rotate, {
-            toValue: event.nativeEvent.pageX > 195 ? 1 : -1,
-            useNativeDriver: false,
-          }).start(),
       },
     ),
     onPanResponderRelease: () => {
       //@ts-ignore
-      const positionY = pan.x.__getValue();
-
-      Animated.spring(rotate, {
-        toValue: 0,
-        useNativeDriver: false,
-      }).start();
+      const positionY = pan.y.__getValue();
 
       if (Math.abs(positionY) > 100) {
         Animated.timing(pan, {
-          toValue: {x: positionY > 100 ? 1000 : -1000, y: 0},
+          toValue: {x: 0, y: positionY > 100 ? 1000 : -1000},
           useNativeDriver: false,
         }).start(() => {
           dispatch(toggleYesNo(false));
@@ -134,16 +118,7 @@ export const HomeScreen: React.FC = () => {
       </Animated.View>
       <Animated.View
         style={{
-          transform: [
-            {translateX: pan.x},
-            {translateY: pan.y},
-            {
-              rotate: rotate.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['0deg', '5deg'],
-              }),
-            },
-          ],
+          transform: [{translateX: pan.x}, {translateY: pan.y}],
         }}
         {...panResponder.panHandlers}>
         <Card canOpen={true} data={data.stories[index]} />
