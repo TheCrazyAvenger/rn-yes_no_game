@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   answer: {
-    backgroundColor: colors.darkGray,
+    backgroundColor: colors.darkBlue,
     borderRadius: 14,
     marginBottom: 100,
   },
@@ -64,7 +64,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button: {paddingHorizontal: 10, paddingVertical: 8, marginBottom: 0},
+  button: {
+    width: 150,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    marginBottom: 0,
+  },
   openButton: {
     position: 'absolute',
     bottom: -20,

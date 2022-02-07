@@ -15,19 +15,19 @@ export const StoryInfo: React.FC<StoryInfoProps> = ({
     <>
       <View style={styles.container}>
         <View style={styles.infoItem}>
-          <Icon name="time-outline" size={25} color={colors.blue} />
+          <Icon name="time-outline" size={25} color={colors.red} />
           <H3 fontWeight="600" style={styles.text}>
             {time}min.
           </H3>
         </View>
         <View style={styles.infoItem}>
-          <Icon name="swap-vertical-outline" size={25} color={colors.blue} />
+          <Icon name="swap-vertical-outline" size={25} color={colors.yellow} />
           <H3 fontWeight="600" style={styles.text}>
             {difficulty}/10
           </H3>
         </View>
         <View style={styles.infoItem}>
-          <Icon name="thumbs-up-outline" size={25} color={colors.blue} />
+          <Icon name="thumbs-up-outline" size={25} color={colors.green} />
           <H3 fontWeight="600" style={styles.text}>
             {rating}%
           </H3>

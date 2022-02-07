@@ -1,22 +1,24 @@
 import React, {useMemo, useRef, useState} from 'react';
 import {Card} from '@components';
-import {Screen} from '@ui';
+import {Loading, Screen} from '@ui';
 import {styles} from './styles';
 import {Animated, PanResponder} from 'react-native';
-import {H3} from '@Typography';
 import {yesno} from '@constants';
 import {getNextIndex, shuffle} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {toggleYesNo} from '@store/slices/actionsSlice';
+import {useGetStoriesQuery} from '@api';
 
 export const HomeScreen: React.FC = () => {
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
+  const yesnoArray = useMemo(() => shuffle(yesno), [yesno]);
   const dispatch = useAppDispatch();
 
+  const {data, error, isLoading} = useGetStoriesQuery({});
+
+  console.log(data, isLoading);
+
   const [index, setIndex] = useState(0);
-
-  const yesnoArray = useMemo(() => shuffle(yesno), [yesno]);
-
   const pan = useRef(new Animated.ValueXY()).current;
   const scale = useRef(new Animated.Value(0.9)).current;
   const translateY = useRef(new Animated.Value(44)).current;
@@ -80,12 +82,12 @@ export const HomeScreen: React.FC = () => {
           useNativeDriver: false,
         }).start(() => {
           dispatch(toggleYesNo(false));
+          pan.setValue({x: 0, y: 0});
           scale.setValue(0.9);
           translateY.setValue(44);
           thirdTranslateY.setValue(-50);
           thirdScale.setValue(0.8);
-          setIndex(prev => getNextIndex(prev));
-          pan.setValue({x: 0, y: 0});
+          setIndex(prev => getNextIndex(data.stories, prev));
         });
       } else {
         Animated.spring(pan, {
@@ -112,6 +114,10 @@ export const HomeScreen: React.FC = () => {
     },
   });
 
+  if (!data || isLoading || error) {
+    return <Loading />;
+  }
+
   return (
     <Screen style={styles.container}>
       <Animated.View
@@ -119,12 +125,12 @@ export const HomeScreen: React.FC = () => {
           styles.secondCard,
           {transform: [{scale: thirdScale}, {translateY: thirdTranslateY}]},
         ]}>
-        <Card data={yesnoArray[getNextIndex(index + 1)]} />
+        <Card data={data.stories[getNextIndex(data.stories, index + 1)]} />
       </Animated.View>
 
       <Animated.View
         style={[styles.secondCard, {transform: [{scale}, {translateY}]}]}>
-        <Card data={yesnoArray[getNextIndex(index)]} />
+        <Card data={data.stories[getNextIndex(data.stories, index)]} />
       </Animated.View>
       <Animated.View
         style={{
@@ -140,7 +146,7 @@ export const HomeScreen: React.FC = () => {
           ],
         }}
         {...panResponder.panHandlers}>
-        <Card canOpen={true} data={yesnoArray[index]} />
+        <Card canOpen={true} data={data.stories[index]} />
       </Animated.View>
     </Screen>
   );

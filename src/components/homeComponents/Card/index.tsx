@@ -95,7 +95,7 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
     <View>
       <Animated.View style={[styles.container, {width: width, height: height}]}>
         <Animated.View style={{height: imageHeight}}>
-          <ImageBackground style={styles.image} source={image}>
+          <ImageBackground style={styles.image} source={{uri: image}}>
             <View
               style={{
                 backgroundColor: `rgba(51,51,51,${actionYesNo ? 0.6 : 0})`,
@@ -114,9 +114,7 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
             Story
           </H2>
 
-          <H3 fontWeight="600" style={styles.story}>
-            {story}
-          </H3>
+          <H3 style={styles.story}>{story}</H3>
 
           {actionYesNo && (
             <>
@@ -127,7 +125,10 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
                 <Button
                   title={`${showAnswer ? 'Hide' : 'Show'} answer`}
                   onPress={showHideAnswer}
-                  style={styles.button}
+                  style={{
+                    ...styles.button,
+                    backgroundColor: showAnswer ? colors.red : colors.green,
+                  }}
                 />
               </View>
               <View style={styles.answer}>
