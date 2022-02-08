@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     padding: 20,
+    flex: 1,
   },
   reviewContainer: {
     flexDirection: 'row',
@@ -87,5 +88,12 @@ export const styles = StyleSheet.create({
     height: 60,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
+  },
+  gradient: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });

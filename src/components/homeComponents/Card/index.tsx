@@ -12,9 +12,10 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 import {useAppDispatch, useAppSelector} from '@hooks';
-import {toggleYesNo} from '@store/slices/actionsSlice';
+import {toggleReview, toggleYesNo} from '@store/slices/actionsSlice';
 import {StoryInfo} from '../StoryInfo';
 import {Button, CloseButton} from '@ui';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -136,7 +137,9 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
 
             <Button
               title="Review"
-              onPress={() => {}}
+              onPress={() => {
+                dispatch(toggleReview(true));
+              }}
               style={styles.reviewButton}
             />
           </Animated.View>
@@ -173,6 +176,18 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
                 </Animated.View>
               </View>
             </>
+          )}
+          {!actionYesNo && (
+            <LinearGradient
+              colors={[
+                'rgba(255,255,255, 0)',
+                'rgba(255,255,255, 0.1)',
+                'rgba(255,255,255, 0.2)',
+                'rgba(255,255,255, 0.9)',
+                'rgba(255,255,255, 1)',
+              ]}
+              style={styles.gradient}
+            />
           )}
         </Content>
         <CloseButton style={{top: closeButtomTop}} onPress={closeCard} />

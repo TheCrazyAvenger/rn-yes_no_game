@@ -4,7 +4,7 @@ import LottieView from 'lottie-react-native';
 import {styles} from './styles';
 import {LottieProps} from '@ui';
 
-export const Loading: React.FC<LottieProps> = ({
+export const Success: React.FC<LottieProps> = ({
   onAnimationFinish,
   style,
   isActive,
@@ -13,7 +13,6 @@ export const Loading: React.FC<LottieProps> = ({
 
   useEffect(() => {
     if (isActive) {
-      animation.current!.loop = true;
       animation.current!.play();
     } else {
       animation.current!.loop = false;
@@ -24,7 +23,7 @@ export const Loading: React.FC<LottieProps> = ({
     <LottieView
       style={{...styles.container, ...style}}
       onAnimationFinish={onAnimationFinish}
-      source={require('@assets/images/loading.json')}
+      source={require('@assets/images/success.json')}
       autoPlay={false}
       loop={false}
       ref={animation}

@@ -20,3 +20,9 @@ export type StoryInfoProps = {
   difficulty: number;
   time: number;
 };
+
+export type ReviewModalProps = {
+  image: string;
+  title: string;
+  id: string;
+};
