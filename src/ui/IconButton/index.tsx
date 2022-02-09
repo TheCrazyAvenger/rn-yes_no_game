@@ -1,25 +1,28 @@
-import {H5} from '@Typography';
-import {ButtonProps} from '@ui';
+import {IconButtonProps} from '@ui';
 import React from 'react';
 import {TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
 
-export const Button: React.FC<ButtonProps> = ({
+export const IconButton: React.FC<IconButtonProps> = ({
   onPress,
-  title,
+  onPressIn,
+  onPressOut,
+  color,
+  size,
+  name,
   disabled,
   style,
-  textStyle,
 }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
       disabled={disabled}
       activeOpacity={0.9}
       style={[styles.button, style]}>
-      <H5 fontWeight="600" style={{...styles.buttonText, ...textStyle}}>
-        {title}
-      </H5>
+      <Icon name={name} color={color} size={size} />
     </TouchableOpacity>
   );
 };

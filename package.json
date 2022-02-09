@@ -13,6 +13,8 @@
     "@react-navigation/drawer": "^6.2.0",
     "@react-navigation/native": "^6.0.7",
     "@reduxjs/toolkit": "^1.7.1",
+    "lottie-ios": "^3.2.3",
+    "lottie-react-native": "^5.0.1",
     "react": "17.0.2",
     "react-native": "0.67.1",
     "react-native-gesture-handler": "^2.2.0",

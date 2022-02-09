@@ -20,8 +20,32 @@ export type ButtonProps = {
   textStyle?: TextStyle;
 };
 
+export type IconButtonProps = {
+  color: string;
+  size: number;
+  name: string;
+  disabled?: boolean;
+  onPressIn?: (...args: any) => void;
+  onPressOut?: (...args: any) => void;
+  onPress?: (...args: any) => void;
+  style?: ViewStyle;
+};
+
 export type CloseButtonProps = {
   disabled?: boolean;
   onPress: (...args: any) => void;
   style?: any;
+};
+
+export type NumberPickerProps = {
+  value: number | string;
+  setValue: (prevValue: any) => any;
+  min: number;
+  max: number;
+};
+
+export type LottieProps = {
+  onAnimationFinish?: (...args: any) => void;
+  style?: ViewStyle;
+  isActive?: boolean;
 };

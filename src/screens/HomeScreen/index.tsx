@@ -1,26 +1,20 @@
-import React, {useMemo, useRef, useState} from 'react';
-import {Card} from '@components';
-import {Screen} from '@ui';
+import React, {useRef, useState} from 'react';
+import {Card, ReviewModal} from '@components';
+import {Loading, Screen} from '@ui';
 import {styles} from './styles';
 import {Animated, PanResponder} from 'react-native';
-import {H3} from '@Typography';
-import {yesno} from '@constants';
-import {getNextIndex, shuffle} from '@utilities';
-import {useAppDispatch, useAppSelector} from '@hooks';
-import {toggleYesNo} from '@store/slices/actionsSlice';
+import {getNextIndex} from '@utilities';
+import {useAppSelector} from '@hooks';
+import {useGetStoriesQuery} from '@api';
 
 export const HomeScreen: React.FC = () => {
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
-  const dispatch = useAppDispatch();
+  const {data, error, isLoading} = useGetStoriesQuery({});
 
   const [index, setIndex] = useState(0);
-
-  const yesnoArray = useMemo(() => shuffle(yesno), [yesno]);
-
   const pan = useRef(new Animated.ValueXY()).current;
   const scale = useRef(new Animated.Value(0.9)).current;
   const translateY = useRef(new Animated.Value(44)).current;
-  const rotate = useRef(new Animated.Value(0)).current;
   const thirdScale = useRef(new Animated.Value(0.8)).current;
   const thirdTranslateY = useRef(new Animated.Value(50)).current;
 
@@ -49,43 +43,24 @@ export const HomeScreen: React.FC = () => {
         useNativeDriver: false,
       }).start();
     },
-    onPanResponderMove: Animated.event(
-      [
-        null,
-        {
-          dx: pan.x,
-        },
-      ],
-      {
-        useNativeDriver: false,
-        listener: (event: any) =>
-          Animated.spring(rotate, {
-            toValue: event.nativeEvent.pageX > 195 ? 1 : -1,
-            useNativeDriver: false,
-          }).start(),
-      },
-    ),
+    onPanResponderMove: Animated.event([null, {dy: pan.y}], {
+      useNativeDriver: false,
+    }),
     onPanResponderRelease: () => {
       //@ts-ignore
-      const positionY = pan.x.__getValue();
-
-      Animated.spring(rotate, {
-        toValue: 0,
-        useNativeDriver: false,
-      }).start();
+      const positionY = pan.y.__getValue();
 
       if (Math.abs(positionY) > 100) {
         Animated.timing(pan, {
-          toValue: {x: positionY > 100 ? 1000 : -1000, y: 0},
+          toValue: {x: 0, y: positionY > 100 ? 1000 : -1000},
           useNativeDriver: false,
         }).start(() => {
-          dispatch(toggleYesNo(false));
+          pan.setValue({x: 0, y: 0});
           scale.setValue(0.9);
           translateY.setValue(44);
           thirdTranslateY.setValue(-50);
           thirdScale.setValue(0.8);
-          setIndex(prev => getNextIndex(prev));
-          pan.setValue({x: 0, y: 0});
+          setIndex(prev => getNextIndex(data.stories, prev));
         });
       } else {
         Animated.spring(pan, {
@@ -112,36 +87,39 @@ export const HomeScreen: React.FC = () => {
     },
   });
 
-  return (
-    <Screen style={styles.container}>
-      <Animated.View
-        style={[
-          styles.secondCard,
-          {transform: [{scale: thirdScale}, {translateY: thirdTranslateY}]},
-        ]}>
-        <Card data={yesnoArray[getNextIndex(index + 1)]} />
-      </Animated.View>
+  if (!data || isLoading || error) {
+    return <Loading isActive={true} />;
+  }
 
-      <Animated.View
-        style={[styles.secondCard, {transform: [{scale}, {translateY}]}]}>
-        <Card data={yesnoArray[getNextIndex(index)]} />
-      </Animated.View>
-      <Animated.View
-        style={{
-          transform: [
-            {translateX: pan.x},
-            {translateY: pan.y},
-            {
-              rotate: rotate.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['0deg', '5deg'],
-              }),
-            },
-          ],
-        }}
-        {...panResponder.panHandlers}>
-        <Card canOpen={true} data={yesnoArray[index]} />
-      </Animated.View>
-    </Screen>
+  return (
+    <>
+      <ReviewModal
+        image={data.stories[index].image}
+        title={data.stories[index].title}
+        id={data.stories[index].id}
+      />
+
+      <Screen style={styles.container}>
+        <Animated.View
+          style={[
+            styles.secondCard,
+            {transform: [{scale: thirdScale}, {translateY: thirdTranslateY}]},
+          ]}>
+          <Card data={data.stories[getNextIndex(data.stories, index + 1)]} />
+        </Animated.View>
+
+        <Animated.View
+          style={[styles.secondCard, {transform: [{scale}, {translateY}]}]}>
+          <Card data={data.stories[getNextIndex(data.stories, index)]} />
+        </Animated.View>
+        <Animated.View
+          style={{
+            transform: [{translateX: pan.x}, {translateY: pan.y}],
+          }}
+          {...panResponder.panHandlers}>
+          <Card canOpen={true} data={data.stories[index]} />
+        </Animated.View>
+      </Screen>
+    </>
   );
 };

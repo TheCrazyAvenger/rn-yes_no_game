@@ -1,4 +1,2 @@
-import {yesno} from '@constants';
-
-export const getNextIndex = (index: number) =>
-  index + 1 > yesno.length - 1 ? 0 : index + 1;
+export const getNextIndex = (data: any, index: number) =>
+  index + 1 > data.length - 1 ? 0 : index + 1;

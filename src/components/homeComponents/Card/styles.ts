@@ -38,6 +38,17 @@ export const styles = StyleSheet.create({
   },
   text: {
     padding: 20,
+    flex: 1,
+  },
+  reviewContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 20,
+  },
+  reviewButton: {
+    width: 100,
+    height: '100%',
+    paddingVertical: 0,
   },
   answerContainer: {
     flexDirection: 'row',
@@ -45,7 +56,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   answer: {
-    backgroundColor: colors.darkGray,
+    backgroundColor: colors.darkBlue,
     borderRadius: 14,
     marginBottom: 100,
   },
@@ -64,7 +75,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button: {paddingHorizontal: 10, paddingVertical: 8, marginBottom: 0},
+  button: {
+    width: 150,
+    paddingVertical: 10,
+    marginBottom: 0,
+  },
   openButton: {
     position: 'absolute',
     bottom: -20,
@@ -73,5 +88,12 @@ export const styles = StyleSheet.create({
     height: 60,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
+  },
+  gradient: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });

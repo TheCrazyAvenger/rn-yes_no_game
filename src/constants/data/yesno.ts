@@ -24,7 +24,7 @@ export const yesno = [
     title: 'Fatal shot',
     story:
       'The man was hunting, he aimed and fired. After a few seconds, he realized that he had made a terrible mistake. A few minutes later he was dead.',
-    answer: `He hunted in snow-capped mountains. The shot provoked an avalanche, which covered the man. He died of strangulation.`,
+    answer: `The man was hunting, he aimed and fired. After a few seconds, he realized that he had made a terrible mistake. A few minutes later he was dead.`,
     image: require('@assets/images/yesno/3.jpg'),
     time: 10,
     difficulty: 5,
@@ -35,7 +35,7 @@ export const yesno = [
     title: 'The accident',
     story:
       'A car driver causes an accident when he crashes into a bike, as he was making an unexpected turn at a crossroad. When the policemen arrive, another man gets arrested. The one who was driving is carried home.',
-    answer: `The driver was receiving driving lessons and his instructor told him to make an incorrect turn at a crossroad, crashing into a bike. The policemen considered the driving instructor to be responsible for the accident so they arrested him and took the learner home.`,
+    answer: `A car driver causes an accident when he crashes into a bike, as he was making an unexpected turn at a crossroad. When the policemen arrive, another man gets arrested. The one who was driving is carried home.`,
     image: require('@assets/images/yesno/4.jpg'),
     time: 12,
     difficulty: 5,
