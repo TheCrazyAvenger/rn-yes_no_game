@@ -6,25 +6,21 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
-    backgroundColor: colors.darkBlue,
+    marginLeft: 10,
   },
   header: {
-    marginTop: -5,
-    padding: 20,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
   profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 45,
+    height: 45,
+    borderRadius: 14,
   },
-  profileName: {
-    color: colors.white,
-    marginLeft: 10,
-  },
+  profileName: {},
   items: {
     backgroundColor: colors.white,
-    paddingTop: 10,
   },
 });

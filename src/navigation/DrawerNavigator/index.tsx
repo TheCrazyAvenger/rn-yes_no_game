@@ -1,20 +1,28 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {DrawerNavigationOptions} from '@react-navigation/drawer/lib/typescript/src/types';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {HomeScreen} from '@screens';
-import {Screens, yesno} from '@constants';
+
+import {HomeScreen, ProfileScreen} from '@screens';
 import {CustomDrawer} from '@components';
 import {H3} from '@Typography';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Screens, yesno} from '@constants';
+import {styles} from './styles';
+import {AuthStack} from '@navigation/AuthStack';
 
 const Drawer = createDrawerNavigator();
+
+const screenOptions: DrawerNavigationOptions = {
+  headerTitleStyle: styles.headerTitleStyle,
+  headerShadowVisible: false,
+  drawerLabelStyle: styles.drawerLabelStyle,
+};
 
 export const DrawerNavigator: React.FC = () => {
   return (
     <Drawer.Navigator
       drawerContent={(props: any) => <CustomDrawer {...props} />}
-      screenOptions={{
-        drawerLabelStyle: {marginLeft: -25},
-      }}>
+      screenOptions={screenOptions}>
       <Drawer.Screen
         name={Screens.homeScreen}
         options={{
@@ -22,11 +30,23 @@ export const DrawerNavigator: React.FC = () => {
             <Icon name="home-outline" color={color} size={size} />
           ),
           headerTitle: () => (
-            <H3 fontWeight="600"> {`In catalog ${yesno.length} stories`}</H3>
+            <H3 style={styles.headerTitleStyle} fontWeight="600">
+              {`In catalog ${yesno.length} stories`}
+            </H3>
           ),
-          title: `Home`,
+          title: 'Home',
         }}
         component={HomeScreen}
+      />
+      <Drawer.Screen
+        name={Screens.authStack}
+        options={{
+          drawerIcon: ({color, size}) => (
+            <Icon name="person-outline" color={color} size={size} />
+          ),
+          title: 'Profile',
+        }}
+        component={AuthStack}
       />
     </Drawer.Navigator>
   );

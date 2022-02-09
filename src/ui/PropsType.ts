@@ -49,3 +49,25 @@ export type LottieProps = {
   style?: ViewStyle;
   isActive?: boolean;
 };
+
+export type FormInputProps = {
+  label?: string;
+  plaseholder: string;
+  onChangeText: (...args: any) => void;
+  onChange?: (...args: any) => void;
+  onFocus?: (...args: any) => void;
+  onBlur: (...args: any) => void;
+  onInput?: (...args: any) => void;
+  value: any;
+  errorMessage?: any;
+  isTouched: any;
+  style?: {[key: string]: number | string};
+  inputStyle?: {[key: string]: number | string};
+  containerStyle?: {[key: string]: number | string};
+  secureTextEntry?: boolean;
+  rightIcon?: any;
+  leftIcon?: any;
+  keyboardType?: any;
+  disabled?: boolean;
+  errorStyle?: {[key: string]: number | string};
+};

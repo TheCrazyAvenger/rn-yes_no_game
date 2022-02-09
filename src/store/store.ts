@@ -1,14 +1,15 @@
-import {yesnoApi} from '@api';
+import {authApi, yesnoApi} from '@api';
 import {configureStore} from '@reduxjs/toolkit';
 import actionsSlice from './slices/actionsSlice';
 
 export const store = configureStore({
   reducer: {
     [yesnoApi.reducerPath]: yesnoApi.reducer,
+    [authApi.reducerPath]: authApi.reducer,
     actions: actionsSlice,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(yesnoApi.middleware),
+    getDefaultMiddleware().concat(yesnoApi.middleware, authApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

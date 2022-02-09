@@ -7,4 +7,6 @@ export * from './Success';
 export * from './ModalItem';
 export * from './NumberPicker';
 
+export * from './formComponents/FormInput';
+
 export * from './PropsType';
