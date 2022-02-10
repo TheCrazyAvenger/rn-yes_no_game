@@ -1,23 +1,15 @@
 import {useReviewYesNoMutation} from '@api';
 import {ReviewModalProps} from '@components';
 import {colors} from '@constants';
-import {useAppDispatch, useAppSelector} from '@hooks';
+import {useAppDispatch} from '@hooks';
 import {toggleReview} from '@store/slices/actionsSlice';
-import {H2, H3, H4, H5} from '@Typography';
-import {
-  Button,
-  CloseButton,
-  Loading,
-  NumberPicker,
-  ModalItem,
-  Success,
-} from '@ui';
+import {H2, H3, H5} from '@Typography';
+import {Button, NumberPicker} from '@ui';
 import React, {useRef, useState} from 'react';
-import {Animated, Image, TouchableOpacity, View} from 'react-native';
+import {Animated, TouchableOpacity, View} from 'react-native';
 import {styles} from './styles';
 
-export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
-  const showReview = useAppSelector(state => state.actions.showReview);
+export const ReviewModal: React.FC<ReviewModalProps> = ({id}) => {
   const dispatch = useAppDispatch();
 
   const [reviewYesNo, {isLoading}] = useReviewYesNoMutation();
@@ -68,23 +60,10 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
 
   return (
     <>
-      <ModalItem visible={showReview}>
-        {isLoading && (
-          <Loading
-            isActive={isLoading}
-            style={{zIndex: 100, backgroundColor: 'rgba(0, 0, 0, 0.3)'}}
-          />
-        )}
-        {success && <Success isActive={success} />}
-        <View style={styles.header}>
-          <Image style={styles.image} source={{uri: image}} />
-          <View style={styles.headerText}>
-            <H4>Story:</H4>
-            <H2 fontWeight="600" style={styles.headerTitle}>
-              {title}
-            </H2>
-          </View>
-        </View>
+      <View style={styles.container}>
+        <H2 fontWeight="600" style={styles.title}>
+          Share your opinion
+        </H2>
         <View style={styles.line} />
         <View style={styles.reviewItem}>
           <H3 fontWeight="600" style={{...styles.title}}>
@@ -113,7 +92,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
                 style={[
                   styles.pickerAnimText,
                   {
-                    paddingLeft: 55,
+                    paddingLeft: 75,
                     color: opacity.interpolate({
                       inputRange: [0, 1],
                       outputRange: [colors.black, colors.white],
@@ -145,7 +124,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
                 style={[
                   styles.pickerAnimText,
                   {
-                    paddingRight: 55,
+                    paddingRight: 75,
                     color: opacity.interpolate({
                       inputRange: [0, 1],
                       outputRange: [colors.white, colors.black],
@@ -180,16 +159,15 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
           />
         </View>
 
-        <View style={styles.line} />
-
         {error && <H5 style={styles.error}>{error}</H5>}
         <Button
+          disabled={isLoading}
+          loading={isLoading}
           title="Send"
           style={styles.button}
           onPress={reviewYesNoHandler}
         />
-        <CloseButton style={{top: 20}} onPress={closeModalHandler} />
-      </ModalItem>
+      </View>
     </>
   );
 };

@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
   answer: {
     backgroundColor: colors.darkBlue,
     borderRadius: 14,
-    marginBottom: 100,
+    marginBottom: 20,
   },
   answerText: {
     fontSize: 18.72,
@@ -79,15 +79,6 @@ export const styles = StyleSheet.create({
     width: 150,
     paddingVertical: 10,
     marginBottom: 0,
-  },
-  openButton: {
-    position: 'absolute',
-    bottom: -20,
-    right: 0,
-    left: 0,
-    height: 60,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
   },
   gradient: {
     position: 'absolute',

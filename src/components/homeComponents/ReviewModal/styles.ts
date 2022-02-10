@@ -2,21 +2,8 @@ import {colors} from '@constants';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  background: {
-    backgroundColor: 'rgba(0,0,0,0.75)',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   container: {
-    width: '80%',
-    backgroundColor: colors.white,
-    borderRadius: 14,
-    padding: 25,
+    marginBottom: 100,
   },
   error: {
     color: colors.red,
@@ -34,9 +21,7 @@ export const styles = StyleSheet.create({
   headerText: {
     marginLeft: 10,
   },
-  headerTitle: {
-    color: colors.blue,
-  },
+
   reviewItem: {
     marginBottom: 20,
   },

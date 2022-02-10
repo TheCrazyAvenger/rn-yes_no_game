@@ -66,12 +66,6 @@ export const HomeScreen: React.FC = () => {
 
   return (
     <>
-      <ReviewModal
-        image={data.stories[index].image}
-        title={data.stories[index].title}
-        id={data.stories[index].id}
-      />
-
       <Screen style={styles.container}>
         <Animated.View style={[styles.secondCard, {transform: [{scale}]}]}>
           <Card data={data.stories[getNextIndex(data.stories, index)]} />

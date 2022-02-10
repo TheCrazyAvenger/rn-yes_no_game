@@ -1,25 +1,28 @@
-import {H5} from '@Typography';
 import {ButtonProps} from '@ui';
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+
+import {Button as ButtonItem} from 'react-native-elements';
 import {styles} from './styles';
 
 export const Button: React.FC<ButtonProps> = ({
   onPress,
   title,
+  loading,
   disabled,
   style,
+  containerStyle,
   textStyle,
 }) => {
   return (
-    <TouchableOpacity
+    <ButtonItem
       onPress={onPress}
+      title={title}
+      loading={loading}
+      buttonStyle={[styles.button, style]}
+      containerStyle={[styles.container, containerStyle]}
       disabled={disabled}
+      titleStyle={{...styles.buttonText, ...textStyle}}
       activeOpacity={0.9}
-      style={[styles.button, style]}>
-      <H5 fontWeight="600" style={{...styles.buttonText, ...textStyle}}>
-        {title}
-      </H5>
-    </TouchableOpacity>
+    />
   );
 };

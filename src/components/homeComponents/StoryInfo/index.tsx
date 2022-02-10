@@ -10,7 +10,10 @@ export const StoryInfo: React.FC<StoryInfoProps> = ({
   rating,
   difficulty,
   time,
+  date,
 }) => {
+  const dateTime = new Date(date).toLocaleString();
+
   return (
     <>
       <View style={styles.container}>
@@ -30,6 +33,12 @@ export const StoryInfo: React.FC<StoryInfoProps> = ({
           <Icon name="thumbs-up-outline" size={25} color={colors.green} />
           <H3 fontWeight="600" style={styles.text}>
             {rating}%
+          </H3>
+        </View>
+        <View style={styles.infoItem}>
+          <Icon name="calendar-outline" size={25} color={colors.darkBlue} />
+          <H3 fontWeight="600" style={styles.text}>
+            {dateTime}
           </H3>
         </View>
       </View>

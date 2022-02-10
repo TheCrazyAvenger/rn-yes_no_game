@@ -8,6 +8,7 @@ export interface CardFields {
   difficulty: number;
   time: number;
   id: string;
+  date: string;
 }
 
 export type CardProps = {
@@ -19,10 +20,9 @@ export type StoryInfoProps = {
   rating: number;
   difficulty: number;
   time: number;
+  date: string;
 };
 
 export type ReviewModalProps = {
-  image: string;
-  title: string;
   id: string;
 };

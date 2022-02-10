@@ -14,9 +14,11 @@ export type TextProps = {
 
 export type ButtonProps = {
   title: string;
+  loading?: boolean;
   disabled?: boolean;
   onPress: (...args: any) => void;
   style?: ViewStyle;
+  containerStyle?: ViewStyle;
   textStyle?: TextStyle;
 };
 
