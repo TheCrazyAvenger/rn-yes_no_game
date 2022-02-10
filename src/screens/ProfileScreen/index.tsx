@@ -1,41 +1,50 @@
 import React from 'react';
-import {Image, ImageBackground, View} from 'react-native';
-
-import {H1, H5} from '@Typography';
+import {
+  Image,
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  View,
+} from 'react-native';
+import {useAppDispatch, useAppSelector} from '@hooks';
 import {styles} from './styles';
-import {Button} from '@ui';
-import {colors, Screens} from '@constants';
-import {useNavigation} from '@react-navigation/native';
+import {H1, H4} from '@Typography';
+import {IconButton} from '@ui';
+import {colors} from '@constants';
+import {logout} from '@store/asyncFuncs';
 
 export const ProfileScreen: React.FC = () => {
-  const navigation: any = useNavigation();
+  const {name, email, image} = useAppSelector(state => state.user);
+  const dispatch = useAppDispatch();
 
-  const loginHandler = () => navigation.navigate(Screens.loginScreen);
+  const logoutHandler = () => dispatch(logout());
 
   return (
-    <ImageBackground
-      style={styles.container}
-      source={require('@assets/images/authbg.jpg')}>
-      <View style={styles.header}>
-        <Image
-          style={styles.image}
-          source={require('@assets/images/logo.png')}
-        />
-        <H1 style={styles.title} fontWeight="bold">
-          Yes! No! Game
-        </H1>
-
-        <H5 style={styles.subtitle}>The game you can't say No to!</H5>
-      </View>
-      <View style={styles.buttons}>
-        <Button
-          onPress={loginHandler}
-          title="Sign In"
-          style={{...styles.authButton, backgroundColor: colors.white}}
-          textStyle={{color: colors.blue}}
-        />
-        <Button onPress={() => {}} title="Sign Up" style={styles.authButton} />
-      </View>
-    </ImageBackground>
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <ImageBackground
+        style={styles.container}
+        source={require('@assets/images/authbg.jpg')}>
+        <View style={styles.header}>
+          <View style={styles.userHeader}>
+            <Image style={styles.image} source={{uri: image!}} />
+            <View style={styles.user}>
+              <H1 style={styles.title} fontWeight="bold">
+                {name}
+              </H1>
+              <H4 style={styles.title}>{email}</H4>
+            </View>
+          </View>
+          <IconButton
+            name="exit"
+            onPress={logoutHandler}
+            color={colors.white}
+            size={30}
+            style={styles.logoutButton}
+          />
+        </View>
+      </ImageBackground>
+    </KeyboardAvoidingView>
   );
 };

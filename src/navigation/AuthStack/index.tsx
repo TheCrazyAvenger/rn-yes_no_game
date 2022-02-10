@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Screens} from '@constants';
-import {LoginScreen, ProfileScreen} from '@screens';
+import {AuthScreen, LoginScreen, SignUpScreen} from '@screens';
 
 const Stack = createStackNavigator();
 
@@ -13,8 +13,9 @@ export const AuthStack: React.FC = () => {
         presentation: 'modal',
         gestureEnabled: true,
       }}>
-      <Stack.Screen name={Screens.profileScreen} component={ProfileScreen} />
+      <Stack.Screen name={Screens.authScreen} component={AuthScreen} />
       <Stack.Screen name={Screens.loginScreen} component={LoginScreen} />
+      <Stack.Screen name={Screens.signUpScreen} component={SignUpScreen} />
     </Stack.Navigator>
   );
 };

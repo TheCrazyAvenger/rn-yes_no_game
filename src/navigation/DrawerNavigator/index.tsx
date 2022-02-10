@@ -8,7 +8,6 @@ import {CustomDrawer} from '@components';
 import {H3} from '@Typography';
 import {Screens, yesno} from '@constants';
 import {styles} from './styles';
-import {AuthStack} from '@navigation/AuthStack';
 
 const Drawer = createDrawerNavigator();
 
@@ -39,14 +38,14 @@ export const DrawerNavigator: React.FC = () => {
         component={HomeScreen}
       />
       <Drawer.Screen
-        name={Screens.authStack}
+        name={Screens.profileScreen}
         options={{
           drawerIcon: ({color, size}) => (
             <Icon name="person-outline" color={color} size={size} />
           ),
           title: 'Profile',
         }}
-        component={AuthStack}
+        component={ProfileScreen}
       />
     </Drawer.Navigator>
   );

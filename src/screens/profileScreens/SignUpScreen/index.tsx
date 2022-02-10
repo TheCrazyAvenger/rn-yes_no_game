@@ -1,39 +1,41 @@
+import {useSignupMutation} from '@api';
+import {useAppDispatch} from '@hooks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import {addUser} from '@store/slices/userSlice';
+import {H5} from '@Typography';
+import {CloseButton, KeyboardDismissView, Loading} from '@ui';
 import React, {useState} from 'react';
 import {Image, ImageBackground, View} from 'react-native';
-
-import {CloseButton, KeyboardDismissView, Loading} from '@ui';
-import {LoginForm} from '../../../forms';
-import {useLoginMutation} from '@api';
-import {useNavigation} from '@react-navigation/native';
-import {H5} from '@Typography';
+import {SignUpForm} from '../../../forms';
 import {styles} from './styles';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useAppDispatch} from '@hooks';
-import {addUser} from '@store/slices/userSlice';
 
-export const LoginScreen: React.FC = () => {
+export const SignUpScreen: React.FC = () => {
   const navigation: any = useNavigation();
+
   const dispatch = useAppDispatch();
 
-  const [login, {isLoading}] = useLoginMutation();
+  const [signup, {isLoading}] = useSignupMutation();
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const goBackHandler = () => navigation.goBack();
 
-  const loginHandler = async (values: {email: string; password: string}) => {
+  const signupHandler = async (values: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
     try {
       setErrorMessage(null);
 
-      const data = await login(values).unwrap();
+      const data = await signup(values).unwrap();
       const {email, name, image} = data.user;
 
       await AsyncStorage.setItem('email', email);
       await AsyncStorage.setItem('name', name);
       await AsyncStorage.setItem('image', image);
       await dispatch(addUser({email, name, image}));
-
-    
     } catch (e: any) {
       setErrorMessage(e.data.message);
     }
@@ -58,7 +60,7 @@ export const LoginScreen: React.FC = () => {
               source={require('@assets/images/logo.png')}
             />
             {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}
-            <LoginForm onSubmit={loginHandler} />
+            <SignUpForm onSubmit={signupHandler} />
             <CloseButton style={styles.closeButton} onPress={goBackHandler} />
           </View>
         </ImageBackground>

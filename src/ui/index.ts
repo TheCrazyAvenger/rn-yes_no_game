@@ -6,6 +6,7 @@ export * from './Loading';
 export * from './Success';
 export * from './ModalItem';
 export * from './NumberPicker';
+export * from './KeyboardDismissView';
 
 export * from './formComponents/FormInput';
 
