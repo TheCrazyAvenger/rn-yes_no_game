@@ -20,8 +20,9 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
   const showReview = useAppSelector(state => state.actions.showReview);
   const dispatch = useAppDispatch();
 
-  const [reviewYesNo, {isLoading, error}] = useReviewYesNoMutation();
+  const [reviewYesNo, {isLoading}] = useReviewYesNoMutation();
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<null | string>(null);
 
   const opacity = useRef(new Animated.Value(0)).current;
 
@@ -47,18 +48,21 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
 
   const reviewYesNoHandler = async () => {
     try {
-      await reviewYesNo({rating, time: spentTime, difficulty: difficult, id});
-    } catch (e) {
-      return console.log(e);
-    }
+      await reviewYesNo({
+        rating,
+        time: spentTime,
+        difficulty: difficult,
+        id,
+      }).unwrap();
 
-    if (!error) {
       setSuccess(true);
 
       setTimeout(() => {
         setSuccess(false);
         closeModalHandler();
       }, 1350);
+    } catch (e: any) {
+      setError(e.data.message);
     }
   };
 
@@ -71,7 +75,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
             style={{zIndex: 100, backgroundColor: 'rgba(0, 0, 0, 0.3)'}}
           />
         )}
-        {success && !error && <Success isActive={success && !error} />}
+        {success && <Success isActive={success} />}
         <View style={styles.header}>
           <Image style={styles.image} source={{uri: image}} />
           <View style={styles.headerText}>
@@ -92,8 +96,8 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
                 styles.pickerFiller,
                 {
                   backgroundColor: colors.green,
-                  borderTopLeftRadius: 30,
-                  borderBottomLeftRadius: 30,
+                  borderTopLeftRadius: 14,
+                  borderBottomLeftRadius: 14,
                   left: 0,
                   opacity: opacity.interpolate({
                     inputRange: [0, 1],
@@ -124,8 +128,8 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
               style={[
                 styles.pickerFiller,
                 {
-                  borderTopRightRadius: 30,
-                  borderBottomRightRadius: 30,
+                  borderTopRightRadius: 14,
+                  borderBottomRightRadius: 14,
                   right: 0,
                   opacity: opacity.interpolate({
                     inputRange: [0, 1],
@@ -177,9 +181,8 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
         </View>
 
         <View style={styles.line} />
-        {/*
-        //@ts-ignore*/}
-        {error && <H5 style={styles.error}>{error.data.message}</H5>}
+
+        {error && <H5 style={styles.error}>{error}</H5>}
         <Button
           title="Send"
           style={styles.button}

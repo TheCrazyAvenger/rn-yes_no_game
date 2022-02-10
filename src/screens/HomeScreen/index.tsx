@@ -1,11 +1,12 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Card, ReviewModal} from '@components';
 import {Loading, Screen} from '@ui';
 import {styles} from './styles';
 import {Animated, PanResponder} from 'react-native';
 import {getNextIndex} from '@utilities';
-import {useAppSelector} from '@hooks';
+import {useAppDispatch, useAppSelector} from '@hooks';
 import {useGetStoriesQuery} from '@api';
+import {getUser} from '@store/asyncFuncs';
 
 export const HomeScreen: React.FC = () => {
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);

@@ -7,7 +7,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderRadius: 30,
+    borderRadius: 14,
+    height: 45,
     overflow: 'hidden',
   },
 });
