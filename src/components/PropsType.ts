@@ -9,6 +9,7 @@ export interface CardFields {
   time: number;
   id: string;
   date: string;
+  reviewedByUser: boolean;
 }
 
 export type CardProps = {
@@ -25,4 +26,5 @@ export type StoryInfoProps = {
 
 export type ReviewModalProps = {
   id: string;
+  reviewedByUser: boolean;
 };

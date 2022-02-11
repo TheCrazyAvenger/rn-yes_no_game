@@ -5,6 +5,9 @@ export const styles = StyleSheet.create({
   container: {
     marginBottom: 100,
   },
+  reviewContainer: {
+    overflow: 'hidden',
+  },
   error: {
     color: colors.red,
   },
@@ -61,5 +64,11 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 0,
     paddingVertical: 15,
+  },
+  reviewReady: {
+    alignItems: 'center',
+  },
+  revReadyText: {
+    textAlign: 'center',
   },
 });

@@ -10,11 +10,11 @@ export const styles = StyleSheet.create({
   infoItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 20,
+    marginRight: 15,
     marginBottom: 10,
   },
   text: {
-    marginLeft: 5,
+    marginLeft: 2,
   },
   line: {
     backgroundColor: colors.blue,

@@ -1,15 +1,23 @@
-import React, {useRef, useState} from 'react';
-import {Card, ReviewModal} from '@components';
+import React, {useEffect, useRef, useState} from 'react';
+import {Card} from '@components';
 import {Loading, Screen} from '@ui';
 import {styles} from './styles';
 import {Animated, PanResponder} from 'react-native';
 import {getNextIndex} from '@utilities';
-import {useAppSelector} from '@hooks';
+import {useAppDispatch, useAppSelector} from '@hooks';
 import {useGetStoriesQuery} from '@api';
+import {addStories} from '@store/slices/userSlice';
 
 export const HomeScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const uid = useAppSelector(state => state.user.id);
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
-  const {data, error, isLoading} = useGetStoriesQuery({});
+  const stories = useAppSelector(state => state.user.stories);
+  const {data, error, isLoading} = useGetStoriesQuery({uid});
+
+  useEffect(() => {
+    data && dispatch(addStories(data.stories));
+  }, [data]);
 
   const [index, setIndex] = useState(0);
   const pan = useRef(new Animated.ValueXY()).current;
@@ -28,7 +36,11 @@ export const HomeScreen: React.FC = () => {
       }
     },
     onPanResponderGrant: () => {
-      Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
+      Animated.timing(scale, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
     },
     onPanResponderMove: Animated.event([null, {dy: pan.y}], {
       useNativeDriver: false,
@@ -48,19 +60,21 @@ export const HomeScreen: React.FC = () => {
           setIndex(prev => getNextIndex(data.stories, prev));
         });
       } else {
-        Animated.spring(pan, {
+        Animated.timing(pan, {
           toValue: {x: 0, y: 0},
+          duration: 300,
           useNativeDriver: false,
         }).start();
-        Animated.spring(scale, {
+        Animated.timing(scale, {
           toValue: 0.8,
+          duration: 300,
           useNativeDriver: false,
         }).start();
       }
     },
   });
 
-  if (!data || isLoading || error) {
+  if (!data || isLoading || error || !stories) {
     return <Loading isActive={true} />;
   }
 
@@ -68,14 +82,14 @@ export const HomeScreen: React.FC = () => {
     <>
       <Screen style={styles.container}>
         <Animated.View style={[styles.secondCard, {transform: [{scale}]}]}>
-          <Card data={data.stories[getNextIndex(data.stories, index)]} />
+          <Card data={data.stories[getNextIndex(stories, index)]} />
         </Animated.View>
         <Animated.View
           style={{
             transform: [{translateX: pan.x}, {translateY: pan.y}],
           }}
           {...panResponder.panHandlers}>
-          <Card canOpen={true} data={data.stories[index]} />
+          <Card canOpen={true} data={stories[index]} />
         </Animated.View>
       </Screen>
     </>

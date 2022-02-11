@@ -5,11 +5,11 @@ export const yesnoApi = createApi({
   baseQuery: fetchBaseQuery({baseUrl: 'http://192.168.0.106:5000/api/yesno/'}),
   endpoints: builder => ({
     getStories: builder.query({
-      query: () => '/all',
+      query: body => `/all/${body.uid}`,
     }),
     reviewYesNo: builder.mutation({
       query: body => {
-        const {id, time, difficulty, rating} = body;
+        const {id, time, difficulty, rating, userId} = body;
         return {
           url: `/${id}`,
           method: 'PATCH',
@@ -17,6 +17,7 @@ export const yesnoApi = createApi({
             time,
             difficulty,
             rating,
+            userId,
           },
         };
       },

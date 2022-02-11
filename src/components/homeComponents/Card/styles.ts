@@ -38,22 +38,8 @@ export const styles = StyleSheet.create({
   },
   text: {
     padding: 20,
+    paddingTop: 10,
     flex: 1,
-  },
-  reviewContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: 20,
-  },
-  reviewButton: {
-    width: 100,
-    height: '100%',
-    paddingVertical: 0,
-  },
-  answerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
   },
   answer: {
     backgroundColor: colors.darkBlue,
@@ -76,8 +62,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    width: 150,
-    paddingVertical: 10,
+    width: '100%',
+    height: 'auto',
+    paddingVertical: 6,
     marginBottom: 0,
   },
   gradient: {

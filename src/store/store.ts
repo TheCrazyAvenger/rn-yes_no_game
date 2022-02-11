@@ -11,7 +11,10 @@ export const store = configureStore({
     user: userSlice,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(yesnoApi.middleware, authApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+      immutableCheck: false,
+    }).concat(yesnoApi.middleware, authApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
