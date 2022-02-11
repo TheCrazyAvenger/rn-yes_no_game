@@ -6,6 +6,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     flexWrap: 'wrap',
+    paddingHorizontal: 20,
+    paddingTop: 10,
   },
   infoItem: {
     flexDirection: 'row',
@@ -19,6 +21,7 @@ export const styles = StyleSheet.create({
   line: {
     backgroundColor: colors.blue,
     height: 1,
+    marginHorizontal: 20,
     marginVertical: 10,
   },
 });

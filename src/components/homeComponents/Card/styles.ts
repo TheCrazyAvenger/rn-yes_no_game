@@ -27,21 +27,15 @@ export const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 30,
   },
-  title: {
-    color: colors.blue,
-    textTransform: 'uppercase',
-    marginBottom: 5,
-    marginRight: 10,
-  },
   story: {
     paddingBottom: 20,
+    paddingHorizontal: 20,
   },
   text: {
-    padding: 20,
-    paddingTop: 10,
     flex: 1,
   },
   answer: {
+    marginHorizontal: 20,
     backgroundColor: colors.darkBlue,
     borderRadius: 14,
     marginBottom: 20,

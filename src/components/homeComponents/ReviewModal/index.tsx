@@ -6,7 +6,7 @@ import {useReviewYesNoMutation} from '@api';
 import {ReviewModalProps} from '@components';
 import {colors} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
-import {H2, H3, H5} from '@Typography';
+import {H1, H2, H3, H5} from '@Typography';
 import {Button, NumberPicker} from '@ui';
 import {styles} from './styles';
 import {addReview} from '@store/slices/userSlice';
@@ -25,7 +25,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
   const reviewOpacity = useRef(
     new Animated.Value(reviewedByUser ? 1 : 0),
   ).current;
-  const height = useRef(new Animated.Value(reviewedByUser ? 120 : 405)).current;
+  const height = useRef(new Animated.Value(reviewedByUser ? 150 : 415)).current;
 
   const [rating, setRating] = useState(1);
   const [spentTime, setSpentTime] = useState(1);
@@ -51,7 +51,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
       }).unwrap();
 
       Animated.timing(height, {
-        toValue: 120,
+        toValue: 150,
         duration: 700,
         useNativeDriver: false,
       }).start();
@@ -61,10 +61,10 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
       setTimeout(() => {
         Animated.timing(reviewOpacity, {
           toValue: 1,
-          duration: 300,
+          duration: 200,
           useNativeDriver: false,
         }).start();
-      }, 700);
+      }, 500);
     } catch (e: any) {
       setError(e.data.message);
     }
@@ -86,10 +86,9 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
         </Animated.View>
       ) : (
         <Animated.View style={[styles.reviewContainer, {height}]}>
-          <H2 fontWeight="600" style={styles.title}>
+          <H1 fontWeight="600" style={{...styles.title, marginBottom: 20}}>
             Share your opinion
-          </H2>
-          <View style={styles.line} />
+          </H1>
           <View style={styles.reviewItem}>
             <H3 fontWeight="600" style={{...styles.title}}>
               Did you like the story?
@@ -118,7 +117,6 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                   style={[
                     styles.pickerAnimText,
                     {
-                      paddingLeft: 75,
                       color: opacity.interpolate({
                         inputRange: [0, 1],
                         outputRange: [colors.black, colors.white],
@@ -150,7 +148,6 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                   style={[
                     styles.pickerAnimText,
                     {
-                      paddingRight: 75,
                       color: opacity.interpolate({
                         inputRange: [0, 1],
                         outputRange: [colors.white, colors.black],

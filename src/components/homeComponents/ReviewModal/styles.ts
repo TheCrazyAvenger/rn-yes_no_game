@@ -3,7 +3,10 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    marginBottom: 100,
+    backgroundColor: colors.darkBlue,
+    paddingTop: 30,
+    paddingHorizontal: 20,
+    paddingBottom: 60,
   },
   reviewContainer: {
     overflow: 'hidden',
@@ -29,9 +32,9 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    textTransform: 'uppercase',
+    textAlign: 'center',
     marginBottom: 5,
-    color: colors.blue,
+    color: colors.white,
   },
   line: {
     backgroundColor: colors.blue,
@@ -54,21 +57,24 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   pickerText: {
-    paddingVertical: 8,
+    width: '50%',
+    alignItems: 'center',
   },
   pickerAnimText: {
     fontSize: 16,
     fontFamily: 'OpenSans-SemiBold',
   },
   button: {
-    marginTop: 10,
+    marginTop: 15,
     marginBottom: 0,
     paddingVertical: 15,
+    backgroundColor: colors.green,
   },
   reviewReady: {
     alignItems: 'center',
   },
   revReadyText: {
     textAlign: 'center',
+    color: colors.white,
   },
 });

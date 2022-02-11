@@ -11,4 +11,7 @@ export const styles = StyleSheet.create({
     height: 45,
     overflow: 'hidden',
   },
+  button: {
+    height: '100%',
+  },
 });

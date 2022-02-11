@@ -38,7 +38,7 @@ export const NumberPicker: React.FC<NumberPickerProps> = ({
         onPressOut={stopTimer}
         name="chevron-down"
         size={20}
-        style={{backgroundColor: colors.red}}
+        style={{...styles.button, backgroundColor: colors.red}}
         color={colors.white}
       />
       <H4 fontWeight="600">{value}</H4>
@@ -47,7 +47,7 @@ export const NumberPicker: React.FC<NumberPickerProps> = ({
         onPressOut={stopTimer}
         name="chevron-up"
         size={20}
-        style={{backgroundColor: colors.green}}
+        style={{...styles.button, backgroundColor: colors.green}}
         color={colors.white}
       />
     </View>
