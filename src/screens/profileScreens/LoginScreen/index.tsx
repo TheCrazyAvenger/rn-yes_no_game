@@ -26,14 +26,13 @@ export const LoginScreen: React.FC = () => {
       setErrorMessage(null);
 
       const data = await login(values).unwrap();
-      const {email, name, image} = data.user;
+      const {email, name, image, id} = data.user;
 
       await AsyncStorage.setItem('email', email);
       await AsyncStorage.setItem('name', name);
       await AsyncStorage.setItem('image', image);
-      await dispatch(addUser({email, name, image}));
-
-    
+      await AsyncStorage.setItem('id', id);
+      await dispatch(addUser({email, name, image, id}));
     } catch (e: any) {
       setErrorMessage(e.data.message);
     }

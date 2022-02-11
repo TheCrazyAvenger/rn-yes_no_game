@@ -5,18 +5,23 @@ export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    flexWrap: 'wrap',
+    paddingHorizontal: 20,
+    paddingTop: 10,
   },
   infoItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 20,
+    marginRight: 15,
+    marginBottom: 10,
   },
   text: {
-    marginLeft: 5,
+    marginLeft: 2,
   },
   line: {
     backgroundColor: colors.blue,
     height: 1,
+    marginHorizontal: 20,
     marginVertical: 10,
   },
 });

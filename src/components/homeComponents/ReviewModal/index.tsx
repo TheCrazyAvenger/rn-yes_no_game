@@ -1,30 +1,31 @@
+import React, {useRef, useState} from 'react';
+import {Animated, TouchableOpacity, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 import {useReviewYesNoMutation} from '@api';
 import {ReviewModalProps} from '@components';
 import {colors} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
-import {toggleReview} from '@store/slices/actionsSlice';
-import {H2, H3, H4, H5} from '@Typography';
-import {
-  Button,
-  CloseButton,
-  Loading,
-  NumberPicker,
-  ModalItem,
-  Success,
-} from '@ui';
-import React, {useRef, useState} from 'react';
-import {Animated, Image, TouchableOpacity, View} from 'react-native';
+import {H1, H2, H3, H5} from '@Typography';
+import {Button, NumberPicker} from '@ui';
 import {styles} from './styles';
+import {addReview} from '@store/slices/userSlice';
 
-export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
-  const showReview = useAppSelector(state => state.actions.showReview);
+export const ReviewModal: React.FC<ReviewModalProps> = ({
+  id,
+  reviewedByUser,
+}) => {
   const dispatch = useAppDispatch();
+  const userId = useAppSelector(state => state.user.id);
 
   const [reviewYesNo, {isLoading}] = useReviewYesNoMutation();
-  const [success, setSuccess] = useState(false);
   const [error, setError] = useState<null | string>(null);
 
   const opacity = useRef(new Animated.Value(0)).current;
+  const reviewOpacity = useRef(
+    new Animated.Value(reviewedByUser ? 1 : 0),
+  ).current;
+  const height = useRef(new Animated.Value(reviewedByUser ? 150 : 415)).current;
 
   const [rating, setRating] = useState(1);
   const [spentTime, setSpentTime] = useState(1);
@@ -38,158 +39,159 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({image, title, id}) => {
     }).start();
   };
 
-  const closeModalHandler = () => {
-    setSpentTime(1);
-    setDifficult(1);
-    setRating(1);
-    pickerHandler(1);
-    dispatch(toggleReview(false));
-  };
-
   const reviewYesNoHandler = async () => {
     try {
+      setError(null);
       await reviewYesNo({
         rating,
         time: spentTime,
         difficulty: difficult,
+        userId,
         id,
       }).unwrap();
 
-      setSuccess(true);
+      Animated.timing(height, {
+        toValue: 150,
+        duration: 700,
+        useNativeDriver: false,
+      }).start();
+
+      dispatch(addReview(id));
 
       setTimeout(() => {
-        setSuccess(false);
-        closeModalHandler();
-      }, 1350);
+        Animated.timing(reviewOpacity, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: false,
+        }).start();
+      }, 500);
     } catch (e: any) {
       setError(e.data.message);
     }
   };
 
   return (
-    <>
-      <ModalItem visible={showReview}>
-        {isLoading && (
-          <Loading
-            isActive={isLoading}
-            style={{zIndex: 100, backgroundColor: 'rgba(0, 0, 0, 0.3)'}}
+    <View style={styles.container}>
+      {reviewedByUser ? (
+        <Animated.View
+          style={[styles.reviewReady, {height, opacity: reviewOpacity}]}>
+          <Icon
+            name="checkmark-circle-outline"
+            size={100}
+            color={colors.green}
           />
-        )}
-        {success && <Success isActive={success} />}
-        <View style={styles.header}>
-          <Image style={styles.image} source={{uri: image}} />
-          <View style={styles.headerText}>
-            <H4>Story:</H4>
-            <H2 fontWeight="600" style={styles.headerTitle}>
-              {title}
-            </H2>
-          </View>
-        </View>
-        <View style={styles.line} />
-        <View style={styles.reviewItem}>
-          <H3 fontWeight="600" style={{...styles.title}}>
-            Did you like the story?
-          </H3>
-          <View style={styles.reviewPicker}>
-            <Animated.View
-              style={[
-                styles.pickerFiller,
-                {
-                  backgroundColor: colors.green,
-                  borderTopLeftRadius: 14,
-                  borderBottomLeftRadius: 14,
-                  left: 0,
-                  opacity: opacity.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, 1],
-                  }),
-                },
-              ]}
-            />
-            <TouchableOpacity
-              onPress={() => pickerHandler(1)}
-              style={styles.pickerText}>
-              <Animated.Text
+          <H2 style={styles.revReadyText} fontWeight="600">
+            Review sent
+          </H2>
+        </Animated.View>
+      ) : (
+        <Animated.View style={[styles.reviewContainer, {height}]}>
+          <H1 fontWeight="600" style={{...styles.title, marginBottom: 20}}>
+            Share your opinion
+          </H1>
+          <View style={styles.reviewItem}>
+            <H3 fontWeight="600" style={{...styles.title}}>
+              Did you like the story?
+            </H3>
+
+            <View style={styles.reviewPicker}>
+              <Animated.View
                 style={[
-                  styles.pickerAnimText,
+                  styles.pickerFiller,
                   {
-                    paddingLeft: 55,
-                    color: opacity.interpolate({
+                    backgroundColor: colors.green,
+                    borderTopLeftRadius: 14,
+                    borderBottomLeftRadius: 14,
+                    left: 0,
+                    opacity: opacity.interpolate({
                       inputRange: [0, 1],
-                      outputRange: [colors.black, colors.white],
+                      outputRange: [0, 1],
                     }),
                   },
-                ]}>
-                Yes
-              </Animated.Text>
-            </TouchableOpacity>
+                ]}
+              />
+              <TouchableOpacity
+                onPress={() => pickerHandler(1)}
+                style={styles.pickerText}>
+                <Animated.Text
+                  style={[
+                    styles.pickerAnimText,
+                    {
+                      color: opacity.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [colors.black, colors.white],
+                      }),
+                    },
+                  ]}>
+                  Yes
+                </Animated.Text>
+              </TouchableOpacity>
 
-            <Animated.View
-              style={[
-                styles.pickerFiller,
-                {
-                  borderTopRightRadius: 14,
-                  borderBottomRightRadius: 14,
-                  right: 0,
-                  opacity: opacity.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [1, 0],
-                  }),
-                },
-              ]}
-            />
-            <TouchableOpacity
-              onPress={() => pickerHandler(0)}
-              style={styles.pickerText}>
-              <Animated.Text
+              <Animated.View
                 style={[
-                  styles.pickerAnimText,
+                  styles.pickerFiller,
                   {
-                    paddingRight: 55,
-                    color: opacity.interpolate({
+                    borderTopRightRadius: 14,
+                    borderBottomRightRadius: 14,
+                    right: 0,
+                    opacity: opacity.interpolate({
                       inputRange: [0, 1],
-                      outputRange: [colors.white, colors.black],
+                      outputRange: [1, 0],
                     }),
                   },
-                ]}>
-                No
-              </Animated.Text>
-            </TouchableOpacity>
+                ]}
+              />
+              <TouchableOpacity
+                onPress={() => pickerHandler(0)}
+                style={styles.pickerText}>
+                <Animated.Text
+                  style={[
+                    styles.pickerAnimText,
+                    {
+                      color: opacity.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [colors.white, colors.black],
+                      }),
+                    },
+                  ]}>
+                  No
+                </Animated.Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <View style={styles.reviewItem}>
-          <H3 fontWeight="600" style={{...styles.title}}>
-            Spent time
-          </H3>
-          <NumberPicker
-            value={spentTime}
-            setValue={setSpentTime}
-            min={1}
-            max={120}
+          <View style={styles.reviewItem}>
+            <H3 fontWeight="600" style={{...styles.title}}>
+              Spent time
+            </H3>
+            <NumberPicker
+              value={`${spentTime} min.`}
+              setValue={setSpentTime}
+              min={1}
+              max={120}
+            />
+          </View>
+          <View style={[styles.reviewItem, {marginBottom: 10}]}>
+            <H3 fontWeight="600" style={{...styles.title}}>
+              Complexity
+            </H3>
+            <NumberPicker
+              value={`${difficult} out of 10`}
+              setValue={setDifficult}
+              min={1}
+              max={10}
+            />
+          </View>
+          {error && <H5 style={styles.error}>{error}</H5>}
+          <Button
+            disabled={isLoading}
+            loading={isLoading}
+            title="Send"
+            style={styles.button}
+            containerStyle={{marginTop: 10}}
+            onPress={reviewYesNoHandler}
           />
-        </View>
-        <View style={[styles.reviewItem, {marginBottom: 10}]}>
-          <H3 fontWeight="600" style={{...styles.title}}>
-            Complexity
-          </H3>
-          <NumberPicker
-            value={`${difficult}/10`}
-            setValue={setDifficult}
-            min={1}
-            max={10}
-          />
-        </View>
-
-        <View style={styles.line} />
-
-        {error && <H5 style={styles.error}>{error}</H5>}
-        <Button
-          title="Send"
-          style={styles.button}
-          onPress={reviewYesNoHandler}
-        />
-        <CloseButton style={{top: 20}} onPress={closeModalHandler} />
-      </ModalItem>
-    </>
+        </Animated.View>
+      )}
+    </View>
   );
 };

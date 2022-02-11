@@ -1,10 +1,11 @@
+import React from 'react';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {H3, H4, H5} from '@Typography';
-import React from 'react';
 import {Image, View} from 'react-native';
+
+import {H3, H5} from '@Typography';
 import {styles} from './styles';
 
 export const CustomDrawer: React.FC = (props: any) => {

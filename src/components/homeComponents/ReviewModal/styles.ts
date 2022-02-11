@@ -2,21 +2,14 @@ import {colors} from '@constants';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  background: {
-    backgroundColor: 'rgba(0,0,0,0.75)',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   container: {
-    width: '80%',
-    backgroundColor: colors.white,
-    borderRadius: 14,
-    padding: 25,
+    backgroundColor: colors.darkBlue,
+    paddingTop: 30,
+    paddingHorizontal: 20,
+    paddingBottom: 60,
+  },
+  reviewContainer: {
+    overflow: 'hidden',
   },
   error: {
     color: colors.red,
@@ -34,16 +27,14 @@ export const styles = StyleSheet.create({
   headerText: {
     marginLeft: 10,
   },
-  headerTitle: {
-    color: colors.blue,
-  },
+
   reviewItem: {
     marginBottom: 20,
   },
   title: {
-    textTransform: 'uppercase',
+    textAlign: 'center',
     marginBottom: 5,
-    color: colors.blue,
+    color: colors.white,
   },
   line: {
     backgroundColor: colors.blue,
@@ -66,15 +57,24 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   pickerText: {
-    paddingVertical: 8,
+    width: '50%',
+    alignItems: 'center',
   },
   pickerAnimText: {
     fontSize: 16,
     fontFamily: 'OpenSans-SemiBold',
   },
   button: {
-    marginTop: 10,
+    marginTop: 15,
     marginBottom: 0,
     paddingVertical: 15,
+    backgroundColor: colors.green,
+  },
+  reviewReady: {
+    alignItems: 'center',
+  },
+  revReadyText: {
+    textAlign: 'center',
+    color: colors.white,
   },
 });

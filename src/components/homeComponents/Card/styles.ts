@@ -27,38 +27,18 @@ export const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 30,
   },
-  title: {
-    color: colors.blue,
-    textTransform: 'uppercase',
-    marginBottom: 5,
-    marginRight: 10,
-  },
   story: {
     paddingBottom: 20,
+    paddingHorizontal: 20,
   },
   text: {
-    padding: 20,
     flex: 1,
   },
-  reviewContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: 20,
-  },
-  reviewButton: {
-    width: 100,
-    height: '100%',
-    paddingVertical: 0,
-  },
-  answerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
   answer: {
+    marginHorizontal: 20,
     backgroundColor: colors.darkBlue,
     borderRadius: 14,
-    marginBottom: 100,
+    marginBottom: 20,
   },
   answerText: {
     fontSize: 18.72,
@@ -76,18 +56,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    width: 150,
-    paddingVertical: 10,
+    width: '100%',
+    height: 'auto',
+    paddingVertical: 6,
     marginBottom: 0,
-  },
-  openButton: {
-    position: 'absolute',
-    bottom: -20,
-    right: 0,
-    left: 0,
-    height: 60,
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
   },
   gradient: {
     position: 'absolute',
