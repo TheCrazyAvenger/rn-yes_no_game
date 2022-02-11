@@ -4,6 +4,7 @@ export * from './homeComponents/ReviewModal';
 
 export * from './navigationComponents/CustomDrawer';
 
-export * from './profileComponents/AuthModal';
+export * from './profileComponents/ProfileItem';
+export * from './profileComponents/ProfileHeader';
 
 export * from './PropsType';

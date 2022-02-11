@@ -28,3 +28,12 @@ export type ReviewModalProps = {
   id: string;
   reviewedByUser: boolean;
 };
+
+export type ProfileItemProps = {
+  showLine?: boolean;
+  title: string;
+  icon: string;
+  color: string;
+  description?: string;
+  onPress: (...args: any) => any;
+};

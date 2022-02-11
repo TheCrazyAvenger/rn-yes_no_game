@@ -1,20 +1,13 @@
 import React from 'react';
-import {
-  Image,
-  ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
-  View,
-} from 'react-native';
-import {useAppDispatch, useAppSelector} from '@hooks';
-import {styles} from './styles';
-import {H1, H4} from '@Typography';
-import {IconButton} from '@ui';
+import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
+
+import {ProfileHeader, ProfileItem} from '@components';
+import {useAppDispatch} from '@hooks';
 import {colors} from '@constants';
 import {logout} from '@store/asyncFuncs';
+import {styles} from './styles';
 
 export const ProfileScreen: React.FC = () => {
-  const {name, email, image} = useAppSelector(state => state.user);
   const dispatch = useAppDispatch();
 
   const logoutHandler = () => dispatch(logout());
@@ -23,28 +16,54 @@ export const ProfileScreen: React.FC = () => {
     <KeyboardAvoidingView
       style={{flex: 1}}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <ImageBackground
-        style={styles.container}
-        source={require('@assets/images/authbg.jpg')}>
-        <View style={styles.header}>
-          <View style={styles.userHeader}>
-            <Image style={styles.image} source={{uri: image!}} />
-            <View style={styles.user}>
-              <H1 style={styles.title} fontWeight="bold">
-                {name}
-              </H1>
-              <H4 style={styles.title}>{email}</H4>
-            </View>
-          </View>
-          <IconButton
-            name="exit"
-            onPress={logoutHandler}
-            color={colors.white}
-            size={30}
-            style={styles.logoutButton}
-          />
-        </View>
-      </ImageBackground>
+      <ProfileHeader />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.profileBody}>
+        <ProfileItem
+          onPress={() => {}}
+          title="Profile"
+          description="Change name or email"
+          icon="person-outline"
+          color={colors.blue}
+        />
+        <ProfileItem
+          onPress={() => {}}
+          title="Personalization"
+          description="Change the look of your profile"
+          icon="brush-outline"
+          color={colors.blue}
+        />
+        <ProfileItem
+          onPress={() => {}}
+          title="Achievements"
+          description="List of your achievements"
+          icon="ribbon-outline"
+          color={colors.blue}
+        />
+        <ProfileItem
+          onPress={() => {}}
+          title="Statistics"
+          description="Detailed account statistics"
+          icon="stats-chart-outline"
+          color={colors.blue}
+        />
+        <ProfileItem
+          onPress={() => {}}
+          title="Send report"
+          description="Report a bug or suggest a change"
+          icon="build-outline"
+          color={colors.blue}
+        />
+
+        <ProfileItem
+          onPress={logoutHandler}
+          title="Log out"
+          icon="log-out-outline"
+          color={colors.red}
+          showLine={false}
+        />
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
