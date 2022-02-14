@@ -13,7 +13,6 @@ export const Loading: React.FC<LottieProps> = ({
 
   useEffect(() => {
     if (isActive) {
-      animation.current!.loop = true;
       animation.current!.play();
     } else {
       animation.current!.loop = false;
@@ -26,7 +25,7 @@ export const Loading: React.FC<LottieProps> = ({
       onAnimationFinish={onAnimationFinish}
       source={require('@assets/images/loading.json')}
       autoPlay={false}
-      loop={false}
+      loop={true}
       ref={animation}
     />
   );

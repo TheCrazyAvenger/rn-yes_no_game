@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 export const yesnoApi = createApi({
   reducerPath: 'yesnoApi',
-  baseQuery: fetchBaseQuery({baseUrl: 'http://192.168.0.106:5000/api/yesno/'}),
+  baseQuery: fetchBaseQuery({baseUrl: 'http://192.168.170.68:5000/api/yesno/'}),
   endpoints: builder => ({
     getStories: builder.query({
       query: body => `/all/${body.uid}`,

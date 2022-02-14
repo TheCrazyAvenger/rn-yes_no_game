@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     color: colors.white,
     width: '90%',
     padding: 20,
-    paddingTop: 30,
+    paddingTop: 50,
   },
   story: {
     paddingBottom: 20,

@@ -73,10 +73,12 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
       }).start();
       Animated.timing(width, {
         toValue: cardWidth,
+        duration: 300,
         useNativeDriver: false,
       }).start();
       Animated.timing(height, {
         toValue: cardHeight,
+        duration: 300,
         useNativeDriver: false,
       }).start();
 
@@ -98,10 +100,12 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
     }).start();
     Animated.timing(width, {
       toValue: cardWidth - 60,
+      duration: 300,
       useNativeDriver: false,
     }).start();
     Animated.timing(height, {
       toValue: cardHeight / 1.3,
+      duration: 300,
       useNativeDriver: false,
     }).start();
   };

@@ -1,9 +1,12 @@
 export enum Screens {
   homeScreen = 'homeScreen',
-  profileScreen = 'profileScreen',
 
   authStack = 'authStack',
   authScreen = 'authScreen',
   loginScreen = 'loginScreen',
   signUpScreen = 'signUpScreen',
+
+  profileStack = 'profileStack',
+  profileScreen = 'profileScreen',
+  reportScreen = 'reportScreen',
 }

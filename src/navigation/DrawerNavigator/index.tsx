@@ -3,11 +3,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {DrawerNavigationOptions} from '@react-navigation/drawer/lib/typescript/src/types';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import {HomeScreen, ProfileScreen} from '@screens';
+import {HomeScreen} from '@screens';
 import {CustomDrawer} from '@components';
 import {H3} from '@Typography';
 import {Screens, yesno} from '@constants';
 import {styles} from './styles';
+import {ProfileStack} from '../ProfileStack';
 
 const Drawer = createDrawerNavigator();
 
@@ -38,14 +39,14 @@ export const DrawerNavigator: React.FC = () => {
         component={HomeScreen}
       />
       <Drawer.Screen
-        name={Screens.profileScreen}
+        name={Screens.profileStack}
         options={{
           drawerIcon: ({color, size}) => (
             <Icon name="person-outline" color={color} size={size} />
           ),
           title: 'Profile',
         }}
-        component={ProfileScreen}
+        component={ProfileStack}
       />
     </Drawer.Navigator>
   );

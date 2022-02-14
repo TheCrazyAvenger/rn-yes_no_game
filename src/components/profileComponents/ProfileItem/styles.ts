@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   },
   line: {
     backgroundColor: colors.black,
-    height: 1,
+    height: 0.7,
     marginVertical: 15,
   },
 });

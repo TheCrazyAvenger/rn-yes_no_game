@@ -1,7 +1,8 @@
-import {Button, FormInput} from '@ui';
-import {Formik} from 'formik';
 import React from 'react';
+import {Formik} from 'formik';
 import {View} from 'react-native';
+
+import {Button, FormInput} from '@ui';
 import {LoginFormProps} from '../PropTypes';
 import {loginSchema} from '../schemas';
 import {styles} from './styles';

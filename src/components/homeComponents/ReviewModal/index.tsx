@@ -52,19 +52,17 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 
       Animated.timing(height, {
         toValue: 150,
-        duration: 700,
+        duration: 500,
         useNativeDriver: false,
       }).start();
 
       dispatch(addReview(id));
 
-      setTimeout(() => {
-        Animated.timing(reviewOpacity, {
-          toValue: 1,
-          duration: 200,
-          useNativeDriver: false,
-        }).start();
-      }, 500);
+      Animated.timing(reviewOpacity, {
+        toValue: 1,
+        duration: 600,
+        useNativeDriver: false,
+      }).start();
     } catch (e: any) {
       setError(e.data.message);
     }
@@ -178,6 +176,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               value={`${difficult} out of 10`}
               setValue={setDifficult}
               min={1}
+              style={{marginBottom: 25}}
               max={10}
             />
           </View>
@@ -187,7 +186,6 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
             loading={isLoading}
             title="Send"
             style={styles.button}
-            containerStyle={{marginTop: 10}}
             onPress={reviewYesNoHandler}
           />
         </Animated.View>

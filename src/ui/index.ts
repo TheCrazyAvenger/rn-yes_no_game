@@ -9,5 +9,6 @@ export * from './NumberPicker';
 export * from './KeyboardDismissView';
 
 export * from './formComponents/FormInput';
+export * from './formComponents/ImagePicker';
 
 export * from './PropsType';

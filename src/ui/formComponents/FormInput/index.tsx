@@ -14,6 +14,8 @@ export const FormInput: React.FC<FormInputProps> = ({
   onBlur,
   onChange,
   onInput,
+  onContentSizeChange,
+  height,
   value,
   errorMessage,
   isTouched,
@@ -24,6 +26,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   leftIcon,
   disabled,
   inputStyle,
+  multiline,
   keyboardType = 'default',
   errorStyle,
 }) => {
@@ -47,6 +50,8 @@ export const FormInput: React.FC<FormInputProps> = ({
         label={label}
         keyboardType={keyboardType}
         onBlur={onBlur}
+        onContentSizeChange={onContentSizeChange}
+        multiline={multiline}
         onChange={onChange}
         onTextInput={onInput}
         leftIconContainerStyle={{marginTop: 3}}
@@ -57,7 +62,10 @@ export const FormInput: React.FC<FormInputProps> = ({
         placeholderTextColor="gray"
         inputStyle={{...styles.inputStyle, ...inputStyle}}
         labelStyle={[...labelStyle, style]}
-        inputContainerStyle={inputContainerStyle}
+        inputContainerStyle={[
+          ...inputContainerStyle,
+          {height: height ? height : 45},
+        ]}
         disabled={disabled ? true : false}
       />
 

@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.lightgray,
     borderRadius: 14,
     paddingHorizontal: 10,
-    height: 45,
     borderBottomWidth: 0,
   },
   errorInput: {

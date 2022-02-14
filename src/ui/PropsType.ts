@@ -44,6 +44,7 @@ export type NumberPickerProps = {
   setValue: (prevValue: any) => any;
   min: number;
   max: number;
+  style?: ViewStyle;
 };
 
 export type LottieProps = {
@@ -60,6 +61,8 @@ export type FormInputProps = {
   onFocus?: (...args: any) => void;
   onBlur: (...args: any) => void;
   onInput?: (...args: any) => void;
+  onContentSizeChange?: (...args: any) => void;
+  height?: number;
   value: any;
   errorMessage?: any;
   isTouched: any;
@@ -67,9 +70,16 @@ export type FormInputProps = {
   inputStyle?: {[key: string]: number | string};
   containerStyle?: {[key: string]: number | string};
   secureTextEntry?: boolean;
+  multiline?: boolean;
   rightIcon?: any;
   leftIcon?: any;
   keyboardType?: any;
   disabled?: boolean;
   errorStyle?: {[key: string]: number | string};
+};
+
+export type ImagePickerProps = {
+  style?: ViewStyle;
+  image: any | null;
+  onImage: (...args: any) => any;
 };

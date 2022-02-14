@@ -65,7 +65,6 @@ export const styles = StyleSheet.create({
     fontFamily: 'OpenSans-SemiBold',
   },
   button: {
-    marginTop: 15,
     marginBottom: 0,
     paddingVertical: 15,
     backgroundColor: colors.green,

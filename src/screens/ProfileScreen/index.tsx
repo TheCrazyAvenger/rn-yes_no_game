@@ -3,13 +3,16 @@ import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 
 import {ProfileHeader, ProfileItem} from '@components';
 import {useAppDispatch} from '@hooks';
-import {colors} from '@constants';
+import {colors, Screens} from '@constants';
 import {logout} from '@store/asyncFuncs';
 import {styles} from './styles';
+import {useNavigation} from '@react-navigation/native';
 
 export const ProfileScreen: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigation: any = useNavigation();
 
+  const reportHandler = () => navigation.navigate(Screens.reportScreen);
   const logoutHandler = () => dispatch(logout());
 
   return (
@@ -49,7 +52,7 @@ export const ProfileScreen: React.FC = () => {
           color={colors.blue}
         />
         <ProfileItem
-          onPress={() => {}}
+          onPress={reportHandler}
           title="Send report"
           description="Report a bug or suggest a change"
           icon="build-outline"

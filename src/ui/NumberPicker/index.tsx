@@ -10,6 +10,7 @@ export const NumberPicker: React.FC<NumberPickerProps> = ({
   setValue,
   min,
   max,
+  style,
 }) => {
   const timer: any = useRef(null);
 
@@ -32,7 +33,7 @@ export const NumberPicker: React.FC<NumberPickerProps> = ({
   };
 
   return (
-    <View style={styles.numberPicker}>
+    <View style={[styles.numberPicker, style]}>
       <IconButton
         onPressIn={removeOne}
         onPressOut={stopTimer}
