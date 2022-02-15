@@ -30,14 +30,16 @@ export const SignUpScreen: React.FC = () => {
       setErrorMessage(null);
 
       const data = await signup(values).unwrap();
-      const {email, name, image, id} = data.user;
+      const {email, name, image, userId, token} = data;
 
       await AsyncStorage.setItem('email', email);
       await AsyncStorage.setItem('name', name);
       await AsyncStorage.setItem('image', image);
-      await AsyncStorage.setItem('id', id);
-      await dispatch(addUser({email, name, image, id}));
+      await AsyncStorage.setItem('id', userId);
+      await AsyncStorage.setItem('token', token);
+      await dispatch(addUser({email, name, image, id: userId, token}));
     } catch (e: any) {
+      console.log(e);
       setErrorMessage(e.data.message);
     }
   };

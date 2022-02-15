@@ -9,10 +9,13 @@ export const yesnoApi = createApi({
     }),
     reviewYesNo: builder.mutation({
       query: body => {
-        const {id, time, difficulty, rating, userId} = body;
+        const {id, time, difficulty, rating, userId, token} = body;
         return {
           url: `/${id}`,
           method: 'PATCH',
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
           body: {
             time,
             difficulty,

@@ -17,6 +17,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(state => state.user.id);
+  const token = useAppSelector(state => state.user.token);
 
   const [reviewYesNo, {isLoading}] = useReviewYesNoMutation();
   const [error, setError] = useState<null | string>(null);
@@ -48,6 +49,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
         difficulty: difficult,
         userId,
         id,
+        token,
       }).unwrap();
 
       Animated.timing(height, {

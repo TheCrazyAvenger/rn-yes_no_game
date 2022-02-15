@@ -28,6 +28,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({onSubmit}) => {
             value={values.password}
             leftIcon={{name: 'lock', type: 'ionicons', color: 'gray'}}
             secureTextEntry={true}
+            keyboardType="email-address"
             plaseholder="Password"
             onChangeText={handleChange('password')}
             onBlur={handleBlur('password')}

@@ -57,7 +57,7 @@ export const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
-    height: 'auto',
+
     paddingVertical: 6,
     marginBottom: 0,
   },

@@ -28,6 +28,7 @@ export const SignUpForm: React.FC<LoginFormProps> = ({onSubmit}) => {
             value={values.email}
             leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
             plaseholder="Your Email"
+            keyboardType="email-address"
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
             errorMessage={errors.email}

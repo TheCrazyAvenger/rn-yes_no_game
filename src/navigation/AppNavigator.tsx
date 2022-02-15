@@ -1,5 +1,4 @@
 import {useAppDispatch, useAppSelector} from '@hooks';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {getUser} from '@store/asyncFuncs';
 import {Loading} from '@ui';
@@ -8,7 +7,7 @@ import {AuthStack} from './AuthStack';
 import {DrawerNavigator} from './DrawerNavigator';
 
 export const AppNavigator: React.FC = () => {
-  const name = useAppSelector(state => state.user.name);
+  const token = useAppSelector(state => state.user.token);
   const dispatch = useAppDispatch();
 
   const [loading, setLoading] = useState(false);
@@ -17,9 +16,6 @@ export const AppNavigator: React.FC = () => {
   }, []);
 
   const getUserData = async () => {
-    // await AsyncStorage.removeItem('email');
-    // await AsyncStorage.removeItem('name');
-    // await AsyncStorage.removeItem('image');
     try {
       setLoading(true);
       await dispatch(getUser());
@@ -33,7 +29,7 @@ export const AppNavigator: React.FC = () => {
     <NavigationContainer>
       {loading ? (
         <Loading isActive={loading} />
-      ) : name ? (
+      ) : token ? (
         <DrawerNavigator />
       ) : (
         <AuthStack />
