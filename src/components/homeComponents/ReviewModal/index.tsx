@@ -25,7 +25,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
   const reviewOpacity = useRef(
     new Animated.Value(reviewedByUser ? 1 : 0),
   ).current;
-  const height = useRef(new Animated.Value(reviewedByUser ? 150 : 415)).current;
+  const height = useRef(new Animated.Value(reviewedByUser ? 150 : 435)).current;
 
   const [rating, setRating] = useState(1);
   const [spentTime, setSpentTime] = useState(1);
@@ -180,14 +180,16 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               max={10}
             />
           </View>
-          {error && <H5 style={styles.error}>{error}</H5>}
+
           <Button
             disabled={isLoading}
             loading={isLoading}
+            containerStyle={{marginBottom: 5}}
             title="Send"
             style={styles.button}
             onPress={reviewYesNoHandler}
           />
+          {error && <H5 style={styles.error}>{error}</H5>}
         </Animated.View>
       )}
     </View>
