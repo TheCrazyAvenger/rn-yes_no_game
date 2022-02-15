@@ -1,8 +1,9 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import {BACKEND_URL} from '@env';
 
 export const reportApi = createApi({
   reducerPath: 'reportApi',
-  baseQuery: fetchBaseQuery({baseUrl: 'http://192.168.170.68:5000/api/report'}),
+  baseQuery: fetchBaseQuery({baseUrl: `${BACKEND_URL}/report`}),
 
   endpoints: builder => ({
     sendReport: builder.mutation({

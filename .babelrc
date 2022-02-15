@@ -31,6 +31,13 @@
           "@images": "./src/assets/images/index.ts"
         }
       }
+    ],
+    [
+      "module:react-native-dotenv",
+      {
+        "moduleName": "@env",
+        "path": ".env"
+      }
     ]
   ]
 }

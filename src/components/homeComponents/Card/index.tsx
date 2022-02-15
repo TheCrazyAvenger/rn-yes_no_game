@@ -18,6 +18,7 @@ import {Button, CloseButton} from '@ui';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {StoryInfo} from '../StoryInfo';
 import {styles} from './styles';
+import {IMAGES_URL} from '@env';
 
 export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -116,7 +117,9 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
         <Animated.View
           style={[styles.container, {width: width, height: height}]}>
           <Animated.View style={{height: imageHeight}}>
-            <ImageBackground style={styles.image} source={{uri: image}}>
+            <ImageBackground
+              style={styles.image}
+              source={{uri: `${IMAGES_URL}${image}`}}>
               <View
                 style={{
                   backgroundColor: `rgba(51,51,51,${actionYesNo ? 0.6 : 0})`,
