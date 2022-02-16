@@ -1,7 +1,9 @@
 export * from './HomeScreen';
-export * from './ProfileScreen';
 
-export * from './profileScreens/LoginScreen';
-export * from './profileScreens/SignUpScreen';
-export * from './profileScreens/AuthScreen';
+export * from './authScreens/LoginScreen';
+export * from './authScreens/SignUpScreen';
+export * from './authScreens/AuthScreen';
+
+export * from './profileScreens/ProfileScreen';
+export * from './profileScreens/ProfileEditScreen';
 export * from './profileScreens/ReportScreen';

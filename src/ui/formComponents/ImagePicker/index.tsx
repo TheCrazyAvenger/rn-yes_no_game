@@ -26,7 +26,7 @@ export const ImagePicker: React.FC<ImagePickerProps> = ({
       style={[styles.container, style]}
       onPress={openGalleryHandler}>
       {image ? (
-        <Image style={styles.image} source={{uri: image.uri}} />
+        <Image style={styles.image} source={{uri: image}} />
       ) : (
         <Icon name="camera" size={32} />
       )}

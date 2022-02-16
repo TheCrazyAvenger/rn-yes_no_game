@@ -3,12 +3,11 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
-    paddingHorizontal: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  error: {
-    marginBottom: 15,
-    color: colors.red,
-    marginLeft: 10,
+  submitButton: {
+    marginHorizontal: 10,
+    height: 45,
   },
 });

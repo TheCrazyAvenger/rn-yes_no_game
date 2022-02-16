@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {View} from 'react-native';
 import {Formik} from 'formik';
+import {IMAGES_URL} from '@env';
 
 import {Button, FormInput, ImagePicker} from '@ui';
 import {reportSchema} from '../schemas';
@@ -8,23 +9,36 @@ import {LoginFormProps} from '../PropTypes';
 import {styles} from './styles';
 import {useAppSelector} from '@hooks';
 
-export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
-  const {name, email} = useAppSelector(state => state.user);
+export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
+  const {
+    name,
+    email,
+    image: currentImage,
+  } = useAppSelector(state => state.user);
 
-  const [height, setHeight] = useState(0);
   const [image, setImage] = useState<any>(null);
 
   const addImage = (image: any) => {
     setImage(image[0]);
   };
 
+  const imageUri = useMemo(
+    () => (image ? image.uri : `${IMAGES_URL}${currentImage}`),
+    [image],
+  );
+
   return (
     <Formik
       validationSchema={reportSchema}
-      initialValues={{name, email, message: ''}}
+      initialValues={{name, email}}
       onSubmit={values => onSubmit({...values, image})}>
       {({handleChange, handleBlur, handleSubmit, values, errors, touched}) => (
         <View>
+          <ImagePicker
+            image={imageUri}
+            style={{marginLeft: 10}}
+            onImage={addImage}
+          />
           <FormInput
             value={values.name}
             leftIcon={{name: 'person', type: 'ionicons', color: 'gray'}}
@@ -43,30 +57,10 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
             errorMessage={errors.email}
             isTouched={touched.email}
           />
-          <FormInput
-            value={values.message}
-            leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
-            plaseholder="Your Message"
-            onChangeText={handleChange('message')}
-            onBlur={handleBlur('message')}
-            onContentSizeChange={event => {
-              setHeight(event.nativeEvent.contentSize.height);
-            }}
-            height={height}
-            errorMessage={errors.message}
-            isTouched={touched.message}
-            multiline={true}
-          />
-
-          <ImagePicker
-            image={image ? image.uri : null}
-            style={{marginLeft: 10}}
-            onImage={addImage}
-          />
 
           <Button
             onPress={handleSubmit}
-            title="Send"
+            title="Save"
             style={styles.submitButton}
           />
         </View>

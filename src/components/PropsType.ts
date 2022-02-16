@@ -37,3 +37,8 @@ export type ProfileItemProps = {
   description?: string;
   onPress: (...args: any) => any;
 };
+
+export type ProfileItemHeaderProps = {
+  title: string;
+  description: string;
+};

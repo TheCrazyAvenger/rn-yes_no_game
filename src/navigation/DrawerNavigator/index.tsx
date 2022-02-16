@@ -6,9 +6,10 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {HomeScreen} from '@screens';
 import {CustomDrawer} from '@components';
 import {H3} from '@Typography';
-import {Screens, yesno} from '@constants';
+import {Screens} from '@constants';
 import {styles} from './styles';
 import {ProfileStack} from '../ProfileStack';
+import {useAppSelector} from '@hooks';
 
 const Drawer = createDrawerNavigator();
 
@@ -19,6 +20,8 @@ const screenOptions: DrawerNavigationOptions = {
 };
 
 export const DrawerNavigator: React.FC = () => {
+  const stories = useAppSelector(state => state.user.stories);
+
   return (
     <Drawer.Navigator
       drawerContent={(props: any) => <CustomDrawer {...props} />}
@@ -31,7 +34,7 @@ export const DrawerNavigator: React.FC = () => {
           ),
           headerTitle: () => (
             <H3 style={styles.headerTitleStyle} fontWeight="600">
-              {`In catalog ${yesno.length} stories`}
+              {`In catalog ${stories ? stories.length : 0} stories`}
             </H3>
           ),
           title: 'Home',

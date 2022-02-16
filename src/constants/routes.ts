@@ -8,5 +8,6 @@ export enum Screens {
 
   profileStack = 'profileStack',
   profileScreen = 'profileScreen',
+  profileEditScreen = 'profileEditScreen',
   reportScreen = 'reportScreen',
 }

@@ -1,17 +1,19 @@
 import React from 'react';
 import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import {ProfileHeader, ProfileItem} from '@components';
 import {useAppDispatch} from '@hooks';
 import {colors, Screens} from '@constants';
 import {logout} from '@store/asyncFuncs';
 import {styles} from './styles';
-import {useNavigation} from '@react-navigation/native';
 
 export const ProfileScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigation: any = useNavigation();
 
+  const profileEditHandler = () =>
+    navigation.navigate(Screens.profileEditScreen);
   const reportHandler = () => navigation.navigate(Screens.reportScreen);
   const logoutHandler = () => dispatch(logout());
 
@@ -24,7 +26,7 @@ export const ProfileScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
         style={styles.profileBody}>
         <ProfileItem
-          onPress={() => {}}
+          onPress={profileEditHandler}
           title="Profile"
           description="Change name or email"
           icon="person-outline"
