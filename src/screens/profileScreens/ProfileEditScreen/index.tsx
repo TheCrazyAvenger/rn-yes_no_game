@@ -10,6 +10,9 @@ import {useEditUserMutation} from '@api';
 import {H5} from '@Typography';
 import {styles} from './styles';
 import {editUserProfile} from '@store/slices/userSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {IMAGES_URL} from '@env';
+import {colors} from '@constants';
 
 export const ProfileEditScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -44,7 +47,17 @@ export const ProfileEditScreen: React.FC = () => {
 
       await editUser({formData, token}).unwrap();
       await dispatch(
-        editUserProfile({email, name, image: image ? image.uri : profileImage}),
+        editUserProfile({
+          email,
+          name,
+          image: image ? image.uri : `${IMAGES_URL}${profileImage}`,
+        }),
+      );
+      await AsyncStorage.setItem('email', email);
+      await AsyncStorage.setItem('name', name);
+      await AsyncStorage.setItem(
+        'image',
+        image ? image.uri : `${IMAGES_URL}${profileImage}`,
       );
 
       setIsSuccess(true);
@@ -69,6 +82,7 @@ export const ProfileEditScreen: React.FC = () => {
         <ProfileItemHeader
           title="Edit profile"
           description="Here you can change the name, email and avatar of your profile."
+          titleColor={colors.red}
         />
 
         {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}

@@ -9,6 +9,7 @@ import {useAppSelector} from '@hooks';
 import {Loading, Screen, Success} from '@ui';
 import {useSendReportMutation} from '@api';
 import {styles} from './styles';
+import {colors} from '@constants';
 
 export const ReportScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -71,6 +72,7 @@ export const ReportScreen: React.FC = () => {
         or just want to let us know how we are doing, we would love to hear
         from you. Fill out the form below and a representative will reach
         out to you as soon as possible."
+          titleColor={colors.darkBlue}
         />
 
         {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}

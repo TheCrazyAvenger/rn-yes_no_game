@@ -30,21 +30,21 @@ export const ProfileScreen: React.FC = () => {
           title="Profile"
           description="Change name or email"
           icon="person-outline"
-          color={colors.blue}
+          color={colors.red}
         />
         <ProfileItem
           onPress={() => {}}
           title="Personalization"
           description="Change the look of your profile"
           icon="brush-outline"
-          color={colors.blue}
+          color={colors.yellow}
         />
         <ProfileItem
           onPress={() => {}}
           title="Achievements"
           description="List of your achievements"
           icon="ribbon-outline"
-          color={colors.blue}
+          color={colors.green}
         />
         <ProfileItem
           onPress={() => {}}
@@ -58,7 +58,7 @@ export const ProfileScreen: React.FC = () => {
           title="Send report"
           description="Report a bug or suggest a change"
           icon="build-outline"
-          color={colors.blue}
+          color={colors.darkBlue}
         />
 
         <ProfileItem

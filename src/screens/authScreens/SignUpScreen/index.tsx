@@ -1,4 +1,5 @@
 import {useSignupMutation} from '@api';
+import {IMAGES_URL} from '@env';
 import {useAppDispatch} from '@hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
@@ -34,10 +35,18 @@ export const SignUpScreen: React.FC = () => {
 
       await AsyncStorage.setItem('email', email);
       await AsyncStorage.setItem('name', name);
-      await AsyncStorage.setItem('image', image);
+      await AsyncStorage.setItem('image', `${IMAGES_URL}${image}`);
       await AsyncStorage.setItem('id', userId);
       await AsyncStorage.setItem('token', token);
-      await dispatch(addUser({email, name, image, id: userId, token}));
+      await dispatch(
+        addUser({
+          email,
+          name,
+          image: `${IMAGES_URL}${image}`,
+          id: userId,
+          token,
+        }),
+      );
     } catch (e: any) {
       console.log(e);
       setErrorMessage(e.data.message);

@@ -170,7 +170,11 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
                     }}
                   />
                 </View>
-                <ReviewModal reviewedByUser={reviewedByUser} id={id} />
+                <ReviewModal
+                  image={image}
+                  reviewedByUser={reviewedByUser}
+                  id={id}
+                />
               </>
             )}
             {!actionYesNo && (

@@ -9,11 +9,16 @@ export const CloseButton: React.FC<CloseButtonProps> = ({
   onPress,
   disabled,
   style,
+  buttonColor,
 }) => {
   return (
     <Animated.View style={[styles.closeButton, style]}>
       <TouchableOpacity disabled={disabled} onPress={onPress}>
-        <Icon name="close" size={25} color={colors.blue} />
+        <Icon
+          name="close"
+          size={25}
+          color={buttonColor ? buttonColor : colors.blue}
+        />
       </TouchableOpacity>
     </Animated.View>
   );

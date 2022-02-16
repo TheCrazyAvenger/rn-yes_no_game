@@ -37,6 +37,7 @@ export type CloseButtonProps = {
   disabled?: boolean;
   onPress: (...args: any) => void;
   style?: any;
+  buttonColor?: string;
 };
 
 export type NumberPickerProps = {
