@@ -1,18 +1,79 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {ProfileItemHeader} from '@components';
 import {ProfileEditForm} from '../../../forms';
-import {Screen} from '@ui';
+import {Loading, Screen, Success} from '@ui';
+import {Platform} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useAppDispatch, useAppSelector} from '@hooks';
+import {useEditUserMutation} from '@api';
+import {H5} from '@Typography';
 import {styles} from './styles';
+import {editUserProfile} from '@store/slices/userSlice';
 
 export const ProfileEditScreen: React.FC = () => {
+  const navigation: any = useNavigation();
+
+  const dispatch = useAppDispatch();
+  const {id, token, image: profileImage} = useAppSelector(state => state.user);
+
+  const [editUser, {isLoading}] = useEditUserMutation();
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const editHandler = async (values: any) => {
+    try {
+      setErrorMessage(null);
+
+      const {email, name, image} = values;
+
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('name', name);
+      formData.append('id', id);
+      image &&
+        formData.append('image', {
+          name: image.fileName,
+          type: image.type,
+          uri:
+            Platform.OS === 'ios'
+              ? image.uri.replace('file://', '')
+              : image.uri,
+        });
+
+      await editUser({formData, token}).unwrap();
+      await dispatch(
+        editUserProfile({email, name, image: image ? image.uri : profileImage}),
+      );
+
+      setIsSuccess(true);
+      setTimeout(() => {
+        navigation.pop();
+      }, 1500);
+    } catch (e: any) {
+      setErrorMessage(e.data.message);
+    }
+  };
+
   return (
-    <Screen style={styles.container} type="ScrollView">
-      <ProfileItemHeader
-        title="Edit profile"
-        description="Here you can change the name, email and avatar of your profile."
-      />
-      <ProfileEditForm onSubmit={() => {}} />
-    </Screen>
+    <>
+      {isLoading && (
+        <Loading
+          style={{backgroundColor: 'rgba(0, 0, 0, 0.3)'}}
+          isActive={isLoading}
+        />
+      )}
+      {isSuccess && <Success isActive={isSuccess} />}
+      <Screen style={styles.container} type="ScrollView">
+        <ProfileItemHeader
+          title="Edit profile"
+          description="Here you can change the name, email and avatar of your profile."
+        />
+
+        {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}
+        <ProfileEditForm onSubmit={editHandler} />
+      </Screen>
+    </>
   );
 };

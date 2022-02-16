@@ -28,15 +28,25 @@ export const authApi = createApi({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: {
-            name,
-            email,
-            password,
+          body: {name, email, password},
+        };
+      },
+    }),
+    editUser: builder.mutation({
+      query: body => {
+        const {formData, token} = body;
+        return {
+          url: '/edit',
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer ' + token,
           },
+          body: formData,
         };
       },
     }),
   }),
 });
 
-export const {useLoginMutation, useSignupMutation} = authApi;
+export const {useLoginMutation, useSignupMutation, useEditUserMutation} =
+  authApi;

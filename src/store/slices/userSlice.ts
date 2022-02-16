@@ -55,6 +55,15 @@ const userSlice = createSlice({
         (story: any) => story.id === action.payload,
       ).reviewedByUser = true;
     },
+    editUserProfile: (
+      state,
+      action: PayloadAction<{email: string; name: string; image: string}>,
+    ) => {
+      const {email, name, image} = action.payload;
+      state.email = email;
+      state.name = name;
+      state.image = image;
+    },
   },
   extraReducers: builder => {
     builder.addCase(getUser.fulfilled, (state, action: PayloadAction<any>) => {
@@ -76,5 +85,6 @@ const userSlice = createSlice({
   },
 });
 
-export const {addUser, removeUser, addStories, addReview} = userSlice.actions;
+export const {addUser, removeUser, addStories, addReview, editUserProfile} =
+  userSlice.actions;
 export default userSlice.reducer;

@@ -4,10 +4,10 @@ import {Formik} from 'formik';
 import {IMAGES_URL} from '@env';
 
 import {Button, FormInput, ImagePicker} from '@ui';
-import {reportSchema} from '../schemas';
 import {LoginFormProps} from '../PropTypes';
 import {styles} from './styles';
 import {useAppSelector} from '@hooks';
+import {editUserSchema} from '..';
 
 export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
   const {
@@ -29,16 +29,19 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
 
   return (
     <Formik
-      validationSchema={reportSchema}
+      validationSchema={editUserSchema}
       initialValues={{name, email}}
       onSubmit={values => onSubmit({...values, image})}>
       {({handleChange, handleBlur, handleSubmit, values, errors, touched}) => (
         <View>
-          <ImagePicker
-            image={imageUri}
-            style={{marginLeft: 10}}
-            onImage={addImage}
-          />
+          <View style={{width: 80}}>
+            <ImagePicker
+              image={imageUri}
+              style={{marginLeft: 10}}
+              onImage={addImage}
+            />
+          </View>
+
           <FormInput
             value={values.name}
             leftIcon={{name: 'person', type: 'ionicons', color: 'gray'}}

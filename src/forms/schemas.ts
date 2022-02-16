@@ -51,3 +51,20 @@ export const reportSchema = yup.object().shape({
     .max(500, 'This field should be less than or equal to 500 symbols')
     .required('Please enter your message'),
 });
+
+export const editUserSchema = yup.object().shape({
+  name: yup
+    .string()
+    .required('Please enter your nickname')
+    .max(50, 'The field should be less than or equal to 50 symbols ')
+    .min(2, 'This field should contain at least 2 symbols')
+    .matches(
+      /^[а-яA-яa-zA-Z-\s]*$/,
+      'Please enter only letters of the alphabet, hyphen (-) and spaces',
+    ),
+  email: yup
+    .string()
+    .email('Please check your email format')
+    .required('Please enter your email')
+    .max(64, 'This field should be less than or equal to 64 symbols'),
+});
