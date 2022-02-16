@@ -23,4 +23,12 @@ export const styles = StyleSheet.create({
   items: {
     backgroundColor: colors.white,
   },
+  bottom: {
+    borderTopWidth: 0.5,
+    padding: 10,
+    paddingLeft: 20,
+  },
+  version: {
+    marginTop: 5,
+  },
 });

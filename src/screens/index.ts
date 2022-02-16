@@ -1,4 +1,5 @@
 export * from './HomeScreen';
+export * from './NullScreen';
 
 export * from './authScreens/LoginScreen';
 export * from './authScreens/SignUpScreen';

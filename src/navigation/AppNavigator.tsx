@@ -10,7 +10,7 @@ export const AppNavigator: React.FC = () => {
   const token = useAppSelector(state => state.user.token);
   const dispatch = useAppDispatch();
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getUserData();
   }, []);

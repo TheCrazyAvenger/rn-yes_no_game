@@ -3,10 +3,12 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {Image, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 
-import {H3, H5} from '@Typography';
+import {H3, H4, H5} from '@Typography';
 import {styles} from './styles';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {colors} from '@constants';
 
 export const CustomDrawer: React.FC = (props: any) => {
   return (
@@ -28,6 +30,11 @@ export const CustomDrawer: React.FC = (props: any) => {
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
+      <View style={styles.bottom}>
+        <H4 style={styles.version} fontWeight="bold">
+          v0.0.1
+        </H4>
+      </View>
     </View>
   );
 };
