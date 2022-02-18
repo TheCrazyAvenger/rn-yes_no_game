@@ -5,11 +5,16 @@ export const styles = StyleSheet.create({
   submitButton: {
     marginHorizontal: 10,
     height: 45,
-    backgroundColor: colors.darkBlue,
   },
   pickerContainer: {
-    marginLeft: 10,
+    marginHorizontal: 10,
     marginBottom: 25,
-    width: 80,
+    maxWidth: '100%',
+    height: 200,
+  },
+  picker: {
+    marginBottom: 0,
+    width: '100%',
+    height: '100%',
   },
 });

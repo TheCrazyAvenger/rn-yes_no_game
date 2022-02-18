@@ -11,6 +11,7 @@ export const ProfileItemHeader: React.FC<ProfileItemHeaderProps> = ({
   title,
   description,
   titleColor,
+  showCloseButton = true,
 }) => {
   const navigation: any = useNavigation();
 
@@ -25,11 +26,13 @@ export const ProfileItemHeader: React.FC<ProfileItemHeaderProps> = ({
         <H3 style={styles.description}>{description}</H3>
       </View>
       <View style={styles.line} />
-      <CloseButton
-        style={styles.closeButton}
-        buttonColor={titleColor}
-        onPress={handleGoBack}
-      />
+      {showCloseButton && (
+        <CloseButton
+          style={styles.closeButton}
+          buttonColor={titleColor}
+          onPress={handleGoBack}
+        />
+      )}
     </>
   );
 };

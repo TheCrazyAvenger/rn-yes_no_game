@@ -58,12 +58,13 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
             multiline={true}
           />
 
-          <ImagePicker
-            image={image ? image.uri : null}
-            style={{marginLeft: 10}}
-            onImage={addImage}
-          />
-
+          <View style={styles.pickerContainer}>
+            <ImagePicker
+              image={image ? image.uri : null}
+              style={{marginBottom: 0}}
+              onImage={addImage}
+            />
+          </View>
           <Button
             onPress={handleSubmit}
             title="Send"

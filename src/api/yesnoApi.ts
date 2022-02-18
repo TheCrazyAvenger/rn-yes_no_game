@@ -26,7 +26,24 @@ export const yesnoApi = createApi({
         };
       },
     }),
+    submitStory: builder.mutation({
+      query: body => {
+        const {formData, token} = body;
+        return {
+          url: `/submit`,
+          method: 'POST',
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+          body: formData,
+        };
+      },
+    }),
   }),
 });
 
-export const {useGetStoriesQuery, useReviewYesNoMutation} = yesnoApi;
+export const {
+  useGetStoriesQuery,
+  useReviewYesNoMutation,
+  useSubmitStoryMutation,
+} = yesnoApi;

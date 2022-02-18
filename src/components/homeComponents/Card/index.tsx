@@ -20,7 +20,7 @@ import {StoryInfo} from '../StoryInfo';
 import {styles} from './styles';
 import {IMAGES_URL} from '@env';
 
-export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
+export const Card: React.FC<CardProps> = ({data}) => {
   const [showAnswer, setShowAnswer] = useState(false);
 
   const {
@@ -66,29 +66,27 @@ export const Card: React.FC<CardProps> = ({canOpen = false, data}) => {
   };
 
   const openCard = () => {
-    if (canOpen) {
-      dispatch(toggleYesNo(true));
-      Animated.timing(imageHeight, {
-        toValue: 120,
-        useNativeDriver: false,
-      }).start();
-      Animated.timing(width, {
-        toValue: cardWidth,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-      Animated.timing(height, {
-        toValue: cardHeight,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
+    dispatch(toggleYesNo(true));
+    Animated.spring(imageHeight, {
+      toValue: 120,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(width, {
+      toValue: cardWidth,
+      duration: 400,
+      useNativeDriver: false,
+    }).start();
+    Animated.timing(height, {
+      toValue: cardHeight,
+      duration: 400,
+      useNativeDriver: false,
+    }).start();
 
-      Animated.timing(opacity, {
-        toValue: 0,
-        duration: 250,
-        useNativeDriver: false,
-      }).start(() => setShowAnswer(false));
-    }
+    Animated.timing(opacity, {
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: false,
+    }).start(() => setShowAnswer(false));
   };
 
   const closeCard = () => {

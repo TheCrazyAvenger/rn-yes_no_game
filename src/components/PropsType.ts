@@ -13,7 +13,6 @@ export interface CardFields {
 }
 
 export type CardProps = {
-  canOpen?: boolean;
   data: CardFields;
 };
 
@@ -43,4 +42,5 @@ export type ProfileItemHeaderProps = {
   title: string;
   description: string;
   titleColor: string;
+  showCloseButton?: boolean;
 };
