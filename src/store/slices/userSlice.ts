@@ -8,6 +8,7 @@ interface UserState {
   image: string | null;
   id: string | null;
   stories: any;
+  bg: number;
 }
 
 const initialState: UserState = {
@@ -17,6 +18,7 @@ const initialState: UserState = {
   image: null,
   id: null,
   stories: null,
+  bg: 3,
 };
 
 const userSlice = createSlice({
@@ -64,6 +66,9 @@ const userSlice = createSlice({
       state.name = name;
       state.image = image;
     },
+    setBg: (state, action: PayloadAction<number>) => {
+      state.bg = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(getUser.fulfilled, (state, action: PayloadAction<any>) => {
@@ -85,6 +90,12 @@ const userSlice = createSlice({
   },
 });
 
-export const {addUser, removeUser, addStories, addReview, editUserProfile} =
-  userSlice.actions;
+export const {
+  addUser,
+  removeUser,
+  addStories,
+  addReview,
+  editUserProfile,
+  setBg,
+} = userSlice.actions;
 export default userSlice.reducer;

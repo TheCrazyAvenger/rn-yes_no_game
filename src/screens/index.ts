@@ -9,3 +9,4 @@ export * from './authScreens/AuthScreen';
 export * from './profileScreens/ProfileScreen';
 export * from './profileScreens/ProfileEditScreen';
 export * from './profileScreens/ReportScreen';
+export * from './profileScreens/BackgroundScreen';

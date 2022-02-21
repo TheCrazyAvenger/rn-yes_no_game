@@ -4,7 +4,12 @@ import {
   StackNavigationOptions,
 } from '@react-navigation/stack';
 
-import {ProfileEditScreen, ProfileScreen, ReportScreen} from '@screens';
+import {
+  BackgroundScreen,
+  ProfileEditScreen,
+  ProfileScreen,
+  ReportScreen,
+} from '@screens';
 import {Screens} from '@constants';
 
 const Stack = createStackNavigator();
@@ -25,6 +30,10 @@ export const ProfileStack: React.FC = () => {
         component={ProfileEditScreen}
       />
       <Stack.Screen name={Screens.reportScreen} component={ReportScreen} />
+      <Stack.Screen
+        name={Screens.backgroundScreen}
+        component={BackgroundScreen}
+      />
     </Stack.Navigator>
   );
 };

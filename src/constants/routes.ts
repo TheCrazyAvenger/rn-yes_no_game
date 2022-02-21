@@ -13,4 +13,5 @@ export enum Screens {
   profileScreen = 'profileScreen',
   profileEditScreen = 'profileEditScreen',
   reportScreen = 'reportScreen',
+  backgroundScreen = 'backgroundScreen',
 }

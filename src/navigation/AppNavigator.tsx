@@ -1,6 +1,8 @@
 import {useAppDispatch, useAppSelector} from '@hooks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 import {getUser} from '@store/asyncFuncs';
+import {setBg} from '@store/slices/userSlice';
 import {Loading} from '@ui';
 import React, {useEffect, useState} from 'react';
 import {AuthStack} from './AuthStack';
@@ -19,6 +21,8 @@ export const AppNavigator: React.FC = () => {
     try {
       setLoading(true);
       await dispatch(getUser());
+      const bg = await AsyncStorage.getItem('bg');
+      bg && dispatch(setBg(+bg));
       setLoading(false);
     } catch (e) {
       setLoading(false);

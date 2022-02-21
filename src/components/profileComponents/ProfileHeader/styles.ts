@@ -7,6 +7,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -21,5 +26,11 @@ export const styles = StyleSheet.create({
   },
   title: {
     color: colors.white,
+  },
+  logout: {
+    backgroundColor: colors.red,
+    width: 55,
+    height: 55,
+    borderRadius: 14,
   },
 });

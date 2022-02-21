@@ -2,20 +2,18 @@ import React from 'react';
 import {KeyboardAvoidingView, Platform, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import {ProfileHeader, ProfileItem} from '@components';
-import {useAppDispatch} from '@hooks';
+import {ProfileHeader, ProfileItem, ProfileStatistics} from '@components';
 import {colors, Screens} from '@constants';
-import {logout} from '@store/asyncFuncs';
 import {styles} from './styles';
+import {H2} from '@Typography';
 
 export const ProfileScreen: React.FC = () => {
-  const dispatch = useAppDispatch();
   const navigation: any = useNavigation();
 
   const profileEditHandler = () =>
     navigation.navigate(Screens.profileEditScreen);
+  const backgroundHandler = () => navigation.navigate(Screens.backgroundScreen);
   const reportHandler = () => navigation.navigate(Screens.reportScreen);
-  const logoutHandler = () => dispatch(logout());
 
   return (
     <KeyboardAvoidingView
@@ -25,6 +23,13 @@ export const ProfileScreen: React.FC = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.profileBody}>
+        <H2 fontWeight="bold" style={styles.title}>
+          Statistics
+        </H2>
+        <ProfileStatistics />
+        <H2 fontWeight="bold" style={{...styles.title, marginTop: 10}}>
+          More options
+        </H2>
         <ProfileItem
           onPress={profileEditHandler}
           title="Edit profile"
@@ -32,13 +37,12 @@ export const ProfileScreen: React.FC = () => {
           icon="person-outline"
           color={colors.red}
         />
-
         <ProfileItem
-          onPress={() => {}}
-          title="Statistics"
-          description="Detailed account statistics"
-          icon="stats-chart-outline"
-          color={colors.blue}
+          onPress={backgroundHandler}
+          title="Background"
+          description="Set background of your profile"
+          icon="image-outline"
+          color={colors.green}
         />
         <ProfileItem
           onPress={reportHandler}
@@ -46,13 +50,6 @@ export const ProfileScreen: React.FC = () => {
           description="Report a bug or suggest a change"
           icon="build-outline"
           color={colors.darkBlue}
-        />
-
-        <ProfileItem
-          onPress={logoutHandler}
-          title="Log out"
-          icon="log-out-outline"
-          color={colors.red}
           showLine={false}
         />
       </ScrollView>

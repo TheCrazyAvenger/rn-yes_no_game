@@ -31,10 +31,10 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
       onSubmit={values => onSubmit({...values, image})}>
       {({handleChange, handleBlur, handleSubmit, values, errors, touched}) => (
         <View>
-          <View style={{width: 80}}>
+          <View style={{width: 150}}>
             <ImagePicker
               image={imageUri}
-              style={{marginLeft: 10}}
+              style={styles.picker}
               onImage={addImage}
             />
           </View>
@@ -53,6 +53,7 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
             leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
             plaseholder="Your Email"
             onChangeText={handleChange('email')}
+            disabled={true}
             onBlur={handleBlur('email')}
             errorMessage={errors.email}
             isTouched={touched.email}
