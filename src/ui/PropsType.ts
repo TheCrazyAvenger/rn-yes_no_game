@@ -37,6 +37,7 @@ export type CloseButtonProps = {
   disabled?: boolean;
   onPress: (...args: any) => void;
   style?: any;
+  buttonColor?: string;
 };
 
 export type NumberPickerProps = {
@@ -71,6 +72,8 @@ export type FormInputProps = {
   containerStyle?: {[key: string]: number | string};
   secureTextEntry?: boolean;
   multiline?: boolean;
+  numberOfLines?: number;
+  textAlignVertical?: string;
   rightIcon?: any;
   leftIcon?: any;
   keyboardType?: any;

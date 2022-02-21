@@ -5,9 +5,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  contentContainer: {
-    marginLeft: 10,
-  },
   header: {
     paddingHorizontal: 15,
     paddingVertical: 10,
@@ -15,12 +12,22 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   profileImage: {
-    width: 45,
-    height: 45,
-    borderRadius: 14,
+    width: 40,
+    height: 40,
+    borderRadius: 10,
   },
-  profileName: {},
+  profileName: {
+    marginLeft: 10,
+  },
   items: {
     backgroundColor: colors.white,
+  },
+  bottom: {
+    borderTopWidth: 0.5,
+    padding: 10,
+    paddingLeft: 20,
+  },
+  version: {
+    marginTop: 5,
   },
 });

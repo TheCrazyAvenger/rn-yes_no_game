@@ -1,5 +1,8 @@
 export enum Screens {
   homeScreen = 'homeScreen',
+  submitStoryScreen = 'submitStoryScreen',
+  settingsScreen = 'settingsScreen',
+  newsScreen = 'newsScreen',
 
   authStack = 'authStack',
   authScreen = 'authScreen',

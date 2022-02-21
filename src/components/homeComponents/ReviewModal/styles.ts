@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.darkBlue,
+    backgroundColor: 'rgba(51,51,51,0.6)',
     paddingTop: 30,
     paddingHorizontal: 20,
     paddingBottom: 60,

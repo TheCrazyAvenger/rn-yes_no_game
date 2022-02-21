@@ -10,6 +10,8 @@ import {styles} from './styles';
 export const ProfileItemHeader: React.FC<ProfileItemHeaderProps> = ({
   title,
   description,
+  titleColor,
+  showCloseButton = true,
 }) => {
   const navigation: any = useNavigation();
 
@@ -18,13 +20,19 @@ export const ProfileItemHeader: React.FC<ProfileItemHeaderProps> = ({
   return (
     <>
       <View style={styles.header}>
-        <H1 style={styles.title} fontWeight="bold">
+        <H1 style={{...styles.title, color: titleColor}} fontWeight="bold">
           {title}
         </H1>
-        <H3>{description}</H3>
+        <H3 style={styles.description}>{description}</H3>
       </View>
       <View style={styles.line} />
-      <CloseButton style={styles.closeButton} onPress={handleGoBack} />
+      {showCloseButton && (
+        <CloseButton
+          style={styles.closeButton}
+          buttonColor={titleColor}
+          onPress={handleGoBack}
+        />
+      )}
     </>
   );
 };

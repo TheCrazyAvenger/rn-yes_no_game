@@ -2,11 +2,12 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Card} from '@components';
 import {Loading, Screen} from '@ui';
 import {styles} from './styles';
-import {Animated, PanResponder} from 'react-native';
-import {getNextIndex} from '@utilities';
+import {Animated, PanResponder, StatusBar} from 'react-native';
+import {getNextIndex, shuffle} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {useGetStoriesQuery} from '@api';
 import {addStories} from '@store/slices/userSlice';
+import {colors} from '@constants';
 
 export const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,12 +17,12 @@ export const HomeScreen: React.FC = () => {
   const {data, error, isLoading} = useGetStoriesQuery({uid});
 
   useEffect(() => {
-    data && dispatch(addStories(data.stories));
+    data && dispatch(addStories(shuffle(data.stories)));
   }, [data]);
 
   const [index, setIndex] = useState(0);
   const pan = useRef(new Animated.ValueXY()).current;
-  const scale = useRef(new Animated.Value(0.8)).current;
+  const scale = useRef(new Animated.Value(1)).current;
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (_, gestureState) => {
@@ -55,18 +56,17 @@ export const HomeScreen: React.FC = () => {
           useNativeDriver: false,
         }).start(() => {
           pan.setValue({x: 0, y: 0});
-          scale.setValue(0.8);
+          scale.setValue(0);
 
           setIndex(prev => getNextIndex(data.stories, prev));
+          Animated.spring(scale, {
+            toValue: 1,
+            useNativeDriver: false,
+          }).start();
         });
       } else {
         Animated.timing(pan, {
           toValue: {x: 0, y: 0},
-          duration: 300,
-          useNativeDriver: false,
-        }).start();
-        Animated.timing(scale, {
-          toValue: 0.8,
           duration: 300,
           useNativeDriver: false,
         }).start();
@@ -81,15 +81,11 @@ export const HomeScreen: React.FC = () => {
   return (
     <>
       <Screen style={styles.container}>
-        <Animated.View style={[styles.secondCard, {transform: [{scale}]}]}>
-          <Card data={data.stories[getNextIndex(stories, index)]} />
-        </Animated.View>
+        <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
         <Animated.View
-          style={{
-            transform: [{translateX: pan.x}, {translateY: pan.y}],
-          }}
+          style={{transform: [{translateY: pan.y}, {scale}]}}
           {...panResponder.panHandlers}>
-          <Card canOpen={true} data={stories[index]} />
+          <Card data={stories[index]} />
         </Animated.View>
       </Screen>
     </>

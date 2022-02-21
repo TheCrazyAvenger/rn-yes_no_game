@@ -27,25 +27,12 @@ export const ProfileScreen: React.FC = () => {
         style={styles.profileBody}>
         <ProfileItem
           onPress={profileEditHandler}
-          title="Profile"
-          description="Change name or email"
+          title="Edit profile"
+          description="Change name, email or avatar"
           icon="person-outline"
-          color={colors.blue}
+          color={colors.red}
         />
-        <ProfileItem
-          onPress={() => {}}
-          title="Personalization"
-          description="Change the look of your profile"
-          icon="brush-outline"
-          color={colors.blue}
-        />
-        <ProfileItem
-          onPress={() => {}}
-          title="Achievements"
-          description="List of your achievements"
-          icon="ribbon-outline"
-          color={colors.blue}
-        />
+
         <ProfileItem
           onPress={() => {}}
           title="Statistics"
@@ -58,7 +45,7 @@ export const ProfileScreen: React.FC = () => {
           title="Send report"
           description="Report a bug or suggest a change"
           icon="build-outline"
-          color={colors.blue}
+          color={colors.darkBlue}
         />
 
         <ProfileItem

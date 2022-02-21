@@ -3,10 +3,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {DrawerNavigationOptions} from '@react-navigation/drawer/lib/typescript/src/types';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import {HomeScreen} from '@screens';
+import {HomeScreen, NullScreen, SubmitStoryScreen} from '@screens';
 import {CustomDrawer} from '@components';
 import {H3} from '@Typography';
-import {Screens} from '@constants';
+import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import {ProfileStack} from '../ProfileStack';
 import {useAppSelector} from '@hooks';
@@ -17,6 +17,8 @@ const screenOptions: DrawerNavigationOptions = {
   headerTitleStyle: styles.headerTitleStyle,
   headerShadowVisible: false,
   drawerLabelStyle: styles.drawerLabelStyle,
+  drawerActiveTintColor: colors.red,
+  drawerInactiveTintColor: colors.black,
 };
 
 export const DrawerNavigator: React.FC = () => {
@@ -50,6 +52,36 @@ export const DrawerNavigator: React.FC = () => {
           title: 'Profile',
         }}
         component={ProfileStack}
+      />
+      <Drawer.Screen
+        name={Screens.newsScreen}
+        options={{
+          drawerIcon: ({color, size}) => (
+            <Icon name="newspaper-outline" color={color} size={size} />
+          ),
+          title: 'News',
+        }}
+        component={NullScreen}
+      />
+      <Drawer.Screen
+        name={Screens.submitStoryScreen}
+        options={{
+          drawerIcon: ({color, size}) => (
+            <Icon name="add-circle-outline" color={color} size={size} />
+          ),
+          title: 'Submit a story',
+        }}
+        component={SubmitStoryScreen}
+      />
+      <Drawer.Screen
+        name={Screens.settingsScreen}
+        options={{
+          drawerIcon: ({color, size}) => (
+            <Icon name="settings-outline" color={color} size={size} />
+          ),
+          title: 'Settings',
+        }}
+        component={NullScreen}
       />
     </Drawer.Navigator>
   );

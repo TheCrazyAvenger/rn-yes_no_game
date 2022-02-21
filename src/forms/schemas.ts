@@ -68,3 +68,33 @@ export const editUserSchema = yup.object().shape({
     .required('Please enter your email')
     .max(64, 'This field should be less than or equal to 64 symbols'),
 });
+
+export const submitStorySchema = yup.object().shape({
+  title: yup
+    .string()
+    .required('Please enter title')
+    .max(50, 'The field should be less than or equal to 50 symbols ')
+    .min(5, 'This field should contain at least 2 symbols')
+    .matches(
+      /^[а-яA-яa-zA-Z-\s]*$/,
+      'Please enter only letters of the alphabet, hyphen (-) and spaces',
+    ),
+  story: yup
+    .string()
+    .required('Please enter story')
+    .max(500, 'The field should be less than or equal to 50 symbols ')
+    .min(5, 'This field should contain at least 2 symbols')
+    .matches(
+      /^[а-яA-яa-zA-Z-,.!\s]*$/,
+      'Please enter only letters of the alphabet, hyphen (-) and spaces',
+    ),
+  answer: yup
+    .string()
+    .required('Please enter answer')
+    .max(500, 'The field should be less than or equal to 50 symbols ')
+    .min(5, 'This field should contain at least 2 symbols')
+    .matches(
+      /^[а-яA-яa-zA-Z-,.!\s]*$/,
+      'Please enter only letters of the alphabet, hyphen (-) and spaces',
+    ),
+});

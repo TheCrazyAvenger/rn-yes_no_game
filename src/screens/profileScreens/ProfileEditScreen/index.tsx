@@ -12,6 +12,7 @@ import {styles} from './styles';
 import {editUserProfile} from '@store/slices/userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {IMAGES_URL} from '@env';
+import {colors} from '@constants';
 
 export const ProfileEditScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -81,6 +82,7 @@ export const ProfileEditScreen: React.FC = () => {
         <ProfileItemHeader
           title="Edit profile"
           description="Here you can change the name, email and avatar of your profile."
+          titleColor={colors.red}
         />
 
         {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}
