@@ -72,6 +72,8 @@ export type FormInputProps = {
   containerStyle?: {[key: string]: number | string};
   secureTextEntry?: boolean;
   multiline?: boolean;
+  numberOfLines?: number;
+  textAlignVertical?: string;
   rightIcon?: any;
   leftIcon?: any;
   keyboardType?: any;

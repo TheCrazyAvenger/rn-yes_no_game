@@ -27,8 +27,10 @@ export const FormInput: React.FC<FormInputProps> = ({
   disabled,
   inputStyle,
   multiline,
+  textAlignVertical,
   keyboardType = 'default',
   errorStyle,
+  numberOfLines,
 }) => {
   const inputContainerStyle = [
     styles.inputContainerStyle,
@@ -52,6 +54,8 @@ export const FormInput: React.FC<FormInputProps> = ({
         onBlur={onBlur}
         onContentSizeChange={onContentSizeChange}
         multiline={multiline}
+        numberOfLines={numberOfLines}
+        textAlignVertical={textAlignVertical}
         onChange={onChange}
         onTextInput={onInput}
         leftIconContainerStyle={{marginTop: 3}}
@@ -64,7 +68,7 @@ export const FormInput: React.FC<FormInputProps> = ({
         labelStyle={[...labelStyle, style]}
         inputContainerStyle={[
           ...inputContainerStyle,
-          {height: height ? height : 45},
+          {height: height ? height : 'auto'},
         ]}
         disabled={disabled ? true : false}
       />

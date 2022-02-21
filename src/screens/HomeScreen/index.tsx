@@ -2,11 +2,12 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Card} from '@components';
 import {Loading, Screen} from '@ui';
 import {styles} from './styles';
-import {Animated, PanResponder} from 'react-native';
+import {Animated, PanResponder, StatusBar} from 'react-native';
 import {getNextIndex, shuffle} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {useGetStoriesQuery} from '@api';
 import {addStories} from '@store/slices/userSlice';
+import {colors} from '@constants';
 
 export const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -80,6 +81,7 @@ export const HomeScreen: React.FC = () => {
   return (
     <>
       <Screen style={styles.container}>
+        <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
         <Animated.View
           style={{transform: [{translateY: pan.y}, {scale}]}}
           {...panResponder.panHandlers}>

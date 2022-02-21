@@ -6,9 +6,11 @@ import {
   Animated,
   TouchableWithoutFeedback,
   ScrollView,
+  BackHandler,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {useFocusEffect} from '@react-navigation/native';
 
 import {CardProps, ReviewModal} from '@components';
 import {toggleYesNo} from '@store/slices/actionsSlice';
@@ -21,6 +23,27 @@ import {styles} from './styles';
 import {IMAGES_URL} from '@env';
 
 export const Card: React.FC<CardProps> = ({data}) => {
+  const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
+  const dispatch = useAppDispatch();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        if (actionYesNo) {
+          closeCard();
+          return true;
+        } else {
+          return false;
+        }
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [actionYesNo]),
+  );
+
   const [showAnswer, setShowAnswer] = useState(false);
 
   const {
@@ -36,9 +59,6 @@ export const Card: React.FC<CardProps> = ({data}) => {
     reviewedByUser,
   } = data;
   const {width: cardWidth, height: cardHeight} = useWindowDimensions();
-
-  const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
-  const dispatch = useAppDispatch();
 
   const Content = useMemo(
     () => (actionYesNo ? ScrollView : View),
