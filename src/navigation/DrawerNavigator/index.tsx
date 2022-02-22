@@ -3,7 +3,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {DrawerNavigationOptions} from '@react-navigation/drawer/lib/typescript/src/types';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 
-import {HomeScreen, NewsScreen, NullScreen, SubmitStoryScreen} from '@screens';
+import {
+  HomeScreen,
+  NewsScreen,
+  NullScreen,
+  SettingsScreen,
+  SubmitStoryScreen,
+} from '@screens';
 import {CustomDrawer} from '@components';
 import {H3} from '@Typography';
 import {colors, Screens} from '@constants';
@@ -82,7 +88,7 @@ export const DrawerNavigator: React.FC = () => {
           ),
           title: 'Settings',
         }}
-        component={NullScreen}
+        component={SettingsScreen}
       />
     </Drawer.Navigator>
   );

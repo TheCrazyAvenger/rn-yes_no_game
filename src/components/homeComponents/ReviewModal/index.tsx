@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {Animated, ImageBackground, TouchableOpacity, View} from 'react-native';
+import {Animated, ImageBackground, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useReviewYesNoMutation} from '@api';
@@ -7,7 +7,7 @@ import {ReviewModalProps} from '@components';
 import {colors} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {H1, H2, H3, H5} from '@Typography';
-import {Button, NumberPicker} from '@ui';
+import {Button, NumberPicker, Switch} from '@ui';
 import {styles} from './styles';
 import {addReview} from '@store/slices/userSlice';
 import {IMAGES_URL} from '@env';
@@ -24,7 +24,6 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
   const [reviewYesNo, {isLoading}] = useReviewYesNoMutation();
   const [error, setError] = useState<null | string>(null);
 
-  const opacity = useRef(new Animated.Value(0)).current;
   const reviewOpacity = useRef(
     new Animated.Value(reviewedByUser ? 1 : 0),
   ).current;
@@ -36,10 +35,6 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 
   const pickerHandler = (value: number) => {
     setRating(value);
-    Animated.spring(opacity, {
-      toValue: value,
-      useNativeDriver: false,
-    }).start();
   };
 
   const reviewYesNoHandler = async () => {
@@ -92,76 +87,18 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
             <H1 fontWeight="600" style={{...styles.title, marginBottom: 20}}>
               Share your opinion
             </H1>
-            <View style={styles.reviewItem}>
-              <H3 fontWeight="600" style={{...styles.title}}>
-                Did you like the story?
-              </H3>
 
-              <View style={styles.reviewPicker}>
-                <Animated.View
-                  style={[
-                    styles.pickerFiller,
-                    {
-                      backgroundColor: colors.green,
-                      borderTopLeftRadius: 14,
-                      borderBottomLeftRadius: 14,
-                      left: 0,
-                      opacity: opacity.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, 1],
-                      }),
-                    },
-                  ]}
-                />
-                <TouchableOpacity
-                  onPress={() => pickerHandler(1)}
-                  style={styles.pickerText}>
-                  <Animated.Text
-                    style={[
-                      styles.pickerAnimText,
-                      {
-                        color: opacity.interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [colors.black, colors.white],
-                        }),
-                      },
-                    ]}>
-                    Yes
-                  </Animated.Text>
-                </TouchableOpacity>
+            <Switch
+              value={rating}
+              leftText="Yes"
+              leftColor={colors.green}
+              rightText="No"
+              rightColor={colors.red}
+              title="Did you like the story?"
+              titleColor={colors.white}
+              onPress={pickerHandler}
+            />
 
-                <Animated.View
-                  style={[
-                    styles.pickerFiller,
-                    {
-                      borderTopRightRadius: 14,
-                      borderBottomRightRadius: 14,
-                      right: 0,
-                      opacity: opacity.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [1, 0],
-                      }),
-                    },
-                  ]}
-                />
-                <TouchableOpacity
-                  onPress={() => pickerHandler(0)}
-                  style={styles.pickerText}>
-                  <Animated.Text
-                    style={[
-                      styles.pickerAnimText,
-                      {
-                        color: opacity.interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [colors.white, colors.black],
-                        }),
-                      },
-                    ]}>
-                    No
-                  </Animated.Text>
-                </TouchableOpacity>
-              </View>
-            </View>
             <View style={styles.reviewItem}>
               <H3 fontWeight="600" style={{...styles.title}}>
                 Spent time

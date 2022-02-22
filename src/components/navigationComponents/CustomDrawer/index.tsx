@@ -33,11 +33,6 @@ export const CustomDrawer: React.FC = (props: any) => {
           <DrawerItemList {...props} />
         </View>
       </DrawerContentScrollView>
-      <View style={styles.bottom}>
-        <H4 style={styles.version} fontWeight="600">
-          Version: 0.0.1beta
-        </H4>
-      </View>
     </View>
   );
 };
