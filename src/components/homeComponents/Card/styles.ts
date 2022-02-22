@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   },
   answerText: {
     fontSize: 18.72,
-    fontFamily: 'OpenSans-SemiBold',
+    fontFamily: 'Nunito-ExtraBold',
     padding: 20,
     color: colors.white,
   },

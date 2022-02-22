@@ -17,6 +17,6 @@ export const styles = StyleSheet.create({
     color: colors.white,
     textTransform: 'uppercase',
     fontSize: 13.28,
-    fontFamily: 'OpenSans-SemiBold',
+    fontFamily: 'Nunito-ExtraBold',
   },
 });

@@ -91,14 +91,14 @@ export const Card: React.FC<CardProps> = ({data}) => {
       toValue: 120,
       useNativeDriver: false,
     }).start();
-    Animated.timing(width, {
+    Animated.spring(width, {
       toValue: cardWidth,
-      duration: 400,
+      // duration: 300,
       useNativeDriver: false,
     }).start();
-    Animated.timing(height, {
+    Animated.spring(height, {
       toValue: cardHeight,
-      duration: 400,
+      // duration: 300,
       useNativeDriver: false,
     }).start();
 
@@ -115,6 +115,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
 
     Animated.timing(imageHeight, {
       toValue: 250,
+      duration: 300,
       useNativeDriver: false,
     }).start();
     Animated.timing(width, {

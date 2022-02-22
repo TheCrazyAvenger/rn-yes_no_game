@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
   },
   pickerAnimText: {
     fontSize: 16,
-    fontFamily: 'OpenSans-SemiBold',
+    fontFamily: 'Nunito-ExtraBold',
   },
   button: {
     marginBottom: 0,

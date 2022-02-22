@@ -12,12 +12,12 @@ export const styles = StyleSheet.create({
     borderColor: colors.red,
   },
   inputStyle: {
-    fontFamily: 'OpenSans-Regular',
+    fontFamily: 'Nunito-Bold',
     fontSize: 16,
     fontWeight: '400',
   },
   labelStyle: {
-    fontFamily: 'OpenSans-Regular',
+    fontFamily: 'Nunito-Bold',
     marginBottom: 6,
     fontSize: 14,
     fontWeight: '400',

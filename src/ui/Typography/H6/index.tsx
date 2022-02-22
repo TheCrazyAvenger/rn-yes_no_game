@@ -20,10 +20,10 @@ export const H6: React.FC<TextProps> = ({
         {
           fontFamily:
             fontWeight === '600'
-              ? 'OpenSans-SemiBold'
+              ? 'Nunito-ExtraBold'
               : fontWeight === 'bold'
-              ? 'OpenSans-Bold'
-              : 'OpenSans-Regular',
+              ? 'Nunito-Black'
+              : 'Nunito-Bold',
         },
       ]}>
       {children}

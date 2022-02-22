@@ -7,6 +7,7 @@ import {Image, View} from 'react-native';
 
 import {H3, H4, H5} from '@Typography';
 import {styles} from './styles';
+import {colors} from '@constants';
 
 export const CustomDrawer: React.FC = (props: any) => {
   return (
@@ -19,7 +20,13 @@ export const CustomDrawer: React.FC = (props: any) => {
           />
 
           <H3 fontWeight="bold" style={styles.profileName}>
-            Yes! No! Game
+            <H3 fontWeight="bold" style={{color: colors.green}}>
+              Yes!
+            </H3>{' '}
+            <H3 fontWeight="bold" style={{color: colors.red}}>
+              No!
+            </H3>{' '}
+            Game
           </H3>
         </View>
         <View style={styles.items}>

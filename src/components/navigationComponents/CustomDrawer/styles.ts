@@ -12,12 +12,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   profileImage: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: 10,
   },
   profileName: {
     marginLeft: 10,
+    textTransform: 'uppercase',
   },
   items: {
     backgroundColor: colors.white,
