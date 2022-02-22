@@ -35,21 +35,21 @@ export const ProfileScreen: React.FC = () => {
           title="Edit profile"
           description="Change name, email or avatar"
           icon="person-outline"
-          color={colors.red}
+          color={colors.blue}
         />
         <ProfileItem
           onPress={backgroundHandler}
           title="Background"
           description="Set background of your profile"
           icon="image-outline"
-          color={colors.green}
+          color={colors.blue}
         />
         <ProfileItem
           onPress={reportHandler}
           title="Send report"
           description="Report a bug or suggest a change"
           icon="build-outline"
-          color={colors.darkBlue}
+          color={colors.blue}
           showLine={false}
         />
       </ScrollView>

@@ -11,7 +11,6 @@ import {useAppSelector} from '@hooks';
 export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
   const {name, email} = useAppSelector(state => state.user);
 
-  const [height, setHeight] = useState(0);
   const [image, setImage] = useState<any>(null);
 
   const addImage = (image: any) => {
@@ -45,14 +44,12 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           />
           <FormInput
             value={values.message}
-            leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
             plaseholder="Your Message"
             onChangeText={handleChange('message')}
             onBlur={handleBlur('message')}
-            onContentSizeChange={event => {
-              setHeight(event.nativeEvent.contentSize.height);
-            }}
-            height={height}
+            numberOfLines={6}
+            textAlignVertical="top"
+            inputStyle={{alignItems: 'flex-start'}}
             errorMessage={errors.message}
             isTouched={touched.message}
             multiline={true}

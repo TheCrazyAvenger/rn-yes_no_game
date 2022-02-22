@@ -82,7 +82,7 @@ export const ProfileEditScreen: React.FC = () => {
         <ProfileItemHeader
           title="Edit profile"
           description="Here you can change the name, email and avatar of your profile."
-          titleColor={colors.red}
+          titleColor={colors.blue}
         />
 
         {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}

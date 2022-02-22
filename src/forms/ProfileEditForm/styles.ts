@@ -10,6 +10,6 @@ export const styles = StyleSheet.create({
   submitButton: {
     marginHorizontal: 10,
     height: 45,
-    backgroundColor: colors.red,
+    backgroundColor: colors.blue,
   },
 });

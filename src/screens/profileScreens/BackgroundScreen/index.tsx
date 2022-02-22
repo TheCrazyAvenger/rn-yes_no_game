@@ -22,7 +22,7 @@ export const BackgroundScreen: React.FC = () => {
 
   const setBgHandler = async (index: number) => {
     await dispatch(setBg(index));
-    await AsyncStorage.setItem('bg', background.toString());
+    await AsyncStorage.setItem('bg', index.toString());
   };
 
   const saveHandler = () => navigation.pop();
