@@ -32,7 +32,6 @@ export const ProfileStatisticsItem: React.FC<ProfileStatisticsProps> = ({
           {value}
         </H3>
       </View>
-    
     </>
   );
 };

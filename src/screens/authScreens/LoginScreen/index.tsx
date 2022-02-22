@@ -10,7 +10,6 @@ import {styles} from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useAppDispatch} from '@hooks';
 import {addUser} from '@store/slices/userSlice';
-import {IMAGES_URL} from '@env';
 
 export const LoginScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -29,16 +28,13 @@ export const LoginScreen: React.FC = () => {
       const data = await login(values).unwrap();
       const {email, name, image, userId, token} = data;
 
-      await AsyncStorage.setItem('email', email);
-      await AsyncStorage.setItem('name', name);
-      await AsyncStorage.setItem('image', `${IMAGES_URL}${image}`);
       await AsyncStorage.setItem('id', userId);
       await AsyncStorage.setItem('token', token);
       await dispatch(
         addUser({
           email,
           name,
-          image: `${IMAGES_URL}${image}`,
+          image,
           id: userId,
           token,
         }),

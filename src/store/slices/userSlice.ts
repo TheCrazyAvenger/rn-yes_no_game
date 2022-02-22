@@ -18,7 +18,7 @@ const initialState: UserState = {
   image: null,
   id: null,
   stories: null,
-  bg: 3,
+  bg: 2,
 };
 
 const userSlice = createSlice({
@@ -72,13 +72,10 @@ const userSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(getUser.fulfilled, (state, action: PayloadAction<any>) => {
-      const {name, email, image, id, token} = action.payload;
+      const {token, id} = action.payload;
 
-      state.email = email;
-      state.name = name;
-      state.image = image;
-      state.id = id;
       state.token = token;
+      state.id = id;
     });
     builder.addCase(logout.fulfilled, state => {
       state.email = null;

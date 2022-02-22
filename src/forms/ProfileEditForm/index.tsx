@@ -22,7 +22,10 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
     setImage(image[0]);
   };
 
-  const imageUri = useMemo(() => (image ? image.uri : currentImage), [image]);
+  const imageUri = useMemo(
+    () => (image ? image.uri : `${IMAGES_URL}${currentImage}`),
+    [image],
+  );
 
   return (
     <Formik

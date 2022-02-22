@@ -11,8 +11,8 @@ import {H5} from '@Typography';
 import {styles} from './styles';
 import {editUserProfile} from '@store/slices/userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {IMAGES_URL} from '@env';
 import {colors} from '@constants';
+import {IMAGES_URL} from '@env';
 
 export const ProfileEditScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -45,19 +45,15 @@ export const ProfileEditScreen: React.FC = () => {
               : image.uri,
         });
 
-      await editUser({formData, token}).unwrap();
+      const response: any = await editUser({formData, token}).unwrap();
+
+      const userImage = await response.user.image;
       await dispatch(
         editUserProfile({
           email,
           name,
-          image: image ? image.uri : `${IMAGES_URL}${profileImage}`,
+          image: image ? userImage : profileImage,
         }),
-      );
-      await AsyncStorage.setItem('email', email);
-      await AsyncStorage.setItem('name', name);
-      await AsyncStorage.setItem(
-        'image',
-        image ? image.uri : `${IMAGES_URL}${profileImage}`,
       );
 
       setIsSuccess(true);

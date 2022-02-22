@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   profileImage: {
     width: 30,
     height: 30,
-    borderRadius: 10,
+    borderRadius: 6,
   },
   profileName: {
     marginLeft: 10,

@@ -1,6 +1,7 @@
 export * from './HomeScreen';
 export * from './SubmitStoryScreen';
 export * from './NullScreen';
+export * from './NewsScreen';
 
 export * from './authScreens/LoginScreen';
 export * from './authScreens/SignUpScreen';

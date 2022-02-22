@@ -7,6 +7,7 @@ export * from './Success';
 export * from './ModalItem';
 export * from './NumberPicker';
 export * from './KeyboardDismissView';
+export * from './ErrorModal';
 
 export * from './formComponents/FormInput';
 export * from './formComponents/ImagePicker';

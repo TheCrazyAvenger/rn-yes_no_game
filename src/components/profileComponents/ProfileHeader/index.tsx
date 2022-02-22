@@ -7,6 +7,7 @@ import {styles} from './styles';
 import {IconButton} from '@ui';
 import {bg, colors} from '@constants';
 import {logout} from '@store/asyncFuncs';
+import {IMAGES_URL} from '@env';
 
 type ProfileHeaderProps = {
   isEdit?: boolean;
@@ -27,7 +28,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
     <ImageBackground style={styles.container} source={bg[background]}>
       <View style={styles.headerContainer}>
         <View style={styles.header}>
-          <Image style={styles.image} source={{uri: image}} />
+          <Image style={styles.image} source={{uri: `${IMAGES_URL}${image}`}} />
           <View style={styles.user}>
             <H1 style={styles.title} fontWeight="bold">
               {name}

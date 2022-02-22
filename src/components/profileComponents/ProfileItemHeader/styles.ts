@@ -7,11 +7,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   title: {
-    marginBottom: 15,
+    marginBottom: 5,
     color: colors.blue,
   },
   description: {
-    fontSize: 16,
+    fontSize: 18,
   },
   line: {
     backgroundColor: colors.black,

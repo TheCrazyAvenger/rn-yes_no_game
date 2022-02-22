@@ -45,8 +45,23 @@ export const authApi = createApi({
         };
       },
     }),
+    getUserInfo: builder.mutation({
+      query: body => {
+        const {id, token} = body;
+        return {
+          url: `/${id}`,
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const {useLoginMutation, useSignupMutation, useEditUserMutation} =
-  authApi;
+export const {
+  useLoginMutation,
+  useSignupMutation,
+  useEditUserMutation,
+  useGetUserInfoMutation,
+} = authApi;
