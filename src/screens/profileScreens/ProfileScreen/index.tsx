@@ -10,6 +10,7 @@ import {useGetUserInfoMutation} from '@api';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {editUserProfile} from '@store/slices/userSlice';
 import {ErrorModal, Loading} from '@ui';
+import {t} from 'i18next';
 
 export const ProfileScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -64,30 +65,30 @@ export const ProfileScreen: React.FC = () => {
           showsVerticalScrollIndicator={false}
           style={{...styles.profileBody, backgroundColor}}>
           <H2 fontWeight="bold" style={{...styles.title, color}}>
-            Statistics
+            {t('profile:statistics')}
           </H2>
           <ProfileStatistics />
           <H2 fontWeight="bold" style={{...styles.title, color}}>
-            More options
+            {t('profile:more')}
           </H2>
           <ProfileItem
             onPress={profileEditHandler}
-            title="Edit profile"
-            description="Change name, email or avatar"
+            title={t('profile:editTitle')}
+            description={t('profile:editSub')}
             icon="person-outline"
             color={colors.blue}
           />
           <ProfileItem
             onPress={backgroundHandler}
-            title="Background"
-            description="Set background of your profile"
+            title={t('profile:bgTitle')}
+            description={t('profile:bgSub')}
             icon="image-outline"
             color={colors.blue}
           />
           <ProfileItem
             onPress={reportHandler}
-            title="Send report"
-            description="Report a bug or suggest a change"
+            title={t('profile:reportTitle')}
+            description={t('profile:reportSub')}
             icon="build-outline"
             color={colors.blue}
             showLine={false}

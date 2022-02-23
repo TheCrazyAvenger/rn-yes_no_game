@@ -7,6 +7,7 @@ import {colors} from '@constants';
 import {H3} from '@Typography';
 import {styles} from './styles';
 import {useAppSelector} from '@hooks';
+import {t} from 'i18next';
 
 export const StoryInfo: React.FC<StoryInfoProps> = ({
   rating,
@@ -17,14 +18,17 @@ export const StoryInfo: React.FC<StoryInfoProps> = ({
   const darkTheme = useAppSelector(state => state.user.darkTheme);
 
   const color = darkTheme ? colors.white : colors.black;
-  const dateTime = new Date(date).toLocaleString();
+  // const dateTime = new Date(date).toLocaleString();
 
   return (
     <>
       <View style={styles.container}>
         <View style={styles.infoItem}>
           <Icon name="time-outline" size={25} color={colors.red} />
-          <H3 style={{...styles.text, color}}>{time}min.</H3>
+          <H3 style={{...styles.text, color}}>
+            {time}
+            {t('common:min')}
+          </H3>
         </View>
         <View style={styles.infoItem}>
           <Icon name="swap-vertical-outline" size={25} color={colors.yellow} />

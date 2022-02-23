@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 5,
+    width: '90%',
     color: colors.blue,
   },
   description: {

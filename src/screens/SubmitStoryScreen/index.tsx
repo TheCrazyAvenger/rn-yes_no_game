@@ -4,6 +4,7 @@ import {colors} from '@constants';
 import {useAppSelector} from '@hooks';
 import {H5} from '@Typography';
 import {Loading, Screen, Success} from '@ui';
+import {t} from 'i18next';
 import React, {useState} from 'react';
 import {Platform} from 'react-native';
 import {SubmitStoryForm} from '../../forms';
@@ -68,9 +69,9 @@ export const SubmitStoryScreen: React.FC = () => {
       <Screen style={{...styles.container, backgroundColor}} type="ScrollView">
         <ProfileItemHeader
           showCloseButton={false}
-          title="Submit a story"
+          title={t('navigation:submitStory')}
           titleColor={colors.blue}
-          description="Here you can create your own story, which will later be verified and be able to get into the application"
+          description={t('submitStory:submitText')}
         />
         {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}
         <SubmitStoryForm onSubmit={submitHandler} />

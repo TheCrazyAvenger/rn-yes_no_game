@@ -6,6 +6,7 @@ import {Button, FormInput} from '@ui';
 import {LoginFormProps} from '../PropTypes';
 import {loginSchema} from '../schemas';
 import {styles} from './styles';
+import {t} from 'i18next';
 
 export const LoginForm: React.FC<LoginFormProps> = ({onSubmit}) => {
   return (
@@ -18,7 +19,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           <FormInput
             value={values.email}
             leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
-            plaseholder="Your Email"
+            plaseholder={t('common:name')}
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
             errorMessage={errors.email}
@@ -29,7 +30,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({onSubmit}) => {
             leftIcon={{name: 'lock', type: 'ionicons', color: 'gray'}}
             secureTextEntry={true}
             keyboardType="email-address"
-            plaseholder="Password"
+            plaseholder={t('auth:password')}
             onChangeText={handleChange('password')}
             onBlur={handleBlur('password')}
             errorMessage={errors.password}
@@ -37,7 +38,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           />
           <Button
             onPress={handleSubmit}
-            title="Sign In"
+            title={t('auth:signin')}
             style={styles.submitButton}
           />
         </View>

@@ -11,6 +11,7 @@ import {Button, NumberPicker, Switch} from '@ui';
 import {styles} from './styles';
 import {addReview} from '@store/slices/userSlice';
 import {IMAGES_URL} from '@env';
+import {t} from 'i18next';
 
 export const ReviewModal: React.FC<ReviewModalProps> = ({
   id,
@@ -79,32 +80,32 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               color={colors.green}
             />
             <H2 style={styles.revReadyText} fontWeight="600">
-              Review sent
+              {t('home:send')}
             </H2>
           </Animated.View>
         ) : (
           <Animated.View style={[styles.reviewContainer, {height}]}>
             <H1 fontWeight="600" style={{...styles.title, marginBottom: 20}}>
-              Share your opinion
+              {t('home:opinionTitle')}
             </H1>
 
             <Switch
               value={rating}
-              leftText="Yes"
+              leftText={t('common:yes')}
               leftColor={colors.green}
-              rightText="No"
+              rightText={t('common:no')}
               rightColor={colors.red}
-              title="Did you like the story?"
+              title={t('home:opinionFirst')}
               titleColor={colors.white}
               onPress={pickerHandler}
             />
 
             <View style={styles.reviewItem}>
               <H3 fontWeight="600" style={{...styles.title}}>
-                Spent time
+                {t('home:opinionSecond')}
               </H3>
               <NumberPicker
-                value={`${spentTime} min.`}
+                value={`${spentTime} ${t('common:min')}`}
                 setValue={setSpentTime}
                 min={1}
                 max={120}
@@ -112,10 +113,10 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
             </View>
             <View style={[styles.reviewItem, {marginBottom: 10}]}>
               <H3 fontWeight="600" style={{...styles.title}}>
-                Complexity
+                {t('home:opinionThird')}
               </H3>
               <NumberPicker
-                value={`${difficult} out of 10`}
+                value={`${difficult} ${t('common:outof')} 10`}
                 setValue={setDifficult}
                 min={1}
                 style={{marginBottom: 25}}
@@ -127,7 +128,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               disabled={isLoading}
               loading={isLoading}
               containerStyle={{marginBottom: 5}}
-              title="Send"
+              title={t('common:send')}
               style={styles.button}
               onPress={reviewYesNoHandler}
             />

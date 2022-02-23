@@ -7,6 +7,7 @@ import {Button} from '@ui';
 import {colors, Screens} from '@constants';
 import {useNavigation} from '@react-navigation/native';
 import {useAppSelector} from '@hooks';
+import {t} from 'i18next';
 
 export const AuthScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -32,21 +33,18 @@ export const AuthScreen: React.FC = () => {
           Yes! No! Game
         </H1>
 
-        <H5 style={styles.subtitle}>The game you can't say No to!</H5>
+        <H5 style={styles.subtitle}>{t('auth:slogan')}</H5>
       </View>
       <View style={styles.buttons}>
-        <H5 style={styles.text}>
-          ● Sign in to rate stories, submit your own, and earn achievements!
-        </H5>
         <Button
           onPress={loginHandler}
-          title="Sign In"
+          title={t('auth:signin')}
           style={{...styles.authButton, backgroundColor: colors.white}}
           textStyle={{color: colors.blue}}
         />
         <Button
           onPress={signupHandler}
-          title="Sign Up"
+          title={t('auth:signup')}
           style={styles.authButton}
         />
       </View>

@@ -29,8 +29,4 @@ export const styles = StyleSheet.create({
   authButton: {
     height: 50,
   },
-  text: {
-    color: colors.white,
-    marginBottom: 20,
-  },
 });

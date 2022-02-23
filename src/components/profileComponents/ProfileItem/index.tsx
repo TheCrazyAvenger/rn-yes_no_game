@@ -28,7 +28,11 @@ export const ProfileItem: React.FC<ProfileItemProps> = ({
             <H3 fontWeight="600" style={{color: textColor}}>
               {title}
             </H3>
-            {description && <H5 style={{color: textColor}}>{description}</H5>}
+            {description && (
+              <H5 numberOfLines={1} style={{color: textColor}}>
+                {description}
+              </H5>
+            )}
           </View>
         </View>
       </TouchableOpacity>

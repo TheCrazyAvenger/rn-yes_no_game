@@ -6,6 +6,7 @@ import {Button, FormInput} from '@ui';
 import {LoginFormProps} from '../PropTypes';
 import {signupSchema} from '../schemas';
 import {styles} from './styles';
+import {t} from 'i18next';
 
 export const SignUpForm: React.FC<LoginFormProps> = ({onSubmit}) => {
   return (
@@ -18,7 +19,7 @@ export const SignUpForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           <FormInput
             value={values.name}
             leftIcon={{name: 'person', type: 'ionicons', color: 'gray'}}
-            plaseholder="Your Nickname"
+            plaseholder={t('common:name')}
             onChangeText={handleChange('name')}
             onBlur={handleBlur('name')}
             errorMessage={errors.name}
@@ -27,7 +28,7 @@ export const SignUpForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           <FormInput
             value={values.email}
             leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
-            plaseholder="Your Email"
+            plaseholder={t('common:email')}
             keyboardType="email-address"
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
@@ -38,7 +39,7 @@ export const SignUpForm: React.FC<LoginFormProps> = ({onSubmit}) => {
             value={values.password}
             leftIcon={{name: 'lock', type: 'ionicons', color: 'gray'}}
             secureTextEntry={true}
-            plaseholder="Password"
+            plaseholder={t('auth:password')}
             onChangeText={handleChange('password')}
             onBlur={handleBlur('password')}
             errorMessage={errors.password}
@@ -46,7 +47,7 @@ export const SignUpForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           />
           <Button
             onPress={handleSubmit}
-            title="Sign Up"
+            title={t('auth:signup')}
             style={styles.submitButton}
           />
         </View>

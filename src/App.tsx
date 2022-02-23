@@ -5,6 +5,7 @@ import {AppNavigator} from './navigation/AppNavigator';
 import {Provider} from 'react-redux';
 import {store} from '@store/store';
 import {LogBox} from 'react-native';
+import './constants/DCSLocalize';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",

@@ -1,8 +1,11 @@
 //Card
 export interface CardFields {
   title: string;
+  titleRu: string;
   story: string;
+  storyRu: string;
   answer: string;
+  answerRu: string;
   image: any;
   rating: number;
   difficulty: number;

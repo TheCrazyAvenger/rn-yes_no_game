@@ -11,6 +11,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useFocusEffect} from '@react-navigation/native';
+import * as RNLocalize from 'react-native-localize';
 
 import {CardProps, ReviewModal} from '@components';
 import {toggleYesNo} from '@store/slices/actionsSlice';
@@ -21,6 +22,7 @@ import {useAppDispatch, useAppSelector} from '@hooks';
 import {StoryInfo} from '../StoryInfo';
 import {styles} from './styles';
 import {IMAGES_URL} from '@env';
+import {t} from 'i18next';
 
 export const Card: React.FC<CardProps> = ({data}) => {
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
@@ -30,6 +32,8 @@ export const Card: React.FC<CardProps> = ({data}) => {
   const shadowColor = darkTheme ? '#fff' : '#000';
   const gradient = darkTheme ? darkGradient : lightGradient;
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
+
+  const language = RNLocalize.getLocales()[0].languageCode;
 
   const dispatch = useAppDispatch();
 
@@ -55,8 +59,11 @@ export const Card: React.FC<CardProps> = ({data}) => {
 
   const {
     title,
+    titleRu,
     story,
+    storyRu,
     answer,
+    answerRu,
     image,
     rating,
     difficulty,
@@ -154,7 +161,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
                   backgroundColor: `rgba(51,51,51,${actionYesNo ? 0.6 : 0})`,
                 }}>
                 <H1 style={styles.headerTitle} fontWeight="bold">
-                  {title}
+                  {language === 'en' ? title : titleRu}
                 </H1>
               </View>
             </ImageBackground>
@@ -169,13 +176,15 @@ export const Card: React.FC<CardProps> = ({data}) => {
               date={date}
             />
 
-            <H3 style={{...styles.story, color}}>{story}</H3>
+            <H3 style={{...styles.story, color}}>
+              {language === 'en' ? story : storyRu}
+            </H3>
 
             {actionYesNo && (
               <>
                 <View style={styles.answer}>
                   <Animated.Text style={[styles.answerText, {opacity}]}>
-                    {answer}
+                    {language === 'en' ? answer : answerRu}
                   </Animated.Text>
                   <Animated.View
                     style={[
@@ -190,7 +199,9 @@ export const Card: React.FC<CardProps> = ({data}) => {
                     <Icon name="help-outline" color={colors.white} size={80} />
                   </Animated.View>
                   <Button
-                    title={`${showAnswer ? 'Hide' : 'Show'} answer`}
+                    title={`${showAnswer ? t('home:hide') : t('home:show')} ${t(
+                      'home:answer',
+                    )}`}
                     onPress={showHideAnswer}
                     containerStyle={{marginBottom: 0}}
                     style={{

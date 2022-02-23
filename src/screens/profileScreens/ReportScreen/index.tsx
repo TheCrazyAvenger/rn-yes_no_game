@@ -10,6 +10,7 @@ import {Loading, Screen, Success} from '@ui';
 import {useSendReportMutation} from '@api';
 import {styles} from './styles';
 import {colors} from '@constants';
+import {t} from 'i18next';
 
 export const ReportScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -17,6 +18,7 @@ export const ReportScreen: React.FC = () => {
   const darkTheme = useAppSelector(state => state.user.darkTheme);
 
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
+  const color = darkTheme ? colors.blue : colors.darkBlue;
 
   const [sendReport, {isLoading}] = useSendReportMutation();
 
@@ -70,12 +72,9 @@ export const ReportScreen: React.FC = () => {
       {isSuccess && <Success isActive={isSuccess} />}
       <Screen type="ScrollView" style={{...styles.container, backgroundColor}}>
         <ProfileItemHeader
-          title="Send report"
-          description="Whether you are looking for answers, would like to solve a problem
-        or just want to let us know how we are doing, we would love to hear
-        from you. Fill out the form below and a representative will reach
-        out to you as soon as possible."
-          titleColor={colors.darkBlue}
+          title={t('profile:reportTitle')}
+          description={t('profile:reportText')}
+          titleColor={color}
         />
 
         {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}

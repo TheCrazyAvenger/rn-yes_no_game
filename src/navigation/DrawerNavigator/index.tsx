@@ -15,6 +15,7 @@ import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import {ProfileStack} from '../ProfileStack';
 import {useAppSelector} from '@hooks';
+import {t} from 'i18next';
 
 const Drawer = createDrawerNavigator();
 
@@ -55,10 +56,12 @@ export const DrawerNavigator: React.FC = () => {
           ),
           headerTitle: () => (
             <H3 style={{...styles.headerTitleStyle, color}} fontWeight="600">
-              {`In catalog ${stories ? stories.length : 0} stories`}
+              {`${t('home:titleFirst')} ${stories ? stories.length : 0} ${t(
+                'home:titleSecond',
+              )}`}
             </H3>
           ),
-          title: 'Home',
+          title: t('navigation:home'),
         }}
         component={HomeScreen}
       />
@@ -68,7 +71,7 @@ export const DrawerNavigator: React.FC = () => {
           drawerIcon: ({color, size}) => (
             <Icon name="person-outline" color={color} size={size} />
           ),
-          title: 'Profile',
+          title: t('navigation:profile'),
           unmountOnBlur: true,
         }}
         component={ProfileStack}
@@ -79,7 +82,7 @@ export const DrawerNavigator: React.FC = () => {
           drawerIcon: ({color, size}) => (
             <Icon name="newspaper-outline" color={color} size={size} />
           ),
-          title: 'News',
+          title: t('navigation:news'),
         }}
         component={NewsScreen}
       />
@@ -89,7 +92,7 @@ export const DrawerNavigator: React.FC = () => {
           drawerIcon: ({color, size}) => (
             <Icon name="add-circle-outline" color={color} size={size} />
           ),
-          title: 'Submit a story',
+          title: t('navigation:submitStory'),
         }}
         component={SubmitStoryScreen}
       />
@@ -99,7 +102,7 @@ export const DrawerNavigator: React.FC = () => {
           drawerIcon: ({color, size}) => (
             <Icon name="settings-outline" color={color} size={size} />
           ),
-          title: 'Settings',
+          title: t('navigation:settings'),
         }}
         component={SettingsScreen}
       />

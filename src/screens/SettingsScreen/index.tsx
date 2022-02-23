@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {setDarkTheme} from '@store/slices/userSlice';
 import {H1} from '@Typography';
 import {Screen, Switch} from '@ui';
+import {t} from 'i18next';
 import React, {useEffect, useRef, useState} from 'react';
 import {Animated, StatusBar, View} from 'react-native';
 import {styles} from './styles';
@@ -48,21 +49,21 @@ export const SettingsScreen: React.FC = () => {
       }}>
       <View style={styles.main}>
         <H1 fontWeight="bold" style={{...styles.mainTitle, color: textColor}}>
-          Main settings
+          {t('settings:main')}
         </H1>
 
         <Switch
           value={theme}
-          title="Theme"
+          title={t('settings:theme')}
           titleColor={textColor}
           onPress={darkThemeHandler}
-          leftText="Light"
-          rightText="Dark"
+          leftText={t('settings:light')}
+          rightText={t('settings:dark')}
           leftColor={colors.yellow}
           rightColor={colors.blue}
         />
 
-        <Switch
+        {/* <Switch
           value={language}
           title="Language"
           titleColor={textColor}
@@ -71,7 +72,7 @@ export const SettingsScreen: React.FC = () => {
           rightText="Rus"
           leftColor={colors.green}
           rightColor={colors.red}
-        />
+        /> */}
       </View>
     </Animated.ScrollView>
   );

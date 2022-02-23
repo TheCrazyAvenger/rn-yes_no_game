@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
   },
   itemText: {
     marginLeft: 10,
+    width: '80%',
   },
   line: {
     backgroundColor: colors.black,

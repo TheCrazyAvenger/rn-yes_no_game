@@ -8,6 +8,7 @@ import {LoginFormProps} from '../PropTypes';
 import {styles} from './styles';
 import {useAppSelector} from '@hooks';
 import {editUserSchema} from '..';
+import {t} from 'i18next';
 
 export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
   const {
@@ -45,7 +46,7 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           <FormInput
             value={values.name}
             leftIcon={{name: 'person', type: 'ionicons', color: 'gray'}}
-            plaseholder="Your Name"
+            plaseholder={t('common:name')}
             onChangeText={handleChange('name')}
             onBlur={handleBlur('name')}
             errorMessage={errors.name}
@@ -54,7 +55,7 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           <FormInput
             value={values.email}
             leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
-            plaseholder="Your Email"
+            plaseholder={t('common:email')}
             onChangeText={handleChange('email')}
             disabled={true}
             onBlur={handleBlur('email')}
@@ -64,7 +65,7 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
 
           <Button
             onPress={handleSubmit}
-            title="Save"
+            title={t('common:save')}
             style={styles.submitButton}
           />
         </View>

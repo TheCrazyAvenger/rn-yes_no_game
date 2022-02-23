@@ -7,9 +7,13 @@ import {reportSchema} from '../schemas';
 import {LoginFormProps} from '../PropTypes';
 import {styles} from './styles';
 import {useAppSelector} from '@hooks';
+import {colors} from '@constants';
+import {t} from 'i18next';
 
 export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
-  const {name, email} = useAppSelector(state => state.user);
+  const {name, email, darkTheme} = useAppSelector(state => state.user);
+
+  const backgroundColor = darkTheme ? colors.blue : colors.darkBlue;
 
   const [image, setImage] = useState<any>(null);
 
@@ -27,7 +31,7 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           <FormInput
             value={values.name}
             leftIcon={{name: 'person', type: 'ionicons', color: 'gray'}}
-            plaseholder="Your Name"
+            plaseholder={t('common:name')}
             onChangeText={handleChange('name')}
             onBlur={handleBlur('name')}
             errorMessage={errors.name}
@@ -36,7 +40,7 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           <FormInput
             value={values.email}
             leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
-            plaseholder="Your Email"
+            plaseholder={t('common:email')}
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
             errorMessage={errors.email}
@@ -44,7 +48,7 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           />
           <FormInput
             value={values.message}
-            plaseholder="Your Message"
+            plaseholder={t('common:message')}
             onChangeText={handleChange('message')}
             onBlur={handleBlur('message')}
             numberOfLines={6}
@@ -64,8 +68,8 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           </View>
           <Button
             onPress={handleSubmit}
-            title="Send"
-            style={styles.submitButton}
+            title={t('common:send')}
+            style={{...styles.submitButton, backgroundColor}}
           />
         </View>
       )}

@@ -6,6 +6,7 @@ import {Button, FormInput, ImagePicker} from '@ui';
 import {LoginFormProps} from '../PropTypes';
 import {styles} from './styles';
 import {submitStorySchema} from '..';
+import {t} from 'i18next';
 
 export const SubmitStoryForm: React.FC<LoginFormProps> = ({onSubmit}) => {
   const [image, setImage] = useState<any>(null);
@@ -34,7 +35,7 @@ export const SubmitStoryForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           </View>
           <FormInput
             value={values.title}
-            plaseholder="Title"
+            plaseholder={t('submitStory:title')}
             onChangeText={handleChange('title')}
             onBlur={handleBlur('title')}
             errorMessage={errors.title}
@@ -42,7 +43,7 @@ export const SubmitStoryForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           />
           <FormInput
             value={values.story}
-            plaseholder="Story"
+            plaseholder={t('submitStory:story')}
             onChangeText={handleChange('story')}
             onBlur={handleBlur('story')}
             numberOfLines={5}
@@ -53,7 +54,7 @@ export const SubmitStoryForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           />
           <FormInput
             value={values.answer}
-            plaseholder="Answer"
+            plaseholder={t('submitStory:answer')}
             onChangeText={handleChange('answer')}
             onBlur={handleBlur('answer')}
             numberOfLines={5}
@@ -66,7 +67,7 @@ export const SubmitStoryForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           <Button
             onPress={handleSubmit}
             disabled={errors && !image}
-            title="Send"
+            title={t('common:send')}
             style={styles.submitButton}
           />
         </View>

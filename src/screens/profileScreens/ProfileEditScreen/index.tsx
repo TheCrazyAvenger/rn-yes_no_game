@@ -11,6 +11,7 @@ import {H5} from '@Typography';
 import {styles} from './styles';
 import {editUserProfile} from '@store/slices/userSlice';
 import {colors} from '@constants';
+import {t} from 'i18next';
 
 export const ProfileEditScreen: React.FC = () => {
   const navigation: any = useNavigation();
@@ -77,8 +78,8 @@ export const ProfileEditScreen: React.FC = () => {
       {isSuccess && <Success isActive={isSuccess} />}
       <Screen style={{...styles.container, backgroundColor}} type="ScrollView">
         <ProfileItemHeader
-          title="Edit profile"
-          description="Here you can change the name, email and avatar of your profile."
+          title={t('profile:editTitle')}
+          description={t('profile:editText')}
           titleColor={colors.blue}
         />
 
