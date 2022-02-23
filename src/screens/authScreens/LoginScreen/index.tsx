@@ -8,12 +8,16 @@ import {useNavigation} from '@react-navigation/native';
 import {H5} from '@Typography';
 import {styles} from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useAppDispatch} from '@hooks';
+import {useAppDispatch, useAppSelector} from '@hooks';
 import {addUser} from '@store/slices/userSlice';
+import {colors} from '@constants';
 
 export const LoginScreen: React.FC = () => {
   const navigation: any = useNavigation();
   const dispatch = useAppDispatch();
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = darkTheme ? colors.dark : colors.white;
 
   const [login, {isLoading}] = useLoginMutation();
 
@@ -56,8 +60,12 @@ export const LoginScreen: React.FC = () => {
       <KeyboardDismissView>
         <ImageBackground
           style={styles.container}
-          source={require('@assets/images/authbg.jpg')}>
-          <View style={styles.form}>
+          source={
+            darkTheme
+              ? require('@assets/images/authbg-dark.jpg')
+              : require('@assets/images/authbg.jpg')
+          }>
+          <View style={{...styles.form, backgroundColor}}>
             <Image
               style={styles.image}
               source={require('@assets/images/logo.png')}

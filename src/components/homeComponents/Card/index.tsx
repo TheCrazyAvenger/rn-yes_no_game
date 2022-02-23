@@ -14,7 +14,7 @@ import {useFocusEffect} from '@react-navigation/native';
 
 import {CardProps, ReviewModal} from '@components';
 import {toggleYesNo} from '@store/slices/actionsSlice';
-import {colors} from '@constants';
+import {colors, darkGradient, lightGradient} from '@constants';
 import {H1, H3} from '@Typography';
 import {Button, CloseButton} from '@ui';
 import {useAppDispatch, useAppSelector} from '@hooks';
@@ -24,6 +24,13 @@ import {IMAGES_URL} from '@env';
 
 export const Card: React.FC<CardProps> = ({data}) => {
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const color = darkTheme ? colors.white : colors.black;
+  const shadowColor = darkTheme ? '#fff' : '#000';
+  const gradient = darkTheme ? darkGradient : lightGradient;
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
+
   const dispatch = useAppDispatch();
 
   useFocusEffect(
@@ -134,7 +141,10 @@ export const Card: React.FC<CardProps> = ({data}) => {
     <Container onPress={openCard}>
       <View>
         <Animated.View
-          style={[styles.container, {width: width, height: height}]}>
+          style={[
+            styles.container,
+            {width: width, height: height, backgroundColor, shadowColor},
+          ]}>
           <Animated.View style={{height: imageHeight}}>
             <ImageBackground
               style={styles.image}
@@ -159,7 +169,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
               date={date}
             />
 
-            <H3 style={styles.story}>{story}</H3>
+            <H3 style={{...styles.story, color}}>{story}</H3>
 
             {actionYesNo && (
               <>
@@ -197,16 +207,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
               </>
             )}
             {!actionYesNo && (
-              <LinearGradient
-                colors={[
-                  'rgba(255,255,255, 0)',
-                  'rgba(255,255,255, 0.1)',
-                  'rgba(255,255,255, 0.2)',
-                  'rgba(255,255,255, 0.9)',
-                  'rgba(255,255,255, 1)',
-                ]}
-                style={styles.gradient}
-              />
+              <LinearGradient colors={gradient} style={styles.gradient} />
             )}
           </Content>
           <CloseButton

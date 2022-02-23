@@ -6,10 +6,4 @@ export const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 14,
   },
-  line: {
-    width: '100%',
-    marginVertical: 5,
-    height: 1,
-    backgroundColor: colors.black,
-  },
 });

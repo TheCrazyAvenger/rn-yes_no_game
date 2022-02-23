@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
   },
   title: {
     position: 'absolute',

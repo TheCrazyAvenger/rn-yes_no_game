@@ -10,15 +10,16 @@ import {useEditUserMutation} from '@api';
 import {H5} from '@Typography';
 import {styles} from './styles';
 import {editUserProfile} from '@store/slices/userSlice';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {colors} from '@constants';
-import {IMAGES_URL} from '@env';
 
 export const ProfileEditScreen: React.FC = () => {
   const navigation: any = useNavigation();
 
   const dispatch = useAppDispatch();
   const {id, token, image: profileImage} = useAppSelector(state => state.user);
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
   const [editUser, {isLoading}] = useEditUserMutation();
 
@@ -74,7 +75,7 @@ export const ProfileEditScreen: React.FC = () => {
         />
       )}
       {isSuccess && <Success isActive={isSuccess} />}
-      <Screen style={styles.container} type="ScrollView">
+      <Screen style={{...styles.container, backgroundColor}} type="ScrollView">
         <ProfileItemHeader
           title="Edit profile"
           description="Here you can change the name, email and avatar of your profile."

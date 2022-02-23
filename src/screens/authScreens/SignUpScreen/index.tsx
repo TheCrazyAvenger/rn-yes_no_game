@@ -1,5 +1,6 @@
 import {useSignupMutation} from '@api';
-import {useAppDispatch} from '@hooks';
+import {colors} from '@constants';
+import {useAppDispatch, useAppSelector} from '@hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {addUser} from '@store/slices/userSlice';
@@ -12,6 +13,9 @@ import {styles} from './styles';
 
 export const SignUpScreen: React.FC = () => {
   const navigation: any = useNavigation();
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = darkTheme ? colors.dark : colors.white;
 
   const dispatch = useAppDispatch();
 
@@ -61,8 +65,12 @@ export const SignUpScreen: React.FC = () => {
       <KeyboardDismissView>
         <ImageBackground
           style={styles.container}
-          source={require('@assets/images/authbg.jpg')}>
-          <View style={styles.form}>
+          source={
+            darkTheme
+              ? require('@assets/images/authbg-dark.jpg')
+              : require('@assets/images/authbg.jpg')
+          }>
+          <View style={{...styles.form, backgroundColor}}>
             <Image
               style={styles.image}
               source={require('@assets/images/logo.png')}

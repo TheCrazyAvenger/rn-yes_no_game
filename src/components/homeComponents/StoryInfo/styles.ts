@@ -13,15 +13,15 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: 15,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   text: {
     marginLeft: 2,
   },
   line: {
-    backgroundColor: colors.blue,
+    backgroundColor: colors.darkBlue,
     height: 1,
     marginHorizontal: 20,
-    marginVertical: 10,
+    marginVertical: 5,
   },
 });

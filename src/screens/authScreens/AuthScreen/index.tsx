@@ -6,9 +6,11 @@ import {styles} from './styles';
 import {Button} from '@ui';
 import {colors, Screens} from '@constants';
 import {useNavigation} from '@react-navigation/native';
+import {useAppSelector} from '@hooks';
 
 export const AuthScreen: React.FC = () => {
   const navigation: any = useNavigation();
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
 
   const loginHandler = () => navigation.navigate(Screens.loginScreen);
   const signupHandler = () => navigation.navigate(Screens.signUpScreen);
@@ -16,7 +18,11 @@ export const AuthScreen: React.FC = () => {
   return (
     <ImageBackground
       style={styles.container}
-      source={require('@assets/images/authbg.jpg')}>
+      source={
+        darkTheme
+          ? require('@assets/images/authbg-dark.jpg')
+          : require('@assets/images/authbg.jpg')
+      }>
       <View style={styles.header}>
         <Image
           style={styles.image}

@@ -19,6 +19,9 @@ export const BackgroundScreen: React.FC = () => {
   const background = useAppSelector(state => state.user.bg);
   const dispatch = useAppDispatch();
   const navigation: any = useNavigation();
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
   const setBgHandler = async (index: number) => {
     await dispatch(setBg(index));
@@ -30,7 +33,9 @@ export const BackgroundScreen: React.FC = () => {
   return (
     <Screen>
       <ProfileHeader onSubmit={saveHandler} isEdit={true} />
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{...styles.container, backgroundColor}}>
         {Object.values(bg).map((item: any, i) => (
           <TouchableOpacity
             onPress={() => setBgHandler(i + 1)}

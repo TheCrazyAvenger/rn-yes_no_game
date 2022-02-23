@@ -3,6 +3,8 @@ import LottieView from 'lottie-react-native';
 
 import {styles} from './styles';
 import {LottieProps} from '@ui';
+import {useAppSelector} from '@hooks';
+import {colors} from '@constants';
 
 export const Loading: React.FC<LottieProps> = ({
   onAnimationFinish,
@@ -10,6 +12,9 @@ export const Loading: React.FC<LottieProps> = ({
   isActive,
 }) => {
   const animation: any = useRef(null);
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
   useEffect(() => {
     if (isActive) {
@@ -21,7 +26,7 @@ export const Loading: React.FC<LottieProps> = ({
 
   return (
     <LottieView
-      style={{...styles.container, ...style}}
+      style={{...styles.container, backgroundColor, ...style}}
       onAnimationFinish={onAnimationFinish}
       source={require('@assets/images/loading.json')}
       autoPlay={false}

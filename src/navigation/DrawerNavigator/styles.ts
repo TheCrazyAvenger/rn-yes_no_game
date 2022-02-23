@@ -7,4 +7,7 @@ export const styles = StyleSheet.create({
     fontSize: 18.72,
   },
   drawerLabelStyle: {marginLeft: -25, fontFamily: 'Nunito-ExtraBold'},
+  leftIcon: {
+    marginHorizontal: 15,
+  },
 });

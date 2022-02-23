@@ -14,6 +14,11 @@ import {ErrorModal, Loading} from '@ui';
 export const ProfileScreen: React.FC = () => {
   const navigation: any = useNavigation();
   const {id, token} = useAppSelector(state => state.user);
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const color = darkTheme ? colors.white : colors.black;
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
+
   const dispatch = useAppDispatch();
 
   const [getUserInfo, {isLoading}] = useGetUserInfoMutation();
@@ -57,12 +62,12 @@ export const ProfileScreen: React.FC = () => {
         <ProfileHeader />
         <ScrollView
           showsVerticalScrollIndicator={false}
-          style={styles.profileBody}>
-          <H2 fontWeight="bold" style={styles.title}>
+          style={{...styles.profileBody, backgroundColor}}>
+          <H2 fontWeight="bold" style={{...styles.title, color}}>
             Statistics
           </H2>
           <ProfileStatistics />
-          <H2 fontWeight="bold" style={{...styles.title, marginTop: 10}}>
+          <H2 fontWeight="bold" style={{...styles.title, color}}>
             More options
           </H2>
           <ProfileItem

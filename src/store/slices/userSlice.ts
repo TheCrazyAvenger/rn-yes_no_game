@@ -9,6 +9,7 @@ interface UserState {
   id: string | null;
   stories: any;
   bg: number;
+  darkTheme: boolean | null;
 }
 
 const initialState: UserState = {
@@ -19,6 +20,7 @@ const initialState: UserState = {
   id: null,
   stories: null,
   bg: 2,
+  darkTheme: null,
 };
 
 const userSlice = createSlice({
@@ -69,6 +71,9 @@ const userSlice = createSlice({
     setBg: (state, action: PayloadAction<number>) => {
       state.bg = action.payload;
     },
+    setDarkTheme: (state, action: PayloadAction<boolean>) => {
+      state.darkTheme = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(getUser.fulfilled, (state, action: PayloadAction<any>) => {
@@ -94,5 +99,6 @@ export const {
   addReview,
   editUserProfile,
   setBg,
+  setDarkTheme,
 } = userSlice.actions;
 export default userSlice.reducer;

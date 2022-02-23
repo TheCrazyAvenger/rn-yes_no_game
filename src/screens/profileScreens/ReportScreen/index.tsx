@@ -14,6 +14,9 @@ import {colors} from '@constants';
 export const ReportScreen: React.FC = () => {
   const navigation: any = useNavigation();
   const id = useAppSelector(state => state.user.id);
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
   const [sendReport, {isLoading}] = useSendReportMutation();
 
@@ -65,7 +68,7 @@ export const ReportScreen: React.FC = () => {
         />
       )}
       {isSuccess && <Success isActive={isSuccess} />}
-      <Screen type="ScrollView" style={styles.container}>
+      <Screen type="ScrollView" style={{...styles.container, backgroundColor}}>
         <ProfileItemHeader
           title="Send report"
           description="Whether you are looking for answers, would like to solve a problem

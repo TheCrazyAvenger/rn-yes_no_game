@@ -1,36 +1,71 @@
 import {colors} from '@constants';
-import {H1, H2} from '@Typography';
+import {useAppDispatch, useAppSelector} from '@hooks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {setDarkTheme} from '@store/slices/userSlice';
+import {H1} from '@Typography';
 import {Screen, Switch} from '@ui';
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Animated, StatusBar, View} from 'react-native';
 import {styles} from './styles';
 
 export const SettingsScreen: React.FC = () => {
-  const [theme, setTheme] = useState(1);
+  const dispatch = useAppDispatch();
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const color = useRef(new Animated.Value(darkTheme ? 0 : 1)).current;
+
+  const [theme, setTheme] = useState(darkTheme ? 0 : 1);
   const [language, setLanguage] = useState(1);
 
+  const textColor = theme === 0 ? colors.white : colors.darkBlue;
+
+  useEffect(() => {
+    Animated.spring(color, {
+      toValue: theme,
+      useNativeDriver: false,
+    }).start();
+  }, [theme]);
+
+  const darkThemeHandler = async (index: number) => {
+    const isDark = index === 0 ? true : false;
+    setTheme(index);
+    dispatch(setDarkTheme(isDark));
+    isDark
+      ? await AsyncStorage.setItem('darkTheme', isDark.toString())
+      : await AsyncStorage.removeItem('darkTheme');
+    StatusBar.setBackgroundColor(isDark ? colors.dark : colors.white);
+    StatusBar.setBarStyle(isDark ? 'light-content' : 'dark-content');
+  };
+
   return (
-    <Screen type="ScrollView" style={styles.container}>
+    <Animated.ScrollView
+      style={{
+        ...styles.container,
+        backgroundColor: color.interpolate({
+          inputRange: [0, 1],
+          outputRange: [colors.dark, colors.white],
+        }),
+      }}>
       <View style={styles.main}>
-        <H1 fontWeight="bold" style={styles.mainTitle}>
+        <H1 fontWeight="bold" style={{...styles.mainTitle, color: textColor}}>
           Main settings
         </H1>
-        <H2 fontWeight="bold" style={styles.title}>
-          App theme
-        </H2>
+
         <Switch
           value={theme}
-          onPress={setTheme}
+          title="Theme"
+          titleColor={textColor}
+          onPress={darkThemeHandler}
           leftText="Light"
           rightText="Dark"
           leftColor={colors.yellow}
           rightColor={colors.blue}
         />
-        <H2 fontWeight="bold" style={styles.title}>
-          Language
-        </H2>
+
         <Switch
           value={language}
+          title="Language"
+          titleColor={textColor}
           onPress={setLanguage}
           leftText="Eng"
           rightText="Rus"
@@ -38,16 +73,6 @@ export const SettingsScreen: React.FC = () => {
           rightColor={colors.red}
         />
       </View>
-      <View style={styles.additional}>
-        <H1 fontWeight="bold" style={styles.mainTitle}>
-          Additional
-        </H1>
-      </View>
-      <View style={styles.social}>
-        <H1 fontWeight="bold" style={styles.mainTitle}>
-          Social
-        </H1>
-      </View>
-    </Screen>
+    </Animated.ScrollView>
   );
 };

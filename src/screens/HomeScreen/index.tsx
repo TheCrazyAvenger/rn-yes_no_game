@@ -14,6 +14,10 @@ export const HomeScreen: React.FC = () => {
   const uid = useAppSelector(state => state.user.id);
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
   const stories = useAppSelector(state => state.user.stories);
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
+
   const {data, error, isLoading} = useGetStoriesQuery({uid});
 
   useEffect(() => {
@@ -80,8 +84,11 @@ export const HomeScreen: React.FC = () => {
 
   return (
     <>
-      <Screen style={styles.container}>
-        <StatusBar backgroundColor={colors.white} barStyle="dark-content" />
+      <Screen style={{...styles.container, backgroundColor}}>
+        <StatusBar
+          backgroundColor={darkTheme ? colors.dark : colors.white}
+          barStyle={darkTheme ? 'light-content' : 'dark-content'}
+        />
         <Animated.View
           style={{transform: [{translateY: pan.y}, {scale}]}}
           {...panResponder.panHandlers}>

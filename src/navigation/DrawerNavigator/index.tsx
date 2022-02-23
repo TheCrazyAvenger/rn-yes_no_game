@@ -6,7 +6,6 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {
   HomeScreen,
   NewsScreen,
-  NullScreen,
   SettingsScreen,
   SubmitStoryScreen,
 } from '@screens';
@@ -19,21 +18,35 @@ import {useAppSelector} from '@hooks';
 
 const Drawer = createDrawerNavigator();
 
-const screenOptions: DrawerNavigationOptions = {
-  headerTitleStyle: styles.headerTitleStyle,
-  headerShadowVisible: false,
-  drawerLabelStyle: styles.drawerLabelStyle,
-  drawerActiveTintColor: colors.red,
-  drawerInactiveTintColor: colors.black,
-};
-
 export const DrawerNavigator: React.FC = () => {
   const stories = useAppSelector(state => state.user.stories);
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const color = darkTheme ? colors.white : colors.black;
+
+  const screenOptions: DrawerNavigationOptions = {
+    headerTitleStyle: styles.headerTitleStyle,
+    headerShadowVisible: false,
+    drawerLabelStyle: styles.drawerLabelStyle,
+    drawerActiveTintColor: colors.red,
+    drawerInactiveTintColor: color,
+  };
 
   return (
     <Drawer.Navigator
       drawerContent={(props: any) => <CustomDrawer {...props} />}
-      screenOptions={screenOptions}>
+      screenOptions={({navigation}) => ({
+        ...screenOptions,
+        headerLeft: () => (
+          <Icon
+            onPress={navigation.openDrawer}
+            name="menu-outline"
+            size={30}
+            style={styles.leftIcon}
+            color={color}
+          />
+        ),
+      })}>
       <Drawer.Screen
         name={Screens.homeScreen}
         options={{
@@ -41,7 +54,7 @@ export const DrawerNavigator: React.FC = () => {
             <Icon name="home-outline" color={color} size={size} />
           ),
           headerTitle: () => (
-            <H3 style={styles.headerTitleStyle} fontWeight="600">
+            <H3 style={{...styles.headerTitleStyle, color}} fontWeight="600">
               {`In catalog ${stories ? stories.length : 0} stories`}
             </H3>
           ),

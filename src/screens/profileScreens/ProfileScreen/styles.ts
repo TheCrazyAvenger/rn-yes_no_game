@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   profileBody: {
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     padding: 20,
     paddingHorizontal: 15,
   },

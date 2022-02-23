@@ -11,6 +11,9 @@ import {styles} from './styles';
 
 export const SubmitStoryScreen: React.FC = () => {
   const token = useAppSelector(state => state.user.token);
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
   const [submitStory, {isLoading}] = useSubmitStoryMutation();
 
@@ -62,7 +65,7 @@ export const SubmitStoryScreen: React.FC = () => {
         />
       )}
       {isSuccess && <Success isActive={isSuccess} />}
-      <Screen style={styles.container} type="ScrollView">
+      <Screen style={{...styles.container, backgroundColor}} type="ScrollView">
         <ProfileItemHeader
           showCloseButton={false}
           title="Submit a story"
