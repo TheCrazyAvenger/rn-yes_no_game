@@ -23,6 +23,7 @@ import {StoryInfo} from '../StoryInfo';
 import {styles} from './styles';
 import {IMAGES_URL} from '@env';
 import {t} from 'i18next';
+import {getStoryByLanguage} from '@utilities';
 
 export const Card: React.FC<CardProps> = ({data}) => {
   const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
@@ -34,6 +35,8 @@ export const Card: React.FC<CardProps> = ({data}) => {
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
   const language = RNLocalize.getLocales()[0].languageCode;
+
+  const {title, story, answer} = getStoryByLanguage(data, language);
 
   const dispatch = useAppDispatch();
 
@@ -57,21 +60,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
 
   const [showAnswer, setShowAnswer] = useState(false);
 
-  const {
-    title,
-    titleRu,
-    story,
-    storyRu,
-    answer,
-    answerRu,
-    image,
-    rating,
-    difficulty,
-    time,
-    date,
-    id,
-    reviewedByUser,
-  } = data;
+  const {image, rating, difficulty, time, date, id, reviewedByUser} = data;
   const {width: cardWidth, height: cardHeight} = useWindowDimensions();
 
   const Content = useMemo(
@@ -161,7 +150,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
                   backgroundColor: `rgba(51,51,51,${actionYesNo ? 0.6 : 0})`,
                 }}>
                 <H1 style={styles.headerTitle} fontWeight="bold">
-                  {language === 'en' ? title : titleRu}
+                  {title}
                 </H1>
               </View>
             </ImageBackground>
@@ -176,15 +165,13 @@ export const Card: React.FC<CardProps> = ({data}) => {
               date={date}
             />
 
-            <H3 style={{...styles.story, color}}>
-              {language === 'en' ? story : storyRu}
-            </H3>
+            <H3 style={{...styles.story, color}}>{story}</H3>
 
             {actionYesNo && (
               <>
                 <View style={styles.answer}>
                   <Animated.Text style={[styles.answerText, {opacity}]}>
-                    {language === 'en' ? answer : answerRu}
+                    {answer}
                   </Animated.Text>
                   <Animated.View
                     style={[

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import 'react-native-gesture-handler';
 import {AppNavigator} from './navigation/AppNavigator';
@@ -6,6 +6,9 @@ import {Provider} from 'react-redux';
 import {store} from '@store/store';
 import {LogBox} from 'react-native';
 import './constants/DCSLocalize';
+import * as RNLocalize from 'react-native-localize';
+import i18next from 'i18next';
+import {setLanguage} from './utilities/setLanguage';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
@@ -13,6 +16,11 @@ LogBox.ignoreLogs([
 ]);
 
 export const App: React.FC = () => {
+  useEffect(() => {
+    const language = RNLocalize.getLocales()[0].languageCode;
+    i18next.changeLanguage(setLanguage(language));
+  }, []);
+
   return (
     <SafeAreaProvider>
       <Provider store={store}>

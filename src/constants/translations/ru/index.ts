@@ -5,6 +5,7 @@ import profile from './profile';
 import submitStory from './submitStory';
 import settings from './settings';
 import auth from './auth';
+import schemas from './schemas';
 
 export default {
   common,
@@ -14,4 +15,5 @@ export default {
   submitStory,
   settings,
   auth,
+  schemas,
 };

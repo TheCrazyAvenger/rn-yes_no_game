@@ -1,100 +1,81 @@
+import {t} from 'i18next';
 import * as yup from 'yup';
 
 export const loginSchema = yup.object().shape({
   email: yup
     .string()
-    .email('Please check your email format')
-    .required('Please enter your email'),
-  password: yup.string().required('Please enter your password'),
+    .email(t('schemas:emailFormat'))
+    .required(t('schemas:emailRequired')),
+  password: yup.string().required(t('schemas:passwordRequired')),
 });
 
 export const signupSchema = yup.object().shape({
   name: yup
     .string()
-    .required('Please enter your nickname')
-    .max(50, 'The field should be less than or equal to 50 symbols ')
-    .min(2, 'This field should contain at least 2 symbols')
-    .matches(
-      /^[а-яA-яa-zA-Z-\s]*$/,
-      'Please enter only letters of the alphabet, hyphen (-) and spaces',
-    ),
+    .required(t('schemas:nameRequired'))
+    .max(50, t('schemas:max50'))
+    .min(2, t('schemas:min2'))
+    .matches(/^[а-яA-яa-zA-Z-\s]*$/, t('schemas:nameMatches')),
   email: yup
     .string()
-    .email('Please check your email format')
-    .required('Please enter your email')
-    .max(64, 'This field should be less than or equal to 64 symbols'),
+    .email(t('schemas:emailFormat'))
+    .required(t('schemas:emailRequired'))
+    .max(64, t('schemas:max64')),
   password: yup
     .string()
-    .min(6, 'This field should contain at least 6 symbols')
-    .max(32, 'This field should be less than or equal to 32 symbols')
-    .required('Please enter your password'),
+    .min(6, t('schemas:min6'))
+    .max(32, t('schemas:max32'))
+    .required(t('schemas:passwordRequired')),
 });
 
 export const reportSchema = yup.object().shape({
   name: yup
     .string()
-    .required('Please enter your nickname')
-    .max(50, 'The field should be less than or equal to 50 symbols ')
-    .min(2, 'This field should contain at least 2 symbols')
-    .matches(
-      /^[а-яA-яa-zA-Z-\s]*$/,
-      'Please enter only letters of the alphabet, hyphen (-) and spaces',
-    ),
+    .required(t('schemas:nameRequired'))
+    .max(50, t('schemas:max50'))
+    .min(2, t('schemas:min2'))
+    .matches(/^[а-яA-яa-zA-Z-\s]*$/, t('schemas:nameMatches')),
   email: yup
     .string()
-    .email('Please check your email format')
-    .required('Please enter your email')
-    .max(64, 'This field should be less than or equal to 64 symbols'),
+    .email(t('schemas:emailFormat'))
+    .required(t('schemas:emailRequired'))
+    .max(64, t('schemas:max64')),
   message: yup
     .string()
-    .min(5, 'This field should contain at least 5 symbols')
-    .max(500, 'This field should be less than or equal to 500 symbols')
-    .required('Please enter your message'),
+    .min(5, t('schemas:min5'))
+    .max(500, t('schemas:max500'))
+    .required(t('schemas:messageRequired')),
 });
 
 export const editUserSchema = yup.object().shape({
   name: yup
     .string()
-    .required('Please enter your nickname')
-    .max(50, 'The field should be less than or equal to 50 symbols ')
-    .min(2, 'This field should contain at least 2 symbols')
-    .matches(
-      /^[а-яA-яa-zA-Z-\s]*$/,
-      'Please enter only letters of the alphabet, hyphen (-) and spaces',
-    ),
+    .required(t('schemas:nameRequired'))
+    .max(50, t('schemas:max50'))
+    .min(2, t('schemas:min2'))
+    .matches(/^[а-яA-яa-zA-Z-\s]*$/, t('schemas:nameMatches')),
   email: yup
     .string()
-    .email('Please check your email format')
-    .required('Please enter your email')
-    .max(64, 'This field should be less than or equal to 64 symbols'),
+    .email(t('schemas:emailFormat'))
+    .required(t('schemas:emailRequired'))
+    .max(64, t('schemas:max64')),
 });
 
 export const submitStorySchema = yup.object().shape({
   title: yup
     .string()
-    .required('Please enter title')
-    .max(50, 'The field should be less than or equal to 50 symbols ')
-    .min(5, 'This field should contain at least 2 symbols')
-    .matches(
-      /^[а-яA-яa-zA-Z-\s]*$/,
-      'Please enter only letters of the alphabet, hyphen (-) and spaces',
-    ),
+    .required(t('schemas:titleRequired'))
+    .max(50, t('schemas:max50'))
+    .min(5, t('schemas:min5'))
+    .matches(/^[а-яA-яa-zA-Z-\s]*$/, t('schemas:nameMatches')),
   story: yup
     .string()
-    .required('Please enter story')
-    .max(500, 'The field should be less than or equal to 50 symbols ')
-    .min(5, 'This field should contain at least 2 symbols')
-    .matches(
-      /^[а-яA-яa-zA-Z-,.!\s]*$/,
-      'Please enter only letters of the alphabet, hyphen (-) and spaces',
-    ),
+    .required(t('schemas:storyRequired'))
+    .max(500, t('schemas:max500'))
+    .min(5, t('schemas:min5')),
   answer: yup
     .string()
-    .required('Please enter answer')
-    .max(500, 'The field should be less than or equal to 50 symbols ')
-    .min(5, 'This field should contain at least 2 symbols')
-    .matches(
-      /^[а-яA-яa-zA-Z-,.!\s]*$/,
-      'Please enter only letters of the alphabet, hyphen (-) and spaces',
-    ),
+    .required(t('schemas:answerRequired'))
+    .max(500, t('schemas:max500'))
+    .min(5, t('schemas:min5')),
 });
