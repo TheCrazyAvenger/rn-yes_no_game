@@ -49,12 +49,11 @@ export const SettingsScreen: React.FC = () => {
       }}>
       <View style={styles.main}>
         <H1 fontWeight="bold" style={{...styles.mainTitle, color: textColor}}>
-          {t('settings:main')}
+          {t('settings:theme')}
         </H1>
 
         <Switch
           value={theme}
-          title={t('settings:theme')}
           titleColor={textColor}
           onPress={darkThemeHandler}
           leftText={t('settings:light')}
