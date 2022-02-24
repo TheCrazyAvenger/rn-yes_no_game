@@ -28,14 +28,14 @@ export const yesnoApi = createApi({
     }),
     submitStory: builder.mutation({
       query: body => {
-        const {formData, token} = body;
+        const {data, token} = body;
         return {
           url: `/submit`,
           method: 'POST',
           headers: {
             Authorization: 'Bearer ' + token,
           },
-          body: formData,
+          body: data,
         };
       },
     }),

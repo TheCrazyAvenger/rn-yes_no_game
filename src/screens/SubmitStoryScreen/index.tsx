@@ -9,6 +9,8 @@ import React, {useState} from 'react';
 import {Platform} from 'react-native';
 import {SubmitStoryForm} from '../../forms';
 import {styles} from './styles';
+import storage from '@react-native-firebase/storage';
+import auth from '@react-native-firebase/auth';
 
 export const SubmitStoryScreen: React.FC = () => {
   const token = useAppSelector(state => state.user.token);
@@ -16,43 +18,35 @@ export const SubmitStoryScreen: React.FC = () => {
 
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
-  const [submitStory, {isLoading}] = useSubmitStoryMutation();
+  const [submitStory] = useSubmitStoryMutation();
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const submitHandler = async (values: any) => {
     try {
+      setIsLoading(true);
       setErrorMessage(null);
 
       const {title, story, answer, image} = values;
       const date = new Date().toLocaleString();
 
-      const formData = new FormData();
+      const data = {title, story, answer, date};
 
-      formData.append('title', title.trim());
-      formData.append('story', story.trim());
-      formData.append('answer', answer.trim());
-      formData.append('date', date);
+      await auth().signInAnonymously();
+      await storage().ref(`stories/story ${title}`).putFile(image.uri);
 
-      image &&
-        formData.append('image', {
-          name: image.fileName,
-          type: image.type,
-          uri:
-            Platform.OS === 'ios'
-              ? image.uri.replace('file://', '')
-              : image.uri,
-        });
+      await submitStory({data, token}).unwrap();
 
-      await submitStory({formData, token}).unwrap();
-
+      setIsLoading(false);
       setIsSuccess(true);
 
       setTimeout(() => {
         setIsSuccess(false);
       }, 1500);
     } catch (e: any) {
+      setIsLoading(false);
       setErrorMessage(e.data.message);
     }
   };

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import storage from '@react-native-firebase/storage';
+import auth from '@react-native-firebase/auth';
 
 import {ProfileItemHeader} from '@components';
 import {ReportForm} from '../../../forms';
@@ -20,43 +21,35 @@ export const ReportScreen: React.FC = () => {
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
   const color = darkTheme ? colors.blue : colors.darkBlue;
 
-  const [sendReport, {isLoading}] = useSendReportMutation();
+  const [sendReport] = useSendReportMutation();
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const reportHandler = async (values: any) => {
     try {
+      setIsLoading(true);
       setErrorMessage(null);
 
       const {email, name, message, image} = values;
       const date = new Date().toLocaleString();
 
-      const formData = new FormData();
+      const data = {email, name, message, date, sendBy: id};
 
-      formData.append('email', email);
-      formData.append('name', name);
-      formData.append('message', message);
-      formData.append('date', date);
-      formData.append('sendBy', id);
-      image &&
-        formData.append('image', {
-          name: image.fileName,
-          type: image.type,
-          uri:
-            Platform.OS === 'ios'
-              ? image.uri.replace('file://', '')
-              : image.uri,
-        });
+      await sendReport(data).unwrap();
 
-      await sendReport(formData).unwrap();
+      await auth().signInAnonymously();
+      await storage().ref(`reports/report ${date}`).putFile(image.uri);
 
+      setIsLoading(false);
       setIsSuccess(true);
 
       setTimeout(() => {
         navigation.pop();
       }, 1500);
     } catch (e: any) {
+      setIsLoading(false);
       setErrorMessage(e.data.message);
     }
   };
