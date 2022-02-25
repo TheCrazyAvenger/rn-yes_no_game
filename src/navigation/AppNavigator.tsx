@@ -11,6 +11,7 @@ import {Loading} from '@ui';
 import React, {useEffect, useState} from 'react';
 import {AuthStack} from './AuthStack';
 import {DrawerNavigator} from './DrawerNavigator';
+import SplashScreen from 'react-native-splash-screen';
 
 export const AppNavigator: React.FC = () => {
   const token = useAppSelector(state => state.user.token);
@@ -24,6 +25,7 @@ export const AppNavigator: React.FC = () => {
 
   const getUserData = async () => {
     try {
+      SplashScreen.hide();
       setLoading(true);
       await dispatch(getUser());
       const bg = await AsyncStorage.getItem('bg');
@@ -33,6 +35,7 @@ export const AppNavigator: React.FC = () => {
       darkTheme && dispatch(setDarkTheme(!!darkTheme));
       setLoading(false);
     } catch (e) {
+      SplashScreen.hide();
       setLoading(false);
     }
   };
