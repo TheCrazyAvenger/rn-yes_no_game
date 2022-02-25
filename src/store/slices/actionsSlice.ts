@@ -3,11 +3,15 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 interface ActionsState {
   actionYesNo: boolean;
   showReview: boolean;
+  yesnoGoBack: boolean;
+  openYesNoRules: boolean;
 }
 
 const initialState: ActionsState = {
   actionYesNo: false,
   showReview: false,
+  yesnoGoBack: false,
+  openYesNoRules: false,
 };
 
 const actionsSlice = createSlice({
@@ -20,8 +24,15 @@ const actionsSlice = createSlice({
     toggleReview: (state, action: PayloadAction<boolean>) => {
       state.showReview = action.payload;
     },
+    toggleYesnoGoBack: (state, action: PayloadAction<boolean>) => {
+      state.yesnoGoBack = action.payload;
+    },
+    toggleYesnoRules: (state, action: PayloadAction<boolean>) => {
+      state.openYesNoRules = action.payload;
+    },
   },
 });
 
-export const {toggleYesNo, toggleReview} = actionsSlice.actions;
+export const {toggleYesNo, toggleReview, toggleYesnoGoBack, toggleYesnoRules} =
+  actionsSlice.actions;
 export default actionsSlice.reducer;

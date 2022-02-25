@@ -1,14 +1,16 @@
 import React, {useEffect} from 'react';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import 'react-native-gesture-handler';
-import {AppNavigator} from './navigation/AppNavigator';
-import {Provider} from 'react-redux';
-import {store} from '@store/store';
 import {LogBox} from 'react-native';
-import './constants/DCSLocalize';
+import {Provider} from 'react-redux';
+import {Provider as PaperProvider} from 'react-native-paper';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import * as RNLocalize from 'react-native-localize';
 import i18next from 'i18next';
+import 'react-native-gesture-handler';
+
+import {AppNavigator} from './navigation/AppNavigator';
+import {store} from '@store/store';
 import {setLanguage} from './utilities/setLanguage';
+import './constants/DCSLocalize';
 
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
@@ -24,7 +26,9 @@ export const App: React.FC = () => {
   return (
     <SafeAreaProvider>
       <Provider store={store}>
-        <AppNavigator />
+        <PaperProvider>
+          <AppNavigator />
+        </PaperProvider>
       </Provider>
     </SafeAreaProvider>
   );

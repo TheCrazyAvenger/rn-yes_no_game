@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: colors.white,
   },
   title: {
     position: 'absolute',
@@ -22,5 +21,12 @@ export const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  cover: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });

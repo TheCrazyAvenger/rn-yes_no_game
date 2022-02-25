@@ -2,19 +2,21 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Card} from '@components';
 import {Loading, Screen} from '@ui';
 import {styles} from './styles';
-import {Animated, PanResponder, StatusBar} from 'react-native';
+import {Animated, PanResponder} from 'react-native';
 import {getNextIndex, shuffle} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {useGetStoriesQuery} from '@api';
 import {addStories} from '@store/slices/userSlice';
-import {colors} from '@constants';
+import {colors, Screens} from '@constants';
+import {useNavigation} from '@react-navigation/native';
+import {toggleYesnoGoBack} from '@store/slices/actionsSlice';
 
 export const HomeScreen: React.FC = () => {
+  const navigation: any = useNavigation();
+
   const dispatch = useAppDispatch();
-  const uid = useAppSelector(state => state.user.id);
-  const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
-  const stories = useAppSelector(state => state.user.stories);
-  const darkTheme = useAppSelector(state => state.user.darkTheme);
+  const {actionYesNo, yesnoGoBack} = useAppSelector(state => state.actions);
+  const {stories, darkTheme, id: uid} = useAppSelector(state => state.user);
 
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
@@ -22,11 +24,21 @@ export const HomeScreen: React.FC = () => {
 
   useEffect(() => {
     data && dispatch(addStories(shuffle(data.stories)));
+    data &&
+      Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
   }, [data]);
+
+  useEffect(() => {
+    !yesnoGoBack &&
+      Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
+        dispatch(toggleYesnoGoBack(false));
+        navigation.replace(Screens.yesNoScreen);
+      });
+  }, [yesnoGoBack]);
 
   const [index, setIndex] = useState(0);
   const pan = useRef(new Animated.ValueXY()).current;
-  const scale = useRef(new Animated.Value(1)).current;
+  const scale = useRef(new Animated.Value(0)).current;
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (_, gestureState) => {
@@ -85,10 +97,6 @@ export const HomeScreen: React.FC = () => {
   return (
     <>
       <Screen style={{...styles.container, backgroundColor}}>
-        <StatusBar
-          backgroundColor={darkTheme ? colors.dark : colors.white}
-          barStyle={darkTheme ? 'light-content' : 'dark-content'}
-        />
         <Animated.View
           style={{transform: [{translateY: pan.y}, {scale}]}}
           {...panResponder.panHandlers}>
