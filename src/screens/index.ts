@@ -12,3 +12,7 @@ export * from './profileScreens/ProfileScreen';
 export * from './profileScreens/ProfileEditScreen';
 export * from './profileScreens/ReportScreen';
 export * from './profileScreens/BackgroundScreen';
+
+export * from './homeScreens/YesNoScreen';
+export * from './homeScreens/AliasScreen';
+export * from './homeScreens/YesNoHelp';

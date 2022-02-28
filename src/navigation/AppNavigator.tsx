@@ -12,6 +12,22 @@ import React, {useEffect, useState} from 'react';
 import {AuthStack} from './AuthStack';
 import {DrawerNavigator} from './DrawerNavigator';
 import SplashScreen from 'react-native-splash-screen';
+import {colors} from '@constants';
+
+const light = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: colors.white,
+  },
+};
+const dark = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    background: colors.dark,
+  },
+};
 
 export const AppNavigator: React.FC = () => {
   const token = useAppSelector(state => state.user.token);
@@ -41,7 +57,7 @@ export const AppNavigator: React.FC = () => {
   };
 
   return (
-    <NavigationContainer theme={darkTheme ? DarkTheme : DefaultTheme}>
+    <NavigationContainer theme={darkTheme ? dark : light}>
       {loading ? (
         <Loading isActive={loading} />
       ) : token ? (
