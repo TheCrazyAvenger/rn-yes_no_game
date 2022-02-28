@@ -6,6 +6,7 @@ import submitStory from './submitStory';
 import settings from './settings';
 import auth from './auth';
 import schemas from './schemas';
+import yesnoRules from './yesnoRules';
 
 export default {
   common,
@@ -16,4 +17,5 @@ export default {
   settings,
   auth,
   schemas,
+  yesnoRules,
 };

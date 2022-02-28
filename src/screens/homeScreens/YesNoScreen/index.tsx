@@ -1,6 +1,5 @@
-import {colors, Screens} from '@constants';
+import {colors} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
-import {useNavigation} from '@react-navigation/native';
 import {toggleYesnoGoBack, toggleYesnoRules} from '@store/slices/actionsSlice';
 import {H1} from '@Typography';
 import {IconButton} from '@ui';
@@ -12,16 +11,14 @@ import {styles} from './styles';
 
 export const YesNoScreen: React.FC = () => {
   const scale = useRef(new Animated.Value(0)).current;
-  const navigation: any = useNavigation();
   const dispatch = useAppDispatch();
 
   const darkTheme = useAppSelector(state => state.user.darkTheme);
-  const {yesnoGoBack, openYesNoRules} = useAppSelector(state => state.actions);
+  const openYesNoRules = useAppSelector(state => state.actions.openYesNoRules);
 
   const handleYesNo = () => {
     Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
       dispatch(toggleYesnoGoBack(true));
-      navigation.navigate(Screens.homeScreen);
     });
   };
 
@@ -29,8 +26,7 @@ export const YesNoScreen: React.FC = () => {
   const handleCloseHelp = () => dispatch(toggleYesnoRules(false));
 
   useEffect(() => {
-    !yesnoGoBack &&
-      Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
+    Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
   }, []);
 
   useEffect(() => {

@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
   },
   block: {
     paddingHorizontal: 20,
-    height: 260,
+    height: 280,
     alignItems: 'center',
     justifyContent: 'center',
   },
