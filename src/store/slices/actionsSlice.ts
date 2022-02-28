@@ -4,6 +4,7 @@ interface ActionsState {
   actionYesNo: boolean;
   showReview: boolean;
   yesnoGoBack: boolean;
+  aliasGoBack: boolean;
   openYesNoRules: boolean;
 }
 
@@ -12,6 +13,7 @@ const initialState: ActionsState = {
   showReview: false,
   yesnoGoBack: false,
   openYesNoRules: false,
+  aliasGoBack: false,
 };
 
 const actionsSlice = createSlice({
@@ -30,9 +32,17 @@ const actionsSlice = createSlice({
     toggleYesnoRules: (state, action: PayloadAction<boolean>) => {
       state.openYesNoRules = action.payload;
     },
+    toggleAliasGoBack: (state, action: PayloadAction<boolean>) => {
+      state.aliasGoBack = action.payload;
+    },
   },
 });
 
-export const {toggleYesNo, toggleReview, toggleYesnoGoBack, toggleYesnoRules} =
-  actionsSlice.actions;
+export const {
+  toggleYesNo,
+  toggleReview,
+  toggleYesnoGoBack,
+  toggleYesnoRules,
+  toggleAliasGoBack,
+} = actionsSlice.actions;
 export default actionsSlice.reducer;

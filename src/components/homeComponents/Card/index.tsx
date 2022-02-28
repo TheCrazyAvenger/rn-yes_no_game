@@ -91,7 +91,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
   const openCard = () => {
     dispatch(toggleYesNo(true));
     Animated.spring(imageHeight, {
-      toValue: 145,
+      toValue: 140,
       useNativeDriver: false,
     }).start();
     Animated.spring(width, {
@@ -209,7 +209,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
             )}
           </Content>
           <CloseButton
-            style={{top: actionYesNo ? 88 : -100}}
+            style={{top: actionYesNo ? 85 : -100}}
             onPress={closeCard}
           />
         </Animated.View>

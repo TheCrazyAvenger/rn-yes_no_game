@@ -14,6 +14,7 @@ import {DrawerNavigator} from './DrawerNavigator';
 import SplashScreen from 'react-native-splash-screen';
 import {colors} from '@constants';
 import {HomeScreen} from '@screens';
+import {AliasStack} from './AliasStack';
 
 const light = {
   ...DefaultTheme,
@@ -33,7 +34,7 @@ const dark = {
 export const AppNavigator: React.FC = () => {
   const token = useAppSelector(state => state.user.token);
   const darkTheme = useAppSelector(state => state.user.darkTheme);
-  const yesnoGoBack = useAppSelector(state => state.actions.yesnoGoBack);
+  const {yesnoGoBack, aliasGoBack} = useAppSelector(state => state.actions);
   const dispatch = useAppDispatch();
 
   const [loading, setLoading] = useState(true);
@@ -65,6 +66,8 @@ export const AppNavigator: React.FC = () => {
       ) : token ? (
         yesnoGoBack ? (
           <HomeScreen />
+        ) : aliasGoBack ? (
+          <AliasStack />
         ) : (
           <DrawerNavigator />
         )

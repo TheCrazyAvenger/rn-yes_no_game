@@ -9,4 +9,6 @@ export const colors = {
   darkBlue: '#2E495B',
   lightgray: '#e3e3e3',
   dark: '#151515',
+  aliasRed: '#E52634',
+  aliasBlack: '#272722',
 };
