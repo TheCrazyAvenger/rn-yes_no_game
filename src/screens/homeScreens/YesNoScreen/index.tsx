@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {toggleYesnoGoBack, toggleYesnoRules} from '@store/slices/actionsSlice';
 import {H1} from '@Typography';
 import {IconButton} from '@ui';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Image, ImageBackground, View, Animated, StatusBar} from 'react-native';
 import {YesNoHelp} from '../YesNoHelp';
 

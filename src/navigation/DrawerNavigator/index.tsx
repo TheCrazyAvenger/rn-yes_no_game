@@ -40,7 +40,7 @@ const HomeIcon: React.FC = () => {
 
 export const DrawerNavigator: React.FC = () => {
   const stories = useAppSelector(state => state.user.stories);
-  const yesnoGoBack = useAppSelector(state => state.actions.yesnoGoBack);
+  const {yesnoGoBack, openYesNoRules} = useAppSelector(state => state.actions);
   const darkTheme = useAppSelector(state => state.user.darkTheme);
 
   const color = darkTheme ? colors.white : colors.black;
@@ -63,15 +63,16 @@ export const DrawerNavigator: React.FC = () => {
 
         return {
           ...screenOptions,
-          headerLeft: () => (
-            <Icon
-              onPress={navigation.openDrawer}
-              name="menu-outline"
-              size={30}
-              style={styles.leftIcon}
-              color={iconColor}
-            />
-          ),
+          headerLeft: () =>
+            openYesNoRules ? null : (
+              <Icon
+                onPress={navigation.openDrawer}
+                name="menu-outline"
+                size={30}
+                style={styles.leftIcon}
+                color={iconColor}
+              />
+            ),
         };
       }}>
       <Drawer.Screen
