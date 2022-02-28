@@ -74,7 +74,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
   );
 
   const width = useRef(new Animated.Value(cardWidth - 60)).current;
-  const height = useRef(new Animated.Value(cardHeight / 1.3)).current;
+  const height = useRef(new Animated.Value(cardHeight / 1.35)).current;
   const opacity = useRef(new Animated.Value(0)).current;
   const imageHeight = useRef(new Animated.Value(250)).current;
 
@@ -91,7 +91,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
   const openCard = () => {
     dispatch(toggleYesNo(true));
     Animated.spring(imageHeight, {
-      toValue: 120,
+      toValue: 145,
       useNativeDriver: false,
     }).start();
     Animated.spring(width, {
@@ -209,7 +209,7 @@ export const Card: React.FC<CardProps> = ({data}) => {
             )}
           </Content>
           <CloseButton
-            style={{top: actionYesNo ? 63 : -100}}
+            style={{top: actionYesNo ? 88 : -100}}
             onPress={closeCard}
           />
         </Animated.View>

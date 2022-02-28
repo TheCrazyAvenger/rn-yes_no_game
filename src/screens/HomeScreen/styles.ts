@@ -6,6 +6,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  header: {
+    flexDirection: 'row',
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    position: 'absolute',
+    top: 0,
+    zIndex: 100,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   title: {
     position: 'absolute',
     left: 35,

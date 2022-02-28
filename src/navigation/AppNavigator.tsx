@@ -13,6 +13,7 @@ import {AuthStack} from './AuthStack';
 import {DrawerNavigator} from './DrawerNavigator';
 import SplashScreen from 'react-native-splash-screen';
 import {colors} from '@constants';
+import {HomeScreen} from '@screens';
 
 const light = {
   ...DefaultTheme,
@@ -32,6 +33,7 @@ const dark = {
 export const AppNavigator: React.FC = () => {
   const token = useAppSelector(state => state.user.token);
   const darkTheme = useAppSelector(state => state.user.darkTheme);
+  const yesnoGoBack = useAppSelector(state => state.actions.yesnoGoBack);
   const dispatch = useAppDispatch();
 
   const [loading, setLoading] = useState(true);
@@ -61,7 +63,11 @@ export const AppNavigator: React.FC = () => {
       {loading ? (
         <Loading isActive={loading} />
       ) : token ? (
-        <DrawerNavigator />
+        yesnoGoBack ? (
+          <HomeScreen />
+        ) : (
+          <DrawerNavigator />
+        )
       ) : (
         <AuthStack />
       )}

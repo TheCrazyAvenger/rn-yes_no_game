@@ -2,23 +2,32 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Card} from '@components';
 import {Loading, Screen} from '@ui';
 import {styles} from './styles';
-import {Animated, PanResponder} from 'react-native';
+import {Animated, PanResponder, StatusBar, View} from 'react-native';
 import {getNextIndex, shuffle} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {useGetStoriesQuery} from '@api';
 import {addStories} from '@store/slices/userSlice';
-import {colors, Screens} from '@constants';
-import {useNavigation} from '@react-navigation/native';
-import {toggleYesnoGoBack} from '@store/slices/actionsSlice';
+import {colors} from '@constants';
+import {toggleYesNo, toggleYesnoGoBack} from '@store/slices/actionsSlice';
+import {H3} from '@Typography';
+import {t} from 'i18next';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const HomeScreen: React.FC = () => {
-  const navigation: any = useNavigation();
-
   const dispatch = useAppDispatch();
-  const {actionYesNo, yesnoGoBack} = useAppSelector(state => state.actions);
+  const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
   const {stories, darkTheme, id: uid} = useAppSelector(state => state.user);
 
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
+  const color = darkTheme ? colors.white : colors.black;
+
+  const handleGoBack = () => {
+    Animated.spring(top, {toValue: -100, useNativeDriver: false}).start();
+    Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
+      dispatch(toggleYesNo(false));
+      dispatch(toggleYesnoGoBack(false));
+    });
+  };
 
   const {data, error, isLoading} = useGetStoriesQuery({uid});
 
@@ -29,16 +38,13 @@ export const HomeScreen: React.FC = () => {
   }, [data]);
 
   useEffect(() => {
-    !yesnoGoBack &&
-      Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
-        dispatch(toggleYesnoGoBack(false));
-        navigation.replace(Screens.yesNoScreen);
-      });
-  }, [yesnoGoBack]);
+    Animated.spring(top, {toValue: 0, useNativeDriver: false}).start();
+  }, []);
 
   const [index, setIndex] = useState(0);
   const pan = useRef(new Animated.ValueXY()).current;
   const scale = useRef(new Animated.Value(0)).current;
+  const top = useRef(new Animated.Value(-100)).current;
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: (_, gestureState) => {
@@ -97,6 +103,24 @@ export const HomeScreen: React.FC = () => {
   return (
     <>
       <Screen style={{...styles.container, backgroundColor}}>
+        <StatusBar
+          backgroundColor={darkTheme ? colors.dark : colors.white}
+          barStyle={darkTheme ? 'light-content' : 'dark-content'}
+        />
+        <Animated.View style={{...styles.header, backgroundColor, top}}>
+          <H3 style={{color}} fontWeight="600">
+            {`${t('home:titleFirst')} ${stories ? stories.length : 0} ${t(
+              'home:titleSecond',
+            )}`}
+          </H3>
+
+          <Ionicons
+            onPress={handleGoBack}
+            name="home"
+            size={30}
+            color={color}
+          />
+        </Animated.View>
         <Animated.View
           style={{transform: [{translateY: pan.y}, {scale}]}}
           {...panResponder.panHandlers}>

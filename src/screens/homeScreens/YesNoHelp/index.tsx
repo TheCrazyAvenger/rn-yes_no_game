@@ -1,6 +1,7 @@
 import {colors} from '@constants';
 import {H1, H3} from '@Typography';
 import {CloseButton} from '@ui';
+import {t} from 'i18next';
 import React, {useEffect, useRef} from 'react';
 import {
   Animated,
@@ -44,9 +45,9 @@ export const YesNoHelp: React.FC<YesNoHelpProps> = ({
             source={require('@assets/images/yesnoRules/rule1.png')}
           />
           <H1 fontWeight="bold" style={styles.title}>
-            Players
+            {t('yesnoRules:rule1title')}
           </H1>
-          <H3 style={styles.text}>You need two or more people to play</H3>
+          <H3 style={styles.text}>{t('yesnoRules:rule1sub')}</H3>
         </View>
         <View style={{...styles.block, backgroundColor: colors.yellow}}>
           <Image
@@ -55,11 +56,9 @@ export const YesNoHelp: React.FC<YesNoHelpProps> = ({
             source={require('@assets/images/yesnoRules/rule2.png')}
           />
           <H1 fontWeight="bold" style={styles.title}>
-            Choose a story
+            {t('yesnoRules:rule2title')}
           </H1>
-          <H3 style={styles.text}>
-            Choose a story from a large list for every taste
-          </H3>
+          <H3 style={styles.text}>{t('yesnoRules:rule2sub')}</H3>
         </View>
         <View style={{...styles.block, backgroundColor: colors.green}}>
           <Image
@@ -68,12 +67,9 @@ export const YesNoHelp: React.FC<YesNoHelpProps> = ({
             source={require('@assets/images/yesnoRules/rule3.png')}
           />
           <H1 fontWeight="bold" style={styles.title}>
-            Start playing
+            {t('yesnoRules:rule3title')}
           </H1>
-          <H3 style={styles.text}>
-            Tell the story to the participants. Please note that only the
-            presenter can read the answer
-          </H3>
+          <H3 style={styles.text}>{t('yesnoRules:rule3sub')}</H3>
         </View>
         <View style={{...styles.block, backgroundColor: colors.blue}}>
           <Image
@@ -82,12 +78,9 @@ export const YesNoHelp: React.FC<YesNoHelpProps> = ({
             source={require('@assets/images/yesnoRules/rule4.png')}
           />
           <H1 fontWeight="bold" style={styles.title}>
-            The main goal
+            {t('yesnoRules:rule4title')}
           </H1>
-          <H3 style={styles.text}>
-            The main goal of the game is to find out the answer to the story by
-            asking yes or no questions.
-          </H3>
+          <H3 style={styles.text}>{t('yesnoRules:rule4sub')}</H3>
         </View>
         <View style={{...styles.block, backgroundColor: colors.darkBlue}}>
           <Image
@@ -96,11 +89,9 @@ export const YesNoHelp: React.FC<YesNoHelpProps> = ({
             source={require('@assets/images/yesnoRules/rule5.png')}
           />
           <H1 fontWeight="bold" style={styles.title}>
-            Rate
+            {t('yesnoRules:rule5title')}
           </H1>
-          <H3 style={styles.text}>
-            Don't forget to rate the story at the end of the game
-          </H3>
+          <H3 style={styles.text}>{t('yesnoRules:rule5sub')}</H3>
         </View>
       </ScrollView>
       <CloseButton
