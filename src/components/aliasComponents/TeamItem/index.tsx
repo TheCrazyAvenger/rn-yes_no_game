@@ -56,7 +56,7 @@ export const TeamItem: React.FC<TeamItemProps> = ({
           </Animated.View>
         )}
       </Animated.View>
-      <View style={{height: 2, backgroundColor: colors.lightgray}} />
+      {/* <View style={{height: 2, backgroundColor: colors.lightgray}} /> */}
     </>
   );
 };

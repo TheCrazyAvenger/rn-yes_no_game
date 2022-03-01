@@ -1,23 +1,28 @@
-import {GameItem} from '@components';
-import {Screens} from '@constants';
-import {useNavigation} from '@react-navigation/native';
-import {Screen} from '@ui';
 import React from 'react';
+
+import {GameItem} from '@components';
+import {Screen} from '@ui';
 import {styles} from './styles';
+import {useAppSelector} from '@hooks';
+import {colors} from '@constants';
 
-export const AliasChoose: React.FC = () => {
-  const navigation: any = useNavigation();
+type AliasChooseProps = {
+  setCategory: (...args: any) => any;
+};
 
-  const handleTeams = () => navigation.navigate(Screens.aliasTeams);
+export const AliasChoose: React.FC<AliasChooseProps> = ({setCategory}) => {
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
   return (
-    <Screen type="ScrollView" style={styles.container}>
+    <Screen type="ScrollView" style={{...styles.container, backgroundColor}}>
       <GameItem
         title="Regular game"
         difficulty="Easy"
         words="home, pirate, sun..."
         wordsNumber={256}
-        onPress={handleTeams}
+        onPress={setCategory}
         image={require('@assets/images/aliasbg/1.jpg')}
       />
       <GameItem
@@ -25,7 +30,7 @@ export const AliasChoose: React.FC = () => {
         difficulty="Difficult"
         words="Sum41, punk, album..."
         wordsNumber={1032}
-        onPress={handleTeams}
+        onPress={setCategory}
         image={require('@assets/images/aliasbg/2.jpg')}
       />
     </Screen>

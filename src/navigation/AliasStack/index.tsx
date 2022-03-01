@@ -4,7 +4,14 @@ import {
   StackNavigationOptions,
 } from '@react-navigation/stack';
 
-import {AliasChoose, AliasHome, AliasSettings, AliasTeams} from '@screens';
+import {
+  AliasChoose,
+  AliasGame,
+  AliasHome,
+  AliasSettings,
+  AliasStart,
+  AliasTeams,
+} from '@screens';
 import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -61,6 +68,20 @@ export const AliasStack: React.FC = () => {
           title: 'Game settings',
         }}
         component={AliasSettings}
+      />
+      <Stack.Screen
+        name={Screens.aliasStart}
+        options={{
+          headerShown: false,
+        }}
+        component={AliasStart}
+      />
+      <Stack.Screen
+        name={Screens.aliasGame}
+        options={{
+          headerShown: false,
+        }}
+        component={AliasGame}
       />
     </Stack.Navigator>
   );

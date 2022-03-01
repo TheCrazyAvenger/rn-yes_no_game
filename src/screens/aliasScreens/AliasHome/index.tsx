@@ -29,7 +29,7 @@ export const AliasHome: React.FC = () => {
     });
   };
 
-  const handlePlay = () => navigation.navigate(Screens.aliasChoose);
+  const handlePlay = () => navigation.navigate(Screens.aliasSettings);
 
   return (
     <Animated.View style={{...styles.container, transform: [{scale}]}}>

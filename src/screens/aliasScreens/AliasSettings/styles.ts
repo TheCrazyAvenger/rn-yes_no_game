@@ -14,18 +14,23 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     color: colors.aliasRed,
   },
+  settingsTitle: {
+    marginLeft: 15,
+    marginTop: 5,
+  },
   line: {
-    marginTop: 8,
+    marginTop: 5,
+
     height: 0.8,
     backgroundColor: colors.aliasBlack,
   },
   nextButton: {
-    position: 'absolute',
-    right: 15,
-    bottom: 15,
-    width: 65,
-    height: 65,
+    height: 55,
+    borderRadius: 0,
     backgroundColor: colors.aliasRed,
-    borderRadius: 14,
+  },
+  buttonContainer: {
+    borderRadius: 0,
+    marginBottom: 0,
   },
 });

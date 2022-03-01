@@ -1,4 +1,5 @@
 import {colors} from '@constants';
+import {useAppSelector} from '@hooks';
 import {H2, H3, H4} from '@Typography';
 import {Button} from '@ui';
 import React from 'react';
@@ -28,6 +29,12 @@ export const AliasSettingsItem: React.FC<AliasSettingsItemProps> = ({
   min,
   max,
 }) => {
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const backgroundColor = darkTheme ? colors.white : colors.aliasBlack;
+  const buttonColor = !darkTheme ? colors.white : colors.aliasBlack;
+  const color = darkTheme ? colors.white : colors.aliasBlack;
+
   return (
     <View>
       <View style={styles.settingsItem}>
@@ -35,7 +42,7 @@ export const AliasSettingsItem: React.FC<AliasSettingsItemProps> = ({
           <H3 style={styles.title} fontWeight="600">
             {title}
           </H3>
-          <H4 style={{color: colors.darkGray}}>{subTitle}</H4>
+          <H4 style={{color}}>{subTitle}</H4>
         </View>
         <H2 style={{color: colors.aliasRed}} fontWeight="600">
           {value}
@@ -46,18 +53,19 @@ export const AliasSettingsItem: React.FC<AliasSettingsItemProps> = ({
           disabled={value <= min}
           onPress={rightButton}
           containerStyle={styles.buttonContainer}
-          style={styles.button}
+          style={{...styles.button, backgroundColor}}
+          textStyle={{color: buttonColor}}
           title={rightButtonTitle}
         />
         <Button
           disabled={value >= max}
           onPress={leftButton}
           containerStyle={styles.buttonContainer}
-          style={{...styles.button, backgroundColor: colors.aliasRed}}
+          style={{...styles.button}}
           title={leftButtonTitle}
         />
       </View>
-      <View style={styles.line} />
+      {/* <View style={{...styles.line, backgroundColor}} /> */}
     </View>
   );
 };

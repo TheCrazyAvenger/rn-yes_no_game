@@ -15,13 +15,12 @@ export const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: 'row',
-    // justifyContent: 'center',
   },
   buttonContainer: {
     marginBottom: 0,
   },
   button: {
-    backgroundColor: colors.aliasBlack,
+    backgroundColor: colors.aliasRed,
     width: 120,
     height: 40,
     marginHorizontal: 10,
@@ -29,6 +28,5 @@ export const styles = StyleSheet.create({
   line: {
     marginTop: 15,
     height: 0.8,
-    backgroundColor: colors.aliasBlack,
   },
 });

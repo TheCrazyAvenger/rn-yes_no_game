@@ -26,4 +26,6 @@ export enum Screens {
   aliasChoose = 'aliasChoose',
   aliasTeams = 'aliasTeams',
   aliasSettings = 'aliasSettings',
+  aliasStart = 'aliasStart',
+  aliasGame = 'aliasGame',
 }
