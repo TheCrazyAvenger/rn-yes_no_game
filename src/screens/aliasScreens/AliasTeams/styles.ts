@@ -15,9 +15,18 @@ export const styles = StyleSheet.create({
   },
   button: {
     height: 55,
-    backgroundColor: colors.aliasRed,
+    backgroundColor: colors.aliasBlack,
   },
   buttonText: {
     fontSize: 17,
+  },
+  nextButton: {
+    position: 'absolute',
+    right: 15,
+    bottom: 15,
+    width: 65,
+    height: 65,
+    backgroundColor: colors.aliasRed,
+    borderRadius: 14,
   },
 });

@@ -2,7 +2,6 @@ import {colors} from '@constants';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  container: {},
   settingsItem: {
     paddingHorizontal: 15,
     paddingVertical: 10,
@@ -14,18 +13,22 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     color: colors.aliasRed,
   },
+  buttons: {
+    flexDirection: 'row',
+    // justifyContent: 'center',
+  },
+  buttonContainer: {
+    marginBottom: 0,
+  },
+  button: {
+    backgroundColor: colors.aliasBlack,
+    width: 120,
+    height: 40,
+    marginHorizontal: 10,
+  },
   line: {
-    marginTop: 8,
+    marginTop: 15,
     height: 0.8,
     backgroundColor: colors.aliasBlack,
-  },
-  nextButton: {
-    position: 'absolute',
-    right: 15,
-    bottom: 15,
-    width: 65,
-    height: 65,
-    backgroundColor: colors.aliasRed,
-    borderRadius: 14,
   },
 });

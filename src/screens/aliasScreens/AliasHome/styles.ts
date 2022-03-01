@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    height: '50%',
+    flex: 0.65,
   },
   imageBg: {
     width: '100%',
@@ -28,14 +28,14 @@ export const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   content: {
+    paddingTop: 25,
     padding: 20,
-    height: '100%',
-    justifyContent: 'center',
+    flex: 0.35,
     alignItems: 'center',
   },
   buttonContainer: {
     width: '100%',
-    marginVertical: 15,
+    marginBottom: 25,
   },
   button: {
     height: 60,

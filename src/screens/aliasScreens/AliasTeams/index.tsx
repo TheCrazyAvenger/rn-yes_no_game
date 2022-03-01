@@ -2,7 +2,7 @@ import {TeamItem} from '@components';
 import {colors, Screens} from '@constants';
 import {useAppSelector} from '@hooks';
 import {useNavigation} from '@react-navigation/native';
-import {Button, Screen} from '@ui';
+import {Button, IconButton, Screen} from '@ui';
 import React, {useEffect, useRef, useState} from 'react';
 import {Animated, ScrollView} from 'react-native';
 import {styles} from './styles';
@@ -59,11 +59,12 @@ export const AliasTeams: React.FC = () => {
           />
         </Animated.View>
       </ScrollView>
-      <Button
-        title="Next"
-        style={{...styles.button, backgroundColor}}
-        containerStyle={styles.buttonContainer}
-        textStyle={{...styles.buttonText, color}}
+
+      <IconButton
+        name="arrow-forward"
+        size={30}
+        color={colors.white}
+        style={styles.nextButton}
         onPress={handleSettings}
       />
     </Screen>

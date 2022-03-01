@@ -11,5 +11,6 @@ export * from './profileComponents/ProfileStatistics';
 
 export * from './aliasComponents/GameItem';
 export * from './aliasComponents/TeamItem';
+export * from './aliasComponents/AliasSettingsItem';
 
 export * from './PropsType';

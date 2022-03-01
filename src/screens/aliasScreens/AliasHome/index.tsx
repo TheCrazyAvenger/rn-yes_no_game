@@ -50,29 +50,29 @@ export const AliasHome: React.FC = () => {
             Alias
           </H1>
         </ImageBackground>
-        <View style={styles.content}>
-          <Button
-            onPress={handlePlay}
-            containerStyle={styles.buttonContainer}
-            style={{...styles.button, backgroundColor: colors.aliasRed}}
-            title="Play"
-            textStyle={styles.buttonText}
-          />
-          <Button
-            onPress={() => {}}
-            containerStyle={styles.buttonContainer}
-            style={{...styles.button, backgroundColor}}
-            title="Rules"
-            textStyle={{...styles.buttonText, color}}
-          />
-          <Button
-            onPress={handleGoBack}
-            containerStyle={styles.buttonContainer}
-            style={{...styles.button, backgroundColor: colors.aliasRed}}
-            title="Back to home"
-            textStyle={styles.buttonText}
-          />
-        </View>
+      </View>
+      <View style={styles.content}>
+        <Button
+          onPress={handlePlay}
+          containerStyle={styles.buttonContainer}
+          style={{...styles.button, backgroundColor: colors.aliasRed}}
+          title="Play"
+          textStyle={styles.buttonText}
+        />
+        <Button
+          onPress={() => {}}
+          containerStyle={styles.buttonContainer}
+          style={{...styles.button, backgroundColor}}
+          title="Rules"
+          textStyle={{...styles.buttonText, color}}
+        />
+        <Button
+          onPress={handleGoBack}
+          containerStyle={styles.buttonContainer}
+          style={{...styles.button, backgroundColor: colors.aliasRed}}
+          title="Back to home"
+          textStyle={styles.buttonText}
+        />
       </View>
     </Animated.View>
   );
