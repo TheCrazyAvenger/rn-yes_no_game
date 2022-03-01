@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
   main: {
     flex: 1,
     overflow: 'hidden',
-
     backgroundColor: colors.white,
   },
 
@@ -20,12 +19,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
+    marginTop: 50,
     width: 150,
     height: 150,
     borderRadius: 14,
   },
   text: {
     marginTop: 10,
+    paddingHorizontal: 80,
+    textAlign: 'center',
     color: colors.white,
     textTransform: 'uppercase',
   },

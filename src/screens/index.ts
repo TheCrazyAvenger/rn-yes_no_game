@@ -16,3 +16,8 @@ export * from './profileScreens/BackgroundScreen';
 export * from './homeScreens/YesNoScreen';
 export * from './homeScreens/AliasScreen';
 export * from './homeScreens/YesNoHelp';
+
+export * from './aliasScreens/AliasHome';
+export * from './aliasScreens/AliasChoose';
+export * from './aliasScreens/AliasTeams';
+export * from './aliasScreens/AliasSettings';

@@ -18,5 +18,12 @@ export enum Screens {
   homeTopTabs = 'homeTopTabs',
 
   yesNoScreen = 'yesNoScreen',
+
   aliasScreen = 'aliasScreen',
+
+  aliasStack = 'aliasStack',
+  aliasHome = 'aliasHome',
+  aliasChoose = 'aliasChoose',
+  aliasTeams = 'aliasTeams',
+  aliasSettings = 'aliasSettings',
 }
