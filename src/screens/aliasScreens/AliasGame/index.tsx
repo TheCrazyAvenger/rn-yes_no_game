@@ -125,7 +125,7 @@ export const AliasGame: React.FC = () => {
               ref={countdownRef}
               style={styles.timer}
               textStyle={styles.timerText}
-              initialSeconds={3}
+              initialSeconds={time}
               onEnd={() => setTimer(true)}
             />
             <H1 fontWeight="bold" style={styles.answerText}>

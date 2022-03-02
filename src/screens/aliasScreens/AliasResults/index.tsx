@@ -79,7 +79,7 @@ export const AliasResults: React.FC = () => {
           backgroundColor={darkTheme ? colors.dark : colors.white}
           barStyle={darkTheme ? 'light-content' : 'dark-content'}
         />
-        {wordsList.map((item: any) => {
+        {wordsList.map((item: any, i: number) => {
           const answerColor =
             item.answered === true ? colors.green : colors.white;
           const skipColor = item.answered === false ? colors.red : colors.white;
@@ -108,7 +108,7 @@ export const AliasResults: React.FC = () => {
                   </TouchableOpacity>
                 </View>
               </View>
-              <View style={{...styles.line, backgroundColor}} />
+              <View key={i} style={{...styles.line, backgroundColor}} />
             </>
           );
         })}
