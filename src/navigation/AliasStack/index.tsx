@@ -8,6 +8,7 @@ import {
   AliasChoose,
   AliasGame,
   AliasHome,
+  AliasResults,
   AliasSettings,
   AliasStart,
   AliasTeams,
@@ -82,6 +83,13 @@ export const AliasStack: React.FC = () => {
           headerShown: false,
         }}
         component={AliasGame}
+      />
+      <Stack.Screen
+        name={Screens.aliasResults}
+        options={{
+          title: 'Results',
+        }}
+        component={AliasResults}
       />
     </Stack.Navigator>
   );

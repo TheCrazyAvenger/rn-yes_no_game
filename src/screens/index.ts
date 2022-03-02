@@ -23,3 +23,4 @@ export * from './aliasScreens/AliasTeams';
 export * from './aliasScreens/AliasSettings';
 export * from './aliasScreens/AliasStart';
 export * from './aliasScreens/AliasGame';
+export * from './aliasScreens/AliasResults';

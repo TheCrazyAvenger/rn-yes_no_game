@@ -57,6 +57,7 @@ export const AliasSettings: React.FC = () => {
       time,
       fee,
       category,
+      isStart: true,
     });
   };
 

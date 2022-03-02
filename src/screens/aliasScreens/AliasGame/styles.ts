@@ -37,4 +37,33 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  answereZone: {
+    height: 215,
+    width: '100%',
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  answerText: {
+    textTransform: 'uppercase',
+    color: colors.white,
+  },
+  answerCircle: {
+    width: 50,
+    height: 50,
+    borderRadius: 35,
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  timer: {
+    color: colors.white,
+    position: 'absolute',
+    top: 10,
+  },
+  timerText: {
+    fontSize: 22,
+    color: colors.white,
+    fontFamily: 'Nunito-Bold',
+  },
 });
