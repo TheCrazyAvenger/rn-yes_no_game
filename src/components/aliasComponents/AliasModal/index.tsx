@@ -45,7 +45,7 @@ export const AliasModal: React.FC<AliasModalProps> = ({
           </View>
 
           <View style={{padding: 15}}>
-            <H2>Score:</H2>
+            <H2 style={{color}}>Score:</H2>
 
             {teams.map((team: any) => (
               <View key={team.team} style={styles.teamItem}>

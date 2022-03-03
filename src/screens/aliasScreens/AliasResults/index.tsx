@@ -1,6 +1,11 @@
+import {AliasModalExit} from '@components';
 import {colors, Screens} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {
   setCurrentWord,
   setGame,
@@ -12,11 +17,28 @@ import {
 import {H2} from '@Typography';
 import {Button, Screen} from '@ui';
 import React, {useState} from 'react';
-import {StatusBar, TouchableOpacity, View} from 'react-native';
+import {BackHandler, StatusBar, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
 
 export const AliasResults: React.FC = () => {
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        setExitVisible(true);
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+  );
+
+  const [exitVisible, setExitVisible] = useState<any>(false);
+  const handleCloseExit = () => setExitVisible(false);
+
   const navigation: any = useNavigation();
   const route: any = useRoute();
 
@@ -26,12 +48,21 @@ export const AliasResults: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const darkTheme = useAppSelector(state => state.user.darkTheme);
-  const {round, game, team, teamIndex, lastTeam, teams, fee} = useAppSelector(
-    state => state.alias,
-  );
+  const {
+    round,
+    game,
+    team,
+    teamIndex,
+    lastTeam,
+    teams,
+    fee,
+    points,
+    words: data,
+  } = useAppSelector(state => state.alias);
 
   const backgroundColor = darkTheme ? colors.white : colors.aliasBlack;
   const color = darkTheme ? colors.white : colors.aliasBlack;
+  const iconColor = !darkTheme ? colors.white : colors.aliasBlack;
 
   const setResult = (word: string, answered: boolean | null) => {
     setWordsList((prev: any) =>
@@ -74,12 +105,27 @@ export const AliasResults: React.FC = () => {
 
   return (
     <>
+      <AliasModalExit
+        points={points}
+        team={team}
+        fee={fee ? fee : false}
+        round={round}
+        game={game}
+        teams={teams}
+        teamIndex={teamIndex}
+        lastTeam={lastTeam}
+        words={data}
+        currentWord={currentWord}
+        time={time}
+        rightButton={handleCloseExit}
+        visible={exitVisible}
+      />
       <Screen type="ScrollView" style={styles.container}>
         <StatusBar
           backgroundColor={darkTheme ? colors.dark : colors.white}
           barStyle={darkTheme ? 'light-content' : 'dark-content'}
         />
-        {wordsList.map((item: any, i: number) => {
+        {wordsList.map((item: any) => {
           const answerColor =
             item.answered === true ? colors.green : colors.white;
           const skipColor = item.answered === false ? colors.red : colors.white;
@@ -87,29 +133,33 @@ export const AliasResults: React.FC = () => {
             item.answered === null ? colors.yellow : colors.white;
 
           return (
-            <>
-              <View key={item.word} style={styles.content}>
+            <React.Fragment key={item.word}>
+              <View style={styles.content}>
                 <H2 style={{color}}>{item.word}</H2>
                 <View style={styles.row}>
                   <TouchableOpacity
                     onPress={() => setResult(item.word, true)}
                     style={{...styles.circle, backgroundColor: answerColor}}>
-                    <Icon name="checkmark-outline" size={20} color={color} />
+                    <Icon
+                      name="checkmark-outline"
+                      size={20}
+                      color={iconColor}
+                    />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => setResult(item.word, false)}
                     style={{...styles.circle, backgroundColor: skipColor}}>
-                    <Icon name="close-outline" size={20} color={color} />
+                    <Icon name="close-outline" size={20} color={iconColor} />
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => setResult(item.word, null)}
                     style={{...styles.circle, backgroundColor: trashColor}}>
-                    <Icon name="trash-outline" size={20} color={color} />
+                    <Icon name="trash-outline" size={20} color={iconColor} />
                   </TouchableOpacity>
                 </View>
               </View>
-              <View key={i} style={{...styles.line, backgroundColor}} />
-            </>
+              <View style={{...styles.line, backgroundColor}} />
+            </React.Fragment>
           );
         })}
       </Screen>

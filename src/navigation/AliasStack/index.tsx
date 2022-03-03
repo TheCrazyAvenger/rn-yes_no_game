@@ -87,6 +87,8 @@ export const AliasStack: React.FC = () => {
       <Stack.Screen
         name={Screens.aliasResults}
         options={{
+          headerLeft: () => null,
+          headerTitleAlign: 'center',
           title: 'Results',
         }}
         component={AliasResults}

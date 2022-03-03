@@ -1,26 +1,60 @@
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {styles} from './styles';
 import {
   Animated,
+  BackHandler,
   Image,
   ImageBackground,
   PanResponder,
   StatusBar,
   View,
 } from 'react-native';
-import {getNextIndex, shuffle} from '@utilities';
+import {getNextIndex} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {colors, Screens} from '@constants';
 import {H1, H3} from '@Typography';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {Countdown} from 'react-native-element-timer';
+import {AliasModalExit} from '@components';
 
 export const AliasGame: React.FC = () => {
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        setExitVisible(true);
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+  );
+
+  const [exitVisible, setExitVisible] = useState<any>(false);
+  const handleCloseExit = () => setExitVisible(false);
+
   const navigation: any = useNavigation();
   const route: any = useRoute();
   const dispatch = useAppDispatch();
   const {darkTheme} = useAppSelector(state => state.user);
-  const {currentWord, words: data} = useAppSelector(state => state.alias);
+  const {
+    round,
+    game,
+    team,
+    points,
+    fee,
+    teams,
+    teamIndex,
+    lastTeam,
+    words: data,
+    currentWord,
+  } = useAppSelector(state => state.alias);
 
   const {time} = route.params;
 
@@ -107,6 +141,21 @@ export const AliasGame: React.FC = () => {
 
   return (
     <>
+      <AliasModalExit
+        points={points}
+        team={team}
+        fee={fee ? fee : false}
+        round={round}
+        game={game}
+        teams={teams}
+        teamIndex={teamIndex}
+        lastTeam={lastTeam}
+        words={data}
+        currentWord={currentWord}
+        time={time}
+        rightButton={handleCloseExit}
+        visible={exitVisible}
+      />
       <View style={{flex: 1}}>
         <Animated.View
           style={{
@@ -199,7 +248,7 @@ export const AliasGame: React.FC = () => {
             style={{transform: [{translateY: pan.y}, {scale}]}}
             {...panResponder.panHandlers}>
             <View style={{...styles.card, backgroundColor}}>
-              <H1 style={{color}}>{data[index]}</H1>
+              <H1 style={{color}}>{data && data[index]}</H1>
             </View>
           </Animated.View>
         </Animated.View>

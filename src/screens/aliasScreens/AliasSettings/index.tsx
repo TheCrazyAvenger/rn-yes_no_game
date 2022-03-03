@@ -8,10 +8,11 @@ import {AliasTeams} from '../AliasTeams';
 import {AliasSettingsItem} from '@components';
 import {Button, Screen} from '@ui';
 import {useAppSelector} from '@hooks';
-import {colors, Screens} from '@constants';
+import {colors, regular, Screens} from '@constants';
 import {H3, H4} from '@Typography';
 import {styles} from './styles';
 import {AliasChoose} from '../AliasChoose';
+import {shuffle} from '@utilities';
 
 export const AliasSettings: React.FC = () => {
   const navigation: any = useNavigation();
@@ -53,10 +54,17 @@ export const AliasSettings: React.FC = () => {
 
     navigation.replace(Screens.aliasStart, {
       teamsPoints,
-      words,
+      words: shuffle(regular),
       time,
       fee,
       category,
+      points: words,
+      round: 1,
+      game: 1,
+      teamIndex: 0,
+      team: teamsPoints[0].team,
+      lastTeam: teamsPoints[teamsPoints.length - 1].team,
+      currentWord: 0,
       isStart: true,
     });
   };

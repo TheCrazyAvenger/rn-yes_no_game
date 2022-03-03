@@ -1,14 +1,42 @@
 import {colors, Screens} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
-import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {toggleAliasGoBack} from '@store/slices/actionsSlice';
 import {H1} from '@Typography';
 import {Button} from '@ui';
-import React, {useEffect, useRef} from 'react';
-import {Animated, Image, ImageBackground, StatusBar, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  Animated,
+  BackHandler,
+  Image,
+  ImageBackground,
+  StatusBar,
+  View,
+} from 'react-native';
 import {styles} from './styles';
 
 export const AliasHome: React.FC = () => {
+  const aliasGoBack = useAppSelector(state => state.actions.aliasGoBack);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        if (aliasGoBack) {
+          handleGoBack();
+          return true;
+        } else {
+          return false;
+        }
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [aliasGoBack]),
+  );
+
   const navigation: any = useNavigation();
 
   const dispatch = useAppDispatch();
@@ -18,6 +46,47 @@ export const AliasHome: React.FC = () => {
   const color = !darkTheme ? colors.white : colors.aliasBlack;
 
   const scale = useRef(new Animated.Value(0)).current;
+
+  const [isContinue, setIsContinue] = useState(true);
+
+  const getContinue = async () => {
+    const points = await AsyncStorage.getItem('points');
+
+    points && setIsContinue(false);
+  };
+
+  useEffect(() => {
+    getContinue();
+  }, []);
+
+  const handleContinue = async () => {
+    const time: any = await AsyncStorage.getItem('time');
+    const points: any = await AsyncStorage.getItem('points');
+    const fee: any = await AsyncStorage.getItem('fee');
+    const round: any = await AsyncStorage.getItem('round');
+    const game: any = await AsyncStorage.getItem('game');
+    const teams: any = await AsyncStorage.getItem('teams');
+    const teamIndex: any = await AsyncStorage.getItem('teamIndex');
+    const team: any = await AsyncStorage.getItem('team');
+    const lastTeam: any = await AsyncStorage.getItem('lastTeam');
+    const words: any = await AsyncStorage.getItem('words');
+    const currentWord: any = await AsyncStorage.getItem('currentWord');
+
+    navigation.replace(Screens.aliasStart, {
+      time: JSON.parse(time),
+      points: JSON.parse(points),
+      fee: JSON.parse(fee),
+      round: JSON.parse(round),
+      game: JSON.parse(game),
+      teamsPoints: JSON.parse(teams),
+      teamIndex: JSON.parse(teamIndex),
+      team: JSON.parse(team),
+      lastTeam: JSON.parse(lastTeam),
+      words: JSON.parse(words),
+      currentWord: JSON.parse(currentWord),
+      isStart: true,
+    });
+  };
 
   useEffect(() => {
     Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
@@ -53,10 +122,18 @@ export const AliasHome: React.FC = () => {
       </View>
       <View style={styles.content}>
         <Button
+          onPress={handleContinue}
+          containerStyle={styles.buttonContainer}
+          style={{...styles.button, backgroundColor}}
+          disabled={isContinue}
+          title="Continue"
+          textStyle={{...styles.buttonText, color}}
+        />
+        <Button
           onPress={handlePlay}
           containerStyle={styles.buttonContainer}
           style={{...styles.button, backgroundColor: colors.aliasRed}}
-          title="Play"
+          title="New Game"
           textStyle={styles.buttonText}
         />
         <Button
