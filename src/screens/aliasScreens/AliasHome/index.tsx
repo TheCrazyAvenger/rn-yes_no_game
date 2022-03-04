@@ -2,7 +2,8 @@ import {colors, Screens} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {toggleAliasGoBack} from '@store/slices/actionsSlice';
+import {AliasHelp} from '@screens';
+import {toggleAliasGoBack, toggleAliasRules} from '@store/slices/actionsSlice';
 import {H1} from '@Typography';
 import {Button} from '@ui';
 import React, {useEffect, useRef, useState} from 'react';
@@ -17,12 +18,13 @@ import {
 import {styles} from './styles';
 
 export const AliasHome: React.FC = () => {
-  const aliasGoBack = useAppSelector(state => state.actions.aliasGoBack);
+  const {aliasGoBack, openAliasRules} = useAppSelector(state => state.actions);
 
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
         if (aliasGoBack) {
+          handleColseRules();
           handleGoBack();
           return true;
         } else {
@@ -43,6 +45,14 @@ export const AliasHome: React.FC = () => {
   const darkTheme = useAppSelector(state => state.user.darkTheme);
 
   const backgroundColor = darkTheme ? colors.white : colors.aliasBlack;
+  const mainBg = darkTheme
+    ? openAliasRules
+      ? colors.white
+      : colors.dark
+    : openAliasRules
+    ? colors.dark
+    : colors.white;
+  const secBg = !darkTheme ? colors.white : colors.dark;
   const color = !darkTheme ? colors.white : colors.aliasBlack;
 
   const scale = useRef(new Animated.Value(0)).current;
@@ -92,6 +102,20 @@ export const AliasHome: React.FC = () => {
     Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
   }, []);
 
+  useEffect(() => {
+    if (openAliasRules) {
+      Animated.spring(scale, {
+        toValue: 0.9,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      Animated.spring(scale, {
+        toValue: 1,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [openAliasRules]);
+
   const handleGoBack = () => {
     Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
       dispatch(toggleAliasGoBack(false));
@@ -100,57 +124,71 @@ export const AliasHome: React.FC = () => {
 
   const handlePlay = () => navigation.navigate(Screens.aliasSettings);
 
+  const handleColseRules = () => dispatch(toggleAliasRules(false));
+  const handleOpenRules = () => dispatch(toggleAliasRules(true));
+
   return (
-    <Animated.View style={{...styles.container, transform: [{scale}]}}>
-      <StatusBar
-        backgroundColor={darkTheme ? colors.dark : colors.white}
-        barStyle={darkTheme ? 'light-content' : 'dark-content'}
-      />
-      <View style={styles.header}>
-        <ImageBackground
-          blurRadius={20}
-          style={styles.imageBg}
-          source={require('@assets/images/alias-logo.jpg')}>
-          <Image
-            style={styles.image}
-            source={require('@assets/images/alias-logo.jpg')}
+    <View style={{backgroundColor: mainBg, flex: 1}}>
+      <Animated.View
+        style={{
+          ...styles.container,
+          backgroundColor: secBg,
+          borderTopStartRadius: openAliasRules ? 14 : 0,
+          borderTopEndRadius: openAliasRules ? 14 : 0,
+          transform: [{scale}],
+        }}>
+        <StatusBar
+          backgroundColor={darkTheme ? colors.dark : colors.white}
+          barStyle={darkTheme ? 'light-content' : 'dark-content'}
+        />
+        <View style={styles.header}>
+          <ImageBackground
+            blurRadius={20}
+            style={styles.imageBg}
+            source={require('@assets/images/alias-logo.jpg')}>
+            <Image
+              style={styles.image}
+              source={require('@assets/images/alias-logo.jpg')}
+            />
+            <H1 fontWeight="bold" style={styles.text}>
+              Alias
+            </H1>
+          </ImageBackground>
+        </View>
+        <View style={styles.content}>
+          <Button
+            onPress={handleContinue}
+            containerStyle={styles.buttonContainer}
+            style={{...styles.button, backgroundColor}}
+            disabled={isContinue}
+            title="Continue"
+            textStyle={{...styles.buttonText, color}}
           />
-          <H1 fontWeight="bold" style={styles.text}>
-            Alias
-          </H1>
-        </ImageBackground>
-      </View>
-      <View style={styles.content}>
-        <Button
-          onPress={handleContinue}
-          containerStyle={styles.buttonContainer}
-          style={{...styles.button, backgroundColor}}
-          disabled={isContinue}
-          title="Continue"
-          textStyle={{...styles.buttonText, color}}
-        />
-        <Button
-          onPress={handlePlay}
-          containerStyle={styles.buttonContainer}
-          style={{...styles.button, backgroundColor: colors.aliasRed}}
-          title="New Game"
-          textStyle={styles.buttonText}
-        />
-        <Button
-          onPress={() => {}}
-          containerStyle={styles.buttonContainer}
-          style={{...styles.button, backgroundColor}}
-          title="Rules"
-          textStyle={{...styles.buttonText, color}}
-        />
-        <Button
-          onPress={handleGoBack}
-          containerStyle={styles.buttonContainer}
-          style={{...styles.button, backgroundColor: colors.aliasRed}}
-          title="Back to home"
-          textStyle={styles.buttonText}
-        />
-      </View>
-    </Animated.View>
+          <Button
+            onPress={handlePlay}
+            containerStyle={styles.buttonContainer}
+            style={{...styles.button, backgroundColor: colors.aliasRed}}
+            title="New Game"
+            textStyle={styles.buttonText}
+          />
+          <Button
+            onPress={handleOpenRules}
+            containerStyle={styles.buttonContainer}
+            style={{...styles.button, backgroundColor}}
+            title="Rules"
+            textStyle={{...styles.buttonText, color}}
+          />
+          <Button
+            onPress={handleGoBack}
+            containerStyle={styles.buttonContainer}
+            style={{...styles.button, backgroundColor: colors.aliasRed}}
+            title="Back to home"
+            textStyle={styles.buttonText}
+          />
+        </View>
+      </Animated.View>
+
+      <AliasHelp isVisible={openAliasRules} setIsVisible={handleColseRules} />
+    </View>
   );
 };

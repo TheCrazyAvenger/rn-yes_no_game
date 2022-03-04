@@ -110,7 +110,7 @@ export const AliasModalExit: React.FC<AliasModalExitProps> = ({
             <IconButton
               name="close"
               size={25}
-              color={colors.white}
+              color={backgroundColor}
               style={{...styles.button, backgroundColor: color}}
               onPress={rightButton}
             />
