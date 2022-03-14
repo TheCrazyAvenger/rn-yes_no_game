@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    flex: 0.55,
+    flex: 0.51,
   },
   imageBg: {
     width: '100%',
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   content: {
     paddingTop: 25,
     padding: 20,
-    flex: 0.45,
+    flex: 0.49,
     alignItems: 'center',
   },
   buttonContainer: {

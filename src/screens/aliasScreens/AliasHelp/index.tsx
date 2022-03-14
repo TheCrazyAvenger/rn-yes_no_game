@@ -7,6 +7,7 @@ import {
   Animated,
   Image,
   ScrollView,
+  StatusBar,
   useWindowDimensions,
   View,
 } from 'react-native';
@@ -22,8 +23,9 @@ export const AliasHelp: React.FC<AliasHelpProps> = ({
   setIsVisible,
 }) => {
   const {height} = useWindowDimensions();
+  const statusBarHeight = StatusBar.currentHeight!;
 
-  const top = useRef(new Animated.Value(height)).current;
+  const top = useRef(new Animated.Value(height + statusBarHeight)).current;
 
   const handleClose = () => setIsVisible(false);
 
@@ -31,7 +33,10 @@ export const AliasHelp: React.FC<AliasHelpProps> = ({
     if (isVisible) {
       Animated.spring(top, {toValue: 55, useNativeDriver: false}).start();
     } else {
-      Animated.spring(top, {toValue: height, useNativeDriver: false}).start();
+      Animated.spring(top, {
+        toValue: height + statusBarHeight,
+        useNativeDriver: false,
+      }).start();
     }
   }, [isVisible]);
 

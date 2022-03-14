@@ -38,7 +38,6 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   answereZone: {
-    height: 215,
     width: '100%',
     position: 'absolute',
     justifyContent: 'center',
@@ -59,7 +58,8 @@ export const styles = StyleSheet.create({
   timer: {
     color: colors.white,
     position: 'absolute',
-    top: 10,
+    top: 30,
+    right: 17,
   },
   timerText: {
     fontSize: 22,

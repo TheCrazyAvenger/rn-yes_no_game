@@ -62,7 +62,7 @@ export const AliasResults: React.FC = () => {
 
   const backgroundColor = darkTheme ? colors.white : colors.aliasBlack;
   const color = darkTheme ? colors.white : colors.aliasBlack;
-  const iconColor = !darkTheme ? colors.white : colors.aliasBlack;
+  const iconColor = colors.aliasBlack;
 
   const setResult = (word: string, answered: boolean | null) => {
     setWordsList((prev: any) =>
@@ -122,8 +122,8 @@ export const AliasResults: React.FC = () => {
       />
       <Screen type="ScrollView" style={styles.container}>
         <StatusBar
-          backgroundColor={darkTheme ? colors.dark : colors.white}
-          barStyle={darkTheme ? 'light-content' : 'dark-content'}
+          backgroundColor={colors.aliasRed}
+          barStyle={'light-content'}
         />
         {wordsList.map((item: any) => {
           const answerColor =

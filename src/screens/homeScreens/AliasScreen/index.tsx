@@ -27,8 +27,9 @@ export const AliasScreen: React.FC = () => {
   return (
     <Animated.View style={{...styles.main, transform: [{scale}]}}>
       <StatusBar
-        backgroundColor={darkTheme ? colors.dark : colors.white}
-        barStyle={darkTheme ? 'light-content' : 'dark-content'}
+        translucent
+        backgroundColor={'transparent'}
+        barStyle={'light-content'}
       />
       <ImageBackground
         blurRadius={20}

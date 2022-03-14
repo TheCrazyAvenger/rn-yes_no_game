@@ -22,7 +22,7 @@ import {
 import {H1, H2, H3, H5} from '@Typography';
 import {Button, Loading, Screen} from '@ui';
 import React, {useEffect, useState} from 'react';
-import {BackHandler, ImageBackground, View} from 'react-native';
+import {BackHandler, ImageBackground, StatusBar, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
 
@@ -181,6 +181,11 @@ export const AliasStart: React.FC = () => {
         rightButton={handleRetry}
       />
       <Screen>
+        <StatusBar
+          translucent
+          backgroundColor={'transparent'}
+          barStyle={'light-content'}
+        />
         <View style={styles.header}>
           <ImageBackground
             blurRadius={15}

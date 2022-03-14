@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
   },
   headerContent: {
     padding: 30,
+    paddingVertical: 40,
   },
   imageBg: {
     width: '100%',

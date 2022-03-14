@@ -138,8 +138,9 @@ export const AliasHome: React.FC = () => {
           transform: [{scale}],
         }}>
         <StatusBar
-          backgroundColor={darkTheme ? colors.dark : colors.white}
-          barStyle={darkTheme ? 'light-content' : 'dark-content'}
+          translucent
+          backgroundColor={'transparent'}
+          barStyle={'light-content'}
         />
         <View style={styles.header}>
           <ImageBackground

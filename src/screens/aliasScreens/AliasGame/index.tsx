@@ -4,9 +4,9 @@ import {
   Animated,
   BackHandler,
   Image,
-  ImageBackground,
   PanResponder,
   StatusBar,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import {getNextIndex} from '@utilities';
@@ -22,6 +22,8 @@ import {Countdown} from 'react-native-element-timer';
 import {AliasModalExit} from '@components';
 
 export const AliasGame: React.FC = () => {
+  const {height} = useWindowDimensions();
+
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
@@ -41,7 +43,6 @@ export const AliasGame: React.FC = () => {
 
   const navigation: any = useNavigation();
   const route: any = useRoute();
-  const dispatch = useAppDispatch();
   const {darkTheme} = useAppSelector(state => state.user);
   const {
     round,
@@ -163,13 +164,19 @@ export const AliasGame: React.FC = () => {
             transform: [{scale: screenScale}],
           }}>
           <StatusBar
-            backgroundColor={darkTheme ? colors.dark : colors.white}
-            barStyle={darkTheme ? 'light-content' : 'dark-content'}
+            translucent
+            backgroundColor={'transparent'}
+            barStyle={'light-content'}
           />
 
-          <ImageBackground
-            style={{...styles.answereZone, top: 0}}
-            source={require('@assets/images/aliasbg/greenbg.png')}>
+          <View
+            style={{
+              ...styles.answereZone,
+              backgroundColor: colors.green,
+              height: height / 4,
+              top: 0,
+              borderBottomStartRadius: 50,
+            }}>
             <Countdown
               ref={countdownRef}
               style={styles.timer}
@@ -183,17 +190,22 @@ export const AliasGame: React.FC = () => {
             <View style={styles.answerCircle}>
               <H3>{answered.length}</H3>
             </View>
-          </ImageBackground>
-          <ImageBackground
-            style={{...styles.answereZone, bottom: 0}}
-            source={require('@assets/images/aliasbg/redbg.png')}>
+          </View>
+          <View
+            style={{
+              ...styles.answereZone,
+              backgroundColor: colors.red,
+              height: height / 4,
+              bottom: 0,
+              borderTopEndRadius: 50,
+            }}>
             <View style={styles.answerCircle}>
               <H3>{skipped.length}</H3>
             </View>
             <H1 fontWeight="bold" style={styles.answerText}>
               Skipped
             </H1>
-          </ImageBackground>
+          </View>
 
           <View
             style={{
