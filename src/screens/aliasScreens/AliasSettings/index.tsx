@@ -8,11 +8,13 @@ import {AliasTeams} from '../AliasTeams';
 import {AliasSettingsItem} from '@components';
 import {Button, Screen} from '@ui';
 import {useAppSelector} from '@hooks';
-import {colors, regular, Screens} from '@constants';
+import {colors, aliasWords, Screens} from '@constants';
 import {H3, H4} from '@Typography';
 import {styles} from './styles';
 import {AliasChoose} from '../AliasChoose';
 import {shuffle} from '@utilities';
+import * as RNLocalize from 'react-native-localize';
+import {t} from 'i18next';
 
 export const AliasSettings: React.FC = () => {
   const navigation: any = useNavigation();
@@ -48,13 +50,17 @@ export const AliasSettings: React.FC = () => {
 
   const handleStart = () => {
     const teamsPoints = [...Array(teams).keys()].map(item => ({
-      team: `Team ${item + 1}`,
+      team: `${t('alias:team')} ${item + 1}`,
       points: 0,
     }));
 
+    const gameCategory = aliasWords[category];
+    const categoryByLang =
+      gameCategory[RNLocalize.getLocales()[0].languageCode];
+
     navigation.replace(Screens.aliasStart, {
       teamsPoints,
-      words: shuffle(regular),
+      words: shuffle(categoryByLang),
       time,
       fee,
       category,
@@ -76,14 +82,14 @@ export const AliasSettings: React.FC = () => {
       </Modal>
       <Screen type="ScrollView" style={styles.container}>
         <H3 fontWeight="600" style={{...styles.settingsTitle, color}}>
-          Category
+          {t('alias:category')}
         </H3>
         <TouchableOpacity
           onPress={setVisibleHandler}
           style={styles.settingsItem}>
           <View>
             <H3 style={styles.title} fontWeight="600">
-              {category ? category : 'Category'}
+              {category ? category : t('alias:category')}
             </H3>
           </View>
           <Icon name="chevron-forward" size={30} />
@@ -91,7 +97,7 @@ export const AliasSettings: React.FC = () => {
         <View style={{...styles.line, backgroundColor}} />
 
         <H3 fontWeight="600" style={{...styles.settingsTitle, color}}>
-          Teams
+          {t('alias:teams')}
         </H3>
 
         <AliasTeams teams={teams} addTeam={addTeam} removeTeam={removeTeam} />
@@ -99,49 +105,49 @@ export const AliasSettings: React.FC = () => {
         <View style={{...styles.line, backgroundColor}} />
 
         <H3 fontWeight="600" style={{...styles.settingsTitle, color}}>
-          Settings
+          {t('alias:settings')}
         </H3>
 
         <AliasSettingsItem
-          title="Number of words"
-          subTitle="to win"
+          title={t('alias:setting1')}
+          subTitle={t('alias:setting1sub')}
           value={words}
           leftButton={addWords}
           rightButton={removeWords}
-          rightButtonTitle="-10 words"
-          leftButtonTitle="+10 words"
+          rightButtonTitle={`-10 ${t('alias:words')}`}
+          leftButtonTitle={`+10 ${t('alias:words')}`}
           min={10}
           max={100}
         />
 
         <AliasSettingsItem
-          title="Round duration"
-          subTitle="for which you need to guess the words"
+          title={t('alias:setting2')}
+          subTitle={t('alias:setting2sub')}
           value={time}
           leftButton={addTime}
           rightButton={removeTime}
-          rightButtonTitle="-30 sec"
-          leftButtonTitle="+30 sec"
+          rightButtonTitle={`-30 ${t('alias:sec')}`}
+          leftButtonTitle={`+30 ${t('alias:sec')}`}
           min={30}
           max={180}
         />
         <View style={{...styles.line, backgroundColor, marginTop: 15}} />
         <H3 fontWeight="600" style={{...styles.settingsTitle, color}}>
-          Additionally
+          {t('alias:additionally')}
         </H3>
         <View style={styles.settingsItem}>
           <View>
             <H3 style={styles.title} fontWeight="600">
-              Pass fee
+              {t('alias:setting3')}
             </H3>
-            <H4 style={{color}}>missing words take away points</H4>
+            <H4 style={{color}}>{t('alias:setting3sub')}</H4>
           </View>
           <Switch value={fee} color={colors.aliasRed} onChange={toggleFee} />
         </View>
       </Screen>
       <Button
         disabled={category === ''}
-        title="Start"
+        title={t('alias:start')}
         style={styles.nextButton}
         containerStyle={styles.buttonContainer}
         onPress={handleStart}

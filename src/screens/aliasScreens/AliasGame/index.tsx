@@ -20,6 +20,7 @@ import {
 } from '@react-navigation/native';
 import {Countdown} from 'react-native-element-timer';
 import {AliasModalExit} from '@components';
+import {t} from 'i18next';
 
 export const AliasGame: React.FC = () => {
   const {height} = useWindowDimensions();
@@ -185,7 +186,7 @@ export const AliasGame: React.FC = () => {
               onEnd={() => setTimer(true)}
             />
             <H1 fontWeight="bold" style={styles.answerText}>
-              Answered
+              {t('alias:answered')}
             </H1>
             <View style={styles.answerCircle}>
               <H3>{answered.length}</H3>
@@ -203,7 +204,7 @@ export const AliasGame: React.FC = () => {
               <H3>{skipped.length}</H3>
             </View>
             <H1 fontWeight="bold" style={styles.answerText}>
-              Skipped
+              {t('alias:skipped')}
             </H1>
           </View>
 

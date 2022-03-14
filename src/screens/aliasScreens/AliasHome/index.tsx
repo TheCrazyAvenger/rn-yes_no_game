@@ -6,6 +6,7 @@ import {AliasHelp} from '@screens';
 import {toggleAliasGoBack, toggleAliasRules} from '@store/slices/actionsSlice';
 import {H1} from '@Typography';
 import {Button} from '@ui';
+import {t} from 'i18next';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Animated,
@@ -162,28 +163,28 @@ export const AliasHome: React.FC = () => {
             containerStyle={styles.buttonContainer}
             style={{...styles.button, backgroundColor}}
             disabled={isContinue}
-            title="Continue"
+            title={t('alias:continue')}
             textStyle={{...styles.buttonText, color}}
           />
           <Button
             onPress={handlePlay}
             containerStyle={styles.buttonContainer}
             style={{...styles.button, backgroundColor: colors.aliasRed}}
-            title="New Game"
+            title={t('alias:newGame')}
             textStyle={styles.buttonText}
           />
           <Button
             onPress={handleOpenRules}
             containerStyle={styles.buttonContainer}
             style={{...styles.button, backgroundColor}}
-            title="Rules"
+            title={t('alias:rules')}
             textStyle={{...styles.buttonText, color}}
           />
           <Button
             onPress={handleGoBack}
             containerStyle={styles.buttonContainer}
             style={{...styles.button, backgroundColor: colors.aliasRed}}
-            title="Back to home"
+            title={t('alias:backHome')}
             textStyle={styles.buttonText}
           />
         </View>

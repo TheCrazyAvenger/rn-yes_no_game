@@ -1,5 +1,5 @@
 import {AliasModal, AliasModalExit} from '@components';
-import {colors, regular, Screens} from '@constants';
+import {colors, Screens} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -21,6 +21,7 @@ import {
 } from '@store/slices/aliasSlice';
 import {H1, H2, H3, H5} from '@Typography';
 import {Button, Loading, Screen} from '@ui';
+import {t} from 'i18next';
 import React, {useEffect, useState} from 'react';
 import {BackHandler, ImageBackground, StatusBar, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -194,7 +195,7 @@ export const AliasStart: React.FC = () => {
             <View style={styles.headerContent}>
               <View style={styles.row}>
                 <H1 fontWeight="bold" style={styles.headerTitle}>
-                  Rating
+                  {t('alias:rating')}
                 </H1>
                 <View style={styles.row}>
                   <Icon name="star" size={30} color={colors.yellow} />
@@ -219,9 +220,9 @@ export const AliasStart: React.FC = () => {
         </View>
         <View style={styles.content}>
           <H3 style={{color}} fontWeight="600">
-            Round {round} / Game {game}
+            {t('alias:round')} {round} / {t('alias:game')} {game}
           </H3>
-          <H5 style={{color}}>now playing</H5>
+          <H5 style={{color}}> {t('alias:nowPlaying')}</H5>
           <H3 fontWeight="600" style={{color: colors.aliasRed}}>
             {team}
           </H3>
@@ -229,7 +230,7 @@ export const AliasStart: React.FC = () => {
       </Screen>
 
       <Button
-        title="Start"
+        title={t('alias:start')}
         style={styles.nextButton}
         containerStyle={styles.buttonContainer}
         onPress={handlePlay}

@@ -16,6 +16,7 @@ import {
 } from '@store/slices/aliasSlice';
 import {H2} from '@Typography';
 import {Button, Screen} from '@ui';
+import {t} from 'i18next';
 import React, {useState} from 'react';
 import {BackHandler, StatusBar, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -125,7 +126,7 @@ export const AliasResults: React.FC = () => {
           backgroundColor={colors.aliasRed}
           barStyle={'light-content'}
         />
-        {wordsList.map((item: any) => {
+        {wordsList.map((item: any, i: number) => {
           const answerColor =
             item.answered === true ? colors.green : colors.white;
           const skipColor = item.answered === false ? colors.red : colors.white;
@@ -133,7 +134,7 @@ export const AliasResults: React.FC = () => {
             item.answered === null ? colors.yellow : colors.white;
 
           return (
-            <React.Fragment key={item.word}>
+            <React.Fragment key={i}>
               <View style={styles.content}>
                 <H2 style={{color}}>{item.word}</H2>
                 <View style={styles.row}>
@@ -165,7 +166,7 @@ export const AliasResults: React.FC = () => {
       </Screen>
       <Button
         onPress={endTurnHandler}
-        title="End turn"
+        title={t('alias:endTurn')}
         containerStyle={styles.buttonContainer}
         style={styles.button}
         textStyle={styles.buttonText}

@@ -2,6 +2,7 @@ import {TeamItem} from '@components';
 import {colors} from '@constants';
 import {useAppSelector} from '@hooks';
 import {H3} from '@Typography';
+import {t} from 'i18next';
 
 import React, {useEffect, useRef} from 'react';
 import {Animated, TouchableOpacity, View} from 'react-native';
@@ -57,7 +58,7 @@ export const AliasTeams: React.FC<AliasTeamsProps> = ({
       <Animated.View style={{height}}>
         <TouchableOpacity onPress={addTeam} style={styles.row}>
           <Icon name="add-circle-outline" size={21} color={colors.aliasRed} />
-          <H3 style={{marginLeft: 5, color}}>Add team</H3>
+          <H3 style={{marginLeft: 5, color}}>{t('alias:addTeam')}</H3>
         </TouchableOpacity>
       </Animated.View>
     </View>

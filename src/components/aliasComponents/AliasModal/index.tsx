@@ -3,6 +3,7 @@ import {useAppSelector} from '@hooks';
 import {BlurView} from '@react-native-community/blur';
 import {H1, H2, H3} from '@Typography';
 import {IconButton} from '@ui';
+import {t} from 'i18next';
 import React from 'react';
 import {Modal, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -34,7 +35,7 @@ export const AliasModal: React.FC<AliasModalProps> = ({
         <View style={{...styles.winModal, backgroundColor}}>
           <View style={styles.headerWin}>
             <H1 style={{color: colors.white, textTransform: 'uppercase'}}>
-              {team && team.team} won!
+              {team && team.team} {t('alias:won')}!
             </H1>
             <View style={styles.row}>
               <Icon name="star" size={30} color={colors.yellow} />
@@ -45,7 +46,7 @@ export const AliasModal: React.FC<AliasModalProps> = ({
           </View>
 
           <View style={{padding: 15}}>
-            <H2 style={{color}}>Score:</H2>
+            <H2 style={{color}}>{t('alias:score')}</H2>
 
             {teams.map((team: any) => (
               <View key={team.team} style={styles.teamItem}>
@@ -68,8 +69,8 @@ export const AliasModal: React.FC<AliasModalProps> = ({
                 onPress={leftButton}
               />
               <IconButton
-                color={colors.white}
-                style={{...styles.button, backgroundColor: colors.aliasBlack}}
+                color={backgroundColor}
+                style={{...styles.button, backgroundColor: color}}
                 size={28}
                 name="reload-outline"
                 onPress={rightButton}

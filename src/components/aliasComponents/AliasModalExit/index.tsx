@@ -17,6 +17,7 @@ import {
 } from '@store/slices/aliasSlice';
 import {H1, H2, H3} from '@Typography';
 import {IconButton} from '@ui';
+import {t} from 'i18next';
 import React from 'react';
 import {Modal, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -96,9 +97,9 @@ export const AliasModalExit: React.FC<AliasModalExitProps> = ({
         <BlurView style={styles.blur} blurAmount={10} />
         <View style={{...styles.winModal, backgroundColor}}>
           <H2 fontWeight="bold" style={styles.titleText}>
-            Are you sure you want to exit the game?
+            {t('alias:modalTitle')}
           </H2>
-          <H3 style={{...styles.text, color}}>All progress will be saved</H3>
+          <H3 style={{...styles.text, color}}> {t('alias:modalText')}</H3>
           <View style={styles.row}>
             <IconButton
               name="checkmark"

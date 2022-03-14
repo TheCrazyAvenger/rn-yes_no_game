@@ -17,6 +17,7 @@ import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
+import {t} from 'i18next';
 
 const Stack = createStackNavigator();
 
@@ -66,7 +67,7 @@ export const AliasStack: React.FC = () => {
       <Stack.Screen
         name={Screens.aliasSettings}
         options={{
-          title: 'Game settings',
+          title: t('alias:gameSettings'),
         }}
         component={AliasSettings}
       />
@@ -89,7 +90,7 @@ export const AliasStack: React.FC = () => {
         options={{
           headerLeft: () => null,
           headerTitleAlign: 'center',
-          title: 'Results',
+          title: t('alias:results'),
         }}
         component={AliasResults}
       />
