@@ -1,4 +1,4 @@
-import {H2, H3, H4} from '@Typography';
+import {H2, H3, H4, H5} from '@Typography';
 import React from 'react';
 import {ImageBackground, TouchableOpacity, View} from 'react-native';
 import {styles} from './styles';
@@ -26,18 +26,18 @@ export const GameItem: React.FC<GameItemProps> = ({
         <View style={styles.wrapper}>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={onPress}
+            onPress={() => onPress(title)}
             style={styles.container}>
             <View style={styles.main}>
               <View>
-                <H2 fontWeight="bold" style={styles.title}>
+                <H3 fontWeight="bold" style={styles.title}>
                   {title}
-                </H2>
-                <H3 style={styles.text}>{difficulty}</H3>
+                </H3>
+                <H4 style={styles.text}>{difficulty}</H4>
               </View>
             </View>
             <View style={styles.main}>
-              <H4 style={styles.text}>{words}</H4>
+              <H5 style={styles.text}>{words}</H5>
 
               <H2 style={styles.words} fontWeight="bold">
                 {wordsNumber}

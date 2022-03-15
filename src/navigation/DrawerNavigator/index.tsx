@@ -26,6 +26,7 @@ export const DrawerNavigator: React.FC = () => {
     drawerLabelStyle: styles.drawerLabelStyle,
     drawerActiveTintColor: colors.red,
     drawerInactiveTintColor: color,
+    unmountOnBlur: true,
   };
 
   return (
@@ -69,7 +70,6 @@ export const DrawerNavigator: React.FC = () => {
             <Icon name="person-outline" color={color} size={size} />
           ),
           title: t('navigation:profile'),
-          unmountOnBlur: true,
         }}
         component={ProfileStack}
       />

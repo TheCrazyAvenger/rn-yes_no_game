@@ -2,7 +2,13 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Card} from '@components';
 import {Loading, Screen} from '@ui';
 import {styles} from './styles';
-import {Animated, PanResponder, StatusBar, View} from 'react-native';
+import {
+  Animated,
+  BackHandler,
+  PanResponder,
+  StatusBar,
+  View,
+} from 'react-native';
 import {getNextIndex, shuffle} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {useGetStoriesQuery} from '@api';
@@ -17,12 +23,35 @@ import {H3} from '@Typography';
 import {t} from 'i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {YesNoHelp} from '@screens';
+import {useFocusEffect} from '@react-navigation/native';
 
 export const HomeScreen: React.FC = () => {
   const dispatch = useAppDispatch();
-  const actionYesNo = useAppSelector(state => state.actions.actionYesNo);
+
   const {stories, darkTheme, id: uid} = useAppSelector(state => state.user);
-  const openYesNoRules = useAppSelector(state => state.actions.openYesNoRules);
+  const {openYesNoRules, actionYesNo, yesnoGoBack} = useAppSelector(
+    state => state.actions,
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        if (!actionYesNo && yesnoGoBack) {
+          handleCloseHelp();
+
+          handleGoBack();
+          return true;
+        } else {
+          return false;
+        }
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [actionYesNo]),
+  );
 
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
   const mainBg = darkTheme ? colors.white : colors.dark;

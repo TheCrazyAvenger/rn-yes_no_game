@@ -1,6 +1,7 @@
 import {colors} from '@constants';
 import {useAppSelector} from '@hooks';
 import {H3} from '@Typography';
+import {t} from 'i18next';
 import React, {useEffect, useRef} from 'react';
 import {Animated, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -48,7 +49,7 @@ export const TeamItem: React.FC<TeamItemProps> = ({
     <>
       <Animated.View style={{...styles.container, height}}>
         <H3 style={{color}} fontWeight="600">
-          Team {team}
+          {t('alias:team')} {team}
         </H3>
         {showRemove && (
           <Animated.View style={{opacity}}>
@@ -56,7 +57,7 @@ export const TeamItem: React.FC<TeamItemProps> = ({
           </Animated.View>
         )}
       </Animated.View>
-      <View style={{height: 2, backgroundColor: colors.lightgray}} />
+      {/* <View style={{height: 2, backgroundColor: colors.lightgray}} /> */}
     </>
   );
 };

@@ -3,22 +3,9 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 17,
+    paddingBottom: 0,
     paddingTop: 5,
-  },
-
-  buttonContainer: {
-    width: '100%',
-    marginTop: 20,
-    marginBottom: 0,
-  },
-  button: {
-    height: 55,
-    backgroundColor: colors.aliasBlack,
-  },
-  buttonText: {
-    fontSize: 17,
   },
   nextButton: {
     position: 'absolute',
@@ -28,5 +15,10 @@ export const styles = StyleSheet.create({
     height: 65,
     backgroundColor: colors.aliasRed,
     borderRadius: 14,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

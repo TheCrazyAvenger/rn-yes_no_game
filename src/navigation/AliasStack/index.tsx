@@ -4,11 +4,20 @@ import {
   StackNavigationOptions,
 } from '@react-navigation/stack';
 
-import {AliasChoose, AliasHome, AliasSettings, AliasTeams} from '@screens';
+import {
+  AliasChoose,
+  AliasGame,
+  AliasHome,
+  AliasResults,
+  AliasSettings,
+  AliasStart,
+  AliasTeams,
+} from '@screens';
 import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
+import {t} from 'i18next';
 
 const Stack = createStackNavigator();
 
@@ -58,9 +67,41 @@ export const AliasStack: React.FC = () => {
       <Stack.Screen
         name={Screens.aliasSettings}
         options={{
-          title: 'Game settings',
+          title: t('alias:gameSettings'),
+          headerLeft: () => (
+            <Icon
+              name="arrow-back"
+              size={25}
+              onPress={() => navigation.navigate(Screens.aliasHome)}
+              style={styles.leftIcon}
+              color={colors.white}
+            />
+          ),
         }}
         component={AliasSettings}
+      />
+      <Stack.Screen
+        name={Screens.aliasStart}
+        options={{
+          headerShown: false,
+        }}
+        component={AliasStart}
+      />
+      <Stack.Screen
+        name={Screens.aliasGame}
+        options={{
+          headerShown: false,
+        }}
+        component={AliasGame}
+      />
+      <Stack.Screen
+        name={Screens.aliasResults}
+        options={{
+          headerLeft: () => null,
+          headerTitleAlign: 'center',
+          title: t('alias:results'),
+        }}
+        component={AliasResults}
       />
     </Stack.Navigator>
   );

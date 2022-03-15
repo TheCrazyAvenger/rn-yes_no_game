@@ -1,33 +1,42 @@
-import {GameItem} from '@components';
-import {Screens} from '@constants';
-import {useNavigation} from '@react-navigation/native';
-import {Screen} from '@ui';
 import React from 'react';
+import * as RNLocalize from 'react-native-localize';
+
+import {GameItem} from '@components';
+import {Screen} from '@ui';
 import {styles} from './styles';
+import {useAppSelector} from '@hooks';
+import {aliasWords, colors} from '@constants';
 
-export const AliasChoose: React.FC = () => {
-  const navigation: any = useNavigation();
+type AliasChooseProps = {
+  setCategory: (...args: any) => any;
+};
 
-  const handleTeams = () => navigation.navigate(Screens.aliasTeams);
+export const AliasChoose: React.FC<AliasChooseProps> = ({setCategory}) => {
+  const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const language = RNLocalize.getLocales()[0].languageCode;
+
+  const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
   return (
-    <Screen type="ScrollView" style={styles.container}>
-      <GameItem
-        title="Regular game"
-        difficulty="Easy"
-        words="home, pirate, sun..."
-        wordsNumber={256}
-        onPress={handleTeams}
-        image={require('@assets/images/aliasbg/1.jpg')}
-      />
-      <GameItem
-        title="Music"
-        difficulty="Difficult"
-        words="Sum41, punk, album..."
-        wordsNumber={1032}
-        onPress={handleTeams}
-        image={require('@assets/images/aliasbg/2.jpg')}
-      />
+    <Screen type="ScrollView" style={{...styles.container, backgroundColor}}>
+      {Object.keys(aliasWords).map(item => {
+        const category = aliasWords[item];
+
+        const {title, difficulty, words, en, image} = category;
+
+        return (
+          <GameItem
+            key={category.title.en}
+            title={title[language]}
+            difficulty={difficulty[language]}
+            words={words[language]}
+            wordsNumber={en.length}
+            onPress={() => setCategory(category.title)}
+            image={image}
+          />
+        );
+      })}
     </Screen>
   );
 };

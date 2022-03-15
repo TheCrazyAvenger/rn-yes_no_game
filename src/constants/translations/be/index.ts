@@ -7,6 +7,7 @@ import settings from './settings';
 import auth from './auth';
 import schemas from './schemas';
 import yesnoRules from './yesnoRules';
+import alias from './alias';
 
 export default {
   common,
@@ -18,4 +19,5 @@ export default {
   auth,
   schemas,
   yesnoRules,
+  alias,
 };

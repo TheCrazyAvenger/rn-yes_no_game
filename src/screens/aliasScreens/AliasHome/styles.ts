@@ -4,10 +4,11 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    overflow: 'hidden',
   },
   header: {
     width: '100%',
-    flex: 0.65,
+    flex: 0.51,
   },
   imageBg: {
     width: '100%',
@@ -30,12 +31,12 @@ export const styles = StyleSheet.create({
   content: {
     paddingTop: 25,
     padding: 20,
-    flex: 0.35,
+    flex: 0.49,
     alignItems: 'center',
   },
   buttonContainer: {
     width: '100%',
-    marginBottom: 25,
+    marginBottom: 20,
   },
   button: {
     height: 60,

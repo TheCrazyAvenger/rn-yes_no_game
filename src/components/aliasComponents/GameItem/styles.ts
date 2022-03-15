@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     color: colors.aliasRed,
+    fontSize: 21,
   },
   sub: {
     color: colors.aliasBlack,
