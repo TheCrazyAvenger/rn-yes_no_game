@@ -1,9 +1,9 @@
 import {ProfileModalItem} from '@components';
-import {bg, colors, Screens} from '@constants';
+import {bg, colors} from '@constants';
 import {IMAGES_URL} from '@env';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 import {logout} from '@store/asyncFuncs';
 import {toggleOpenMenu} from '@store/slices/actionsSlice';
 import {setDarkTheme} from '@store/slices/userSlice';
@@ -13,14 +13,14 @@ import {t} from 'i18next';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Animated,
+  BackHandler,
   Image,
   ImageBackground,
-  ScrollView,
   StatusBar,
   useWindowDimensions,
   View,
 } from 'react-native';
-import {Slider} from 'react-native-elements';
+
 import {Switch} from 'react-native-paper';
 import {BackgroundScreen} from '../profileScreens/BackgroundScreen';
 import {ProfileEditScreen} from '../profileScreens/ProfileEditScreen';
@@ -44,6 +44,23 @@ export const ProfileModal: React.FC<AliasHelpProps> = ({
     name,
     email,
   } = useAppSelector(state => state.user);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        setReport(false);
+        setEditProfile(false);
+        setEditBackground(false);
+        handleClose();
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+  );
 
   const [report, setReport] = useState(false);
   const [editProfile, setEditProfile] = useState(false);

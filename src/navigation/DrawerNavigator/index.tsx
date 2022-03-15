@@ -7,7 +7,7 @@ import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {HomeTopTabs} from '../HomeTopTabs';
-import {Animated, Image, TouchableOpacity, View} from 'react-native';
+import {Animated, Image, TouchableOpacity} from 'react-native';
 import {IMAGES_URL} from '@env';
 import {toggleOpenMenu} from '@store/slices/actionsSlice';
 
