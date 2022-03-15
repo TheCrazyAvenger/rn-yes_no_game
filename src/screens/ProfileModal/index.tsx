@@ -174,7 +174,7 @@ export const ProfileModal: React.FC<AliasHelpProps> = ({
                 {t('profile:darkTheme')}
               </H3>
             </View>
-            <View style={styles.line} />
+            <View style={{...styles.line, backgroundColor: color}} />
             <ProfileModalItem
               onPress={handleLogout}
               color={colors.red}

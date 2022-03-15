@@ -37,7 +37,6 @@ export type ProfileItemProps = {
   title: string;
   icon: string;
   color: string;
-  description?: string;
   onPress: (...args: any) => any;
 };
 

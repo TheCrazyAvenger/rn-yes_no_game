@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight: 45,
+    marginRight: 32,
   },
   line: {
     backgroundColor: colors.black,

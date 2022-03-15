@@ -12,7 +12,6 @@ export const ProfileModalItem: React.FC<ProfileItemProps> = ({
   color,
   icon,
   title,
-  description,
   onPress,
 }) => {
   const darkTheme = useAppSelector(state => state.user.darkTheme);
@@ -30,7 +29,9 @@ export const ProfileModalItem: React.FC<ProfileItemProps> = ({
           </H3>
         </View>
       </TouchableOpacity>
-      {showLine && <View style={styles.line} />}
+      {showLine && (
+        <View style={{...styles.line, backgroundColor: textColor}} />
+      )}
     </>
   );
 };
