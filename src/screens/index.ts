@@ -14,6 +14,7 @@ export * from './profileScreens/BackgroundScreen';
 
 export * from './homeScreens/YesNoScreen';
 export * from './homeScreens/AliasScreen';
+export * from './homeScreens/SpyScreen';
 export * from './homeScreens/YesNoHelp';
 
 export * from './aliasScreens/AliasHome';
