@@ -22,17 +22,11 @@ export const CustomDrawer: React.FC = (props: any) => {
         <View style={styles.header}>
           <Image
             style={styles.profileImage}
-            source={require('@assets/images/logo.png')}
+            source={require('@assets/images/main-logo.jpg')}
           />
 
           <H3 fontWeight="bold" style={{...styles.profileName, color}}>
-            <H3 fontWeight="bold" style={{color: colors.green}}>
-              Yes!
-            </H3>{' '}
-            <H3 fontWeight="bold" style={{color: colors.red}}>
-              No!
-            </H3>{' '}
-            Game
+            Board Games
           </H3>
         </View>
         <View style={{...styles.items, backgroundColor}}>

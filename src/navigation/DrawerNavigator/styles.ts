@@ -1,13 +1,16 @@
+import {colors} from '@constants';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  headerTitleStyle: {
-    marginLeft: -20,
-    fontFamily: 'Nunito-ExtraBold',
-    fontSize: 18.72,
+  container: {
+    flex: 1,
+    overflow: 'hidden',
   },
-  drawerLabelStyle: {marginLeft: -25, fontFamily: 'Nunito-ExtraBold'},
   leftIcon: {
     marginHorizontal: 15,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: colors.white,
   },
 });

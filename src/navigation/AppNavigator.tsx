@@ -6,7 +6,7 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 import {getUser} from '@store/asyncFuncs';
-import {setBg, setDarkTheme} from '@store/slices/userSlice';
+import {editUserProfile, setBg, setDarkTheme} from '@store/slices/userSlice';
 import {Loading} from '@ui';
 import React, {useEffect, useState} from 'react';
 import {AuthStack} from './AuthStack';
@@ -15,6 +15,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {colors} from '@constants';
 import {HomeScreen} from '@screens';
 import {AliasStack} from './AliasStack';
+import {useGetUserInfoMutation} from '@api';
 
 const light = {
   ...DefaultTheme,
@@ -32,9 +33,12 @@ const dark = {
 };
 
 export const AppNavigator: React.FC = () => {
-  const token = useAppSelector(state => state.user.token);
   const darkTheme = useAppSelector(state => state.user.darkTheme);
   const {yesnoGoBack, aliasGoBack} = useAppSelector(state => state.actions);
+  const {token} = useAppSelector(state => state.user);
+
+  const [getUserInfo, {isLoading}] = useGetUserInfoMutation();
+
   const dispatch = useAppDispatch();
 
   const [loading, setLoading] = useState(true);
@@ -52,6 +56,22 @@ export const AppNavigator: React.FC = () => {
       const darkTheme = await AsyncStorage.getItem('darkTheme');
 
       darkTheme && dispatch(setDarkTheme(!!darkTheme));
+
+      const token = await AsyncStorage.getItem('token');
+      const id = await AsyncStorage.getItem('id');
+
+      const response: any = await getUserInfo({id, token});
+
+      const {name, email, image} = await response.data.user;
+
+      await dispatch(
+        editUserProfile({
+          email,
+          name,
+          image,
+        }),
+      );
+
       setLoading(false);
     } catch (e) {
       SplashScreen.hide();
@@ -61,7 +81,7 @@ export const AppNavigator: React.FC = () => {
 
   return (
     <NavigationContainer theme={darkTheme ? dark : light}>
-      {loading ? (
+      {loading || isLoading ? (
         <Loading isActive={loading} />
       ) : token ? (
         yesnoGoBack ? (

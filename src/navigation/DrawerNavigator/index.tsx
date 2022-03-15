@@ -1,108 +1,100 @@
-import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React, {useEffect, useRef} from 'react';
 import {DrawerNavigationOptions} from '@react-navigation/drawer/lib/typescript/src/types';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-
-import {NewsScreen, SettingsScreen, SubmitStoryScreen} from '@screens';
+import {ProfileModal} from '@screens';
 import {CustomDrawer} from '@components';
 import {colors, Screens} from '@constants';
 import {styles} from './styles';
-import {ProfileStack} from '../ProfileStack';
-import {useAppSelector} from '@hooks';
-import {t} from 'i18next';
+import {useAppDispatch, useAppSelector} from '@hooks';
 import {HomeTopTabs} from '../HomeTopTabs';
+import {Animated, Image, TouchableOpacity, View} from 'react-native';
+import {IMAGES_URL} from '@env';
+import {toggleOpenMenu} from '@store/slices/actionsSlice';
 
 const Drawer = createDrawerNavigator();
 
 export const DrawerNavigator: React.FC = () => {
-  const {yesnoGoBack, openYesNoRules} = useAppSelector(state => state.actions);
-  const darkTheme = useAppSelector(state => state.user.darkTheme);
+  const dispatch = useAppDispatch();
+  const {openYesNoRules, openMenu} = useAppSelector(state => state.actions);
+  const {darkTheme, image} = useAppSelector(state => state.user);
 
-  const color = darkTheme ? colors.white : colors.black;
+  const scale = useRef(new Animated.Value(1)).current;
+
+  const bgColor = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    if (darkTheme) {
+      Animated.timing(bgColor, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      Animated.timing(bgColor, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [darkTheme]);
+
+  useEffect(() => {
+    if (openMenu) {
+      Animated.spring(scale, {
+        toValue: 0.9,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      Animated.spring(scale, {
+        toValue: 1,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [openMenu]);
+
+  const handleOpenMenu = () => dispatch(toggleOpenMenu(true));
+  const handleCloseMenu = () => dispatch(toggleOpenMenu(false));
 
   const screenOptions: DrawerNavigationOptions = {
-    headerTitleStyle: styles.headerTitleStyle,
-    headerShadowVisible: false,
-    drawerLabelStyle: styles.drawerLabelStyle,
-    drawerActiveTintColor: colors.red,
-    drawerInactiveTintColor: color,
-    unmountOnBlur: true,
+    headerTransparent: true,
+    headerLeft: () =>
+      openYesNoRules ? null : (
+        <TouchableOpacity onPress={handleOpenMenu}>
+          <Image
+            source={{uri: `${IMAGES_URL}${image}`}}
+            style={styles.leftIcon}
+          />
+        </TouchableOpacity>
+      ),
   };
 
   return (
-    <Drawer.Navigator
-      drawerContent={(props: any) => <CustomDrawer {...props} />}
-      screenOptions={({navigation}) => {
-        const screenIndex = navigation.getState().index;
-        const iconColor =
-          screenIndex === 0 && !yesnoGoBack ? colors.white : color;
-
-        return {
-          ...screenOptions,
-          headerLeft: () =>
-            openYesNoRules ? null : (
-              <Icon
-                onPress={navigation.openDrawer}
-                name="menu-outline"
-                size={30}
-                style={styles.leftIcon}
-                color={iconColor}
-              />
-            ),
-        };
+    <Animated.View
+      style={{
+        backgroundColor: bgColor.interpolate({
+          inputRange: [0, 1],
+          outputRange: [colors.white, colors.black],
+        }),
+        flex: 1,
       }}>
-      <Drawer.Screen
-        name={Screens.homeTopTabs}
-        options={{
-          headerTransparent: yesnoGoBack ? false : true,
-          drawerIcon: ({color, size}) => (
-            <Icon name="home-outline" color={color} size={size} />
-          ),
-          headerTitle: () => null,
-          title: t('navigation:home'),
-        }}
-        component={HomeTopTabs}
-      />
-      <Drawer.Screen
-        name={Screens.profileStack}
-        options={{
-          drawerIcon: ({color, size}) => (
-            <Icon name="person-outline" color={color} size={size} />
-          ),
-          title: t('navigation:profile'),
-        }}
-        component={ProfileStack}
-      />
-      <Drawer.Screen
-        name={Screens.newsScreen}
-        options={{
-          drawerIcon: ({color, size}) => (
-            <Icon name="newspaper-outline" color={color} size={size} />
-          ),
-          title: t('navigation:news'),
-        }}
-        component={NewsScreen}
-      />
-      <Drawer.Screen
-        name={Screens.submitStoryScreen}
-        options={{
-          drawerIcon: ({color, size}) => (
-            <Icon name="add-circle-outline" color={color} size={size} />
-          ),
-          title: t('navigation:submitStory'),
-        }}
-        component={SubmitStoryScreen}
-      />
-      <Drawer.Screen
-        name={Screens.settingsScreen}
-        options={{
-          drawerIcon: ({color, size}) => (
-            <Icon name="settings-outline" color={color} size={size} />
-          ),
-          title: t('navigation:settings'),
-        }}
-        component={SettingsScreen}
-      />
-    </Drawer.Navigator>
+      <Animated.View
+        style={{
+          ...styles.container,
+          transform: [{scale}],
+          borderTopStartRadius: openMenu ? 14 : 0,
+          borderTopEndRadius: openMenu ? 14 : 0,
+        }}>
+        <Drawer.Navigator
+          drawerContent={(props: any) => <CustomDrawer {...props} />}
+          screenOptions={screenOptions}>
+          <Drawer.Screen
+            name={Screens.homeTopTabs}
+            options={{headerTitle: () => null}}
+            component={HomeTopTabs}
+          />
+        </Drawer.Navigator>
+      </Animated.View>
+
+      <ProfileModal isVisible={openMenu} setIsVisible={handleCloseMenu} />
+    </Animated.View>
   );
 };

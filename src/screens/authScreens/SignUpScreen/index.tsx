@@ -73,7 +73,7 @@ export const SignUpScreen: React.FC = () => {
           <View style={{...styles.form, backgroundColor}}>
             <Image
               style={styles.image}
-              source={require('@assets/images/logo.png')}
+              source={require('@assets/images/main-logo.jpg')}
             />
             {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}
             <SignUpForm onSubmit={signupHandler} />

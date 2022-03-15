@@ -1,5 +1,5 @@
 export default {
-  slogan: `The game you can't say No to!`,
+  slogan: `Entertainment for a big company`,
   signin: 'Sign In',
   password: 'Your password',
   signup: 'Sign Up',
