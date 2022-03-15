@@ -3,6 +3,7 @@ import {TextStyle, ViewStyle} from 'react-native';
 export type ScreenProps = {
   type?: 'View' | 'ScrollView';
   style?: ViewStyle;
+  showsVerticalScrollIndicator?: boolean;
 };
 
 export type TextProps = {

@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import {ProfileItemHeader} from '@components';
 import {ProfileEditForm} from '../../../forms';
 import {Loading, Screen, Success} from '@ui';
-import {Platform} from 'react-native';
+import {Animated, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {useEditUserMutation} from '@api';
@@ -13,7 +13,11 @@ import {editUserProfile} from '@store/slices/userSlice';
 import {colors} from '@constants';
 import {t} from 'i18next';
 
-export const ProfileEditScreen: React.FC = () => {
+type ProfileProps = {
+  closeWindow: (...ars: any) => any;
+};
+
+export const ProfileEditScreen: React.FC<ProfileProps> = ({closeWindow}) => {
   const navigation: any = useNavigation();
 
   const dispatch = useAppDispatch();
@@ -21,6 +25,12 @@ export const ProfileEditScreen: React.FC = () => {
   const darkTheme = useAppSelector(state => state.user.darkTheme);
 
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
+
+  const scale = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
+  }, []);
 
   const [editUser, {isLoading}] = useEditUserMutation();
 
@@ -60,7 +70,7 @@ export const ProfileEditScreen: React.FC = () => {
 
       setIsSuccess(true);
       setTimeout(() => {
-        navigation.pop();
+        closeWindow();
       }, 1500);
     } catch (e: any) {
       setErrorMessage(e.data.message);
@@ -76,16 +86,21 @@ export const ProfileEditScreen: React.FC = () => {
         />
       )}
       {isSuccess && <Success isActive={isSuccess} />}
-      <Screen style={{...styles.container, backgroundColor}} type="ScrollView">
-        <ProfileItemHeader
-          title={t('profile:editTitle')}
-          description={t('profile:editText')}
-          titleColor={colors.blue}
-        />
+      <Animated.View style={{flex: 1, transform: [{scale}]}}>
+        <Screen
+          style={{...styles.container, backgroundColor}}
+          type="ScrollView">
+          <ProfileItemHeader
+            showCloseButton={false}
+            title={t('profile:editTitle')}
+            description={t('profile:editText')}
+            titleColor={colors.blue}
+          />
 
-        {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}
-        <ProfileEditForm onSubmit={editHandler} />
-      </Screen>
+          {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}
+          <ProfileEditForm onSubmit={editHandler} />
+        </Screen>
+      </Animated.View>
     </>
   );
 };

@@ -1,4 +1,7 @@
 export default {
+  menu: 'Menu',
+  settings: 'Settings',
+  darkTheme: 'Dark theme',
   statistics: 'Statistics',
   stRate: 'Stories rated',
   stSubmit: 'Stories submitted',
@@ -14,4 +17,5 @@ export default {
     'Whether you are looking for answers, would like to solve a problem or just want to let us know how we are doing, we would love to hear from you. Fill out the form below and a representative will reach out to you as soon as possible.',
 
   editText: 'Here you can change the name, email and avatar of your profile.',
+  logout: 'Logout',
 };

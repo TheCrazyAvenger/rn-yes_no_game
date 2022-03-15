@@ -27,10 +27,10 @@ export const AuthScreen: React.FC = () => {
       <View style={styles.header}>
         <Image
           style={styles.image}
-          source={require('@assets/images/logo.png')}
+          source={require('@assets/images/main-logo.jpg')}
         />
         <H1 style={styles.title} fontWeight="bold">
-          Yes! No! Game
+          Board Games
         </H1>
 
         <H5 style={styles.subtitle}>{t('auth:slogan')}</H5>
