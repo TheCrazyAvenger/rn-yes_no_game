@@ -12,9 +12,21 @@ export const aliasWords: any = {
     en: regular,
     ru: regularRu,
     be: regularBe,
-    title: 'Regular game',
-    difficulty: 'Easy',
-    words: 'home, pirate, sun...',
+    title: {
+      en: 'Regular game',
+      ru: 'Обычная игра',
+      be: 'Звычайная гульня',
+    },
+    difficulty: {
+      en: 'Easy',
+      ru: 'Просто',
+      be: 'Проста',
+    },
+    words: {
+      en: 'home, pirate, sun...',
+      ru: 'дом, пират, солнце...',
+      be: 'дом, пірат, сонца...',
+    },
     image: require('@assets/images/aliasbg/1.jpg'),
   },
 };

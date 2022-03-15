@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Modal, TouchableOpacity, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {BackHandler, Modal, TouchableOpacity, View} from 'react-native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Switch} from 'react-native-elements';
 
@@ -19,13 +19,29 @@ import {t} from 'i18next';
 export const AliasSettings: React.FC = () => {
   const navigation: any = useNavigation();
 
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        navigation.navigate(Screens.aliasHome);
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+  );
+
   const darkTheme = useAppSelector(state => state.user.darkTheme);
+
+  const language = RNLocalize.getLocales()[0].languageCode;
 
   const backgroundColor = darkTheme ? colors.white : colors.aliasBlack;
   const color = darkTheme ? colors.white : colors.aliasBlack;
 
   const [visible, setVisible] = useState(false);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState<any>(null);
   const [teams, setTeams] = useState(2);
   const [words, setWords] = useState(10);
   const [time, setTime] = useState(30);
@@ -54,9 +70,9 @@ export const AliasSettings: React.FC = () => {
       points: 0,
     }));
 
-    const gameCategory = aliasWords[category];
-    const categoryByLang =
-      gameCategory[RNLocalize.getLocales()[0].languageCode];
+    const gameCategory = aliasWords[category.en];
+
+    const categoryByLang = gameCategory[language];
 
     navigation.replace(Screens.aliasStart, {
       teamsPoints,
@@ -89,7 +105,7 @@ export const AliasSettings: React.FC = () => {
           style={styles.settingsItem}>
           <View>
             <H3 style={styles.title} fontWeight="600">
-              {category ? category : t('alias:category')}
+              {category ? category[language] : t('alias:category')}
             </H3>
           </View>
           <Icon name="chevron-forward" size={30} />

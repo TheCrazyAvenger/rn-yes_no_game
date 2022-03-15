@@ -1,4 +1,5 @@
 import React from 'react';
+import * as RNLocalize from 'react-native-localize';
 
 import {GameItem} from '@components';
 import {Screen} from '@ui';
@@ -13,6 +14,8 @@ type AliasChooseProps = {
 export const AliasChoose: React.FC<AliasChooseProps> = ({setCategory}) => {
   const darkTheme = useAppSelector(state => state.user.darkTheme);
 
+  const language = RNLocalize.getLocales()[0].languageCode;
+
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
 
   return (
@@ -24,12 +27,12 @@ export const AliasChoose: React.FC<AliasChooseProps> = ({setCategory}) => {
 
         return (
           <GameItem
-            key={category.title}
-            title={title}
-            difficulty={difficulty}
-            words={words}
+            key={category.title.en}
+            title={title[language]}
+            difficulty={difficulty[language]}
+            words={words[language]}
             wordsNumber={en.length}
-            onPress={setCategory}
+            onPress={() => setCategory(category.title)}
             image={image}
           />
         );

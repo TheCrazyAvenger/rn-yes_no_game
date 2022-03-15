@@ -68,6 +68,15 @@ export const AliasStack: React.FC = () => {
         name={Screens.aliasSettings}
         options={{
           title: t('alias:gameSettings'),
+          headerLeft: () => (
+            <Icon
+              name="arrow-back"
+              size={25}
+              onPress={() => navigation.navigate(Screens.aliasHome)}
+              style={styles.leftIcon}
+              color={colors.white}
+            />
+          ),
         }}
         component={AliasSettings}
       />
