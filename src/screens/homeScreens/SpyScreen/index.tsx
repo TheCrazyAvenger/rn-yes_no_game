@@ -2,8 +2,8 @@ import React, {useEffect, useRef} from 'react';
 import {Animated, Image, ImageBackground, StatusBar, View} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 
-import {useAppDispatch, useAppSelector} from '@hooks';
-import {toggleAliasGoBack} from '@store/slices/actionsSlice';
+import {useAppDispatch} from '@hooks';
+import {toggleSpyGoBack} from '@store/slices/actionsSlice';
 import {H1} from '@Typography';
 import {styles} from './styles';
 
@@ -11,9 +11,9 @@ export const SpyScreen: React.FC = () => {
   const scale = useRef(new Animated.Value(0)).current;
   const dispatch = useAppDispatch();
 
-  const handleAlias = () => {
+  const handleSpy = () => {
     Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
-      dispatch(toggleAliasGoBack(true));
+      dispatch(toggleSpyGoBack(true));
     });
   };
 
@@ -33,7 +33,7 @@ export const SpyScreen: React.FC = () => {
         source={require('@assets/images/spy-logo.jpg')}
         style={styles.container}>
         <TouchableRipple
-          onPress={handleAlias}
+          onPress={handleSpy}
           rippleColor="rgba(255, 255, 255, .32)"
           style={styles.content}>
           <View style={{alignItems: 'center'}}>

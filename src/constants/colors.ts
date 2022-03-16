@@ -11,4 +11,7 @@ export const colors = {
   dark: '#151515',
   aliasRed: '#E52634',
   aliasBlack: '#272722',
+  spyRed: '#B5322E',
+  spyWhite: '#F9E6C5',
+  spyGray: '#6D606B',
 };

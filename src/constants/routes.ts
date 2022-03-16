@@ -22,4 +22,7 @@ export enum Screens {
   aliasStart = 'aliasStart',
   aliasGame = 'aliasGame',
   aliasResults = 'aliasResults',
+
+  spyStack = 'spyStack',
+  spyHome = 'spyHome',
 }

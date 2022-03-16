@@ -25,3 +25,5 @@ export * from './aliasScreens/AliasStart';
 export * from './aliasScreens/AliasGame';
 export * from './aliasScreens/AliasResults';
 export * from './aliasScreens/AliasHelp';
+
+export * from './spyScreens/SpyHome';
