@@ -45,7 +45,6 @@ export const AliasHome: React.FC = () => {
   const dispatch = useAppDispatch();
   const darkTheme = useAppSelector(state => state.user.darkTheme);
 
-  const backgroundColor = darkTheme ? colors.white : colors.aliasBlack;
   const mainBg = darkTheme
     ? openAliasRules
       ? colors.white
@@ -54,7 +53,6 @@ export const AliasHome: React.FC = () => {
     ? colors.dark
     : colors.white;
   const secBg = !darkTheme ? colors.white : colors.dark;
-  const color = !darkTheme ? colors.white : colors.aliasBlack;
 
   const scale = useRef(new Animated.Value(0)).current;
 
@@ -143,51 +141,53 @@ export const AliasHome: React.FC = () => {
           backgroundColor={'transparent'}
           barStyle={'light-content'}
         />
-        <View style={styles.header}>
-          <ImageBackground
-            blurRadius={20}
-            style={styles.imageBg}
-            source={require('@assets/images/alias-logo.jpg')}>
+
+        <ImageBackground
+          blurRadius={20}
+          style={styles.imageBg}
+          source={require('@assets/images/alias-logo.jpg')}>
+          <View style={{flex: 1, justifyContent: 'center'}}>
             <Image
               style={styles.image}
               source={require('@assets/images/alias-logo.jpg')}
             />
+
             <H1 fontWeight="bold" style={styles.text}>
               Alias
             </H1>
-          </ImageBackground>
-        </View>
-        <View style={styles.content}>
-          <Button
-            onPress={handleContinue}
-            containerStyle={styles.buttonContainer}
-            style={{...styles.button, backgroundColor}}
-            disabled={isContinue}
-            title={t('alias:continue')}
-            textStyle={{...styles.buttonText, color}}
-          />
-          <Button
-            onPress={handlePlay}
-            containerStyle={styles.buttonContainer}
-            style={{...styles.button, backgroundColor: colors.aliasRed}}
-            title={t('alias:newGame')}
-            textStyle={styles.buttonText}
-          />
-          <Button
-            onPress={handleOpenRules}
-            containerStyle={styles.buttonContainer}
-            style={{...styles.button, backgroundColor}}
-            title={t('alias:rules')}
-            textStyle={{...styles.buttonText, color}}
-          />
-          <Button
-            onPress={handleGoBack}
-            containerStyle={styles.buttonContainer}
-            style={{...styles.button, backgroundColor: colors.aliasRed}}
-            title={t('alias:backHome')}
-            textStyle={styles.buttonText}
-          />
-        </View>
+          </View>
+          <View style={styles.content}>
+            <Button
+              onPress={handleContinue}
+              containerStyle={styles.buttonContainer}
+              style={{...styles.button, backgroundColor: colors.aliasBlack}}
+              disabled={isContinue}
+              title={t('alias:continue')}
+              textStyle={{...styles.buttonText}}
+            />
+            <Button
+              onPress={handlePlay}
+              containerStyle={styles.buttonContainer}
+              style={{...styles.button, backgroundColor: colors.aliasRed}}
+              title={t('alias:newGame')}
+              textStyle={styles.buttonText}
+            />
+            <Button
+              onPress={handleOpenRules}
+              containerStyle={styles.buttonContainer}
+              style={{...styles.button, backgroundColor: colors.aliasBlack}}
+              title={t('alias:rules')}
+              textStyle={{...styles.buttonText}}
+            />
+            <Button
+              onPress={handleGoBack}
+              containerStyle={{...styles.buttonContainer, marginBottom: 0}}
+              style={{...styles.button, backgroundColor: colors.aliasRed}}
+              title={t('alias:backHome')}
+              textStyle={styles.buttonText}
+            />
+          </View>
+        </ImageBackground>
       </Animated.View>
 
       <AliasHelp isVisible={openAliasRules} setIsVisible={handleColseRules} />

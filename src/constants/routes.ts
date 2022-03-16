@@ -11,7 +11,7 @@ export enum Screens {
   homeTopTabs = 'homeTopTabs',
 
   yesNoScreen = 'yesNoScreen',
-
+  spyScreen = 'spyScreen',
   aliasScreen = 'aliasScreen',
 
   aliasStack = 'aliasStack',
@@ -22,4 +22,7 @@ export enum Screens {
   aliasStart = 'aliasStart',
   aliasGame = 'aliasGame',
   aliasResults = 'aliasResults',
+
+  spyStack = 'spyStack',
+  spyHome = 'spyHome',
 }

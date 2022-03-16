@@ -16,6 +16,7 @@ import {colors} from '@constants';
 import {HomeScreen} from '@screens';
 import {AliasStack} from './AliasStack';
 import {useGetUserInfoMutation} from '@api';
+import {SpyStack} from './SpyStack';
 
 const light = {
   ...DefaultTheme,
@@ -34,7 +35,9 @@ const dark = {
 
 export const AppNavigator: React.FC = () => {
   const darkTheme = useAppSelector(state => state.user.darkTheme);
-  const {yesnoGoBack, aliasGoBack} = useAppSelector(state => state.actions);
+  const {yesnoGoBack, aliasGoBack, spyGoBack} = useAppSelector(
+    state => state.actions,
+  );
   const {token} = useAppSelector(state => state.user);
 
   const [getUserInfo, {isLoading}] = useGetUserInfoMutation();
@@ -88,6 +91,8 @@ export const AppNavigator: React.FC = () => {
           <HomeScreen />
         ) : aliasGoBack ? (
           <AliasStack />
+        ) : spyGoBack ? (
+          <SpyStack />
         ) : (
           <DrawerNavigator />
         )

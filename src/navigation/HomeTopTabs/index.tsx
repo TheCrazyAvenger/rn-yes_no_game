@@ -4,7 +4,7 @@ import {
   MaterialTopTabNavigationOptions,
 } from '@react-navigation/material-top-tabs';
 import {Screens} from '@constants';
-import {AliasScreen, YesNoScreen} from '@screens';
+import {AliasScreen, SpyScreen, YesNoScreen} from '@screens';
 import {useAppSelector} from '@hooks';
 
 const Tab = createMaterialTopTabNavigator();
@@ -21,6 +21,7 @@ export const HomeTopTabs: React.FC = () => {
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen name={Screens.yesNoScreen} component={YesNoScreen} />
       <Tab.Screen name={Screens.aliasScreen} component={AliasScreen} />
+      <Tab.Screen name={Screens.spyScreen} component={SpyScreen} />
     </Tab.Navigator>
   );
 };
