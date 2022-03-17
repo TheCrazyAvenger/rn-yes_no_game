@@ -27,3 +27,4 @@ export * from './aliasScreens/AliasResults';
 export * from './aliasScreens/AliasHelp';
 
 export * from './spyScreens/SpyHome';
+export * from './spyScreens/SpySettings';
