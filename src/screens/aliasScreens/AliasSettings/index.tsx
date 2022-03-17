@@ -117,9 +117,9 @@ export const AliasSettings: React.FC = () => {
         />
         <View style={styles.header}>
           <H1 fontWeight="600" style={{...styles.title, color: titleColor}}>
-            Settings
+            {t('alias:gameSettings')}
           </H1>
-          <H3 style={{color: colors.aliasRed}}>A few pre-game tweaks</H3>
+          <H3 style={{color: colors.aliasRed}}> {t('alias:settingSub')}</H3>
         </View>
 
         <TouchableOpacity
@@ -141,7 +141,7 @@ export const AliasSettings: React.FC = () => {
         <View style={{...styles.card, backgroundColor: colors.aliasRed}}>
           <View style={styles.cardContent}>
             <H2 fontWeight="600" style={styles.cardTitle}>
-              Points
+              {t('alias:setting1')}
             </H2>
             <H4 style={styles.cardTitle}>{t('alias:setting1sub')}</H4>
           </View>
@@ -175,7 +175,7 @@ export const AliasSettings: React.FC = () => {
         <View style={{...styles.card, backgroundColor}}>
           <View style={{...styles.cardContent, width: '59%'}}>
             <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
-              Duration
+              {t('alias:setting2')}
             </H2>
             <H4 style={{...styles.cardTitle, color}}>
               {t('alias:setting2sub')}
@@ -227,11 +227,9 @@ export const AliasSettings: React.FC = () => {
           }}>
           <View style={{...styles.cardContent}}>
             <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
-              Teams
+              {t('alias:teams')}
             </H2>
-            <H4 style={{...styles.cardTitle, color}}>
-              Customize the number of teams
-            </H4>
+            <H4 style={{...styles.cardTitle, color}}>{t('alias:teamsSub')}</H4>
           </View>
           <View style={styles.teams}>
             <AliasTeams

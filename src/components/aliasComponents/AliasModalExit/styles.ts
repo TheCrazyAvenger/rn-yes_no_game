@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
   },
   winModal: {
     padding: 15,
-    width: 300,
+    width: 350,
     overflow: 'hidden',
     borderRadius: 14,
   },

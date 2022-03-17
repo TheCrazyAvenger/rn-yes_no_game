@@ -1,11 +1,13 @@
 export default {
-  gameSettings: 'Game settings',
+  gameSettings: 'Settings',
+  settingSub: 'A few pre-game tweaks',
   category: 'Category',
   teams: 'Teams',
+  teamsSub: 'Customize the number of teams',
   team: 'Team',
   addTeam: 'Add Team',
   settings: 'Settings',
-  setting1: 'Number of words',
+  setting1: 'Points',
   setting1sub: 'to win',
   setting2: 'Round duration',
   setting2sub: 'for which you need to guess the words',
@@ -15,6 +17,7 @@ export default {
   setting3: 'Pass fee',
   setting3sub: 'missing words take away points',
   start: 'Start',
+  back: 'Back',
 
   rating: 'Rating',
   round: 'Round',
@@ -25,6 +28,7 @@ export default {
   skipped: 'Skipped',
 
   results: 'Results',
+  resultsSub: 'See your results',
   endTurn: 'End Turn',
 
   modalTitle: 'Are you sure you want to exit the game?',

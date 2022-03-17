@@ -130,7 +130,7 @@ export const AliasResults: React.FC = () => {
           <H1 fontWeight="600" style={{...styles.title, color}}>
             {t('alias:results')}
           </H1>
-          <H3 style={{color: colors.aliasRed}}>See your results</H3>
+          <H3 style={{color: colors.aliasRed}}> {t('alias:resultsSub')}</H3>
         </View>
 
         {wordsList.map((item: any, i: number) => {
