@@ -1,20 +1,25 @@
 import React, {useState} from 'react';
-import {BackHandler, Modal, TouchableOpacity, View} from 'react-native';
+import {
+  BackHandler,
+  Modal,
+  StatusBar,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Switch} from 'react-native-elements';
+import {WheelPicker} from 'react-native-wheel-picker-android';
+import * as RNLocalize from 'react-native-localize';
+import {t} from 'i18next';
 
-import {AliasTeams} from '../AliasTeams';
-import {AliasSettingsItem} from '@components';
-import {Button, Screen} from '@ui';
+import {Screen, Button} from '@ui';
 import {useAppSelector} from '@hooks';
 import {colors, aliasWords, Screens} from '@constants';
-import {H3, H4} from '@Typography';
+import {H1, H2, H3, H4} from '@Typography';
 import {styles} from './styles';
 import {AliasChoose} from '../AliasChoose';
 import {shuffle} from '@utilities';
-import * as RNLocalize from 'react-native-localize';
-import {t} from 'i18next';
+import {AliasTeams} from '../AliasTeams';
 
 export const AliasSettings: React.FC = () => {
   const navigation: any = useNavigation();
@@ -38,7 +43,8 @@ export const AliasSettings: React.FC = () => {
   const language = RNLocalize.getLocales()[0].languageCode;
 
   const backgroundColor = darkTheme ? colors.white : colors.aliasBlack;
-  const color = darkTheme ? colors.white : colors.aliasBlack;
+  const color = darkTheme ? colors.aliasBlack : colors.white;
+  const titleColor = !darkTheme ? colors.aliasBlack : colors.white;
 
   const [visible, setVisible] = useState(false);
   const [category, setCategory] = useState<any>(null);
@@ -55,14 +61,6 @@ export const AliasSettings: React.FC = () => {
 
   const addTeam = () => setTeams(team => team + 1);
   const removeTeam = () => setTeams(team => team - 1);
-
-  const addWords = () => setWords(prev => prev + 10);
-  const removeWords = () => setWords(prev => prev - 10);
-
-  const addTime = () => setTime(prev => prev + 30);
-  const removeTime = () => setTime(prev => prev - 30);
-
-  const toggleFee = () => setFee(prev => !prev);
 
   const handleStart = () => {
     const teamsPoints = [...Array(teams).keys()].map(item => ({
@@ -91,83 +89,176 @@ export const AliasSettings: React.FC = () => {
     });
   };
 
+  const backHandler = () => navigation.navigate(Screens.aliasHome);
+
+  const setWordIndex = (index: number) => {
+    setWords((index + 1) * 10);
+  };
+
+  const setTimeIndex = (index: number) => {
+    const time = ['30', '60', '90', '120', '150', '180'];
+    setTime(Number(time[index]));
+  };
+
+  const setPassFee = (index: number) => {
+    const isOn = index === 0 ? false : true;
+    setFee(isOn);
+  };
+
   return (
     <>
       <Modal animationType="fade" visible={visible}>
         <AliasChoose setCategory={categoryHandler} />
       </Modal>
-      <Screen type="ScrollView" style={styles.container}>
-        <H3 fontWeight="600" style={{...styles.settingsTitle, color}}>
-          {t('alias:category')}
-        </H3>
+      <Screen type="ScrollView">
+        <StatusBar
+          barStyle={darkTheme ? 'light-content' : 'dark-content'}
+          backgroundColor={darkTheme ? colors.dark : colors.white}
+        />
+        <View style={styles.header}>
+          <H1 fontWeight="600" style={{...styles.title, color: titleColor}}>
+            Settings
+          </H1>
+          <H3 style={{color: colors.aliasRed}}>A few pre-game tweaks</H3>
+        </View>
+
         <TouchableOpacity
           onPress={setVisibleHandler}
-          style={styles.settingsItem}>
-          <View>
-            <H3 style={styles.title} fontWeight="600">
+          style={{...styles.card, backgroundColor}}>
+          <View style={styles.cardContent}>
+            <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
               {category ? category[language] : t('alias:category')}
-            </H3>
+            </H2>
           </View>
-          <Icon name="chevron-forward" size={30} />
+          <Icon
+            name="chevron-forward"
+            size={30}
+            style={{marginRight: 30}}
+            color={color}
+          />
         </TouchableOpacity>
-        <View style={{...styles.line, backgroundColor}} />
 
-        <H3 fontWeight="600" style={{...styles.settingsTitle, color}}>
-          {t('alias:teams')}
-        </H3>
-
-        <AliasTeams teams={teams} addTeam={addTeam} removeTeam={removeTeam} />
-
-        <View style={{...styles.line, backgroundColor}} />
-
-        <H3 fontWeight="600" style={{...styles.settingsTitle, color}}>
-          {t('alias:settings')}
-        </H3>
-
-        <AliasSettingsItem
-          title={t('alias:setting1')}
-          subTitle={t('alias:setting1sub')}
-          value={words}
-          leftButton={addWords}
-          rightButton={removeWords}
-          rightButtonTitle={`-10 ${t('alias:words')}`}
-          leftButtonTitle={`+10 ${t('alias:words')}`}
-          min={10}
-          max={100}
-        />
-
-        <AliasSettingsItem
-          title={t('alias:setting2')}
-          subTitle={t('alias:setting2sub')}
-          value={time}
-          leftButton={addTime}
-          rightButton={removeTime}
-          rightButtonTitle={`-30 ${t('alias:sec')}`}
-          leftButtonTitle={`+30 ${t('alias:sec')}`}
-          min={30}
-          max={180}
-        />
-        <View style={{...styles.line, backgroundColor, marginTop: 15}} />
-        <H3 fontWeight="600" style={{...styles.settingsTitle, color}}>
-          {t('alias:additionally')}
-        </H3>
-        <View style={styles.settingsItem}>
-          <View>
-            <H3 style={styles.title} fontWeight="600">
-              {t('alias:setting3')}
-            </H3>
-            <H4 style={{color}}>{t('alias:setting3sub')}</H4>
+        <View style={{...styles.card, backgroundColor: colors.aliasRed}}>
+          <View style={styles.cardContent}>
+            <H2 fontWeight="600" style={styles.cardTitle}>
+              Points
+            </H2>
+            <H4 style={styles.cardTitle}>{t('alias:setting1sub')}</H4>
           </View>
-          <Switch value={fee} color={colors.aliasRed} onChange={toggleFee} />
+
+          <View style={{maxWidth: '41%'}}>
+            <WheelPicker
+              data={[
+                '10',
+                '20',
+                '30',
+                '40',
+                '50',
+                '60',
+                '70',
+                '80',
+                '90',
+                '100',
+              ]}
+              itemTextFontFamily={'Nunito-Bold'}
+              selectedItemTextSize={20}
+              selectedItemTextColor={'white'}
+              selectedItemTextFontFamily={'Nunito-ExtraBold'}
+              hideIndicator
+              onItemSelected={selectedItem => {
+                setWordIndex(selectedItem);
+              }}
+            />
+          </View>
+        </View>
+
+        <View style={{...styles.card, backgroundColor}}>
+          <View style={{...styles.cardContent, width: '59%'}}>
+            <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
+              Duration
+            </H2>
+            <H4 style={{...styles.cardTitle, color}}>
+              {t('alias:setting2sub')}
+            </H4>
+          </View>
+
+          <View style={{maxWidth: '41%'}}>
+            <WheelPicker
+              data={['30', '60', '90', '120', '150', '180']}
+              itemTextFontFamily={'Nunito-Bold'}
+              selectedItemTextSize={20}
+              selectedItemTextColor={darkTheme ? 'black' : 'white'}
+              selectedItemTextFontFamily={'Nunito-ExtraBold'}
+              hideIndicator
+              onItemSelected={selectedItem => setTimeIndex(selectedItem)}
+            />
+          </View>
+        </View>
+
+        <View style={{...styles.card, backgroundColor: colors.aliasRed}}>
+          <View style={{...styles.cardContent, width: '59%'}}>
+            <H2 fontWeight="600" style={styles.cardTitle}>
+              {t('alias:setting3')}
+            </H2>
+            <H4 style={{...styles.cardTitle}}>{t('alias:setting3sub')}</H4>
+          </View>
+
+          <View style={{maxWidth: '41%'}}>
+            <WheelPicker
+              data={['Off', 'On']}
+              itemTextFontFamily={'Nunito-Bold'}
+              selectedItemTextSize={20}
+              selectedItemTextColor={'white'}
+              selectedItemTextFontFamily={'Nunito-ExtraBold'}
+              hideIndicator
+              onItemSelected={selectedItem => {
+                setPassFee(selectedItem);
+              }}
+            />
+          </View>
+        </View>
+
+        <View
+          style={{
+            ...styles.card,
+            backgroundColor,
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+          }}>
+          <View style={{...styles.cardContent}}>
+            <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
+              Teams
+            </H2>
+            <H4 style={{...styles.cardTitle, color}}>
+              Customize the number of teams
+            </H4>
+          </View>
+          <View style={styles.teams}>
+            <AliasTeams
+              teams={teams}
+              addTeam={addTeam}
+              removeTeam={removeTeam}
+            />
+          </View>
+        </View>
+
+        <View style={styles.buttons}>
+          <Button
+            title={t('alias:back')}
+            style={{...styles.nextButton, backgroundColor}}
+            textStyle={{color}}
+            containerStyle={styles.buttonContainer}
+            onPress={backHandler}
+          />
+          <Button
+            disabled={category === null}
+            title={t('alias:start')}
+            style={styles.nextButton}
+            containerStyle={styles.buttonContainer}
+            onPress={handleStart}
+          />
         </View>
       </Screen>
-      <Button
-        disabled={category === ''}
-        title={t('alias:start')}
-        style={styles.nextButton}
-        containerStyle={styles.buttonContainer}
-        onPress={handleStart}
-      />
     </>
   );
 };

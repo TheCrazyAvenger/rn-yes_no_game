@@ -14,7 +14,7 @@ import {
   setTeamIndex,
   setTeamsPoint,
 } from '@store/slices/aliasSlice';
-import {H2} from '@Typography';
+import {H1, H2, H3} from '@Typography';
 import {Button, Screen} from '@ui';
 import {t} from 'i18next';
 import React, {useState} from 'react';
@@ -123,9 +123,16 @@ export const AliasResults: React.FC = () => {
       />
       <Screen type="ScrollView" style={styles.container}>
         <StatusBar
-          backgroundColor={colors.aliasRed}
-          barStyle={'light-content'}
+          barStyle={darkTheme ? 'light-content' : 'dark-content'}
+          backgroundColor={darkTheme ? colors.dark : colors.white}
         />
+        <View style={styles.header}>
+          <H1 fontWeight="600" style={{...styles.title, color}}>
+            {t('alias:results')}
+          </H1>
+          <H3 style={{color: colors.aliasRed}}>See your results</H3>
+        </View>
+
         {wordsList.map((item: any, i: number) => {
           const answerColor =
             item.answered === true ? colors.green : colors.white;
@@ -159,18 +166,22 @@ export const AliasResults: React.FC = () => {
                   </TouchableOpacity>
                 </View>
               </View>
-              <View style={{...styles.line, backgroundColor}} />
+              {i !== wordsList.length - 1 && (
+                <View style={{...styles.line, backgroundColor}} />
+              )}
             </React.Fragment>
           );
         })}
+        <View style={{marginHorizontal: 20}}>
+          <Button
+            onPress={endTurnHandler}
+            title={t('alias:endTurn')}
+            containerStyle={styles.buttonContainer}
+            style={styles.button}
+            textStyle={styles.buttonText}
+          />
+        </View>
       </Screen>
-      <Button
-        onPress={endTurnHandler}
-        title={t('alias:endTurn')}
-        containerStyle={styles.buttonContainer}
-        style={styles.button}
-        textStyle={styles.buttonText}
-      />
     </>
   );
 };

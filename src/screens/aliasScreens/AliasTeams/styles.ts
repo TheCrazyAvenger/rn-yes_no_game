@@ -2,11 +2,7 @@ import {colors} from '@constants';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  container: {
-    padding: 17,
-    paddingBottom: 0,
-    paddingTop: 5,
-  },
+  container: {},
   nextButton: {
     position: 'absolute',
     right: 15,
@@ -19,6 +15,6 @@ export const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
 });

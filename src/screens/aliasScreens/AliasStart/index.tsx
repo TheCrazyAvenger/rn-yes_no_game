@@ -23,7 +23,7 @@ import {H1, H2, H3, H5} from '@Typography';
 import {Button, Loading, Screen} from '@ui';
 import {t} from 'i18next';
 import React, {useEffect, useState} from 'react';
-import {BackHandler, ImageBackground, StatusBar, View} from 'react-native';
+import {BackHandler, StatusBar, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
 
@@ -188,35 +188,29 @@ export const AliasStart: React.FC = () => {
           barStyle={'light-content'}
         />
         <View style={styles.header}>
-          <ImageBackground
-            blurRadius={15}
-            style={styles.imageBg}
-            source={require('@assets/images/alias-logo.jpg')}>
-            <View style={styles.headerContent}>
+          <View style={styles.headerContent}>
+            <View style={styles.row}>
+              <H1 fontWeight="600" style={{...styles.headerTitle, color}}>
+                {t('alias:rating')}
+              </H1>
               <View style={styles.row}>
-                <H1 fontWeight="bold" style={styles.headerTitle}>
-                  {t('alias:rating')}
+                <Icon name="star" size={35} color={colors.yellow} />
+                <H1 fontWeight="600" style={{...styles.headerScore, color}}>
+                  {points}
                 </H1>
-                <View style={styles.row}>
-                  <Icon name="star" size={30} color={colors.yellow} />
-                  <H2 fontWeight="600" style={{...styles.headerScore}}>
-                    {points}
-                  </H2>
-                </View>
               </View>
-              {teams.map((team: any) => (
-                <View key={team.team} style={styles.teamItem}>
-                  <View style={styles.row}>
-                    <H3 style={styles.teamName}>{team.team}</H3>
-
-                    <H2 fontWeight="600" style={{...styles.teamScore}}>
-                      {team.points}
-                    </H2>
-                  </View>
-                </View>
-              ))}
             </View>
-          </ImageBackground>
+            {teams.map((team: any) => (
+              <View key={team.team} style={styles.teamItem}>
+                <View style={styles.row}>
+                  <H3 style={{...styles.teamName, color}}>{team.team}</H3>
+
+                  <H3 style={{...styles.teamScore, color}}>{team.points}</H3>
+                </View>
+                <View style={{...styles.teamsLine, backgroundColor: color}} />
+              </View>
+            ))}
+          </View>
         </View>
         <View style={styles.content}>
           <H3 style={{color}} fontWeight="600">
@@ -229,12 +223,15 @@ export const AliasStart: React.FC = () => {
         </View>
       </Screen>
 
-      <Button
-        title={t('alias:start')}
-        style={styles.nextButton}
-        containerStyle={styles.buttonContainer}
-        onPress={handlePlay}
-      />
+      <View style={{marginHorizontal: 30}}>
+        <Button
+          title={t('alias:start')}
+          style={styles.nextButton}
+          containerStyle={styles.buttonContainer}
+          textStyle={styles.buttonText}
+          onPress={handlePlay}
+        />
+      </View>
     </>
   );
 };

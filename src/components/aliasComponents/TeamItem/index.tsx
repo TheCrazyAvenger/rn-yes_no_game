@@ -1,6 +1,6 @@
 import {colors} from '@constants';
 import {useAppSelector} from '@hooks';
-import {H3} from '@Typography';
+import {H3, H4} from '@Typography';
 import {t} from 'i18next';
 import React, {useEffect, useRef} from 'react';
 import {Animated, View} from 'react-native';
@@ -19,8 +19,7 @@ export const TeamItem: React.FC<TeamItemProps> = ({
   showRemove,
 }) => {
   const darkTheme = useAppSelector(state => state.user.darkTheme);
-
-  const color = darkTheme ? colors.white : colors.aliasBlack;
+  const color = darkTheme ? colors.aliasBlack : colors.white;
 
   const height = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(0)).current;
@@ -47,17 +46,25 @@ export const TeamItem: React.FC<TeamItemProps> = ({
 
   return (
     <>
-      <Animated.View style={{...styles.container, height}}>
-        <H3 style={{color}} fontWeight="600">
-          {t('alias:team')} {team}
-        </H3>
-        {showRemove && (
-          <Animated.View style={{opacity}}>
-            <Icon name="close" onPress={moveHandler} size={27} color={color} />
-          </Animated.View>
-        )}
+      <Animated.View style={{height}}>
+        <View style={{...styles.container}}>
+          <H4 style={{...styles.teamsText, color}}>
+            {t('alias:team')} {team}
+          </H4>
+
+          {showRemove && (
+            <Animated.View style={{opacity}}>
+              <Icon
+                name="close"
+                onPress={moveHandler}
+                size={20}
+                color={color}
+              />
+            </Animated.View>
+          )}
+        </View>
+        <View style={{...styles.teamsLine, backgroundColor: color}} />
       </Animated.View>
-      {/* <View style={{height: 2, backgroundColor: colors.lightgray}} /> */}
     </>
   );
 };

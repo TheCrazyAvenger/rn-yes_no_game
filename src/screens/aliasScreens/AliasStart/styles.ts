@@ -7,11 +7,10 @@ export const styles = StyleSheet.create({
   },
   header: {
     width: '100%',
-    minHeight: 100,
   },
   headerContent: {
     padding: 30,
-    paddingVertical: 40,
+    marginTop: 10,
   },
   imageBg: {
     width: '100%',
@@ -28,30 +27,27 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerTitle: {
-    opacity: 0.8,
-    color: colors.white,
-    textTransform: 'uppercase',
-    fontSize: 38,
+    fontSize: 45,
   },
   headerScore: {
     marginLeft: 5,
     color: colors.white,
   },
   teamItem: {
-    marginTop: 5,
+    marginBottom: 15,
   },
   teamName: {
     color: colors.white,
   },
   teamScore: {color: colors.white},
   nextButton: {
-    height: 55,
-    borderRadius: 0,
+    height: 60,
+    borderRadius: 10,
     backgroundColor: colors.aliasRed,
   },
   buttonContainer: {
-    borderRadius: 0,
-    marginBottom: 0,
+    borderRadius: 10,
+    marginBottom: 20,
   },
   content: {
     flex: 1,
@@ -59,5 +55,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 0,
+  },
+  teamsLine: {
+    height: 1,
+    width: '100%',
+  },
+  buttonText: {
+    fontSize: 19,
   },
 });

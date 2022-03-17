@@ -1,7 +1,7 @@
 import {TeamItem} from '@components';
 import {colors} from '@constants';
 import {useAppSelector} from '@hooks';
-import {H3} from '@Typography';
+import {H4} from '@Typography';
 import {t} from 'i18next';
 
 import React, {useEffect, useRef} from 'react';
@@ -20,10 +20,10 @@ export const AliasTeams: React.FC<AliasTeamsProps> = ({
   addTeam,
   removeTeam,
 }) => {
-  const height = useRef(new Animated.Value(35)).current;
+  const height = useRef(new Animated.Value(20)).current;
 
   const darkTheme = useAppSelector(state => state.user.darkTheme);
-  const color = darkTheme ? colors.white : colors.aliasBlack;
+  const color = darkTheme ? colors.aliasBlack : colors.white;
 
   useEffect(() => {
     if (teams > 5) {
@@ -34,7 +34,7 @@ export const AliasTeams: React.FC<AliasTeamsProps> = ({
       }).start();
     } else {
       Animated.timing(height, {
-        toValue: 35,
+        toValue: 20,
         duration: 300,
         useNativeDriver: false,
       }).start();
@@ -57,8 +57,8 @@ export const AliasTeams: React.FC<AliasTeamsProps> = ({
       })}
       <Animated.View style={{height}}>
         <TouchableOpacity onPress={addTeam} style={styles.row}>
-          <Icon name="add-circle-outline" size={21} color={colors.aliasRed} />
-          <H3 style={{marginLeft: 5, color}}>{t('alias:addTeam')}</H3>
+          <Icon name="add-circle-outline" size={20} color={color} />
+          <H4 style={{marginLeft: 5, color}}>{t('alias:addTeam')}</H4>
         </TouchableOpacity>
       </Animated.View>
     </View>

@@ -3,11 +3,20 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {},
+  header: {
+    marginLeft: 20,
+    marginTop: 50,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 45,
+  },
+
   content: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 15,
+    paddingHorizontal: 20,
   },
   circle: {
     width: 30,
@@ -26,17 +35,18 @@ export const styles = StyleSheet.create({
   },
   line: {
     marginTop: 10,
-    height: 1,
+    height: 0.9,
+    marginHorizontal: 20,
   },
   buttonContainer: {
     width: '100%',
-    marginBottom: 0,
-    borderRadius: 0,
+    marginVertical: 20,
+    borderRadius: 10,
   },
   button: {
     backgroundColor: colors.aliasRed,
-    height: 60,
-    borderRadius: 0,
+    height: 50,
+    borderRadius: 10,
   },
   buttonText: {
     fontSize: 19,

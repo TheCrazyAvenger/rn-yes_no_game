@@ -67,16 +67,17 @@ export const AliasStack: React.FC = () => {
       <Stack.Screen
         name={Screens.aliasSettings}
         options={{
-          title: t('alias:gameSettings'),
-          headerLeft: () => (
-            <Icon
-              name="arrow-back"
-              size={25}
-              onPress={() => navigation.navigate(Screens.aliasHome)}
-              style={styles.leftIcon}
-              color={colors.white}
-            />
-          ),
+          // title: t('alias:gameSettings'),
+          // headerLeft: () => (
+          //   <Icon
+          //     name="arrow-back"
+          //     size={25}
+          //     onPress={() => navigation.navigate(Screens.aliasHome)}
+          //     style={styles.leftIcon}
+          //     color={colors.white}
+          //   />
+          // ),
+          headerShown: false,
         }}
         component={AliasSettings}
       />
@@ -97,9 +98,10 @@ export const AliasStack: React.FC = () => {
       <Stack.Screen
         name={Screens.aliasResults}
         options={{
-          headerLeft: () => null,
-          headerTitleAlign: 'center',
-          title: t('alias:results'),
+          // headerLeft: () => null,
+          // headerTitleAlign: 'center',
+          // title: t('alias:results'),
+          headerShown: false,
         }}
         component={AliasResults}
       />
