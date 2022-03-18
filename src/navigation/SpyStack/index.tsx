@@ -4,7 +4,7 @@ import {
   StackNavigationOptions,
 } from '@react-navigation/stack';
 
-import {SpyHome} from '@screens';
+import {SpyHome, SpySettings} from '@screens';
 import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -40,6 +40,13 @@ export const SpyStack: React.FC = () => {
           animationEnabled: false,
         }}
         component={SpyHome}
+      />
+      <Stack.Screen
+        name={Screens.spySettings}
+        options={{
+          headerShown: false,
+        }}
+        component={SpySettings}
       />
     </Stack.Navigator>
   );

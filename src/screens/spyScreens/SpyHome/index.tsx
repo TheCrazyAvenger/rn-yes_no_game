@@ -77,7 +77,7 @@ export const SpyHome: React.FC = () => {
     });
   };
 
-  const handlePlay = () => navigation.navigate(Screens.aliasSettings);
+  const handlePlay = () => navigation.navigate(Screens.spySettings);
 
   const handleColseRules = () => dispatch(toggleAliasRules(false));
   const handleOpenRules = () => dispatch(toggleAliasRules(true));
