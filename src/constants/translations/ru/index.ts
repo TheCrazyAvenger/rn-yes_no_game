@@ -8,6 +8,7 @@ import auth from './auth';
 import schemas from './schemas';
 import yesnoRules from './yesnoRules';
 import alias from './alias';
+import spy from './spy';
 
 export default {
   common,
@@ -20,4 +21,5 @@ export default {
   schemas,
   yesnoRules,
   alias,
+  spy,
 };

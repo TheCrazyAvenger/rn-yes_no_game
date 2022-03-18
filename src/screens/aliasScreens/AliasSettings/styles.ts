@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
   },
   cardContent: {
     padding: 20,
+    width: '70%',
   },
   picker: {
     flexDirection: 'row',

@@ -10,17 +10,25 @@ export const styles = StyleSheet.create({
     fontSize: 45,
     color: colors.white,
   },
-  wheelPicker: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
+
   card: {
-    paddingTop: 20,
-    width: '100%',
-    height: '80%',
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginBottom: 10,
+    margin: 20,
   },
+  cardImage: {
+    width: '100%',
+    height: 150,
+  },
+  cardContent: {
+    padding: 20,
+    backgroundColor: colors.spyRed,
+  },
+  cardTitle: {
+    color: colors.white,
+  },
+
   buttons: {
     backgroundColor: colors.aliasBlack,
     flexDirection: 'row',

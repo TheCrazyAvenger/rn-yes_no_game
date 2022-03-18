@@ -1,16 +1,29 @@
 import React, {useState} from 'react';
-import {BackHandler, StatusBar, View} from 'react-native';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {
+  BackHandler,
+  ImageBackground,
+  ScrollView,
+  StatusBar,
+  View,
+} from 'react-native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {WheelPicker} from 'react-native-wheel-picker-android';
 import {t} from 'i18next';
 
 import {Screen, Button} from '@ui';
 import {colors, Screens} from '@constants';
-import {H1, H3} from '@Typography';
+import {H1, H2, H3, H4} from '@Typography';
 import {styles} from './styles';
 
-export const SpySettings: React.FC = () => {
+export const SpyLocations: React.FC = () => {
   const navigation: any = useNavigation();
+  const route: any = useRoute();
+
+  const {data} = route.params;
 
   useFocusEffect(
     React.useCallback(() => {
@@ -26,16 +39,29 @@ export const SpySettings: React.FC = () => {
     }, []),
   );
 
-  const [players, setPlayers] = useState(3);
+  const [spyHint, setSpyHint] = useState(false);
+  const [roles, setRoles] = useState(false);
+  const [discloseRoles, setDiscloseRoles] = useState(false);
 
   const handleNext = () => {
-    navigation.navigate(Screens.spySpies, {data: {players}});
+    navigation.navigate();
   };
 
-  const backHandler = () => navigation.navigate(Screens.spyHome);
+  const backHandler = () => navigation.goBack();
 
-  const setPlayersIndex = (index: number) => {
-    setPlayers(index + 3);
+  const setSpyHintIndex = (index: number) => {
+    const isOn = index === 0 ? false : true;
+    setSpyHint(isOn);
+  };
+
+  const setRolesIndex = (index: number) => {
+    const isOn = index === 0 ? false : true;
+    setRoles(isOn);
+  };
+
+  const setDiscloseRolesIndex = (index: number) => {
+    const isOn = index === 0 ? false : true;
+    setDiscloseRoles(isOn);
   };
 
   return (
@@ -47,31 +73,23 @@ export const SpySettings: React.FC = () => {
         />
         <View style={styles.header}>
           <H1 fontWeight="600" style={{...styles.title}}>
-            {t('spy:locals')}
+            {t('spy:locations')}
           </H1>
-          <H3 style={{color: colors.spyRed}}> {t('spy:localssSub')}</H3>
+          <H3 style={{color: colors.spyRed}}> {t('spy:locationsSub')}</H3>
         </View>
 
-        <View style={styles.wheelPicker}>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.card}>
-            <WheelPicker
-              data={['3', '4', '5', '6', '7', '8']}
-              itemTextFontFamily={'Nunito-Bold'}
-              selectedItemTextSize={52}
-              itemTextSize={30}
-              selectedItemTextColor="#B5322E"
-              indicatorColor="white"
-              selectedItemTextFontFamily={'Nunito-ExtraBold'}
-              style={{
-                width: '100%',
-                height: '100%',
-              }}
-              onItemSelected={selectedItem => {
-                setPlayersIndex(selectedItem);
-              }}
+            <ImageBackground
+              borderTopLeftRadius={10}
+              borderTopRightRadius={10}
+              style={styles.cardImage}
+              source={require('@assets/images/spy/1.png')}
             />
+            <View style={styles.cardContent}></View>
           </View>
-        </View>
+        </ScrollView>
+
         <View style={styles.buttons}>
           <Button
             title={t('alias:back')}

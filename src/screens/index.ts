@@ -28,3 +28,6 @@ export * from './aliasScreens/AliasHelp';
 
 export * from './spyScreens/SpyHome';
 export * from './spyScreens/SpySettings';
+export * from './spyScreens/SpySpies';
+export * from './spyScreens/SpyAdditional';
+export * from './spyScreens/SpyLocations';

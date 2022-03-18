@@ -5,22 +5,37 @@ export const styles = StyleSheet.create({
   header: {
     marginTop: 50,
     alignItems: 'center',
+    marginBottom: 30,
   },
   title: {
     fontSize: 45,
     color: colors.white,
   },
-  wheelPicker: {
-    flex: 1,
+
+  card: {
+    marginHorizontal: 20,
+    overflow: 'hidden',
+    marginBottom: 10,
+    borderRadius: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  cardContent: {
+    padding: 20,
+    width: '80%',
+  },
+  cardTitle: {
+    color: colors.white,
+  },
+  wheelContainer: {
+    maxWidth: '10%',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    marginRight: 20,
+    overflow: 'hidden',
   },
-  card: {
-    paddingTop: 20,
-    width: '100%',
-    height: '80%',
-  },
+
   buttons: {
     backgroundColor: colors.aliasBlack,
     flexDirection: 'row',

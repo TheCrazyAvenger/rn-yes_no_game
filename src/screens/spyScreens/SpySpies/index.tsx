@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import {BackHandler, StatusBar, View} from 'react-native';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {WheelPicker} from 'react-native-wheel-picker-android';
 import {t} from 'i18next';
 
@@ -9,8 +13,11 @@ import {colors, Screens} from '@constants';
 import {H1, H3} from '@Typography';
 import {styles} from './styles';
 
-export const SpySettings: React.FC = () => {
+export const SpySpies: React.FC = () => {
   const navigation: any = useNavigation();
+  const route: any = useRoute();
+
+  const {data} = route.params;
 
   useFocusEffect(
     React.useCallback(() => {
@@ -26,16 +33,16 @@ export const SpySettings: React.FC = () => {
     }, []),
   );
 
-  const [players, setPlayers] = useState(3);
+  const [spies, setSpies] = useState(1);
 
   const handleNext = () => {
-    navigation.navigate(Screens.spySpies, {data: {players}});
+    navigation.navigate(Screens.spyAdditional, {data: {...data, spies}});
   };
 
-  const backHandler = () => navigation.navigate(Screens.spyHome);
+  const backHandler = () => navigation.goBack();
 
   const setPlayersIndex = (index: number) => {
-    setPlayers(index + 3);
+    setSpies(index + 1);
   };
 
   return (
@@ -47,15 +54,17 @@ export const SpySettings: React.FC = () => {
         />
         <View style={styles.header}>
           <H1 fontWeight="600" style={{...styles.title}}>
-            {t('spy:locals')}
+            {t('spy:spies')}
           </H1>
-          <H3 style={{color: colors.spyRed}}> {t('spy:localssSub')}</H3>
+          <H3 style={{color: colors.spyRed}}> {t('spy:spiesSub')}</H3>
         </View>
 
         <View style={styles.wheelPicker}>
           <View style={styles.card}>
             <WheelPicker
-              data={['3', '4', '5', '6', '7', '8']}
+              data={[...Array(data.players).keys()].map(item =>
+                (item + 1).toString(),
+              )}
               itemTextFontFamily={'Nunito-Bold'}
               selectedItemTextSize={52}
               itemTextSize={30}

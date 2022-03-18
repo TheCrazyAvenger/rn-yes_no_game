@@ -173,7 +173,7 @@ export const AliasSettings: React.FC = () => {
         </View>
 
         <View style={{...styles.card, backgroundColor}}>
-          <View style={{...styles.cardContent, width: '59%'}}>
+          <View style={styles.cardContent}>
             <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
               {t('alias:setting2')}
             </H2>
@@ -200,7 +200,7 @@ export const AliasSettings: React.FC = () => {
             ...styles.card,
             backgroundColor: colors.aliasRed,
           }}>
-          <View style={{...styles.cardContent, width: '59%'}}>
+          <View style={styles.cardContent}>
             <H2 fontWeight="600" style={styles.cardTitle}>
               {t('alias:setting3')}
             </H2>
@@ -229,7 +229,7 @@ export const AliasSettings: React.FC = () => {
             flexDirection: 'column',
             alignItems: 'flex-start',
           }}>
-          <View style={{...styles.cardContent}}>
+          <View style={{...styles.cardContent, width: '100%'}}>
             <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
               {t('alias:teams')}
             </H2>
