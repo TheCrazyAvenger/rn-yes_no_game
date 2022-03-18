@@ -1,9 +1,11 @@
+import {ProfileItemHeader} from '@components';
 import {bg, colors} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {setBg} from '@store/slices/userSlice';
 import {Screen} from '@ui';
+import {t} from 'i18next';
 import React, {useEffect, useRef} from 'react';
 import {
   Animated,
@@ -40,6 +42,14 @@ export const BackgroundScreen: React.FC<ProfileProps> = ({closeWindow}) => {
   return (
     <Animated.View style={{flex: 1, transform: [{scale}]}}>
       <Screen>
+        <View style={{marginHorizontal: 10}}>
+          <ProfileItemHeader
+            showCloseButton={false}
+            title={t('profile:bgItemTitle')}
+            description={t('profile:bgSub')}
+            titleColor={colors.blue}
+          />
+        </View>
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{...styles.container, backgroundColor}}>

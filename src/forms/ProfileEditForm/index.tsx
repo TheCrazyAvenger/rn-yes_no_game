@@ -45,6 +45,7 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
 
           <FormInput
             value={values.name}
+            inputStyle={styles.inputContainer}
             leftIcon={{name: 'person', type: 'ionicons', color: 'gray'}}
             plaseholder={t('common:name')}
             onChangeText={handleChange('name')}
@@ -54,6 +55,7 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           />
           <FormInput
             value={values.email}
+            inputStyle={styles.inputContainer}
             leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
             plaseholder={t('common:email')}
             onChangeText={handleChange('email')}
@@ -66,6 +68,7 @@ export const ProfileEditForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           <Button
             onPress={handleSubmit}
             title={t('common:save')}
+            textStyle={styles.buttonText}
             style={styles.submitButton}
           />
         </View>
