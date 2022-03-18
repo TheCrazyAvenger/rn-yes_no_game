@@ -25,12 +25,12 @@ export const ProfileItemHeader: React.FC<ProfileItemHeaderProps> = ({
   return (
     <>
       <View style={styles.header}>
-        <H1 style={{...styles.title, color: titleColor}} fontWeight="bold">
+        <H1 style={{...styles.title, color}} fontWeight="600">
           {title}
         </H1>
         <H3 style={{...styles.description, color}}>{description}</H3>
       </View>
-      <View style={styles.line} />
+
       {showCloseButton && (
         <CloseButton
           style={styles.closeButton}

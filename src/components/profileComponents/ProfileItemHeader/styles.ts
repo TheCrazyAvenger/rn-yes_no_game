@@ -3,22 +3,15 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   header: {
-    marginTop: 10,
+    marginTop: 20,
     paddingHorizontal: 10,
+    marginBottom: 25,
   },
   title: {
-    marginBottom: 5,
-    width: '90%',
-    color: colors.blue,
+    fontSize: 45,
   },
   description: {
     fontSize: 18,
-  },
-  line: {
-    backgroundColor: colors.black,
-    height: 0.9,
-    marginVertical: 15,
-    marginHorizontal: 10,
   },
   closeButton: {
     top: 5,

@@ -9,7 +9,13 @@ export const styles = StyleSheet.create({
   picker: {marginLeft: 10, width: 150, height: 150},
   submitButton: {
     marginHorizontal: 10,
-    height: 45,
+    height: 55,
     backgroundColor: colors.blue,
+  },
+  buttonText: {
+    fontSize: 18,
+  },
+  inputContainer: {
+    height: 55,
   },
 });

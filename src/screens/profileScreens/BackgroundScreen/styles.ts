@@ -4,6 +4,7 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     padding: 20,
+    paddingTop: 0,
   },
   bgItem: {
     width: '100%',
@@ -26,7 +27,7 @@ export const styles = StyleSheet.create({
   checkmark: {
     width: 60,
     height: 60,
-    backgroundColor: colors.red,
+    backgroundColor: colors.yellow,
     borderRadius: 30,
     alignItems: 'center',
     justifyContent: 'center',

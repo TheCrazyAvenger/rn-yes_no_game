@@ -13,7 +13,8 @@ import {t} from 'i18next';
 export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
   const {name, email, darkTheme} = useAppSelector(state => state.user);
 
-  const backgroundColor = darkTheme ? colors.blue : colors.darkBlue;
+  const backgroundColor = darkTheme ? colors.white : colors.darkBlue;
+  const color = darkTheme ? colors.darkBlue : colors.white;
 
   const [image, setImage] = useState<any>(null);
 
@@ -30,6 +31,7 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
         <View>
           <FormInput
             value={values.name}
+            inputStyle={styles.inputStyle}
             leftIcon={{name: 'person', type: 'ionicons', color: 'gray'}}
             plaseholder={t('common:name')}
             onChangeText={handleChange('name')}
@@ -39,6 +41,7 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
           />
           <FormInput
             value={values.email}
+            inputStyle={styles.inputStyle}
             leftIcon={{name: 'mail', type: 'ionicons', color: 'gray'}}
             plaseholder={t('common:email')}
             onChangeText={handleChange('email')}
@@ -70,6 +73,7 @@ export const ReportForm: React.FC<LoginFormProps> = ({onSubmit}) => {
             onPress={handleSubmit}
             title={t('common:send')}
             style={{...styles.submitButton, backgroundColor}}
+            textStyle={{fontSize: 18, color}}
           />
         </View>
       )}

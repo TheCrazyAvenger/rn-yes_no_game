@@ -3,6 +3,7 @@ import React from 'react';
 import {Image} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
 
@@ -21,8 +22,7 @@ export const ImagePicker: React.FC<ImagePickerProps> = ({
   };
 
   return (
-    <TouchableOpacity
-      activeOpacity={0.7}
+    <TouchableRipple
       style={[styles.container, style]}
       onPress={openGalleryHandler}>
       {image ? (
@@ -30,6 +30,6 @@ export const ImagePicker: React.FC<ImagePickerProps> = ({
       ) : (
         <Icon name="camera" size={32} />
       )}
-    </TouchableOpacity>
+    </TouchableRipple>
   );
 };
