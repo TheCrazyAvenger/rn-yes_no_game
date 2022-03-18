@@ -169,7 +169,9 @@ export const SpySettings: React.FC = () => {
 
           <View style={{maxWidth: '41%'}}>
             <WheelPicker
-              data={['1', '2', '3', '4']}
+              data={[...Array(players).keys()].map(item =>
+                (item + 1).toString(),
+              )}
               itemTextFontFamily={'Nunito-Bold'}
               selectedItemTextSize={20}
               selectedItemTextColor={darkTheme ? 'black' : 'white'}
