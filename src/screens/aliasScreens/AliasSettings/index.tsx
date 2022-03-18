@@ -146,7 +146,7 @@ export const AliasSettings: React.FC = () => {
             <H4 style={styles.cardTitle}>{t('alias:setting1sub')}</H4>
           </View>
 
-          <View style={{maxWidth: '41%'}}>
+          <View style={styles.wheelContainer}>
             <WheelPicker
               data={[
                 '10',
@@ -182,7 +182,7 @@ export const AliasSettings: React.FC = () => {
             </H4>
           </View>
 
-          <View style={{maxWidth: '41%'}}>
+          <View style={styles.wheelContainer}>
             <WheelPicker
               data={['30', '60', '90', '120', '150', '180']}
               itemTextFontFamily={'Nunito-Bold'}
@@ -195,7 +195,11 @@ export const AliasSettings: React.FC = () => {
           </View>
         </View>
 
-        <View style={{...styles.card, backgroundColor: colors.aliasRed}}>
+        <View
+          style={{
+            ...styles.card,
+            backgroundColor: colors.aliasRed,
+          }}>
           <View style={{...styles.cardContent, width: '59%'}}>
             <H2 fontWeight="600" style={styles.cardTitle}>
               {t('alias:setting3')}
@@ -203,7 +207,7 @@ export const AliasSettings: React.FC = () => {
             <H4 style={{...styles.cardTitle}}>{t('alias:setting3sub')}</H4>
           </View>
 
-          <View style={{maxWidth: '41%'}}>
+          <View style={styles.wheelContainer}>
             <WheelPicker
               data={['Off', 'On']}
               itemTextFontFamily={'Nunito-Bold'}

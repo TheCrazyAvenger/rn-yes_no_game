@@ -78,4 +78,11 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: colors.aliasRed,
   },
+  wheelContainer: {
+    maxWidth: '10%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 20,
+    overflow: 'hidden',
+  },
 });
