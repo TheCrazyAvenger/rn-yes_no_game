@@ -1,6 +1,9 @@
 export default {
   next: 'Next',
 
+  players: 'Players',
+  playersSub: 'Select the number of players',
+
   locals: 'Locals',
   localssSub: 'Select the number of locals',
 

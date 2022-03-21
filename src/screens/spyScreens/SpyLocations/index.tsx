@@ -1,29 +1,34 @@
-import React, {useState} from 'react';
-import {
-  BackHandler,
-  ImageBackground,
-  ScrollView,
-  StatusBar,
-  View,
-} from 'react-native';
+import React, {useRef, useState} from 'react';
+import {BackHandler, FlatList, ScrollView, StatusBar, View} from 'react-native';
 import {
   useFocusEffect,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import {WheelPicker} from 'react-native-wheel-picker-android';
 import {t} from 'i18next';
+import * as RNLocalize from 'react-native-localize';
 
+import {LocationCard, SpyHeader} from '@components';
 import {Screen, Button} from '@ui';
-import {colors, Screens} from '@constants';
-import {H1, H2, H3, H4} from '@Typography';
+import {colors, locations, Screens} from '@constants';
 import {styles} from './styles';
 
 export const SpyLocations: React.FC = () => {
   const navigation: any = useNavigation();
   const route: any = useRoute();
 
+  const language = RNLocalize.getLocales()[0].languageCode;
+
+  const [location, setLocation] = useState(0);
+  const slidesRef: any = useRef(null);
+
   const {data} = route.params;
+
+  const viewConfig = useRef({viewAreaCoveragePercentThreshold: 50}).current;
+
+  // const onViewableItemsChanged = ({viewableItems}: any) => {
+  //   setLocation(viewableItems[0].index);
+  // };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -31,38 +36,18 @@ export const SpyLocations: React.FC = () => {
         navigation.navigate(Screens.spyHome);
         return true;
       };
-
       BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
       return () =>
         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, []),
   );
 
-  const [spyHint, setSpyHint] = useState(false);
-  const [roles, setRoles] = useState(false);
-  const [discloseRoles, setDiscloseRoles] = useState(false);
-
   const handleNext = () => {
-    navigation.navigate();
+    console.log({...data, location: locations[language][location]});
+    // navigation.navigate();
   };
 
   const backHandler = () => navigation.goBack();
-
-  const setSpyHintIndex = (index: number) => {
-    const isOn = index === 0 ? false : true;
-    setSpyHint(isOn);
-  };
-
-  const setRolesIndex = (index: number) => {
-    const isOn = index === 0 ? false : true;
-    setRoles(isOn);
-  };
-
-  const setDiscloseRolesIndex = (index: number) => {
-    const isOn = index === 0 ? false : true;
-    setDiscloseRoles(isOn);
-  };
 
   return (
     <>
@@ -71,23 +56,26 @@ export const SpyLocations: React.FC = () => {
           barStyle={'light-content'}
           backgroundColor={colors.aliasBlack}
         />
-        <View style={styles.header}>
-          <H1 fontWeight="600" style={{...styles.title}}>
-            {t('spy:locations')}
-          </H1>
-          <H3 style={{color: colors.spyRed}}> {t('spy:locationsSub')}</H3>
-        </View>
+        <SpyHeader
+          title={t('spy:locations')}
+          subtitle={t('spy:locationsSub')}
+          style={{paddingBottom: 10}}
+        />
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.card}>
-            <ImageBackground
-              borderTopLeftRadius={10}
-              borderTopRightRadius={10}
-              style={styles.cardImage}
-              source={require('@assets/images/spy/1.png')}
-            />
-            <View style={styles.cardContent}></View>
-          </View>
+          <FlatList
+            horizontal
+            keyExtractor={item => item.id}
+            data={locations[language]}
+            renderItem={({item}) => <LocationCard key={item.id} item={item} />}
+            bounces={false}
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            scrollEventThrottle={32}
+            viewabilityConfig={viewConfig}
+            // onViewableItemsChanged={onViewableItemsChanged}
+            ref={slidesRef}
+          />
         </ScrollView>
 
         <View style={styles.buttons}>

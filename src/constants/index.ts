@@ -30,3 +30,5 @@ export const aliasWords: any = {
     image: require('@assets/images/aliasbg/1.jpg'),
   },
 };
+
+export * from './spy/index';

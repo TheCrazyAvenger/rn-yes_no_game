@@ -2,25 +2,11 @@ import {colors} from '@constants';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
-  header: {
-    marginTop: 50,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 45,
-    color: colors.white,
-  },
   wheelPicker: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 20,
   },
-  card: {
-    paddingTop: 20,
-    width: '100%',
-    height: '80%',
-  },
+
   buttons: {
     backgroundColor: colors.aliasBlack,
     flexDirection: 'row',
@@ -37,5 +23,13 @@ export const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     backgroundColor: colors.spyRed,
+  },
+
+  pickerContainer: {
+    flexDirection: 'row',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
   },
 });

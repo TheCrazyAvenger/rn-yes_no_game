@@ -20,6 +20,7 @@ import {styles} from './styles';
 import {AliasChoose} from '../AliasChoose';
 import {shuffle} from '@utilities';
 import {AliasTeams} from '../AliasTeams';
+import {WheelCard} from '@components';
 
 export const AliasSettings: React.FC = () => {
   const navigation: any = useNavigation();
@@ -138,89 +139,41 @@ export const AliasSettings: React.FC = () => {
           />
         </TouchableOpacity>
 
-        <View style={{...styles.card, backgroundColor: colors.aliasRed}}>
-          <View style={styles.cardContent}>
-            <H2 fontWeight="600" style={styles.cardTitle}>
-              {t('alias:setting1')}
-            </H2>
-            <H4 style={styles.cardTitle}>{t('alias:setting1sub')}</H4>
-          </View>
+        <WheelCard
+          title={t('alias:setting1')}
+          subtitle={t('alias:setting1sub')}
+          backgroundColor={colors.aliasRed}
+          wheelData={[
+            '10',
+            '20',
+            '30',
+            '40',
+            '50',
+            '60',
+            '70',
+            '80',
+            '90',
+            '100',
+          ]}
+          onItemSelected={setWordIndex}
+        />
 
-          <View style={styles.wheelContainer}>
-            <WheelPicker
-              data={[
-                '10',
-                '20',
-                '30',
-                '40',
-                '50',
-                '60',
-                '70',
-                '80',
-                '90',
-                '100',
-              ]}
-              itemTextFontFamily={'Nunito-Bold'}
-              selectedItemTextSize={20}
-              selectedItemTextColor={'white'}
-              selectedItemTextFontFamily={'Nunito-ExtraBold'}
-              hideIndicator
-              onItemSelected={selectedItem => {
-                setWordIndex(selectedItem);
-              }}
-            />
-          </View>
-        </View>
+        <WheelCard
+          title={t('alias:setting2')}
+          subtitle={t('alias:setting2sub')}
+          backgroundColor={backgroundColor}
+          color={color}
+          wheelData={['30', '60', '90', '120', '150', '180']}
+          onItemSelected={setTimeIndex}
+        />
 
-        <View style={{...styles.card, backgroundColor}}>
-          <View style={styles.cardContent}>
-            <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
-              {t('alias:setting2')}
-            </H2>
-            <H4 style={{...styles.cardTitle, color}}>
-              {t('alias:setting2sub')}
-            </H4>
-          </View>
-
-          <View style={styles.wheelContainer}>
-            <WheelPicker
-              data={['30', '60', '90', '120', '150', '180']}
-              itemTextFontFamily={'Nunito-Bold'}
-              selectedItemTextSize={20}
-              selectedItemTextColor={darkTheme ? 'black' : 'white'}
-              selectedItemTextFontFamily={'Nunito-ExtraBold'}
-              hideIndicator
-              onItemSelected={selectedItem => setTimeIndex(selectedItem)}
-            />
-          </View>
-        </View>
-
-        <View
-          style={{
-            ...styles.card,
-            backgroundColor: colors.aliasRed,
-          }}>
-          <View style={styles.cardContent}>
-            <H2 fontWeight="600" style={styles.cardTitle}>
-              {t('alias:setting3')}
-            </H2>
-            <H4 style={{...styles.cardTitle}}>{t('alias:setting3sub')}</H4>
-          </View>
-
-          <View style={styles.wheelContainer}>
-            <WheelPicker
-              data={['Off', 'On']}
-              itemTextFontFamily={'Nunito-Bold'}
-              selectedItemTextSize={20}
-              selectedItemTextColor={'white'}
-              selectedItemTextFontFamily={'Nunito-ExtraBold'}
-              hideIndicator
-              onItemSelected={selectedItem => {
-                setPassFee(selectedItem);
-              }}
-            />
-          </View>
-        </View>
+        <WheelCard
+          title={t('alias:setting3')}
+          subtitle={t('alias:setting3sub')}
+          backgroundColor={colors.aliasRed}
+          wheelData={['Off', 'On']}
+          onItemSelected={setPassFee}
+        />
 
         <View
           style={{

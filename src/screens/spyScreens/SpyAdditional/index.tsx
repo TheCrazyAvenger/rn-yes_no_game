@@ -5,13 +5,12 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import {WheelPicker} from 'react-native-wheel-picker-android';
 import {t} from 'i18next';
 
 import {Screen, Button} from '@ui';
 import {colors, Screens} from '@constants';
-import {H1, H2, H3, H4} from '@Typography';
 import {styles} from './styles';
+import {SpyHeader, WheelCard} from '@components';
 
 export const SpyAdditional: React.FC = () => {
   const navigation: any = useNavigation();
@@ -67,81 +66,36 @@ export const SpyAdditional: React.FC = () => {
           barStyle={'light-content'}
           backgroundColor={colors.aliasBlack}
         />
-        <View style={styles.header}>
-          <H1 fontWeight="600" style={{...styles.title}}>
-            {t('spy:additional')}
-          </H1>
-          <H3 style={{color: colors.spyRed}}> {t('spy:additionalSub')}</H3>
-        </View>
+        <SpyHeader
+          title={t('spy:additional')}
+          subtitle={t('spy:additionalSub')}
+          style={{marginBottom: 30}}
+        />
 
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{...styles.card, backgroundColor: colors.spyRed}}>
-            <View style={{...styles.cardContent}}>
-              <H2 fontWeight="600" style={styles.cardTitle}>
-                {t('spy:additional1')}
-              </H2>
-              <H4 style={{...styles.cardTitle}}>{t('spy:additional1Sub')}</H4>
-            </View>
+          <WheelCard
+            title={t('spy:additional1')}
+            subtitle={t('spy:additional1Sub')}
+            backgroundColor={colors.spyRed}
+            wheelData={['Off', 'On']}
+            onItemSelected={setSpyHintIndex}
+          />
 
-            <View style={styles.wheelContainer}>
-              <WheelPicker
-                data={['Off', 'On']}
-                itemTextFontFamily={'Nunito-Bold'}
-                selectedItemTextSize={20}
-                selectedItemTextColor={'white'}
-                selectedItemTextFontFamily={'Nunito-ExtraBold'}
-                hideIndicator
-                onItemSelected={selectedItem => {
-                  setSpyHintIndex(selectedItem);
-                }}
-              />
-            </View>
-          </View>
-          <View style={{...styles.card, backgroundColor: colors.spyRed}}>
-            <View style={{...styles.cardContent}}>
-              <H2 fontWeight="600" style={styles.cardTitle}>
-                {t('spy:additional2')}
-              </H2>
-              <H4 style={{...styles.cardTitle}}>{t('spy:additional2Sub')}</H4>
-            </View>
+          <WheelCard
+            title={t('spy:additional2')}
+            subtitle={t('spy:additional2Sub')}
+            backgroundColor={colors.spyRed}
+            wheelData={['Off', 'On']}
+            onItemSelected={setRolesIndex}
+          />
 
-            <View style={styles.wheelContainer}>
-              <WheelPicker
-                data={['Off', 'On']}
-                itemTextFontFamily={'Nunito-Bold'}
-                selectedItemTextSize={20}
-                selectedItemTextColor={'white'}
-                selectedItemTextFontFamily={'Nunito-ExtraBold'}
-                hideIndicator
-                onItemSelected={selectedItem => {
-                  setRolesIndex(selectedItem);
-                }}
-              />
-            </View>
-          </View>
-
-          <View style={{...styles.card, backgroundColor: colors.spyRed}}>
-            <View style={{...styles.cardContent}}>
-              <H2 fontWeight="600" style={styles.cardTitle}>
-                {t('spy:additional3')}
-              </H2>
-              <H4 style={{...styles.cardTitle}}>{t('spy:additional3Sub')}</H4>
-            </View>
-
-            <View style={styles.wheelContainer}>
-              <WheelPicker
-                data={['Off', 'On']}
-                itemTextFontFamily={'Nunito-Bold'}
-                selectedItemTextSize={20}
-                selectedItemTextColor={'white'}
-                selectedItemTextFontFamily={'Nunito-ExtraBold'}
-                hideIndicator
-                onItemSelected={selectedItem => {
-                  setDiscloseRolesIndex(selectedItem);
-                }}
-              />
-            </View>
-          </View>
+          <WheelCard
+            title={t('spy:additional3')}
+            subtitle={t('spy:additional3Sub')}
+            backgroundColor={colors.spyRed}
+            wheelData={['Off', 'On']}
+            onItemSelected={setDiscloseRolesIndex}
+          />
         </ScrollView>
 
         <View style={styles.buttons}>

@@ -1,6 +1,9 @@
 export default {
   next: 'Далей',
 
+  players: 'Гульцы',
+  playersSub: 'Выберыце колькасць гульцоў',
+
   locals: 'Мясцовыя',
   localssSub: 'Выберыце колькасць мясцовых жыхароў',
 

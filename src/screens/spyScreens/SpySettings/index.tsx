@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import {BackHandler, StatusBar, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Animated, BackHandler, StatusBar, View} from 'react-native';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {WheelPicker} from 'react-native-wheel-picker-android';
+
 import {t} from 'i18next';
 
 import {Screen, Button} from '@ui';
 import {colors, Screens} from '@constants';
-import {H1, H3} from '@Typography';
+
 import {styles} from './styles';
+import {SpyHeader, SpyNumberPicker} from '@components';
 
 export const SpySettings: React.FC = () => {
   const navigation: any = useNavigation();
@@ -26,17 +27,39 @@ export const SpySettings: React.FC = () => {
     }, []),
   );
 
+  const top: any = useRef(new Animated.Value(-1000)).current;
+  const bottom: any = useRef(new Animated.Value(-1000)).current;
+
   const [players, setPlayers] = useState(3);
+  const [spies, setSpies] = useState(1);
 
   const handleNext = () => {
-    navigation.navigate(Screens.spySpies, {data: {players}});
+    navigation.navigate(Screens.spyAdditional, {data: {players, spies}});
   };
 
   const backHandler = () => navigation.navigate(Screens.spyHome);
 
-  const setPlayersIndex = (index: number) => {
-    setPlayers(index + 3);
+  const addPlayers = () => {
+    setPlayers(prev => prev + 1);
   };
+
+  const removePlayers = () => {
+    spies === players && setSpies(players - 1);
+    setPlayers(prev => prev - 1);
+  };
+
+  const addSpies = () => {
+    setSpies(prev => prev + 1);
+  };
+
+  const removeSpies = () => {
+    setSpies(prev => prev - 1);
+  };
+
+  useEffect(() => {
+    Animated.spring(top, {toValue: 40, useNativeDriver: false}).start();
+    Animated.spring(bottom, {toValue: 40, useNativeDriver: false}).start();
+  }, []);
 
   return (
     <>
@@ -45,16 +68,52 @@ export const SpySettings: React.FC = () => {
           barStyle={'light-content'}
           backgroundColor={colors.aliasBlack}
         />
-        <View style={styles.header}>
-          <H1 fontWeight="600" style={{...styles.title}}>
-            {t('spy:locals')}
-          </H1>
-          <H3 style={{color: colors.spyRed}}> {t('spy:localssSub')}</H3>
-        </View>
+        <SpyHeader
+          title={t('spy:players')}
+          subtitle={t('spy:playersSub')}
+          style={{marginBottom: 30}}
+        />
 
         <View style={styles.wheelPicker}>
-          <View style={styles.card}>
-            <WheelPicker
+          <View style={styles.pickerContainer}>
+            <SpyNumberPicker
+              min={3}
+              max={8}
+              value={players}
+              title={t('spy:locals')}
+              plus={addPlayers}
+              minus={removePlayers}
+              style={{position: 'absolute', top, left: 40}}
+            />
+
+            <SpyNumberPicker
+              min={1}
+              max={players}
+              value={spies}
+              title={t('spy:spies')}
+              plus={addSpies}
+              minus={removeSpies}
+              style={{position: 'absolute', bottom, right: 40}}
+            />
+          </View>
+
+          {/* <CardWithContent
+            title={t('spy:locals')}
+            subtitle={t('spy:localssSub')}
+            backgroundColor={colors.spyRed}>
+            <View style={styles.numberPicker}>
+              <Icon
+                name="remove-circle-outline"
+                color={colors.white}
+                size={20}
+              />
+              <H2 style={styles.pickerNum}>{players}</H2>
+              <Icon name="add-circle-outline" color={colors.white} size={20} />
+            </View>
+          </CardWithContent> */}
+        </View>
+
+        {/* <WheelPicker
               data={['3', '4', '5', '6', '7', '8']}
               itemTextFontFamily={'Nunito-Bold'}
               selectedItemTextSize={52}
@@ -69,9 +128,8 @@ export const SpySettings: React.FC = () => {
               onItemSelected={selectedItem => {
                 setPlayersIndex(selectedItem);
               }}
-            />
-          </View>
-        </View>
+            /> */}
+
         <View style={styles.buttons}>
           <Button
             title={t('alias:back')}
