@@ -30,6 +30,11 @@ export const SpySettings: React.FC = () => {
   const top: any = useRef(new Animated.Value(-1000)).current;
   const bottom: any = useRef(new Animated.Value(-1000)).current;
 
+  useEffect(() => {
+    Animated.spring(top, {toValue: 40, useNativeDriver: false}).start();
+    Animated.spring(bottom, {toValue: 40, useNativeDriver: false}).start();
+  }, []);
+
   const [players, setPlayers] = useState(3);
   const [spies, setSpies] = useState(1);
 
@@ -55,11 +60,6 @@ export const SpySettings: React.FC = () => {
   const removeSpies = () => {
     setSpies(prev => prev - 1);
   };
-
-  useEffect(() => {
-    Animated.spring(top, {toValue: 40, useNativeDriver: false}).start();
-    Animated.spring(bottom, {toValue: 40, useNativeDriver: false}).start();
-  }, []);
 
   return (
     <>
@@ -96,39 +96,7 @@ export const SpySettings: React.FC = () => {
               style={{position: 'absolute', bottom, right: 40}}
             />
           </View>
-
-          {/* <CardWithContent
-            title={t('spy:locals')}
-            subtitle={t('spy:localssSub')}
-            backgroundColor={colors.spyRed}>
-            <View style={styles.numberPicker}>
-              <Icon
-                name="remove-circle-outline"
-                color={colors.white}
-                size={20}
-              />
-              <H2 style={styles.pickerNum}>{players}</H2>
-              <Icon name="add-circle-outline" color={colors.white} size={20} />
-            </View>
-          </CardWithContent> */}
         </View>
-
-        {/* <WheelPicker
-              data={['3', '4', '5', '6', '7', '8']}
-              itemTextFontFamily={'Nunito-Bold'}
-              selectedItemTextSize={52}
-              itemTextSize={30}
-              selectedItemTextColor="#B5322E"
-              indicatorColor="white"
-              selectedItemTextFontFamily={'Nunito-ExtraBold'}
-              style={{
-                width: '100%',
-                height: '100%',
-              }}
-              onItemSelected={selectedItem => {
-                setPlayersIndex(selectedItem);
-              }}
-            /> */}
 
         <View style={styles.buttons}>
           <Button

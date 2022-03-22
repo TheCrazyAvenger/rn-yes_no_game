@@ -19,5 +19,6 @@ export * from './spyComponents/SpyHeader';
 export * from './spyComponents/WheelCard';
 export * from './spyComponents/CardWithContent';
 export * from './spyComponents/SpyNumberPicker';
+export * from './spyComponents/SpyCard';
 
 export * from './PropsType';

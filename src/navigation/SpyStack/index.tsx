@@ -48,7 +48,11 @@ export const SpyStack: React.FC = () => {
       <Stack.Screen name={Screens.spySettings} component={SpySettings} />
       <Stack.Screen name={Screens.spyAdditional} component={SpyAdditional} />
       <Stack.Screen name={Screens.spyLocations} component={SpyLocations} />
-      <Stack.Screen name={Screens.spyStart} component={SpyStart} />
+      <Stack.Screen
+        name={Screens.spyStart}
+        options={{animationEnabled: false}}
+        component={SpyStart}
+      />
     </Stack.Navigator>
   );
 };

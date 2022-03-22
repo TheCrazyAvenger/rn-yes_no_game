@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
+  Animated,
   BackHandler,
   Modal,
   StatusBar,
@@ -53,6 +54,14 @@ export const AliasSettings: React.FC = () => {
   const [words, setWords] = useState(10);
   const [time, setTime] = useState(30);
   const [fee, setFee] = useState(false);
+
+  const left = useRef(new Animated.Value(-500)).current;
+  const right = useRef(new Animated.Value(-500)).current;
+
+  useEffect(() => {
+    Animated.spring(left, {toValue: 0, useNativeDriver: false}).start();
+    Animated.spring(right, {toValue: 0, useNativeDriver: false}).start();
+  }, []);
 
   const setVisibleHandler = () => setVisible(true);
   const categoryHandler = (name: string) => {
@@ -123,79 +132,91 @@ export const AliasSettings: React.FC = () => {
           <H3 style={{color: colors.aliasRed}}> {t('alias:settingSub')}</H3>
         </View>
 
-        <TouchableOpacity
-          onPress={setVisibleHandler}
-          style={{...styles.card, backgroundColor}}>
-          <View style={styles.cardContent}>
-            <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
-              {category ? category[language] : t('alias:category')}
-            </H2>
-          </View>
-          <Icon
-            name="chevron-forward"
-            size={30}
-            style={{marginRight: 30}}
-            color={color}
-          />
-        </TouchableOpacity>
-
-        <WheelCard
-          title={t('alias:setting1')}
-          subtitle={t('alias:setting1sub')}
-          backgroundColor={colors.aliasRed}
-          wheelData={[
-            '10',
-            '20',
-            '30',
-            '40',
-            '50',
-            '60',
-            '70',
-            '80',
-            '90',
-            '100',
-          ]}
-          onItemSelected={setWordIndex}
-        />
-
-        <WheelCard
-          title={t('alias:setting2')}
-          subtitle={t('alias:setting2sub')}
-          backgroundColor={backgroundColor}
-          color={color}
-          wheelData={['30', '60', '90', '120', '150', '180']}
-          onItemSelected={setTimeIndex}
-        />
-
-        <WheelCard
-          title={t('alias:setting3')}
-          subtitle={t('alias:setting3sub')}
-          backgroundColor={colors.aliasRed}
-          wheelData={['Off', 'On']}
-          onItemSelected={setPassFee}
-        />
-
-        <View
-          style={{
-            ...styles.card,
-            backgroundColor,
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-          }}>
-          <View style={{...styles.cardContent, width: '100%'}}>
-            <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
-              {t('alias:teams')}
-            </H2>
-            <H4 style={{...styles.cardTitle, color}}>{t('alias:teamsSub')}</H4>
-          </View>
-          <View style={styles.teams}>
-            <AliasTeams
-              teams={teams}
-              addTeam={addTeam}
-              removeTeam={removeTeam}
+        <Animated.View style={{left}}>
+          <TouchableOpacity
+            onPress={setVisibleHandler}
+            style={{...styles.card, backgroundColor}}>
+            <View style={styles.cardContent}>
+              <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
+                {category ? category[language] : t('alias:category')}
+              </H2>
+            </View>
+            <Icon
+              name="chevron-forward"
+              size={30}
+              style={{marginRight: 30}}
+              color={color}
             />
+          </TouchableOpacity>
+        </Animated.View>
+
+        <Animated.View style={{right}}>
+          <WheelCard
+            title={t('alias:setting1')}
+            subtitle={t('alias:setting1sub')}
+            backgroundColor={colors.aliasRed}
+            wheelData={[
+              '10',
+              '20',
+              '30',
+              '40',
+              '50',
+              '60',
+              '70',
+              '80',
+              '90',
+              '100',
+            ]}
+            onItemSelected={setWordIndex}
+          />
+        </Animated.View>
+
+        <Animated.View style={{left}}>
+          <WheelCard
+            title={t('alias:setting2')}
+            subtitle={t('alias:setting2sub')}
+            backgroundColor={backgroundColor}
+            color={color}
+            wheelData={['30', '60', '90', '120', '150', '180']}
+            onItemSelected={setTimeIndex}
+          />
+        </Animated.View>
+
+        <Animated.View style={{right}}>
+          <WheelCard
+            title={t('alias:setting3')}
+            subtitle={t('alias:setting3sub')}
+            backgroundColor={colors.aliasRed}
+            wheelData={['Off', 'On']}
+            onItemSelected={setPassFee}
+          />
+        </Animated.View>
+
+        <Animated.View style={{left}}>
+          <View
+            style={{
+              ...styles.card,
+              backgroundColor,
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+            }}>
+            <View style={{...styles.cardContent, width: '100%'}}>
+              <H2 fontWeight="600" style={{...styles.cardTitle, color}}>
+                {t('alias:teams')}
+              </H2>
+              <H4 style={{...styles.cardTitle, color}}>
+                {t('alias:teamsSub')}
+              </H4>
+            </View>
+            <View style={styles.teams}>
+              <AliasTeams
+                teams={teams}
+                addTeam={addTeam}
+                removeTeam={removeTeam}
+              />
+            </View>
           </View>
-        </View>
+        </Animated.View>
 
         <View style={styles.buttons}>
           <Button

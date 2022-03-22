@@ -2,6 +2,7 @@ import {authApi, reportApi, yesnoApi} from '@api';
 import {configureStore} from '@reduxjs/toolkit';
 import actionsSlice from './slices/actionsSlice';
 import aliasSlice from './slices/aliasSlice';
+import spySlice from './slices/spySlice';
 import userSlice from './slices/userSlice';
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     actions: actionsSlice,
     user: userSlice,
     alias: aliasSlice,
+    spy: spySlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

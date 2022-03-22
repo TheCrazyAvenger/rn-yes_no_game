@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {BackHandler, ScrollView, StatusBar, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Animated, BackHandler, ScrollView, StatusBar, View} from 'react-native';
 import {
   useFocusEffect,
   useNavigation,
@@ -33,12 +33,39 @@ export const SpyAdditional: React.FC = () => {
   );
 
   const [spyHint, setSpyHint] = useState(false);
+  const [spyHintNumber, setSpyHintNumber] = useState(5);
   const [roles, setRoles] = useState(false);
   const [discloseRoles, setDiscloseRoles] = useState(false);
+  const [time, setTime] = useState(5);
+
+  const left = useRef(new Animated.Value(-500)).current;
+  const right = useRef(new Animated.Value(-500)).current;
+  const height = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.spring(left, {toValue: 0, useNativeDriver: false}).start();
+    Animated.spring(right, {toValue: 0, useNativeDriver: false}).start();
+  }, []);
+
+  useEffect(() => {
+    if (spyHint) {
+      Animated.timing(height, {
+        toValue: 160,
+        duration: 200,
+        useNativeDriver: false,
+      }).start();
+    } else {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: false,
+      }).start();
+    }
+  }, [spyHint]);
 
   const handleNext = () => {
     navigation.navigate(Screens.spyLocations, {
-      data: {...data, spyHint, roles, discloseRoles},
+      data: {...data, spyHint, spyHintNumber, time, roles, discloseRoles},
     });
   };
 
@@ -59,6 +86,14 @@ export const SpyAdditional: React.FC = () => {
     setDiscloseRoles(isOn);
   };
 
+  const setTimeIndex = (index: number) => {
+    setTime(index + 1);
+  };
+
+  const setspyHintNumberIndex = (index: number) => {
+    setSpyHintNumber(index + 5);
+  };
+
   return (
     <>
       <Screen style={{backgroundColor: colors.aliasBlack}}>
@@ -72,31 +107,59 @@ export const SpyAdditional: React.FC = () => {
           style={{marginBottom: 30}}
         />
 
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <WheelCard
-            title={t('spy:additional1')}
-            subtitle={t('spy:additional1Sub')}
-            backgroundColor={colors.spyRed}
-            wheelData={['Off', 'On']}
-            onItemSelected={setSpyHintIndex}
-          />
+        <Animated.ScrollView showsVerticalScrollIndicator={false}>
+          <Animated.View style={{left}}>
+            <WheelCard
+              title={t('spy:time')}
+              subtitle={t('spy:timeSub')}
+              initPosition={4}
+              backgroundColor={colors.spyRed}
+              wheelData={[...Array(30).keys()].map(item =>
+                (item + 1).toString(),
+              )}
+              onItemSelected={setTimeIndex}
+            />
+          </Animated.View>
 
-          <WheelCard
-            title={t('spy:additional2')}
-            subtitle={t('spy:additional2Sub')}
-            backgroundColor={colors.spyRed}
-            wheelData={['Off', 'On']}
-            onItemSelected={setRolesIndex}
-          />
+          <Animated.View style={{right}}>
+            <WheelCard
+              title={t('spy:additional1')}
+              subtitle={t('spy:additional1Sub')}
+              backgroundColor={colors.spyRed}
+              wheelData={['Off', 'On']}
+              onItemSelected={setSpyHintIndex}
+            />
+          </Animated.View>
+          <Animated.View style={{height}}>
+            <WheelCard
+              title={t('spy:spyHint')}
+              subtitle={t('spy:spyHintSub')}
+              backgroundColor={colors.spyRed}
+              wheelData={['5', '6', '7', '8', '9', '10']}
+              onItemSelected={setspyHintNumberIndex}
+            />
+          </Animated.View>
 
-          <WheelCard
-            title={t('spy:additional3')}
-            subtitle={t('spy:additional3Sub')}
-            backgroundColor={colors.spyRed}
-            wheelData={['Off', 'On']}
-            onItemSelected={setDiscloseRolesIndex}
-          />
-        </ScrollView>
+          <Animated.View style={{left}}>
+            <WheelCard
+              title={t('spy:additional2')}
+              subtitle={t('spy:additional2Sub')}
+              backgroundColor={colors.spyRed}
+              wheelData={['Off', 'On']}
+              onItemSelected={setRolesIndex}
+            />
+          </Animated.View>
+
+          <Animated.View style={{right}}>
+            <WheelCard
+              title={t('spy:additional3')}
+              subtitle={t('spy:additional3Sub')}
+              backgroundColor={colors.spyRed}
+              wheelData={['Off', 'On']}
+              onItemSelected={setDiscloseRolesIndex}
+            />
+          </Animated.View>
+        </Animated.ScrollView>
 
         <View style={styles.buttons}>
           <Button

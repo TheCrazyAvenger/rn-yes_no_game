@@ -11,6 +11,7 @@ type WheelCardProps = {
   subtitle: string;
   wheelData: Array<string>;
   color?: string;
+  initPosition?: number;
   onItemSelected: (...args: any) => any;
 };
 
@@ -20,6 +21,7 @@ export const WheelCard: React.FC<WheelCardProps> = ({
   subtitle,
   wheelData,
   color,
+  initPosition,
   onItemSelected,
 }) => {
   return (
@@ -35,6 +37,7 @@ export const WheelCard: React.FC<WheelCardProps> = ({
 
       <View style={styles.wheelContainer}>
         <WheelPicker
+          initPosition={initPosition}
           data={wheelData}
           itemTextFontFamily={'Nunito-Bold'}
           selectedItemTextSize={20}
