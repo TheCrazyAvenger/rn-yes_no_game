@@ -2,6 +2,7 @@ export default {
   next: 'Next',
   show: 'Show',
   spy: 'Spy',
+  local: 'Local',
   location: 'Location:',
 
   localHint: 'Try not to give out the location and find out who is the spy',
@@ -37,4 +38,11 @@ export default {
 
   additional3: 'Disclose roles',
   additional3Sub: 'When a playes is killed, his role will be revealed',
+
+  start: 'Now you will see your roles',
+  startSub: 'Do not show them to others!',
+
+  possibleLocations: 'Possible Locations',
+
+  gotIt: 'Got it',
 };

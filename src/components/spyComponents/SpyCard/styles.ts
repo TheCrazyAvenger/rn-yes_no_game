@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
   },
   role: {
     fontSize: 45,
+    textAlign: 'center',
   },
   tip: {
     textAlign: 'center',

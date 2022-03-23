@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     color: colors.white,
   },
   wheelContainer: {
-    maxWidth: '10%',
+    maxWidth: '15%',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 20,

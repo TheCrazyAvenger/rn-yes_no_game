@@ -9,4 +9,6 @@ export default {
   name: 'Ваша імя',
   email: 'Ваша пошта',
   message: 'Ваша паведамленне',
+  on: 'Укл',
+  off: 'Выкл',
 };

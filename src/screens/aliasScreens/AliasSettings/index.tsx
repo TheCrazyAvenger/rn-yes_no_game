@@ -187,7 +187,7 @@ export const AliasSettings: React.FC = () => {
             title={t('alias:setting3')}
             subtitle={t('alias:setting3sub')}
             backgroundColor={colors.aliasRed}
-            wheelData={['Off', 'On']}
+            wheelData={[t('common:off'), t('common:on')]}
             onItemSelected={setPassFee}
           />
         </Animated.View>

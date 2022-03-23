@@ -5,30 +5,38 @@ import {t} from 'i18next';
 import * as RNLocalize from 'react-native-localize';
 
 import {Screen, Button} from '@ui';
-import {colors} from '@constants';
+import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import {useAppSelector} from '@hooks';
 import {SpyCard} from '@components';
-import {H1, H3} from '@Typography';
+import {H1, H2, H3} from '@Typography';
+import {shuffle} from '@utilities';
 
 export const SpyStart: React.FC = () => {
   const navigation: any = useNavigation();
   const route: any = useRoute();
 
-  const {spyHint, spyHintNumber, locations, location, rolesList} =
+  const {spyHint, spyHintNumber, locations, location, rolesList, spyLocations} =
     useAppSelector(state => state.spy);
 
   const gameLocation = location.name;
 
   const [index, setIndex] = useState(0);
   const [showRoles, setShowRoles] = useState(spyHint ? false : true);
+  const [showSpyHint, setShowSpyHint] = useState(spyHint);
   const [isCardOpen, setIsCardOpen] = useState(false);
+  const [isNextCard, setIsNextCard] = useState(false);
   const pan = useRef(new Animated.ValueXY()).current;
   const scale = useRef(new Animated.Value(0)).current;
 
   const rolesOpacity = useRef(new Animated.Value(1)).current;
   const roleTitleOpacity = useRef(new Animated.Value(0)).current;
   const roleTextOpacity = useRef(new Animated.Value(0)).current;
+
+  const spyOpacity = useRef(new Animated.Value(1)).current;
+  const spyTitleOpacity = useRef(new Animated.Value(0)).current;
+  const spyLocOpacity = useRef(new Animated.Value(0)).current;
+  const spyButtonOpacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (showRoles) {
@@ -61,10 +69,64 @@ export const SpyStart: React.FC = () => {
         );
       });
     }
-  }, []);
+  }, [showRoles]);
+
+  useEffect(() => {
+    if (showSpyHint) {
+      Animated.timing(spyTitleOpacity, {
+        toValue: 1,
+        useNativeDriver: false,
+      }).start(() => {
+        setTimeout(
+          () =>
+            Animated.timing(spyLocOpacity, {
+              toValue: 1,
+              duration: 500,
+              useNativeDriver: false,
+            }).start(() => {
+              setTimeout(
+                () =>
+                  Animated.spring(spyButtonOpacity, {
+                    toValue: 1,
+                    useNativeDriver: false,
+                  }).start(),
+                1000,
+              );
+            }),
+          500,
+        );
+      });
+    }
+  }, [showSpyHint]);
+
+  useEffect(() => {
+    if (isNextCard) {
+      Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
+        setIndex(prev => prev + 1);
+        setIsNextCard(false);
+        if (index === rolesList.length - 1) {
+          navigation.navigate(Screens.spyGame);
+        } else {
+          Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
+        }
+      });
+    }
+  }, [isNextCard]);
 
   const toggleOpen = () => {
+    setIsNextCard(isCardOpen ? true : false);
     setIsCardOpen(prev => !prev);
+  };
+
+  const hideHint = () => {
+    Animated.timing(spyOpacity, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: false,
+    }).start(() => {
+      setShowSpyHint(false);
+      setShowRoles(true);
+    });
   };
 
   return (
@@ -74,7 +136,33 @@ export const SpyStart: React.FC = () => {
           barStyle={'light-content'}
           backgroundColor={colors.aliasBlack}
         />
-        {spyHint && <View></View>}
+        {showSpyHint && (
+          <Animated.View style={{opacity: spyOpacity}}>
+            <Animated.View
+              style={{alignItems: 'center', opacity: spyTitleOpacity}}>
+              <H1 fontWeight="600" style={styles.spyTitle}>
+                {t('spy:possibleLocations')}
+              </H1>
+              <View style={styles.line} />
+            </Animated.View>
+
+            <Animated.View
+              style={{alignItems: 'center', opacity: spyLocOpacity}}>
+              {spyLocations.map((item: any, i: number) => (
+                <H2 style={{color: colors.white}}>{item.name}</H2>
+              ))}
+            </Animated.View>
+            <Animated.View
+              style={{alignItems: 'center', opacity: spyButtonOpacity}}>
+              <Button
+                title={t('spy:gotIt')}
+                style={{...styles.nextButton, height: 45}}
+                containerStyle={{...styles.buttonContainer, marginTop: 15}}
+                onPress={hideHint}
+              />
+            </Animated.View>
+          </Animated.View>
+        )}
         {showRoles && (
           <Animated.View
             style={{
@@ -86,40 +174,38 @@ export const SpyStart: React.FC = () => {
               <H1
                 fontWeight="600"
                 style={{textAlign: 'center', color: colors.white}}>
-                Now you will see your roles
+                {t('spy:start')}
               </H1>
             </Animated.View>
 
             <Animated.View style={{opacity: roleTextOpacity}}>
               <H3 style={{textAlign: 'center', color: colors.aliasRed}}>
-                Do not show them to others!
+                {t('spy:startSub')}
               </H3>
             </Animated.View>
           </Animated.View>
         )}
-        {!showRoles && (
+        {!showRoles && !showSpyHint && (
           <>
-            <View style={styles.secondCard}>
-              <SpyCard
-                role={rolesList[index]}
-                location={gameLocation}
-                isOpen={false}
-              />
-            </View>
-
-            <Animated.View style={{transform: [{translateY: pan.y}, {scale}]}}>
+            <Animated.View
+              style={{
+                alignItems: 'center',
+                transform: [{translateY: pan.y}, {scale}],
+              }}>
               <SpyCard
                 role={rolesList[index]}
                 location={gameLocation}
                 isOpen={isCardOpen}
               />
+
+              <Button
+                disabled={isNextCard}
+                title={isCardOpen ? t('spy:next') : t('spy:show')}
+                style={styles.nextButton}
+                containerStyle={styles.buttonContainer}
+                onPress={toggleOpen}
+              />
             </Animated.View>
-            <Button
-              title={isCardOpen ? t('spy:next') : t('spy:show')}
-              style={styles.nextButton}
-              containerStyle={styles.buttonContainer}
-              onPress={toggleOpen}
-            />
           </>
         )}
       </Screen>

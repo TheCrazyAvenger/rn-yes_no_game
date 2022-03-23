@@ -4,6 +4,7 @@ interface SpyState {
   time: number | null;
   spyHint: boolean;
   spyHintNumber: number | null;
+  spyLocations: any;
   roles: boolean;
   discloseRoles: boolean;
   locations: any;
@@ -17,6 +18,7 @@ const initialState: SpyState = {
   spyHintNumber: 0,
   roles: false,
   discloseRoles: false,
+  spyLocations: null,
   locations: null,
   rolesList: null,
   location: null,
@@ -33,6 +35,7 @@ const spySlice = createSlice({
         spyHintNumber,
         roles,
         discloseRoles,
+        spyLocations,
         locations,
         rolesList,
         location,
@@ -43,6 +46,7 @@ const spySlice = createSlice({
       state.spyHintNumber = spyHintNumber;
       state.roles = roles;
       state.discloseRoles = discloseRoles;
+      state.spyLocations = spyLocations;
       state.locations = locations;
       state.rolesList = rolesList;
       state.location = location;
@@ -53,6 +57,7 @@ const spySlice = createSlice({
       state.spyHintNumber = 0;
       state.roles = false;
       state.discloseRoles = false;
+      state.spyLocations = null;
       state.locations = null;
       state.rolesList = null;
       state.location = null;

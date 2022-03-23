@@ -84,12 +84,14 @@ export const SpyLocations: React.FC = () => {
         const localsNumber = players - spies;
         const isRoles = roles
           ? shuffle(gameLocation.roles).slice(0, localsNumber)
-          : [...Array(localsNumber).keys()].map(() => 'Local');
+          : [...Array(localsNumber).keys()].map(() => t('spy:local'));
 
         const locationRoles = shuffle([
           ...isRoles,
           ...[...Array(spies).keys()].map(() => t('spy:spy')),
         ]);
+
+        const spyLocations = shuffle(locationsList.slice(0, spyHintNumber));
 
         await dispatch(
           setGameData({
@@ -98,6 +100,7 @@ export const SpyLocations: React.FC = () => {
             spyHintNumber,
             roles,
             discloseRoles,
+            spyLocations,
             locations: locationsList,
             rolesList: locationRoles,
             location: gameLocation,

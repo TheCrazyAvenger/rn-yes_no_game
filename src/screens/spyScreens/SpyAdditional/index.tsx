@@ -126,7 +126,7 @@ export const SpyAdditional: React.FC = () => {
               title={t('spy:additional1')}
               subtitle={t('spy:additional1Sub')}
               backgroundColor={colors.spyRed}
-              wheelData={['Off', 'On']}
+              wheelData={[t('common:off'), t('common:on')]}
               onItemSelected={setSpyHintIndex}
             />
           </Animated.View>
@@ -145,7 +145,7 @@ export const SpyAdditional: React.FC = () => {
               title={t('spy:additional2')}
               subtitle={t('spy:additional2Sub')}
               backgroundColor={colors.spyRed}
-              wheelData={['Off', 'On']}
+              wheelData={[t('common:off'), t('common:on')]}
               onItemSelected={setRolesIndex}
             />
           </Animated.View>
@@ -155,7 +155,7 @@ export const SpyAdditional: React.FC = () => {
               title={t('spy:additional3')}
               subtitle={t('spy:additional3Sub')}
               backgroundColor={colors.spyRed}
-              wheelData={['Off', 'On']}
+              wheelData={[t('common:off'), t('common:on')]}
               onItemSelected={setDiscloseRolesIndex}
             />
           </Animated.View>

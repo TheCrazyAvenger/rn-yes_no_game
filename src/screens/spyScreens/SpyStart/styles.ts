@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: 160,
-    marginTop: 20,
+    marginTop: 30,
     marginBottom: 0,
     borderRadius: 10,
   },
@@ -32,8 +32,17 @@ export const styles = StyleSheet.create({
   },
   secondCard: {
     position: 'absolute',
-    justifyContent: 'center',
-    top: '50%',
-    transform: [{translateY: -272.5}],
+  },
+  spyTitle: {
+    textAlign: 'center',
+    color: colors.spyRed,
+    fontSize: 46,
+    lineHeight: 50,
+  },
+  line: {
+    height: 1,
+    backgroundColor: colors.white,
+    width: 100,
+    marginVertical: 15,
   },
 });

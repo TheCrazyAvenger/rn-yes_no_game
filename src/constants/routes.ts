@@ -29,4 +29,5 @@ export enum Screens {
   spyAdditional = 'spyAdditional',
   spyLocations = 'spyLocations',
   spyStart = 'spyStart',
+  spyGame = 'spyGame',
 }
