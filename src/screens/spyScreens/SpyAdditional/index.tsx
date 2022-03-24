@@ -35,7 +35,6 @@ export const SpyAdditional: React.FC = () => {
   const [spyHint, setSpyHint] = useState(false);
   const [spyHintNumber, setSpyHintNumber] = useState(5);
   const [roles, setRoles] = useState(false);
-  const [discloseRoles, setDiscloseRoles] = useState(false);
   const [time, setTime] = useState(5);
 
   const left = useRef(new Animated.Value(-500)).current;
@@ -65,7 +64,7 @@ export const SpyAdditional: React.FC = () => {
 
   const handleNext = () => {
     navigation.navigate(Screens.spyLocations, {
-      data: {...data, spyHint, spyHintNumber, time, roles, discloseRoles},
+      data: {...data, spyHint, spyHintNumber, time, roles},
     });
   };
 
@@ -79,11 +78,6 @@ export const SpyAdditional: React.FC = () => {
   const setRolesIndex = (index: number) => {
     const isOn = index === 0 ? false : true;
     setRoles(isOn);
-  };
-
-  const setDiscloseRolesIndex = (index: number) => {
-    const isOn = index === 0 ? false : true;
-    setDiscloseRoles(isOn);
   };
 
   const setTimeIndex = (index: number) => {
@@ -147,16 +141,6 @@ export const SpyAdditional: React.FC = () => {
               backgroundColor={colors.spyRed}
               wheelData={[t('common:off'), t('common:on')]}
               onItemSelected={setRolesIndex}
-            />
-          </Animated.View>
-
-          <Animated.View style={{right}}>
-            <WheelCard
-              title={t('spy:additional3')}
-              subtitle={t('spy:additional3Sub')}
-              backgroundColor={colors.spyRed}
-              wheelData={[t('common:off'), t('common:on')]}
-              onItemSelected={setDiscloseRolesIndex}
             />
           </Animated.View>
         </Animated.ScrollView>

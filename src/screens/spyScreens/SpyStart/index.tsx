@@ -1,26 +1,44 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Animated, StatusBar, View} from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {Animated, BackHandler, StatusBar, View} from 'react-native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import {t} from 'i18next';
-import * as RNLocalize from 'react-native-localize';
 
 import {Screen, Button} from '@ui';
 import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import {useAppSelector} from '@hooks';
-import {SpyCard} from '@components';
+import {SpyCard, SpyModalExit} from '@components';
 import {H1, H2, H3} from '@Typography';
-import {shuffle} from '@utilities';
 
 export const SpyStart: React.FC = () => {
   const navigation: any = useNavigation();
   const route: any = useRoute();
 
-  const {spyHint, spyHintNumber, locations, location, rolesList, spyLocations} =
-    useAppSelector(state => state.spy);
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        setVisible(true);
+        return true;
+      };
+
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+  );
+
+  const {spyHint, location, rolesList, spyLocations} = useAppSelector(
+    state => state.spy,
+  );
 
   const gameLocation = location.name;
 
+  const [visible, setVisible] = useState(false);
   const [index, setIndex] = useState(0);
   const [showRoles, setShowRoles] = useState(spyHint ? false : true);
   const [showSpyHint, setShowSpyHint] = useState(spyHint);
@@ -129,15 +147,20 @@ export const SpyStart: React.FC = () => {
     });
   };
 
+  const hideModal = () => {
+    setVisible(false);
+  };
+
   return (
     <>
+      <SpyModalExit visible={visible} rightButton={hideModal} />
       <Screen style={styles.container}>
         <StatusBar
           barStyle={'light-content'}
           backgroundColor={colors.aliasBlack}
         />
         {showSpyHint && (
-          <Animated.View style={{opacity: spyOpacity}}>
+          <Animated.View style={{paddingHorizontal: 20, opacity: spyOpacity}}>
             <Animated.View
               style={{alignItems: 'center', opacity: spyTitleOpacity}}>
               <H1 fontWeight="600" style={styles.spyTitle}>
@@ -149,7 +172,9 @@ export const SpyStart: React.FC = () => {
             <Animated.View
               style={{alignItems: 'center', opacity: spyLocOpacity}}>
               {spyLocations.map((item: any, i: number) => (
-                <H2 style={{color: colors.white}}>{item.name}</H2>
+                <H2 key={i} style={{color: colors.white}}>
+                  {item.name}
+                </H2>
               ))}
             </Animated.View>
             <Animated.View

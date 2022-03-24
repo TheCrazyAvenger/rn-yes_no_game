@@ -3,7 +3,6 @@ import {
   Animated,
   BackHandler,
   FlatList,
-  ScrollView,
   StatusBar,
   useWindowDimensions,
   View,
@@ -65,15 +64,7 @@ export const SpyLocations: React.FC = () => {
   const handleNext = () => {
     Animated.timing(coverTop, {toValue: 0, useNativeDriver: false}).start(
       async () => {
-        const {
-          time,
-          spyHint,
-          spyHintNumber,
-          roles,
-          discloseRoles,
-          players,
-          spies,
-        } = data;
+        const {time, spyHint, spyHintNumber, roles, players, spies} = data;
 
         const locationsList = shuffle(
           locations[language][location].locations,
@@ -99,7 +90,6 @@ export const SpyLocations: React.FC = () => {
             spyHint,
             spyHintNumber,
             roles,
-            discloseRoles,
             spyLocations,
             locations: locationsList,
             rolesList: locationRoles,

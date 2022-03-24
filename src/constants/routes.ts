@@ -30,4 +30,5 @@ export enum Screens {
   spyLocations = 'spyLocations',
   spyStart = 'spyStart',
   spyGame = 'spyGame',
+  spyFinish = 'spyFinish',
 }

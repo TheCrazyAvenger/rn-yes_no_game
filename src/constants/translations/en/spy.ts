@@ -45,4 +45,15 @@ export default {
   possibleLocations: 'Possible Locations',
 
   gotIt: 'Got it',
+
+  modalTitle: 'Are you sure you want to exit the game?',
+  modalText: 'All progress will not be saved',
+
+  spyWon: 'Spy won',
+  spyWonSub: 'Spy guessed the location',
+  localWon: 'Locals won',
+  localWonSub: 'Locals found a spy',
+
+  gameTitle: 'Question Time',
+  gameSubTitle: 'Press pause at any time to vote or indicate who won',
 };

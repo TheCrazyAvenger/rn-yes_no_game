@@ -8,6 +8,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import {
   SpyAdditional,
+  SpyFinish,
   SpyGame,
   SpyHome,
   SpyLocations,
@@ -58,6 +59,11 @@ export const SpyStack: React.FC = () => {
         name={Screens.spyGame}
         options={{animationEnabled: false}}
         component={SpyGame}
+      />
+      <Stack.Screen
+        name={Screens.spyFinish}
+        options={{animationEnabled: false}}
+        component={SpyFinish}
       />
     </Stack.Navigator>
   );

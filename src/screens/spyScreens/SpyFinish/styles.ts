@@ -3,8 +3,19 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.aliasBlack,
+  },
+  logo: {
+    width: 70,
+    height: 70,
+    borderRadius: 14,
+    marginBottom: 20,
+  },
+  card: {
     width: 300,
-    height: 450,
+    height: 470,
     marginTop: 20,
 
     borderRadius: 10,
@@ -13,17 +24,18 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.aliasBlack,
     alignItems: 'center',
   },
+  winTitle: {
+    textAlign: 'center',
+    color: colors.white,
+    fontSize: 45,
+    lineHeight: 55,
+    textTransform: 'uppercase',
+  },
   content: {
     padding: 20,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    transform: [{rotateY: '180deg'}],
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: 45,
-    color: colors.white,
   },
   image: {
     width: '100%',
@@ -41,7 +53,20 @@ export const styles = StyleSheet.create({
     height: 1,
     backgroundColor: colors.white,
     width: 100,
-    marginTop: 15,
+
     marginBottom: 10,
+  },
+  buttons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 15,
+  },
+  button: {
+    marginHorizontal: 5,
+    backgroundColor: colors.spyRed,
+    width: 60,
+    height: 60,
+    borderRadius: 14,
   },
 });

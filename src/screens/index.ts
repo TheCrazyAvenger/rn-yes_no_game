@@ -32,3 +32,4 @@ export * from './spyScreens/SpyAdditional';
 export * from './spyScreens/SpyLocations';
 export * from './spyScreens/SpyStart';
 export * from './spyScreens/SpyGame';
+export * from './spyScreens/SpyFinish';
