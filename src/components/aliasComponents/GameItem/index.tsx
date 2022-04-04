@@ -21,32 +21,29 @@ export const GameItem: React.FC<GameItemProps> = ({
   onPress,
 }) => {
   return (
-    <>
-      <ImageBackground blurRadius={1} source={image}>
-        <View style={styles.wrapper}>
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => onPress(title)}
-            style={styles.container}>
-            <View style={styles.main}>
-              <View>
-                <H3 fontWeight="bold" style={styles.title}>
-                  {title}
-                </H3>
-                <H4 style={styles.text}>{difficulty}</H4>
-              </View>
+    <ImageBackground blurRadius={1} style={styles.mainContainer} source={image}>
+      <View style={styles.wrapper}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => onPress(title)}
+          style={styles.container}>
+          <View style={styles.main}>
+            <View>
+              <H3 fontWeight="bold" style={styles.title}>
+                {title}
+              </H3>
+              <H4 style={styles.text}>{difficulty}</H4>
             </View>
-            <View style={styles.main}>
-              <H5 style={styles.text}>{words}</H5>
+          </View>
+          <View style={styles.main}>
+            <H5 style={styles.text}>{words}</H5>
 
-              <H2 style={styles.words} fontWeight="bold">
-                {wordsNumber}
-              </H2>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-      <View style={styles.line} />
-    </>
+            <H2 style={styles.words} fontWeight="bold">
+              {wordsNumber}
+            </H2>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
 };

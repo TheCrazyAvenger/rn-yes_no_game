@@ -1,16 +1,10 @@
-import {colors} from '@constants';
-import {useAppDispatch, useAppSelector} from '@hooks';
-
-import {BlurView} from '@react-native-community/blur';
-import {useNavigation} from '@react-navigation/native';
-
-import {H1, H2, H3} from '@Typography';
-import {CloseButton} from '@ui';
-
-import {t} from 'i18next';
 import React from 'react';
 import {Modal, useWindowDimensions, View} from 'react-native';
+import {BlurView} from '@react-native-community/blur';
+import {t} from 'i18next';
 
+import {H1, H3} from '@Typography';
+import {Button} from '@ui';
 import {styles} from './styles';
 
 type SpyModalRolesProps = {
@@ -24,12 +18,7 @@ export const SpyModalRoles: React.FC<SpyModalRolesProps> = ({
   visible,
   hideModal,
 }) => {
-  const navigation: any = useNavigation();
-  const dispatch = useAppDispatch();
-
   const {width} = useWindowDimensions();
-
-  const darkTheme = useAppSelector(state => state.user.darkTheme);
 
   const {name, roles} = locations;
 
@@ -41,15 +30,16 @@ export const SpyModalRoles: React.FC<SpyModalRolesProps> = ({
           <H1 fontWeight="600" style={styles.title}>
             {name}
           </H1>
-          <H3 style={styles.text}>Roles:</H3>
+          <H3 style={styles.text}>{t('spy:roles')}</H3>
           {roles.map((item: string, i: number) => (
             <H3 style={styles.text} key={item}>
               {i + 1}. {item}
             </H3>
           ))}
-          <CloseButton
-            style={styles.closeButton}
-            buttonColor={colors.spyRed}
+          <Button
+            title={t('spy:close')}
+            style={{...styles.nextButton}}
+            containerStyle={styles.buttonContainer}
             onPress={hideModal}
           />
         </View>

@@ -21,7 +21,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     const language = RNLocalize.getLocales()[0].languageCode;
     i18next.changeLanguage(setLanguage(language));
-  }, []);
+  }, [RNLocalize.getLocales()[0].languageCode]);
 
   return (
     <SafeAreaProvider>

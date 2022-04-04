@@ -64,7 +64,7 @@ export const SpyCard: React.FC<SpyCardProps> = ({location, role, isOpen}) => {
         <View style={styles.content}>
           <H1 style={{...styles.role, color: textColor}}>{role}</H1>
           <H3 style={{textAlign: 'center', color: colors.white}}>
-            {t('spy:location')} {isSpy ? 'Unknown' : location}
+            {t('spy:location')} {isSpy ? t('spy:unknown') : location}
           </H3>
           <View style={styles.line} />
           <H3 style={{...styles.tip, color: textColor}}>

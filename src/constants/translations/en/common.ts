@@ -11,4 +11,5 @@ export default {
   message: 'Your message',
   on: 'On',
   off: 'Off',
+  close: 'Close',
 };

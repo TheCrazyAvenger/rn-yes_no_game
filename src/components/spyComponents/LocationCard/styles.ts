@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     marginBottom: 10,
-    margin: 20,
+    margin: 15,
     paddingVertical: 15,
     paddingHorizontal: 20,
   },

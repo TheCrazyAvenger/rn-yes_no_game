@@ -5,7 +5,6 @@ import {
 } from '@react-navigation/stack';
 
 import {
-  AliasChoose,
   AliasGame,
   AliasHome,
   AliasResults,
@@ -17,7 +16,6 @@ import {colors, Screens} from '@constants';
 import {styles} from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
-import {t} from 'i18next';
 
 const Stack = createStackNavigator();
 
@@ -29,6 +27,7 @@ export const AliasStack: React.FC = () => {
   const screenOptions: StackNavigationOptions = {
     headerTitleStyle: styles.headerTitleStyle,
     headerStyle: styles.headerStyle,
+    headerShown: false,
     headerLeft: () => (
       <Icon
         name="arrow-back"
@@ -50,61 +49,11 @@ export const AliasStack: React.FC = () => {
         }}
         component={AliasHome}
       />
-      <Stack.Screen
-        name={Screens.aliasChoose}
-        options={{
-          title: 'Choose game',
-        }}
-        component={AliasChoose}
-      />
-      <Stack.Screen
-        name={Screens.aliasTeams}
-        options={{
-          title: 'Teams',
-        }}
-        component={AliasTeams}
-      />
-      <Stack.Screen
-        name={Screens.aliasSettings}
-        options={{
-          // title: t('alias:gameSettings'),
-          // headerLeft: () => (
-          //   <Icon
-          //     name="arrow-back"
-          //     size={25}
-          //     onPress={() => navigation.navigate(Screens.aliasHome)}
-          //     style={styles.leftIcon}
-          //     color={colors.white}
-          //   />
-          // ),
-          headerShown: false,
-        }}
-        component={AliasSettings}
-      />
-      <Stack.Screen
-        name={Screens.aliasStart}
-        options={{
-          headerShown: false,
-        }}
-        component={AliasStart}
-      />
-      <Stack.Screen
-        name={Screens.aliasGame}
-        options={{
-          headerShown: false,
-        }}
-        component={AliasGame}
-      />
-      <Stack.Screen
-        name={Screens.aliasResults}
-        options={{
-          // headerLeft: () => null,
-          // headerTitleAlign: 'center',
-          // title: t('alias:results'),
-          headerShown: false,
-        }}
-        component={AliasResults}
-      />
+      <Stack.Screen name={Screens.aliasTeams} component={AliasTeams} />
+      <Stack.Screen name={Screens.aliasSettings} component={AliasSettings} />
+      <Stack.Screen name={Screens.aliasStart} component={AliasStart} />
+      <Stack.Screen name={Screens.aliasGame} component={AliasGame} />
+      <Stack.Screen name={Screens.aliasResults} component={AliasResults} />
     </Stack.Navigator>
   );
 };

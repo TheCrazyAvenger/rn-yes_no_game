@@ -4,6 +4,8 @@ export default {
   spy: 'Spy',
   local: 'Local',
   location: 'Location:',
+  roles: 'Roles:',
+  unknown: 'Unknown',
 
   localHint: 'Try not to give out the location and find out who is the spy',
   spyGameHint: 'Try not to betray yourself and find out the location',

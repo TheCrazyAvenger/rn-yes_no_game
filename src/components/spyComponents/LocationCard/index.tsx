@@ -37,7 +37,7 @@ export const LocationCard: React.FC<LocationCardProps> = ({item}) => {
         hideModal={hideModal}
         locations={locations[index]}
       />
-      <View style={{...styles.card, width: width - 40}}>
+      <View style={{...styles.card, width: width - 30}}>
         <H1 fontWeight="600" style={styles.cardTitle}>
           {name}
         </H1>

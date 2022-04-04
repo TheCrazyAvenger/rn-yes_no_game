@@ -2,6 +2,8 @@ export default {
   gameSettings: 'Settings',
   settingSub: 'A few pre-game tweaks',
   category: 'Category',
+  categories: 'Categories',
+  chooseOne: 'Choose one to get started',
   teams: 'Teams',
   teamsSub: 'Customize the number of teams',
   team: 'Team',

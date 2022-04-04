@@ -11,4 +11,5 @@ export default {
   message: 'Ваша паведамленне',
   on: 'Укл',
   off: 'Выкл',
+  close: 'Закрыць',
 };

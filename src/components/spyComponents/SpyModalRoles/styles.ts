@@ -30,8 +30,14 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
     color: colors.white,
   },
-  closeButton: {
-    top: 10,
-    right: 10,
+  buttonContainer: {
+    marginBottom: 0,
+    marginTop: 10,
+    borderRadius: 10,
+  },
+  nextButton: {
+    height: 45,
+    borderRadius: 10,
+    backgroundColor: colors.spyRed,
   },
 });

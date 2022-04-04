@@ -11,9 +11,9 @@ export const styles = StyleSheet.create({
     fontSize: 45,
   },
   card: {
-    marginHorizontal: 20,
+    marginHorizontal: 15,
     overflow: 'hidden',
-    marginBottom: 10,
+    marginBottom: 15,
     borderRadius: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginHorizontal: 20,
+    marginHorizontal: 15,
     marginBottom: 10,
   },
   buttonContainer: {

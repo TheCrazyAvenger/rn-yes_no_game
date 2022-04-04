@@ -2,6 +2,12 @@ import {colors} from '@constants';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
+  mainContainer: {
+    marginHorizontal: 15,
+    marginBottom: 15,
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
   container: {
     padding: 15,
     paddingBottom: 20,
@@ -21,10 +27,6 @@ export const styles = StyleSheet.create({
   },
   sub: {
     color: colors.aliasBlack,
-  },
-  line: {
-    height: 2,
-    backgroundColor: colors.lightgray,
   },
   text: {
     color: colors.white,

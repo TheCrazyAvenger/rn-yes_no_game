@@ -117,7 +117,7 @@ export const AliasSettings: React.FC = () => {
 
   return (
     <>
-      <Modal animationType="fade" visible={visible}>
+      <Modal animationType="slide" visible={visible}>
         <AliasChoose setCategory={categoryHandler} />
       </Modal>
       <Screen type="ScrollView">

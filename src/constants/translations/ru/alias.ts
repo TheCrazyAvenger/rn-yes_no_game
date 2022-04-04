@@ -2,6 +2,8 @@ export default {
   gameSettings: 'Настройки',
   settingSub: 'Несколько настроек перед игрой',
   category: 'Категория',
+  categories: 'Категории',
+  chooseOne: 'Выберите одну, чтобы начать',
   teams: 'Команды',
   teamsSub: 'Настройте количество команд',
   team: 'Команда',
