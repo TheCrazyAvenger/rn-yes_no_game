@@ -8,6 +8,7 @@ import {
   AliasGame,
   AliasHome,
   AliasResults,
+  AliasRules,
   AliasSettings,
   AliasStart,
   AliasTeams,
@@ -54,6 +55,11 @@ export const AliasStack: React.FC = () => {
       <Stack.Screen name={Screens.aliasStart} component={AliasStart} />
       <Stack.Screen name={Screens.aliasGame} component={AliasGame} />
       <Stack.Screen name={Screens.aliasResults} component={AliasResults} />
+      <Stack.Screen
+        name={Screens.aliasRules}
+        options={{presentation: 'modal'}}
+        component={AliasRules}
+      />
     </Stack.Navigator>
   );
 };

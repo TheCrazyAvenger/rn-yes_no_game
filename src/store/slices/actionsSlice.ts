@@ -7,7 +7,6 @@ interface ActionsState {
   aliasGoBack: boolean;
   spyGoBack: boolean;
   openYesNoRules: boolean;
-  openAliasRules: boolean;
   openMenu: boolean;
 }
 
@@ -17,7 +16,6 @@ const initialState: ActionsState = {
   showReview: false,
   yesnoGoBack: false,
   openYesNoRules: false,
-  openAliasRules: false,
   aliasGoBack: false,
   spyGoBack: false,
 };
@@ -38,9 +36,6 @@ const actionsSlice = createSlice({
     toggleYesnoRules: (state, action: PayloadAction<boolean>) => {
       state.openYesNoRules = action.payload;
     },
-    toggleAliasRules: (state, action: PayloadAction<boolean>) => {
-      state.openAliasRules = action.payload;
-    },
     toggleAliasGoBack: (state, action: PayloadAction<boolean>) => {
       state.aliasGoBack = action.payload;
     },
@@ -58,7 +53,6 @@ export const {
   toggleReview,
   toggleYesnoGoBack,
   toggleYesnoRules,
-  toggleAliasRules,
   toggleAliasGoBack,
   toggleOpenMenu,
   toggleSpyGoBack,

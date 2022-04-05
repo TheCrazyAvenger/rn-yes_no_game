@@ -44,13 +44,13 @@ export default {
   rules: 'Rules',
   backHome: 'Back to Home',
 
-  rule1: 'To get started, split into teams of at least two people.',
+  rule1: '1. To get started, split into teams of at least two people.',
   rule2:
-    'Each team chooses a player who explains on the first round. When the team is ready, the host presses "Start"',
+    '2. Each team chooses a player who explains on the first round. When the team is ready, the host presses "Start"',
   rule3:
-    'When the game starts, words will appear on the screen that you need to explain in the allotted time. When guessing, you swipe up, to skip a word - down',
+    '3. When the game starts, words will appear on the screen that you need to explain in the allotted time. When guessing, you swipe up, to skip a word - down',
   rule4:
-    'When the time is up, you will have the opportunity to explain the last word and remove or count the rest of the answers. The round then moves on to the next team.',
+    '4. When the time is up, you will have the opportunity to explain the last word and remove or count the rest of the answers. The round then moves on to the next team.',
   rule5:
-    ' The game will not end until the required number of points is scored. At the same time, if one team scores them earlier, other teams will have a round to recoup.',
+    '5. The game will not end until the required number of points is scored. At the same time, if one team scores them earlier, other teams will have a round to recoup.',
 };

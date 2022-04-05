@@ -2,8 +2,7 @@ import {colors, Screens} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {AliasHelp} from '@screens';
-import {toggleAliasGoBack, toggleAliasRules} from '@store/slices/actionsSlice';
+import {toggleAliasGoBack} from '@store/slices/actionsSlice';
 import {H1} from '@Typography';
 import {Button} from '@ui';
 import {t} from 'i18next';
@@ -19,13 +18,12 @@ import {
 import {styles} from './styles';
 
 export const AliasHome: React.FC = () => {
-  const {aliasGoBack, openAliasRules} = useAppSelector(state => state.actions);
+  const {aliasGoBack} = useAppSelector(state => state.actions);
 
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
         if (aliasGoBack) {
-          handleColseRules();
           handleGoBack();
           return true;
         } else {
@@ -43,16 +41,6 @@ export const AliasHome: React.FC = () => {
   const navigation: any = useNavigation();
 
   const dispatch = useAppDispatch();
-  const darkTheme = useAppSelector(state => state.user.darkTheme);
-
-  const mainBg = darkTheme
-    ? openAliasRules
-      ? colors.white
-      : colors.dark
-    : openAliasRules
-    ? colors.dark
-    : colors.white;
-  const secBg = !darkTheme ? colors.white : colors.dark;
 
   const scale = useRef(new Animated.Value(0)).current;
 
@@ -101,20 +89,6 @@ export const AliasHome: React.FC = () => {
     Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
   }, []);
 
-  useEffect(() => {
-    if (openAliasRules) {
-      Animated.spring(scale, {
-        toValue: 0.9,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.spring(scale, {
-        toValue: 1,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [openAliasRules]);
-
   const handleGoBack = () => {
     Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
       dispatch(toggleAliasGoBack(false));
@@ -123,19 +97,11 @@ export const AliasHome: React.FC = () => {
 
   const handlePlay = () => navigation.navigate(Screens.aliasSettings);
 
-  const handleColseRules = () => dispatch(toggleAliasRules(false));
-  const handleOpenRules = () => dispatch(toggleAliasRules(true));
+  const handleOpenRules = () => navigation.navigate(Screens.aliasRules);
 
   return (
-    <View style={{backgroundColor: mainBg, flex: 1}}>
-      <Animated.View
-        style={{
-          ...styles.container,
-          backgroundColor: secBg,
-          borderTopStartRadius: openAliasRules ? 14 : 0,
-          borderTopEndRadius: openAliasRules ? 14 : 0,
-          transform: [{scale}],
-        }}>
+    <View style={{flex: 1}}>
+      <Animated.View style={{...styles.container, transform: [{scale}]}}>
         <StatusBar
           translucent
           backgroundColor={'transparent'}
@@ -189,8 +155,6 @@ export const AliasHome: React.FC = () => {
           </View>
         </ImageBackground>
       </Animated.View>
-
-      <AliasHelp isVisible={openAliasRules} setIsVisible={handleColseRules} />
     </View>
   );
 };
