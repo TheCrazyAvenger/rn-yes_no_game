@@ -46,6 +46,7 @@ export const AliasSettings: React.FC = () => {
 
   const backgroundColor = darkTheme ? colors.white : colors.aliasBlack;
   const color = darkTheme ? colors.aliasBlack : colors.white;
+  const wheelColor = darkTheme ? 'black' : 'white';
   const titleColor = !darkTheme ? colors.aliasBlack : colors.white;
 
   const [visible, setVisible] = useState(false);
@@ -177,6 +178,8 @@ export const AliasSettings: React.FC = () => {
             subtitle={t('alias:setting2sub')}
             backgroundColor={backgroundColor}
             color={color}
+            itemTextColor={wheelColor}
+            selectedItemTextColor={wheelColor}
             wheelData={['30', '60', '90', '120', '150', '180']}
             onItemSelected={setTimeIndex}
           />
