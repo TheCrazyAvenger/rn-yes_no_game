@@ -13,6 +13,8 @@ type WheelCardProps = {
   color?: string;
   initPosition?: number;
   onItemSelected: (...args: any) => any;
+  itemTextColor?: string;
+  selectedItemTextColor?: string;
 };
 
 export const WheelCard: React.FC<WheelCardProps> = ({
@@ -23,7 +25,12 @@ export const WheelCard: React.FC<WheelCardProps> = ({
   color,
   initPosition,
   onItemSelected,
+  itemTextColor,
+  selectedItemTextColor,
 }) => {
+  const selectedColor = selectedItemTextColor ?? 'white';
+  const itemColor = itemTextColor ?? 'white';
+
   return (
     <View style={{...styles.card, backgroundColor}}>
       <View style={{...styles.cardContent}}>
@@ -32,7 +39,9 @@ export const WheelCard: React.FC<WheelCardProps> = ({
           style={{...styles.cardTitle, color: color ? color : colors.white}}>
           {title}
         </H2>
-        <H4 style={{...styles.cardTitle}}>{subtitle}</H4>
+        <H4 style={{...styles.cardTitle, color: color ? color : colors.white}}>
+          {subtitle}
+        </H4>
       </View>
 
       <View style={styles.wheelContainer}>
@@ -41,7 +50,8 @@ export const WheelCard: React.FC<WheelCardProps> = ({
           data={wheelData}
           itemTextFontFamily={'Nunito-Bold'}
           selectedItemTextSize={20}
-          selectedItemTextColor={'white'}
+          selectedItemTextColor={selectedColor}
+          itemTextColor={itemColor}
           selectedItemTextFontFamily={'Nunito-ExtraBold'}
           hideIndicator
           onItemSelected={selectedItem => {
