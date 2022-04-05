@@ -24,10 +24,12 @@ import {Button, Loading, Screen} from '@ui';
 import {t} from 'i18next';
 import React, {useEffect, useState} from 'react';
 import {BackHandler, StatusBar, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {styles} from './styles';
 
 export const AliasStart: React.FC = () => {
+  const insets = useSafeAreaInsets();
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
@@ -60,6 +62,8 @@ export const AliasStart: React.FC = () => {
 
   const darkTheme = useAppSelector(state => state.user.darkTheme);
   const color = darkTheme ? colors.white : colors.aliasBlack;
+  const backgroundColor = darkTheme ? colors.white : colors.aliasBlack;
+  const scoreColor = !darkTheme ? colors.white : colors.aliasBlack;
 
   const {
     teamsPoints,
@@ -181,21 +185,24 @@ export const AliasStart: React.FC = () => {
         leftButton={handleHome}
         rightButton={handleRetry}
       />
-      <Screen>
+      <Screen style={{...styles.container, paddingTop: insets.top + 10}}>
         <StatusBar
-          translucent
           backgroundColor={'transparent'}
-          barStyle={'light-content'}
+          barStyle={darkTheme ? 'light-content' : 'dark-content'}
         />
-        <View style={styles.header}>
+        <View style={{...styles.header, backgroundColor}}>
           <View style={styles.headerContent}>
             <View style={styles.row}>
-              <H1 fontWeight="600" style={{...styles.headerTitle, color}}>
+              <H1
+                fontWeight="600"
+                style={{...styles.headerTitle, color: scoreColor}}>
                 {t('alias:rating')}
               </H1>
               <View style={styles.row}>
                 <Icon name="star" size={35} color={colors.yellow} />
-                <H1 fontWeight="600" style={{...styles.headerScore, color}}>
+                <H1
+                  fontWeight="600"
+                  style={{...styles.headerScore, color: scoreColor}}>
                   {points}
                 </H1>
               </View>
@@ -203,11 +210,17 @@ export const AliasStart: React.FC = () => {
             {teams.map((team: any) => (
               <View key={team.team} style={styles.teamItem}>
                 <View style={styles.row}>
-                  <H3 style={{...styles.teamName, color}}>{team.team}</H3>
+                  <H3 style={{...styles.teamName, color: scoreColor}}>
+                    {team.team}
+                  </H3>
 
-                  <H3 style={{...styles.teamScore, color}}>{team.points}</H3>
+                  <H3 style={{...styles.teamScore, color: scoreColor}}>
+                    {team.points}
+                  </H3>
                 </View>
-                <View style={{...styles.teamsLine, backgroundColor: color}} />
+                <View
+                  style={{...styles.teamsLine, backgroundColor: scoreColor}}
+                />
               </View>
             ))}
           </View>
@@ -223,7 +236,7 @@ export const AliasStart: React.FC = () => {
         </View>
       </Screen>
 
-      <View style={{marginHorizontal: 30}}>
+      <View style={{marginHorizontal: 15}}>
         <Button
           title={t('alias:start')}
           style={styles.nextButton}

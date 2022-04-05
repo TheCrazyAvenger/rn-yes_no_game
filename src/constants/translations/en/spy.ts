@@ -58,4 +58,17 @@ export default {
 
   gameTitle: 'Question Time',
   gameSubTitle: 'Press pause at any time to vote or indicate who won',
+
+  rules: 'Rules',
+  rulesSub: 'Get to know before the game',
+
+  rule1:
+    '1. The game involves locals and a spy. Pass the phone to find out what role you have. All players except the Spy will know the location.',
+  rule2:
+    '2. Your task is to exchange questions about this location. Questions and answers should not be direct, because a spy who does not know the location can guess it and win. If the players find the spy, then they win. Listen to other players responses.',
+  rule3:
+    '3. If you suspect someone, say - I know who the spy is. The rest of the players must point out who they think is the spy.',
+  rule4: `4. If all players agree on one person, the player must reveal his role. If it's a spy, then the locals have won. If local, then the spy won. If you have indicated different people, play on.`,
+  rule5:
+    '5. If the spy guessed what the location was, then he can name it. If he guessed right, his victory. If you make a mistake, the local won. Good luck.',
 };

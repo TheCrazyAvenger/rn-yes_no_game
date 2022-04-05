@@ -12,6 +12,7 @@ import {
   SpyGame,
   SpyHome,
   SpyLocations,
+  SpyRules,
   SpySettings,
   SpyStart,
 } from '@screens';
@@ -64,6 +65,11 @@ export const SpyStack: React.FC = () => {
         name={Screens.spyFinish}
         options={{animationEnabled: false}}
         component={SpyFinish}
+      />
+      <Stack.Screen
+        name={Screens.spyRules}
+        options={{presentation: 'modal'}}
+        component={SpyRules}
       />
     </Stack.Navigator>
   );
