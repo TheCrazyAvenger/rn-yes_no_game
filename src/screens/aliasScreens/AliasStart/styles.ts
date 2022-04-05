@@ -4,13 +4,16 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
+    marginHorizontal: 15,
   },
   header: {
+    borderRadius: 10,
     width: '100%',
+    backgroundColor: colors.aliasRed,
+    elevation: 10,
   },
   headerContent: {
     padding: 30,
-    marginTop: 10,
   },
   imageBg: {
     width: '100%',

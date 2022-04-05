@@ -2,6 +2,8 @@ export default {
   gameSettings: 'Налады',
   settingSub: 'Некалькі налад перад гульнёй',
   category: 'Катэгорыя',
+  categories: 'Катэгорыі',
+  chooseOne: 'Абярыце адну, каб пачаць',
   teams: 'Каманды',
   teamsSub: 'Наладзьце колькасць каманд',
   team: 'Каманда',

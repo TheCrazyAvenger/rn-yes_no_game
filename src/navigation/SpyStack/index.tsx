@@ -3,12 +3,21 @@ import {
   createStackNavigator,
   StackNavigationOptions,
 } from '@react-navigation/stack';
-
-import {SpyHome, SpySettings} from '@screens';
-import {colors, Screens} from '@constants';
-import {styles} from './styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useNavigation} from '@react-navigation/native';
+
+import {
+  SpyAdditional,
+  SpyFinish,
+  SpyGame,
+  SpyHome,
+  SpyLocations,
+  SpyRules,
+  SpySettings,
+  SpyStart,
+} from '@screens';
+import {colors, Screens} from '@constants';
+import {styles} from './styles';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +29,7 @@ export const SpyStack: React.FC = () => {
   const screenOptions: StackNavigationOptions = {
     headerTitleStyle: styles.headerTitleStyle,
     headerStyle: styles.headerStyle,
+    headerShown: false,
     headerLeft: () => (
       <Icon
         name="arrow-back"
@@ -35,18 +45,31 @@ export const SpyStack: React.FC = () => {
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
         name={Screens.spyHome}
-        options={{
-          headerShown: false,
-          animationEnabled: false,
-        }}
+        options={{animationEnabled: false}}
         component={SpyHome}
       />
+      <Stack.Screen name={Screens.spySettings} component={SpySettings} />
+      <Stack.Screen name={Screens.spyAdditional} component={SpyAdditional} />
+      <Stack.Screen name={Screens.spyLocations} component={SpyLocations} />
       <Stack.Screen
-        name={Screens.spySettings}
-        options={{
-          headerShown: false,
-        }}
-        component={SpySettings}
+        name={Screens.spyStart}
+        options={{animationEnabled: false}}
+        component={SpyStart}
+      />
+      <Stack.Screen
+        name={Screens.spyGame}
+        options={{animationEnabled: false}}
+        component={SpyGame}
+      />
+      <Stack.Screen
+        name={Screens.spyFinish}
+        options={{animationEnabled: false}}
+        component={SpyFinish}
+      />
+      <Stack.Screen
+        name={Screens.spyRules}
+        options={{presentation: 'modal'}}
+        component={SpyRules}
       />
     </Stack.Navigator>
   );

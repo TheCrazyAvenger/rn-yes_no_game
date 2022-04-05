@@ -10,13 +10,13 @@ import {editUserProfile, setBg, setDarkTheme} from '@store/slices/userSlice';
 import {Loading} from '@ui';
 import React, {useEffect, useState} from 'react';
 import {AuthStack} from './AuthStack';
-import {DrawerNavigator} from './DrawerNavigator';
 import SplashScreen from 'react-native-splash-screen';
 import {colors} from '@constants';
 import {HomeScreen} from '@screens';
 import {AliasStack} from './AliasStack';
 import {useGetUserInfoMutation} from '@api';
 import {SpyStack} from './SpyStack';
+import {HomeTopTabs} from './HomeTopTabs';
 
 const light = {
   ...DefaultTheme,
@@ -94,7 +94,7 @@ export const AppNavigator: React.FC = () => {
         ) : spyGoBack ? (
           <SpyStack />
         ) : (
-          <DrawerNavigator />
+          <HomeTopTabs />
         )
       ) : (
         <AuthStack />

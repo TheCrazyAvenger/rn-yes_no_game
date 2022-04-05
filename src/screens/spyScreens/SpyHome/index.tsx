@@ -1,7 +1,7 @@
 import {colors, Screens} from '@constants';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {toggleAliasRules, toggleSpyGoBack} from '@store/slices/actionsSlice';
+import {toggleSpyGoBack} from '@store/slices/actionsSlice';
 import {H1} from '@Typography';
 import {Button} from '@ui';
 import {t} from 'i18next';
@@ -57,20 +57,6 @@ export const SpyHome: React.FC = () => {
     Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
   }, []);
 
-  // useEffect(() => {
-  //   if (openAliasRules) {
-  //     Animated.spring(scale, {
-  //       toValue: 0.9,
-  //       useNativeDriver: false,
-  //     }).start();
-  //   } else {
-  //     Animated.spring(scale, {
-  //       toValue: 1,
-  //       useNativeDriver: false,
-  //     }).start();
-  //   }
-  // }, [openAliasRules]);
-
   const handleGoBack = () => {
     Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
       dispatch(toggleSpyGoBack(false));
@@ -79,8 +65,7 @@ export const SpyHome: React.FC = () => {
 
   const handlePlay = () => navigation.navigate(Screens.spySettings);
 
-  const handleColseRules = () => dispatch(toggleAliasRules(false));
-  const handleOpenRules = () => dispatch(toggleAliasRules(true));
+  const handleOpenRules = () => navigation.navigate(Screens.spyRules);
 
   return (
     <View style={{backgroundColor: mainBg, flex: 1}}>
@@ -88,8 +73,7 @@ export const SpyHome: React.FC = () => {
         style={{
           ...styles.container,
           backgroundColor: secBg,
-          // borderTopStartRadius: openAliasRules ? 14 : 0,
-          // borderTopEndRadius: openAliasRules ? 14 : 0,
+
           transform: [{scale}],
         }}>
         <StatusBar
@@ -137,8 +121,6 @@ export const SpyHome: React.FC = () => {
           </View>
         </ImageBackground>
       </Animated.View>
-
-      {/* <AliasHelp isVisible={openAliasRules} setIsVisible={handleColseRules} /> */}
     </View>
   );
 };

@@ -9,4 +9,7 @@ export default {
   name: 'Your name',
   email: 'Your email',
   message: 'Your message',
+  on: 'On',
+  off: 'Off',
+  close: 'Close',
 };
