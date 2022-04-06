@@ -3,17 +3,10 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    borderTopStartRadius: 14,
-    borderTopEndRadius: 14,
-    overflow: 'hidden',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 100,
+    flex: 1,
   },
   closeButton: {
-    top: 20,
+    top: 30,
     right: 20,
     zIndex: 100,
   },
@@ -38,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   headerEmail: {
     color: colors.white,
-    marginBottom: 30,
+    marginBottom: 20,
   },
   content: {
     flex: 0.78,

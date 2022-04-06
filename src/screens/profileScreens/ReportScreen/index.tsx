@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import storage from '@react-native-firebase/storage';
 import auth from '@react-native-firebase/auth';
@@ -12,13 +12,8 @@ import {useSendReportMutation} from '@api';
 import {styles} from './styles';
 import {colors} from '@constants';
 import {t} from 'i18next';
-import {Animated} from 'react-native';
 
-type ProfileProps = {
-  closeWindow: (...ars: any) => any;
-};
-
-export const ReportScreen: React.FC<ProfileProps> = ({closeWindow}) => {
+export const ReportScreen: React.FC = () => {
   const navigation: any = useNavigation();
   const id = useAppSelector(state => state.user.id);
   const darkTheme = useAppSelector(state => state.user.darkTheme);
@@ -26,13 +21,7 @@ export const ReportScreen: React.FC<ProfileProps> = ({closeWindow}) => {
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
   const color = darkTheme ? colors.blue : colors.darkBlue;
 
-  const scale = useRef(new Animated.Value(0)).current;
-
   const [sendReport] = useSendReportMutation();
-
-  useEffect(() => {
-    Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
-  }, []);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -57,7 +46,7 @@ export const ReportScreen: React.FC<ProfileProps> = ({closeWindow}) => {
       setIsSuccess(true);
 
       setTimeout(() => {
-        closeWindow();
+        navigation.goBack();
       }, 1500);
     } catch (e: any) {
       setIsLoading(false);
@@ -74,21 +63,18 @@ export const ReportScreen: React.FC<ProfileProps> = ({closeWindow}) => {
         />
       )}
       {isSuccess && <Success isActive={isSuccess} />}
-      <Animated.View style={{flex: 1, transform: [{scale}]}}>
-        <Screen
-          type="ScrollView"
-          style={{...styles.container, backgroundColor}}>
-          <ProfileItemHeader
-            showCloseButton={false}
-            title={t('profile:reportTitle')}
-            description={t('profile:reportText')}
-            titleColor={color}
-          />
 
-          {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}
-          <ReportForm onSubmit={reportHandler} />
-        </Screen>
-      </Animated.View>
+      <Screen type="ScrollView" style={{...styles.container, backgroundColor}}>
+        <ProfileItemHeader
+          showCloseButton={false}
+          title={t('profile:reportTitle')}
+          description={t('profile:reportText')}
+          titleColor={color}
+        />
+
+        {errorMessage && <H5 style={styles.error}>{errorMessage}</H5>}
+        <ReportForm onSubmit={reportHandler} />
+      </Screen>
     </>
   );
 };

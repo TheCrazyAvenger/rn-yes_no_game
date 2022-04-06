@@ -5,77 +5,32 @@ import {
 } from '@react-navigation/material-top-tabs';
 import {IMAGES_URL} from '@env';
 import {colors, Screens} from '@constants';
-import {AliasScreen, ProfileModal, SpyScreen, YesNoScreen} from '@screens';
-import {useAppDispatch, useAppSelector} from '@hooks';
-import {Animated, Image, TouchableOpacity} from 'react-native';
+import {AliasScreen, SpyScreen, YesNoScreen} from '@screens';
+import {useAppSelector} from '@hooks';
+import {Animated, Image, TouchableOpacity, View} from 'react-native';
 import {styles} from './styles';
-import {toggleOpenMenu} from '@store/slices/actionsSlice';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
 
 const Tab = createMaterialTopTabNavigator();
 
 export const HomeTopTabs: React.FC = () => {
+  const navigation: any = useNavigation();
   const insets = useSafeAreaInsets();
-  const {openMenu} = useAppSelector(state => state.actions);
   const {darkTheme, image} = useAppSelector(state => state.user);
-  const dispatch = useAppDispatch();
 
-  const scale = useRef(new Animated.Value(1)).current;
-  const bgColor = useRef(new Animated.Value(0)).current;
+  const backgroundColor = darkTheme ? colors.dark : colors.white;
 
-  const handleOpenMenu = () => dispatch(toggleOpenMenu(true));
-  const handleCloseMenu = () => dispatch(toggleOpenMenu(false));
-
-  useEffect(() => {
-    if (darkTheme) {
-      Animated.timing(bgColor, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.timing(bgColor, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [darkTheme]);
-
-  useEffect(() => {
-    if (openMenu) {
-      Animated.spring(scale, {
-        toValue: 0.9,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.spring(scale, {
-        toValue: 1,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [openMenu]);
+  const handleOpenMenu = () =>
+    navigation.navigate(Screens.menuStack, {screen: Screens.profileModal});
 
   const screenOptions: MaterialTopTabNavigationOptions = {
     tabBarStyle: {height: 0},
   };
 
   return (
-    <Animated.View
-      style={{
-        backgroundColor: bgColor.interpolate({
-          inputRange: [0, 1],
-          outputRange: [colors.white, colors.black],
-        }),
-        flex: 1,
-      }}>
-      <Animated.View
-        style={{
-          ...styles.container,
-          transform: [{scale}],
-          borderTopStartRadius: openMenu ? 14 : 0,
-          borderTopEndRadius: openMenu ? 14 : 0,
-        }}>
+    <>
+      <View style={{...styles.container, backgroundColor}}>
         <TouchableOpacity
           style={{
             position: 'absolute',
@@ -94,8 +49,7 @@ export const HomeTopTabs: React.FC = () => {
           <Tab.Screen name={Screens.aliasScreen} component={AliasScreen} />
           <Tab.Screen name={Screens.spyScreen} component={SpyScreen} />
         </Tab.Navigator>
-      </Animated.View>
-      <ProfileModal isVisible={openMenu} setIsVisible={handleCloseMenu} />
-    </Animated.View>
+      </View>
+    </>
   );
 };

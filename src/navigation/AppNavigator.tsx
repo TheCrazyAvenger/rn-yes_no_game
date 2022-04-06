@@ -17,6 +17,7 @@ import {useGetUserInfoMutation} from '@api';
 import {SpyStack} from './SpyStack';
 import {HomeTopTabs} from './HomeTopTabs';
 import {HomeStack} from './HomeStack';
+import {MainStack} from './MainStack';
 
 const light = {
   ...DefaultTheme,
@@ -94,7 +95,7 @@ export const AppNavigator: React.FC = () => {
         ) : spyGoBack ? (
           <SpyStack />
         ) : (
-          <HomeTopTabs />
+          <MainStack />
         )
       ) : (
         <AuthStack />
