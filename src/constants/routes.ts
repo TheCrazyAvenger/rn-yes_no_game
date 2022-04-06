@@ -33,4 +33,7 @@ export enum Screens {
   spyGame = 'spyGame',
   spyFinish = 'spyFinish',
   spyRules = 'spuRules',
+
+  yesnoRules = 'yesnoRules',
+  yesnoHome = 'yesnoHome',
 }

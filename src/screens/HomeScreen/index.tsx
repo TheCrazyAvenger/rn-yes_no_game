@@ -13,32 +13,24 @@ import {getNextIndex, shuffle} from '@utilities';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import {useGetStoriesQuery} from '@api';
 import {addStories} from '@store/slices/userSlice';
-import {colors} from '@constants';
-import {
-  toggleYesNo,
-  toggleYesnoGoBack,
-  toggleYesnoRules,
-} from '@store/slices/actionsSlice';
+import {colors, Screens} from '@constants';
+import {toggleYesNo, toggleYesnoGoBack} from '@store/slices/actionsSlice';
 import {H3} from '@Typography';
 import {t} from 'i18next';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {YesNoHelp} from '@screens';
-import {useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
 export const HomeScreen: React.FC = () => {
+  const navigation: any = useNavigation();
   const dispatch = useAppDispatch();
 
   const {stories, darkTheme, id: uid} = useAppSelector(state => state.user);
-  const {openYesNoRules, actionYesNo, yesnoGoBack} = useAppSelector(
-    state => state.actions,
-  );
+  const {actionYesNo, yesnoGoBack} = useAppSelector(state => state.actions);
 
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
         if (!actionYesNo && yesnoGoBack) {
-          handleCloseHelp();
-
           handleGoBack();
           return true;
         } else {
@@ -54,7 +46,6 @@ export const HomeScreen: React.FC = () => {
   );
 
   const backgroundColor = !darkTheme ? colors.white : colors.dark;
-  const mainBg = darkTheme ? colors.white : colors.dark;
   const color = darkTheme ? colors.white : colors.black;
 
   const {data, error, isLoading} = useGetStoriesQuery({uid});
@@ -72,7 +63,6 @@ export const HomeScreen: React.FC = () => {
   const [index, setIndex] = useState(0);
   const pan = useRef(new Animated.ValueXY()).current;
   const scale = useRef(new Animated.Value(0)).current;
-  const screenScale = useRef(new Animated.Value(1)).current;
   const top = useRef(new Animated.Value(-100)).current;
 
   const handleGoBack = () => {
@@ -133,72 +123,46 @@ export const HomeScreen: React.FC = () => {
     },
   });
 
-  const handleOpenHelp = () => dispatch(toggleYesnoRules(true));
-  const handleCloseHelp = () => dispatch(toggleYesnoRules(false));
-
-  useEffect(() => {
-    if (openYesNoRules) {
-      Animated.spring(screenScale, {
-        toValue: 0.9,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.spring(screenScale, {
-        toValue: 1,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [openYesNoRules]);
+  const handleOpenHelp = () => navigation.navigate(Screens.yesnoRules);
 
   if (!data || isLoading || error || !stories) {
     return <Loading isActive={true} />;
   }
 
   return (
-    <View style={{backgroundColor: mainBg, flex: 1}}>
-      <Animated.View
-        style={{
-          ...styles.container,
-          transform: [{scale: screenScale}],
-          backgroundColor,
-          borderTopStartRadius: openYesNoRules ? 14 : 0,
-          borderTopEndRadius: openYesNoRules ? 14 : 0,
-        }}>
-        <StatusBar
-          backgroundColor={darkTheme ? colors.dark : colors.white}
-          barStyle={darkTheme ? 'light-content' : 'dark-content'}
-        />
-        <Animated.View style={{...styles.header, backgroundColor, top}}>
-          <H3 style={{color}} fontWeight="600">
-            {`${t('home:titleFirst')} ${stories ? stories.length : 0} ${t(
-              'home:titleSecond',
-            )}`}
-          </H3>
+    <Screen style={{...styles.container, backgroundColor}}>
+      <StatusBar
+        backgroundColor={darkTheme ? colors.dark : colors.white}
+        barStyle={darkTheme ? 'light-content' : 'dark-content'}
+      />
+      <Animated.View style={{...styles.header, backgroundColor, top}}>
+        <H3 style={{color}} fontWeight="600">
+          {`${t('home:titleFirst')} ${stories ? stories.length : 0} ${t(
+            'home:titleSecond',
+          )}`}
+        </H3>
 
-          <View style={styles.buttons}>
-            <Ionicons
-              onPress={handleOpenHelp}
-              name="help"
-              size={30}
-              color={color}
-              style={{marginRight: 15}}
-            />
-            <Ionicons
-              onPress={handleGoBack}
-              name="home"
-              size={30}
-              color={color}
-            />
-          </View>
-        </Animated.View>
-        <Animated.View
-          style={{transform: [{translateY: pan.y}, {scale}]}}
-          {...panResponder.panHandlers}>
-          <Card data={stories[index]} />
-        </Animated.View>
+        <View style={styles.buttons}>
+          <Ionicons
+            onPress={handleOpenHelp}
+            name="help"
+            size={30}
+            color={color}
+            style={{marginRight: 15}}
+          />
+          <Ionicons
+            onPress={handleGoBack}
+            name="home"
+            size={30}
+            color={color}
+          />
+        </View>
       </Animated.View>
-
-      <YesNoHelp isVisible={openYesNoRules} setIsVisible={handleCloseHelp} />
-    </View>
+      <Animated.View
+        style={{transform: [{translateY: pan.y}, {scale}]}}
+        {...panResponder.panHandlers}>
+        <Card data={stories[index]} />
+      </Animated.View>
+    </Screen>
   );
 };

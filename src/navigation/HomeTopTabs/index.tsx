@@ -16,9 +16,7 @@ const Tab = createMaterialTopTabNavigator();
 
 export const HomeTopTabs: React.FC = () => {
   const insets = useSafeAreaInsets();
-  const {yesnoGoBack, openYesNoRules, openMenu} = useAppSelector(
-    state => state.actions,
-  );
+  const {openMenu} = useAppSelector(state => state.actions);
   const {darkTheme, image} = useAppSelector(state => state.user);
   const dispatch = useAppDispatch();
 
@@ -60,7 +58,6 @@ export const HomeTopTabs: React.FC = () => {
 
   const screenOptions: MaterialTopTabNavigationOptions = {
     tabBarStyle: {height: 0},
-    swipeEnabled: yesnoGoBack || openYesNoRules ? false : true,
   };
 
   return (

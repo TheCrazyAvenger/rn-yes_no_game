@@ -12,11 +12,11 @@ import React, {useEffect, useState} from 'react';
 import {AuthStack} from './AuthStack';
 import SplashScreen from 'react-native-splash-screen';
 import {colors} from '@constants';
-import {HomeScreen} from '@screens';
 import {AliasStack} from './AliasStack';
 import {useGetUserInfoMutation} from '@api';
 import {SpyStack} from './SpyStack';
 import {HomeTopTabs} from './HomeTopTabs';
+import {HomeStack} from './HomeStack';
 
 const light = {
   ...DefaultTheme,
@@ -88,7 +88,7 @@ export const AppNavigator: React.FC = () => {
         <Loading isActive={loading} />
       ) : token ? (
         yesnoGoBack ? (
-          <HomeScreen />
+          <HomeStack />
         ) : aliasGoBack ? (
           <AliasStack />
         ) : spyGoBack ? (

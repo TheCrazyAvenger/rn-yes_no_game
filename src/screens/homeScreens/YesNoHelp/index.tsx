@@ -1,43 +1,20 @@
 import {colors} from '@constants';
+import {useNavigation} from '@react-navigation/native';
 import {H1, H3} from '@Typography';
-import {CloseButton} from '@ui';
+import {CloseButton, Screen} from '@ui';
 import {t} from 'i18next';
-import React, {useEffect, useRef} from 'react';
-import {
-  Animated,
-  Image,
-  ScrollView,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import React from 'react';
+import {Image, View} from 'react-native';
 import {styles} from './styles';
 
-type YesNoHelpProps = {
-  isVisible: boolean;
-  setIsVisible: (arg: boolean) => void;
-};
+export const YesNoHelp: React.FC = ({}) => {
+  const navigation = useNavigation();
 
-export const YesNoHelp: React.FC<YesNoHelpProps> = ({
-  isVisible,
-  setIsVisible,
-}) => {
-  const {height} = useWindowDimensions();
-
-  const top = useRef(new Animated.Value(height)).current;
-
-  const handleClose = () => setIsVisible(false);
-
-  useEffect(() => {
-    if (isVisible) {
-      Animated.spring(top, {toValue: 55, useNativeDriver: false}).start();
-    } else {
-      Animated.spring(top, {toValue: height, useNativeDriver: false}).start();
-    }
-  }, [isVisible]);
+  const handleGoBack = () => navigation.goBack();
 
   return (
-    <Animated.View style={{...styles.container, top}}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <>
+      <Screen type="ScrollView" showsVerticalScrollIndicator={false}>
         <View style={{...styles.block, backgroundColor: colors.red}}>
           <Image
             resizeMode="contain"
@@ -93,12 +70,12 @@ export const YesNoHelp: React.FC<YesNoHelpProps> = ({
           </H1>
           <H3 style={styles.text}>{t('yesnoRules:rule5sub')}</H3>
         </View>
-      </ScrollView>
+      </Screen>
       <CloseButton
         style={styles.closeButton}
         buttonColor={colors.blue}
-        onPress={handleClose}
+        onPress={handleGoBack}
       />
-    </Animated.View>
+    </>
   );
 };

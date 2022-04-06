@@ -37,7 +37,7 @@ export const SpyModalRoles: React.FC<SpyModalRolesProps> = ({
             </H3>
           ))}
           <Button
-            title={t('spy:close')}
+            title={t('common:close')}
             style={{...styles.nextButton}}
             containerStyle={styles.buttonContainer}
             onPress={hideModal}
