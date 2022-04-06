@@ -9,6 +9,12 @@ export enum Screens {
   signUpScreen = 'signUpScreen',
 
   homeTopTabs = 'homeTopTabs',
+  menuStack = 'menuStack',
+
+  profileModal = 'profileModal',
+  reportScreen = 'reportScreen',
+  profileEditScreen = 'profileEditScreen',
+  backgroundScreen = 'backgroundScreen',
 
   yesNoScreen = 'yesNoScreen',
   spyScreen = 'spyScreen',
