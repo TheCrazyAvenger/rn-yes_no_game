@@ -3,14 +3,13 @@ import {bg, colors, Screens} from '@constants';
 import {IMAGES_URL} from '@env';
 import {useAppDispatch, useAppSelector} from '@hooks';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import {logout} from '@store/asyncFuncs';
-import {toggleOpenMenu} from '@store/slices/actionsSlice';
 import {setDarkTheme} from '@store/slices/userSlice';
 import {H1, H3} from '@Typography';
 import {CloseButton} from '@ui';
 import {t} from 'i18next';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Animated, Image, ImageBackground, View} from 'react-native';
 
 import {Switch} from 'react-native-paper';
@@ -27,21 +26,9 @@ export const ProfileModal: React.FC = () => {
     email,
   } = useAppSelector(state => state.user);
 
-  const [report, setReport] = useState(false);
-  const [editProfile, setEditProfile] = useState(false);
-  const [editBackground, setEditBackground] = useState(false);
-
   const bgColor = useRef(new Animated.Value(0)).current;
 
-  const handleClose = () => {
-    if (report || editProfile || editBackground) {
-      setReport(false);
-      setEditProfile(false);
-      setEditBackground(false);
-    } else {
-      navigation.goBack();
-    }
-  };
+  const handleClose = () => navigation.goBack();
 
   useEffect(() => {
     if (darkTheme) {
@@ -67,7 +54,6 @@ export const ProfileModal: React.FC = () => {
   const reportHandler = () => navigation.navigate(Screens.reportScreen);
 
   const handleLogout = () => {
-    dispatch(toggleOpenMenu(false));
     dispatch(logout());
   };
 

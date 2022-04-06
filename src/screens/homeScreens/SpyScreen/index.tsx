@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {Animated, Image, ImageBackground, StatusBar, View} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 
@@ -8,7 +8,7 @@ import {H1} from '@Typography';
 import {styles} from './styles';
 
 export const SpyScreen: React.FC = () => {
-  const scale = useRef(new Animated.Value(0)).current;
+  const scale = useRef(new Animated.Value(1)).current;
   const dispatch = useAppDispatch();
 
   const handleSpy = () => {
@@ -16,10 +16,6 @@ export const SpyScreen: React.FC = () => {
       dispatch(toggleSpyGoBack(true));
     });
   };
-
-  useEffect(() => {
-    Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
-  }, []);
 
   return (
     <Animated.View style={{...styles.main, transform: [{scale}]}}>

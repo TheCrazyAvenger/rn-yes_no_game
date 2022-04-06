@@ -1,28 +1,21 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useRef} from 'react';
 import {Animated, Image, ImageBackground, StatusBar, View} from 'react-native';
 import {TouchableRipple} from 'react-native-paper';
 
-import {useAppDispatch, useAppSelector} from '@hooks';
+import {useAppDispatch} from '@hooks';
 import {toggleAliasGoBack} from '@store/slices/actionsSlice';
-import {colors} from '@constants';
 import {H1} from '@Typography';
 import {styles} from './styles';
 
 export const AliasScreen: React.FC = () => {
-  const scale = useRef(new Animated.Value(0)).current;
+  const scale = useRef(new Animated.Value(1)).current;
   const dispatch = useAppDispatch();
-
-  const darkTheme = useAppSelector(state => state.user.darkTheme);
 
   const handleAlias = () => {
     Animated.spring(scale, {toValue: 0, useNativeDriver: false}).start(() => {
       dispatch(toggleAliasGoBack(true));
     });
   };
-
-  useEffect(() => {
-    Animated.spring(scale, {toValue: 1, useNativeDriver: false}).start();
-  }, []);
 
   return (
     <Animated.View style={{...styles.main, transform: [{scale}]}}>

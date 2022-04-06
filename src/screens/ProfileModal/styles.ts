@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   closeButton: {
-    top: 30,
+    top: 50,
     right: 20,
     zIndex: 100,
   },
